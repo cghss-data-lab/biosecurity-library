@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://example.talusanalytics.com/',
+    siteUrl: 'https://biosecurity-library.talusanalytics.com/',
     title: 'Talus Analytics',
     cookieConsent: {
       cookieMessage:
@@ -20,8 +20,8 @@ module.exports = {
         concurrency: 5,
         tables: [
           {
-            baseId: `apptYPkeoCz0lSn19`,
-            tableName: `Table 1`,
+            baseId: `app708Ctx0rz1c1n7`,
+            tableName: `Resource Library`,
           },
         ],
       },
