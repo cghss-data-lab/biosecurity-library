@@ -1,0 +1,20 @@
+@import './styles.scss';
+
+// These will need to be edited to match
+// the Figma names exported, and to add
+// additional information that isn't
+// exported, such as colors.
+.semanticStyles {
+  h1 {
+    @include textStyleH1;
+  }
+  h2 {
+    @include textStyleH2;
+  }
+  h3 {
+    @include textStyleH3;
+  }
+  p {
+    @include textStyleParagraph;
+  }
+}

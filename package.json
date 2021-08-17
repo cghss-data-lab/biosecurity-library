@@ -1,0 +1,42 @@
+{
+  "name": "talus-gatsby-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "talus-gatsby-starter",
+  "author": "Ryan",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
+    "babel-plugin-styled-components": "^1.13.2",
+    "gatsby": "^3.11.1",
+    "gatsby-plugin-gtag": "^1.0.13",
+    "gatsby-plugin-mdx": "^2.11.0",
+    "gatsby-plugin-react-helmet": "^4.11.0",
+    "gatsby-plugin-sass": "^4.11.0",
+    "gatsby-plugin-styled-components": "^4.11.0",
+    "gatsby-source-airtable": "^2.2.1",
+    "gatsby-source-filesystem": "^3.11.0",
+    "node-sass": "^6.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-helmet": "^6.1.0",
+    "sass": "^1.37.5",
+    "sass-extract": "^2.1.0",
+    "sass-extract-js": "^0.4.0",
+    "sass-extract-loader": "^1.1.0",
+    "styled-components": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.12"
+  }
+}
