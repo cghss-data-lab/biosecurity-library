@@ -1,9 +1,18 @@
 @import './styles.scss';
 
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 // These will need to be edited to match
 // the Figma names exported, and to add
 // additional information that isn't
 // exported, such as colors.
+
 .semanticStyles {
   h1 {
     @include textStyleH1;

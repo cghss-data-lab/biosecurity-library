@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import FigmaProvider from '../../figma/FigmaProvider'
+import NavBar from '../NavBar/NavBar'
 
 import './fonts.css'
 
@@ -12,11 +13,14 @@ import './fonts.css'
 // from the figma design document.
 
 const Main = styled.main`
-  padding: 15%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 30px;
 `
 
 const Layout = ({ children }) => (
   <FigmaProvider>
+    <NavBar />
     <Main>{children}</Main>
   </FigmaProvider>
 )
