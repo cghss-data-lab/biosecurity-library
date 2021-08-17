@@ -23,6 +23,10 @@ module.exports = {
             baseId: `app708Ctx0rz1c1n7`,
             tableName: `Resource Library`,
           },
+          {
+            baseId: `appmL0p5H21CiY7tL`,
+            tableName: `Landing Page`,
+          },
         ],
       },
     },
