@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { HomePageText } from '../../pages'
+
 const ImageSection = styled.section`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -13,28 +15,25 @@ const StyledImage = styled.img`
   width: 100%;
 `
 
-interface ImageObj {
-  data: {
-    Name: string
-    Alt: string
-    Attachments: [
-      {
-        url: string
-      }
-    ]
-  }
-}
-
-const Image = ({ image }: { image: ImageObj }) => (
-  <StyledImage src={image.data.Attachments[0].url} alt={image.data.Alt} />
-)
-
-const ImageHeader = ({ images }: { images: ImageObj[] }) => (
+const ImageHeader = ({ homePageText }: { homePageText: HomePageText }) => (
   <ImageSection>
-    <Image image={images.find(i => i.data.Name === 'Left Image')} />
-    <Image image={images.find(i => i.data.Name === 'Center Image')} />
-    <Image image={images.find(i => i.data.Name === 'Right Image')} />
+    <Image name={'Left Image'} {...{ homePageText }} />
+    <Image name={'Center Image'} {...{ homePageText }} />
+    <Image name={'Right Image'} {...{ homePageText }} />
   </ImageSection>
 )
+
+const Image = ({
+  homePageText,
+  name,
+}: {
+  homePageText: HomePageText
+  name: string
+}) => {
+  const image = homePageText.nodes.find(i => i.data.Name === name)
+  return (
+    <StyledImage src={image.data.Attachments[0].url} alt={image.data.Alt} />
+  )
+}
 
 export default ImageHeader
