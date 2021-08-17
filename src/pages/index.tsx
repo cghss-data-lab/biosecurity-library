@@ -2,7 +2,10 @@ import React from 'react'
 
 import { useStaticQuery, graphql } from 'gatsby'
 
-import Layout from '../components/Layout/Layout'
+import ImageHeader from '../components/homepage/ImageHeader'
+import FigmaProvider from '../figma/FigmaProvider'
+import NavBar from '../components/layout/NavBar/NavBar'
+import Main from '../components/layout/Main'
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -12,6 +15,7 @@ const IndexPage = () => {
           data {
             Name
             Text
+            Alt
             Attachments {
               url
             }
@@ -29,18 +33,22 @@ const IndexPage = () => {
     }
   `)
 
-  console.log(data)
-
-  // const airtableData = data.allAirtable.edges[0].node.data
-
   return (
-    <Layout>
-      <h1>Talus Analytics Gatsby Starter</h1>
-      <p>
-        {/* {airtableData.Notes.trim()}, from{' '}
+    <FigmaProvider>
+      <NavBar />
+      <ImageHeader
+        images={data.homePageText.nodes.filter(n =>
+          n.data.Name.includes('Image')
+        )}
+      />
+      <Main>
+        <h1>Talus Analytics Gatsby Starter</h1>
+        <p>
+          {/* {airtableData.Notes.trim()}, from{' '}
         <a href={airtableData.url}>this table.</a> */}
-      </p>
-    </Layout>
+        </p>
+      </Main>
+    </FigmaProvider>
   )
 }
 
