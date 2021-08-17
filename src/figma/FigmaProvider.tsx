@@ -3,6 +3,8 @@ import { ThemeProvider } from 'styled-components'
 
 import { semanticStyles } from './semanticStyles.module.scss'
 
+import './fonts.css'
+
 // inline webpack require because it's easier that way in gatsby
 const figmaStyles = require('sass-extract-loader?{"plugins":["sass-extract-js"]}!./styles.scss')
 
