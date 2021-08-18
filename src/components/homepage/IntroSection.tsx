@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { HomePageText } from '../../pages'
-import Button from '../ui/Button'
+import { HomePageText, ResourceSearchData } from '../../pages'
+import ResourceSearch from './ResourceSearch'
 
 const Section = styled.section`
   display: flex;
@@ -23,18 +23,21 @@ const Section = styled.section`
     line-height: 38px;
   }
 `
-const SearchControls = styled.div``
 
 const findByName = (homePageText: HomePageText, name: string) =>
   homePageText.nodes.find(n => n.data.Name === name).data.Text
 
-const IntroSection = ({ homePageText }: { homePageText: HomePageText }) => (
+const IntroSection = ({
+  resourceSearchData,
+  homePageText,
+}: {
+  homePageText: HomePageText
+  resourceSearchData: ResourceSearchData
+}) => (
   <Section>
     <h1>{findByName(homePageText, 'First Header')}</h1>
     <h3>{findByName(homePageText, 'First Paragraph')}</h3>
-    <SearchControls>
-      <Button>{findByName(homePageText, 'Button Text')}</Button>
-    </SearchControls>
+    <ResourceSearch {...{ homePageText, resourceSearchData }} />
   </Section>
 )
 

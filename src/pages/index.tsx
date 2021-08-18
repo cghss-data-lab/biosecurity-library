@@ -7,6 +7,7 @@ import FigmaProvider from '../figma/FigmaProvider'
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import IntroSection from '../components/homepage/IntroSection'
+import ResourceSearch from '../components/homepage/ResourceSearch'
 
 export interface HomePageText {
   nodes: [
@@ -25,8 +26,24 @@ export interface HomePageText {
   ]
 }
 
+export interface ResourceSearchData {
+  nodes: [
+    {
+      data: {
+        Resource_Name: string
+        Short_Name: string
+        Description: string
+        Resource_Type: string
+      }
+    }
+  ]
+}
+
 const IndexPage = () => {
-  const { homePageText }: { homePageText: HomePageText } =
+  const {
+    homePageText,
+    resourceSearchData,
+  }: { homePageText: HomePageText; resourceSearchData: ResourceSearchData } =
     useStaticQuery(graphql`
       query indexQuery {
         homePageText: allAirtable(filter: { table: { eq: "Landing Page" } }) {
@@ -49,6 +66,18 @@ const IndexPage = () => {
             totalCount
           }
         }
+        resourceSearchData: allAirtable(
+          filter: { table: { eq: "Resource Library" } }
+        ) {
+          nodes {
+            data {
+              Resource_Name
+              Resource_Type
+              Short_Name
+              Description
+            }
+          }
+        }
       }
     `)
 
@@ -59,7 +88,7 @@ const IndexPage = () => {
       <NavBar />
       <ImageHeader {...{ homePageText }} />
       <Main>
-        <IntroSection {...{ homePageText }} />
+        <IntroSection {...{ homePageText, resourceSearchData }} />
       </Main>
     </FigmaProvider>
   )
