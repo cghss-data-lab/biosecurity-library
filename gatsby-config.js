@@ -4,7 +4,7 @@ module.exports = {
     title: 'Talus Analytics',
     cookieConsent: {
       cookieMessage:
-        'Talus sites use cookies to ensure you get the best experience possible.',
+        'The biosecurity library uses cookies to ensure you get the best experience possible.',
       buttonColor: 'rgb(15, 35, 75)',
       backgroundColor: '#edf2f2',
     },
