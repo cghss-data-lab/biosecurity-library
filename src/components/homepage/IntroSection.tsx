@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { HomePageText } from '../../pages'
+import Button from '../ui/Button'
 
 const Section = styled.section`
   display: flex;
@@ -22,18 +23,18 @@ const Section = styled.section`
     line-height: 38px;
   }
 `
+const SearchControls = styled.div``
+
+const findByName = (homePageText: HomePageText, name: string) =>
+  homePageText.nodes.find(n => n.data.Name === name).data.Text
 
 const IntroSection = ({ homePageText }: { homePageText: HomePageText }) => (
   <Section>
-    <h1>
-      {homePageText.nodes.find(n => n.data.Name === 'First Header').data.Text}
-    </h1>
-    <h3>
-      {
-        homePageText.nodes.find(n => n.data.Name === 'First Paragraph').data
-          .Text
-      }
-    </h3>
+    <h1>{findByName(homePageText, 'First Header')}</h1>
+    <h3>{findByName(homePageText, 'First Paragraph')}</h3>
+    <SearchControls>
+      <Button>{findByName(homePageText, 'Button Text')}</Button>
+    </SearchControls>
   </Section>
 )
 
