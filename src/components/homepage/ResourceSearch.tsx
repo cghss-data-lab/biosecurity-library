@@ -44,8 +44,8 @@ const StyledTypeaheadControl = styled(TypeaheadControl)`
 `
 
 const ResourceSearch = ({
-  resourceSearchData,
   homePageText,
+  resourceSearchData,
 }: {
   homePageText: HomePageText
   resourceSearchData: ResourceSearchData
@@ -63,6 +63,7 @@ const ResourceSearch = ({
     <SearchControls>
       <Button>{findByName(homePageText, 'Button Text')}</Button>
       <StyledTypeaheadControl
+        className={''}
         placeholder={findByName(homePageText, 'Search Placeholder')}
         items={resources}
         value={selectedResource}
