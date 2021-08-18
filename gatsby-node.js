@@ -24,7 +24,7 @@ exports.createPages = async ({ actions, graphql }) => {
   result.data.resources.nodes.forEach(({ data }) => {
     actions.createPage({
       path:
-        'resources/' +
+        'resource/' +
         makeUrl(data.Resource_Type) +
         '/' +
         makeUrl(data.Short_Name),
