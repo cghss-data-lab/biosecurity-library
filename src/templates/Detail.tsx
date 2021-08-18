@@ -5,7 +5,7 @@ import FigmaProvider from '../figma/FigmaProvider'
 
 interface PageContext {
   data: {
-    Description: string
+    Short_Description: string
     Key_Topic_Areas_s_: string[]
     Resource_Name: string
     Short_Name: string
@@ -19,7 +19,7 @@ const Detail = ({ pageContext: { data } }: { pageContext: PageContext }) => {
       <NavBar />
       <Main>
         <h1>{data.Resource_Name}</h1>
-        <p>{data.Description}</p>
+        <p>{data.Short_Description}</p>
       </Main>
     </FigmaProvider>
   )

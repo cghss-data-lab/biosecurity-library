@@ -13,7 +13,7 @@ exports.createPages = async ({ actions, graphql }) => {
             Resource_Name
             Resource_Type
             Short_Name
-            Description
+            Short_Description
             Key_Topic_Area_s_
           }
         }

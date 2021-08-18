@@ -74,7 +74,7 @@ const IndexPage = () => {
               Resource_Name
               Resource_Type
               Short_Name
-              Description
+              Short_Description
             }
           }
         }
