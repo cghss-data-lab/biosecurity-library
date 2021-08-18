@@ -69,11 +69,12 @@ const TypeaheadControl = ({
       onFocus={onFocusHandler}
       onBlur={onBlurHandler}
       className={className}
+      onSubmit={e => e.preventDefault()}
     >
       <SearchBar
         disabled={disabled}
         type="search"
-        autoComplete="special-auto-fill"
+        autoComplete="off"
         name="special-auto-fill"
         ref={inputRef}
         onKeyPress={handleKeyPress}
