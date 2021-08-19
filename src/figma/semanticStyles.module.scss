@@ -19,11 +19,37 @@ body {
   }
   h2 {
     @include textStyleH2;
+    margin-top: 35px;
+    margin-bottom: 0;
   }
   h3 {
     @include textStyleH3;
   }
+  h4 {
+    @include textStyleH4Regular;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  h5 {
+    @include textStyleH5;
+  }
+  h6 {
+    @include textStyleH6;
+    margin-top: 5px;
+  }
   p {
-    @include textStyleParagraph;
+    @include textStyleParagraphMoreSpace;
+  }
+  a {
+    color: $colorDarker;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  strong {
+    font-weight: 600;
   }
 }
