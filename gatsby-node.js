@@ -7,7 +7,12 @@ exports.createPages = async ({ actions, graphql }) => {
   const detailPageTemplate = path.resolve('./src/templates/Detail.tsx')
   const result = await graphql(`
     {
-      resources: allAirtable(filter: { table: { eq: "Resource Library" } }) {
+      resources: allAirtable(
+        filter: {
+          table: { eq: "Resource Library" }
+          data: { Publish_INTERNAL: { eq: true } }
+        }
+      ) {
         nodes {
           data {
             Resource_Name
@@ -15,6 +20,7 @@ exports.createPages = async ({ actions, graphql }) => {
             Short_Name
             Short_Description
             Key_Topic_Area_s_
+            Authoring_Organization
           }
         }
       }
