@@ -18,7 +18,9 @@ export interface PageContext {
   }
 }
 
-const Detail = ({ pageContext: { data } }: { pageContext: PageContext }) => (
+const Detail: React.FC<{ pageContext: PageContext }> = ({
+  pageContext: { data },
+}) => (
   <FigmaProvider>
     <NavBar />
     <Main>

@@ -11,7 +11,7 @@ const Div = styled.div`
   color: ${({ theme }) => theme.colorDarkGray};
 `
 
-const Breadcrumbs = ({ data }: { data: PageContext['data'] }) => (
+const Breadcrumbs: React.FC<PageContext> = ({ data }) => (
   <Div className={styles.breadcrumbs}>
     Home / {data.Resource_Type} / {data.Resource_Name}
   </Div>

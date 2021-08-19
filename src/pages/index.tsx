@@ -38,7 +38,7 @@ export interface ResourceSearchData {
   ]
 }
 
-const IndexPage = () => {
+const IndexPage: React.FC = () => {
   const {
     homePageText,
     resourceSearchData,

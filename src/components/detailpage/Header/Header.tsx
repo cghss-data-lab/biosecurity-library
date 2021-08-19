@@ -7,7 +7,7 @@ const HeaderContainer = styled.header`
   grid-area: header;
 `
 
-const Header = ({ data }: { data: PageContext['data'] }) => (
+const Header: React.FC<PageContext> = ({ data }) => (
   <HeaderContainer>
     <h2>{data.Resource_Name}</h2>
     <h6>[{data.Short_Name.trim()}]</h6>

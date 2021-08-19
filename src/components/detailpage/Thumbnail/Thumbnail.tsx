@@ -7,6 +7,8 @@ const ThumbnailContainer = styled.div`
   padding-top: 30px;
 `
 
-const Thumbnail = () => <ThumbnailContainer>Thumbnail here</ThumbnailContainer>
+const Thumbnail: React.FC = () => (
+  <ThumbnailContainer>Thumbnail here</ThumbnailContainer>
+)
 
 export default Thumbnail

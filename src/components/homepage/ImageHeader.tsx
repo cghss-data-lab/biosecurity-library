@@ -15,7 +15,9 @@ const StyledImage = styled.img`
   width: 100%;
 `
 
-const ImageHeader = ({ homePageText }: { homePageText: HomePageText }) => (
+const ImageHeader: React.FC<{ homePageText: HomePageText }> = ({
+  homePageText,
+}) => (
   <ImageSection>
     <Image name={'Left Image'} {...{ homePageText }} />
     <Image name={'Center Image'} {...{ homePageText }} />
@@ -23,17 +25,18 @@ const ImageHeader = ({ homePageText }: { homePageText: HomePageText }) => (
   </ImageSection>
 )
 
-const Image = ({
-  homePageText,
-  name,
-}: {
+const Image: React.FC<{
   homePageText: HomePageText
   name: string
-}) => {
+}> = ({ homePageText, name }) => {
   const image = homePageText.nodes.find(i => i.data.Name === name)
-  return (
-    <StyledImage src={image.data.Attachments[0].url} alt={image.data.Alt} />
-  )
+
+  if (image) {
+    return (
+      <StyledImage src={image.data.Attachments[0].url} alt={image.data.Alt} />
+    )
+  }
+  return <></>
 }
 
 export default ImageHeader

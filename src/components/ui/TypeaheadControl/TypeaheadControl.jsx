@@ -28,7 +28,10 @@ const TypeaheadControl = ({
   const inputRef = useRef()
 
   // compute fuzzy search
-  const fuse = useMemo(() => new Fuse(items, { keys: searchKeys }), [items])
+  const fuse = useMemo(
+    () => new Fuse(items, { keys: searchKeys }),
+    [items, searchKeys]
+  )
   const results = fuse.search(searchString).map(({ item }) => item)
 
   // accept top result if enter is pressed
@@ -62,7 +65,7 @@ const TypeaheadControl = ({
 
   useEffect(() => {
     if (disabled && value === '') setSearchString('')
-  }, [disabled])
+  }, [disabled, value])
 
   return (
     <Container

@@ -10,6 +10,7 @@ const StyledLink = styled(Link)`
   padding: 30px;
   text-decoration: none;
   transition: 500ms ease;
+
   &:hover {
     background-color: ${({ theme }) => theme.colorVeryDarkGray};
     transition: 150ms ease;

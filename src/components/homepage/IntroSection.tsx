@@ -25,15 +25,12 @@ const Section = styled.section`
 `
 
 const findByName = (homePageText: HomePageText, name: string) =>
-  homePageText.nodes.find(n => n.data.Name === name).data.Text
+  homePageText.nodes.find(n => n.data.Name === name)?.data.Text
 
-const IntroSection = ({
-  resourceSearchData,
-  homePageText,
-}: {
+const IntroSection: React.FC<{
   homePageText: HomePageText
   resourceSearchData: ResourceSearchData
-}) => (
+}> = ({ resourceSearchData, homePageText }) => (
   <Section>
     <h1>{findByName(homePageText, 'First Header')}</h1>
     <h3>{findByName(homePageText, 'First Paragraph')}</h3>
