@@ -36,7 +36,7 @@ const Image: React.FC<{
       <StyledImage src={image.data.Attachments[0].url} alt={image.data.Alt} />
     )
   }
-  return <></>
+  throw new Error(`Image ${name} not found.`)
 }
 
 export default ImageHeader
