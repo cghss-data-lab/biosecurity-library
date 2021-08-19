@@ -7,7 +7,6 @@ import FigmaProvider from '../figma/FigmaProvider'
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import IntroSection from '../components/homepage/IntroSection'
-import ResourceSearch from '../components/homepage/ResourceSearch'
 
 export interface HomePageText {
   nodes: [
