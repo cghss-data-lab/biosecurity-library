@@ -6,13 +6,14 @@ const StyledLink = styled(Link)`
   font-family: 'Open Sans', sans-serif;
   font-weight: 200;
   font-size: 18px;
-  color: white;
+  color: white !important;
   padding: 30px;
   text-decoration: none;
   transition: 500ms ease;
   &:hover {
     background-color: ${({ theme }) => theme.colorVeryDarkGray};
     transition: 150ms ease;
+    text-decoration: none !important;
   }
 `
 const defaultActiveStyle = {
