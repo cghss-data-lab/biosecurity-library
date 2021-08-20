@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, PageProps, graphql } from 'gatsby'
 
 import ImageHeader from '../components/homepage/ImageHeader'
 import FigmaProvider from '../figma/FigmaProvider'
@@ -38,7 +38,7 @@ export interface ResourceSearchData {
   ]
 }
 
-const IndexPage: React.FC = () => {
+const IndexPage: React.FC<PageProps> = () => {
   const {
     homePageText,
     resourceSearchData,
