@@ -43,6 +43,9 @@ body {
   a {
     color: $colorDarker;
     text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    font-size: 18px;
 
     &:hover {
       text-decoration: underline;

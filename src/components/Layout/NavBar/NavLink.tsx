@@ -3,9 +3,6 @@ import { Link } from 'gatsby'
 import styled from 'styled-components'
 
 const StyledLink = styled(Link)`
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 200;
-  font-size: 18px;
   color: white !important;
   padding: 30px;
   text-decoration: none;
