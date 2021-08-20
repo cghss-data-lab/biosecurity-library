@@ -11,6 +11,7 @@ import Breadcrumbs from '../components/detailpage/Breadcrumbs/Breadcrumbs'
 import Grid from '../components/detailpage/Grid'
 import Header from '../components/detailpage/Header/Header'
 import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
+import TabSection from '../components/detailpage/TabSection/TabSection'
 
 export interface PageContext {
   data: {
@@ -33,6 +34,7 @@ const Detail: React.FC<{ pageContext: PageContext }> = ({
       <Grid>
         <Thumbnail />
         <Header {...{ data }} />
+        <TabSection {...{ data }} />
       </Grid>
     </Main>
   </FigmaProvider>

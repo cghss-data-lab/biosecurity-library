@@ -1758,7 +1758,7 @@
 
 "@types/styled-components@^5.1.12":
   version "5.1.12"
-  resolved "https://registry.npmjs.org/@types/styled-components/-/styled-components-5.1.12.tgz"
+  resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-5.1.12.tgz#1a3679942746adecd1e736bfc47aea2c938a7d9a"
   integrity sha512-sTjc0+gMl08JvOHchQKgEGbbiSexSvWg5khUNSH4kosb7Tl4782AtfWMkAhQmeXMg2vIn6PthGVHFW+U/Dpihg==
   dependencies:
     "@types/hoist-non-react-statics" "*"
