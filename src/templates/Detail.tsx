@@ -1,11 +1,16 @@
 import React from 'react'
+import { PageProps } from 'gatsby'
+
+// layout components
+import Main from '../components/layout/Main'
+import NavBar from '../components/layout/NavBar/NavBar'
+import FigmaProvider from '../figma/FigmaProvider'
+
+// page-specific components
 import Breadcrumbs from '../components/detailpage/Breadcrumbs/Breadcrumbs'
 import Grid from '../components/detailpage/Grid'
 import Header from '../components/detailpage/Header/Header'
 import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
-import Main from '../components/layout/Main'
-import NavBar from '../components/layout/NavBar/NavBar'
-import FigmaProvider from '../figma/FigmaProvider'
 
 export interface PageContext {
   data: {
