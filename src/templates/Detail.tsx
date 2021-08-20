@@ -15,7 +15,7 @@ import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
 export interface PageContext {
   data: {
     Short_Description: string
-    Key_Topic_Areas_s_: string[]
+    Key_Topic_Area_s_: string[]
     Resource_Name: string
     Short_Name: string
     Resource_Type: string
