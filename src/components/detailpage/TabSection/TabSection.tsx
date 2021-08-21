@@ -20,7 +20,6 @@ const tabs: Tab[] = [
 
 const TabSection: React.FC<PageContext> = ({ data }) => {
   const [activeTab, setActiveTab] = useState(tabs[0])
-  console.log(activeTab)
   console.log(data)
   return (
     <>
