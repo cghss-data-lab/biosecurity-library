@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { HomePageText, ResourceSearchData } from '../../pages'
-import Button from '../ui/ButtonLink'
+import ButtonLink from '../ui/ButtonLink'
 
 // @ts-ignore: implicit any
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
@@ -63,7 +63,9 @@ const ResourceSearch = ({
 
   return (
     <SearchControls>
-      <Button>{findByName(homePageText, 'Button Text')}</Button>
+      <ButtonLink to="/explore">
+        {findByName(homePageText, 'Button Text')}
+      </ButtonLink>
       <StyledTypeaheadControl
         className={''}
         placeholder={findByName(homePageText, 'Search Placeholder')}
