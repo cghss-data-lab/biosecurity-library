@@ -2,6 +2,7 @@
 
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 * {
@@ -16,24 +17,29 @@ body {
 .semanticStyles {
   h1 {
     @include textStyleH1;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     color: $colorBlack;
   }
   h2 {
     @include textStyleH2;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     color: $colorBlack;
     margin-top: 35px;
     margin-bottom: 0;
   }
   h3 {
     @include textStyleH3;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   }
   h4 {
     @include textStyleH4Regular;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     margin-top: 20px;
     margin-bottom: 30px;
   }
   h5 {
     @include textStyleH5;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     color: $colorDarkGray;
     // looks like the figma plugin skipped
     // exporting the font weight here so the
@@ -42,16 +48,18 @@ body {
   }
   h6 {
     @include textStyleH6;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     margin-top: 5px;
   }
   p {
     @include textStyleParagraphMoreSpace;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     color: $colorBlack;
   }
   a {
     color: $colorDarker;
     text-decoration: none;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     font-weight: 200;
     font-size: 18px;
 
@@ -61,6 +69,7 @@ body {
   }
 
   strong {
+    font-family: sans-serif;
     font-weight: 600;
   }
 }
