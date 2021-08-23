@@ -1,5 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+
 import { HomePageText } from '../../pages'
 
 const ImageSection = styled.section`
@@ -8,7 +11,7 @@ const ImageSection = styled.section`
   width: 100%;
   overflow: hidden;
 `
-const StyledImage = styled.img`
+const StyledImage = styled(GatsbyImage)`
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -31,9 +34,9 @@ const Image: React.FC<{
   const image = homePageText.nodes.find(i => i.data.Name === name)
 
   if (image) {
-    return (
-      <StyledImage src={image.data.Attachments[0].url} alt={image.data.Alt} />
-    )
+    const imageSources = getImage(image.data.Image.localFiles[0])
+    if (imageSources)
+      return <StyledImage image={imageSources} alt={image.data.Text} />
   }
   throw new Error(`Image ${name} not found.`)
 }

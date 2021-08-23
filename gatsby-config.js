@@ -28,6 +28,8 @@ module.exports = {
           {
             baseId: `appmL0p5H21CiY7tL`,
             tableName: `Landing Page`,
+            // tableView: `Grid View`,
+            mapping: { Image: `fileNode` },
           },
         ],
       },

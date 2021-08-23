@@ -7,6 +7,7 @@ import FigmaProvider from '../figma/FigmaProvider'
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import IntroSection from '../components/homepage/IntroSection'
+import { ImageDataLike } from 'gatsby-plugin-image'
 
 export interface HomePageText {
   nodes: [
@@ -14,12 +15,9 @@ export interface HomePageText {
       data: {
         Name: string
         Text: string
-        Alt: string
-        Attachments: [
-          {
-            url: string
-          }
-        ]
+        Image: {
+          localFiles: ImageDataLike[]
+        }
       }
     }
   ]
@@ -50,9 +48,12 @@ const IndexPage: React.FC<PageProps> = () => {
             data {
               Name
               Text
-              Alt
-              Attachments {
-                url
+              Image {
+                localFiles {
+                  childImageSharp {
+                    gatsbyImageData(height: 200, placeholder: TRACED_SVG)
+                  }
+                }
               }
             }
           }
