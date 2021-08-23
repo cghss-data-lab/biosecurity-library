@@ -1,20 +1,20 @@
-import { navigate } from 'gatsby'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { navigate } from 'gatsby'
 
-import { HomePageText, ResourceSearchData } from '../../pages'
+import { AirtableCMSText } from '../../airtable-cms/types'
+import getCMSText from '../../airtable-cms/getCMSText'
+
 import ButtonLink from '../ui/ButtonLink'
-
 // @ts-ignore: implicit any
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
 // @ts-ignore: implicit any
 import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
+import { ResourceSearchData } from '../../pages'
+
 const makeUrl = (string: string) =>
   encodeURI(string.toLowerCase().trim().replace(/ /g, '-'))
-
-const findByName = (homePageText: HomePageText, name: string) =>
-  homePageText.nodes.find(n => n.data.Name === name)?.data.Text
 
 const SearchControls = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ const ResourceSearch = ({
   homePageText,
   resourceSearchData,
 }: {
-  homePageText: HomePageText
+  homePageText: AirtableCMSText
   resourceSearchData: ResourceSearchData
 }) => {
   const [selectedResource, setSelectedResource] = useState()
@@ -64,11 +64,11 @@ const ResourceSearch = ({
   return (
     <SearchControls>
       <ButtonLink to="/explore">
-        {findByName(homePageText, 'Button Text')}
+        {getCMSText(homePageText, 'Button Text')}
       </ButtonLink>
       <StyledTypeaheadControl
         className={''}
-        placeholder={findByName(homePageText, 'Search Placeholder')}
+        placeholder={getCMSText(homePageText, 'Search Placeholder')}
         items={resources}
         value={selectedResource}
         onChange={(resource: any) => {

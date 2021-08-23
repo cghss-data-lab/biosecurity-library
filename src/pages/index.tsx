@@ -1,27 +1,14 @@
 import React from 'react'
-
 import { useStaticQuery, PageProps, graphql } from 'gatsby'
 
-import ImageHeader from '../components/homepage/ImageHeader'
 import FigmaProvider from '../figma/FigmaProvider'
+
+import { AirtableCMSText } from '../airtable-cms/types'
+
+import ImageHeader from '../components/homepage/ImageHeader'
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import IntroSection from '../components/homepage/IntroSection'
-import { ImageDataLike } from 'gatsby-plugin-image'
-
-export interface HomePageText {
-  nodes: [
-    {
-      data: {
-        Name: string
-        Text: string
-        Image: {
-          localFiles: ImageDataLike[]
-        }
-      }
-    }
-  ]
-}
 
 export interface ResourceSearchData {
   nodes: [
@@ -40,7 +27,7 @@ const IndexPage: React.FC<PageProps> = () => {
   const {
     homePageText,
     resourceSearchData,
-  }: { homePageText: HomePageText; resourceSearchData: ResourceSearchData } =
+  }: { homePageText: AirtableCMSText; resourceSearchData: ResourceSearchData } =
     useStaticQuery(graphql`
       query indexQuery {
         homePageText: allAirtable(filter: { table: { eq: "Landing Page" } }) {

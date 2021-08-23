@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import getCMSText from '../../airtable-cms/getCMSText'
 
-import { HomePageText, ResourceSearchData } from '../../pages'
+import { AirtableCMSText } from '../../airtable-cms/types'
+
+import { ResourceSearchData } from '../../pages'
 import ResourceSearch from './ResourceSearch'
 
 const Section = styled.section`
@@ -24,16 +27,13 @@ const Section = styled.section`
   }
 `
 
-const findByName = (homePageText: HomePageText, name: string) =>
-  homePageText.nodes.find(n => n.data.Name === name)?.data.Text
-
 const IntroSection: React.FC<{
-  homePageText: HomePageText
+  homePageText: AirtableCMSText
   resourceSearchData: ResourceSearchData
 }> = ({ resourceSearchData, homePageText }) => (
   <Section>
-    <h1>{findByName(homePageText, 'First Header')}</h1>
-    <h3>{findByName(homePageText, 'First Paragraph')}</h3>
+    <h1>{getCMSText(homePageText, 'First Header')}</h1>
+    <h3>{getCMSText(homePageText, 'First Paragraph')}</h3>
     <ResourceSearch {...{ homePageText, resourceSearchData }} />
   </Section>
 )

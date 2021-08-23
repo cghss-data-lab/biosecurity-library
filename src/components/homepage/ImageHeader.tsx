@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-import { HomePageText } from '../../pages'
+import { AirtableCMSText } from '../../airtable-cms/types'
 
 const ImageSection = styled.section`
   display: grid;
@@ -17,7 +17,7 @@ const StyledImage = styled(GatsbyImage)`
   width: 100%;
 `
 
-const ImageHeader: React.FC<{ homePageText: HomePageText }> = ({
+const ImageHeader: React.FC<{ homePageText: AirtableCMSText }> = ({
   homePageText,
 }) => (
   <ImageSection>
@@ -28,7 +28,7 @@ const ImageHeader: React.FC<{ homePageText: HomePageText }> = ({
 )
 
 const Image: React.FC<{
-  homePageText: HomePageText
+  homePageText: AirtableCMSText
   name: string
 }> = ({ homePageText, name }) => {
   const image = homePageText.nodes.find(i => i.data.Name === name)
