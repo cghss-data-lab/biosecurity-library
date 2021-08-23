@@ -1,14 +1,14 @@
 import React from 'react'
 import { graphql, PageProps, useStaticQuery } from 'gatsby'
-import { ImageDataLike } from 'gatsby-plugin-image'
 
 import FigmaProvider from '../figma/FigmaProvider'
+
+import { AirtableCMSText } from '../airtable-cms/types'
+import getCMSText from '../airtable-cms/getCMSText'
 
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import styled from 'styled-components'
-import { AirtableCMSText } from '../airtable-cms/types'
-import getCMSText from '../airtable-cms/getCMSText'
 
 const Header = styled.header`
   text-align: center;
