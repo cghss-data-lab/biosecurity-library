@@ -1,7 +1,7 @@
 const path = require('path')
 
 const makeUrl = string =>
-  encodeURI(string.toLowerCase().trim().replace(/ /g, '-'))
+  encodeURI(string.toLowerCase().trim().replace(/ /g, '-')) + '/'
 
 exports.createPages = async ({ actions, graphql }) => {
   const detailPageTemplate = path.resolve('./src/templates/Detail.tsx')
@@ -38,10 +38,7 @@ exports.createPages = async ({ actions, graphql }) => {
   result.data.resources.nodes.forEach(({ data }) => {
     actions.createPage({
       path:
-        'resource/' +
-        makeUrl(data.Resource_Type) +
-        '/' +
-        makeUrl(data.Short_Name),
+        'resource/' + makeUrl(data.Resource_Type) + makeUrl(data.Short_Name),
       component: detailPageTemplate,
       context: { data },
     })
