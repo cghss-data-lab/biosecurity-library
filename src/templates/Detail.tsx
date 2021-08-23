@@ -16,6 +16,7 @@ import TabSection from '../components/detailpage/TabSection/TabSection'
 export interface PageContext {
   data: {
     Short_Description: string
+    Long_Description: string
     Key_Topic_Area_s_: string[]
     Resource_Name: string
     Short_Name: string

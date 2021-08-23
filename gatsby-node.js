@@ -19,6 +19,7 @@ exports.createPages = async ({ actions, graphql }) => {
             Resource_Type
             Short_Name
             Short_Description
+            Long_Description
             Key_Topic_Area_s_
             Authoring_Organization
             Thumbnail_INTERNAL {

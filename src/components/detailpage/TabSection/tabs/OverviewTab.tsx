@@ -13,7 +13,7 @@ const ContentSection = styled.section`
 const OverviewTab: React.FC<PageContext> = ({ data }) => (
   <ContentSection>
     <h5>SUMMARY</h5>
-    <p>{data.Short_Description}</p>
+    <p>{data.Long_Description}</p>
     <h5>RESOURCE TYPE</h5>
     <p>{data.Resource_Type}</p>
     <h5>CATEGORIES</h5>
