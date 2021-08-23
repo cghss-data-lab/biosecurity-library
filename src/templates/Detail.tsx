@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageProps } from 'gatsby'
+import { ImageDataLike } from 'gatsby-plugin-image'
 
 // layout components
 import Main from '../components/layout/Main'
@@ -22,10 +22,8 @@ export interface PageContext {
     Short_Name: string
     Resource_Type: string
     Authoring_Organization: string
-    // There's probably a type definition
-    // for this somewhere, I should look that up
     Thumbnail_INTERNAL: {
-      localFiles: any[]
+      localFiles: ImageDataLike[]
     }
   }
 }
