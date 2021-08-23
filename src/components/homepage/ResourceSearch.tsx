@@ -3,16 +3,18 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import { HomePageText, ResourceSearchData } from '../../pages'
-import Button from '../ui/Button'
+import Button from '../ui/ButtonLink'
 
+// @ts-ignore: implicit any
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
+// @ts-ignore: implicit any
 import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
-const makeUrl = string =>
+const makeUrl = (string: string) =>
   encodeURI(string.toLowerCase().trim().replace(/ /g, '-'))
 
 const findByName = (homePageText: HomePageText, name: string) =>
-  homePageText.nodes.find(n => n.data.Name === name).data.Text
+  homePageText.nodes.find(n => n.data.Name === name)?.data.Text
 
 const SearchControls = styled.div`
   display: flex;
@@ -67,7 +69,7 @@ const ResourceSearch = ({
         placeholder={findByName(homePageText, 'Search Placeholder')}
         items={resources}
         value={selectedResource}
-        onChange={resource => {
+        onChange={(resource: any) => {
           if (resource)
             navigate(
               `/resource/${makeUrl(resource.Resource_Type)}/${makeUrl(
@@ -75,7 +77,9 @@ const ResourceSearch = ({
               )}`
             )
         }}
-        renderItem={({ label }) => <TypeaheadResult>{label}</TypeaheadResult>}
+        renderItem={({ label }: { label: string }) => (
+          <TypeaheadResult>{label}</TypeaheadResult>
+        )}
       />
     </SearchControls>
   )
