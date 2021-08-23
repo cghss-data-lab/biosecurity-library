@@ -21,6 +21,13 @@ exports.createPages = async ({ actions, graphql }) => {
             Short_Description
             Key_Topic_Area_s_
             Authoring_Organization
+            Thumbnail_INTERNAL {
+              localFiles {
+                childImageSharp {
+                  gatsbyImageData(width: 200, placeholder: BLURRED)
+                }
+              }
+            }
           }
         }
       }

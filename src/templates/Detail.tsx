@@ -21,6 +21,11 @@ export interface PageContext {
     Short_Name: string
     Resource_Type: string
     Authoring_Organization: string
+    // There's probably a type definition
+    // for this somewhere, I should look that up
+    Thumbnail_INTERNAL: {
+      localFiles: any[]
+    }
   }
 }
 
@@ -32,7 +37,7 @@ const Detail: React.FC<{ pageContext: PageContext }> = ({
     <Main>
       <Breadcrumbs {...{ data }} />
       <Grid>
-        <Thumbnail />
+        <Thumbnail {...{ data }} />
         <Header {...{ data }} />
         <TabSection {...{ data }} />
       </Grid>

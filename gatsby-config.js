@@ -22,6 +22,8 @@ module.exports = {
           {
             baseId: `app708Ctx0rz1c1n7`,
             tableName: `Resource Library`,
+            tableView: `website-view`,
+            mapping: { Thumbnail_INTERNAL: `fileNode` },
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
@@ -52,6 +54,9 @@ module.exports = {
     },
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-image',
     'gatsby-plugin-sass',
     'gatsby-plugin-mdx',
   ],
