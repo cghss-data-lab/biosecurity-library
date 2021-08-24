@@ -7,6 +7,10 @@ export const getCMSText = (data: AirtableCMSData, name: string) =>
 const AirtableCMSText: React.FC<{
   name: string
   data: AirtableCMSData
-}> = ({ data, name }) => <>{getCMSText(data, name)}</>
+}> = ({ data, name }) => {
+  const text = getCMSText(data, name)
+  if (text) return <>{text}</>
+  throw new Error(`Text section ${name} not found.`)
+}
 
 export default AirtableCMSText
