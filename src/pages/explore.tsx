@@ -3,8 +3,8 @@ import { graphql, PageProps, useStaticQuery } from 'gatsby'
 
 import FigmaProvider from '../figma/FigmaProvider'
 
-import { AirtableCMSText } from '../airtable-cms/types'
-import getCMSText from '../airtable-cms/getCMSText'
+import { AirtableCMSData } from '../airtable-cms/types'
+import AirtableCMSText from '../airtable-cms/AirtableCMSText'
 
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
@@ -15,7 +15,7 @@ const Header = styled.header`
 `
 
 const ExplorePage: React.FC<PageProps> = () => {
-  const { explorePageText }: { explorePageText: AirtableCMSText } =
+  const { explorePageText }: { explorePageText: AirtableCMSData } =
     useStaticQuery(graphql`
       query exploreQuery {
         explorePageText: allAirtable(
@@ -36,7 +36,9 @@ const ExplorePage: React.FC<PageProps> = () => {
       <NavBar />
       <Main>
         <Header>
-          <h1>{getCMSText(explorePageText, 'First Header')}</h1>
+          <h1>
+            <AirtableCMSText name={'First Header'} data={explorePageText} />
+          </h1>
         </Header>
       </Main>
     </FigmaProvider>

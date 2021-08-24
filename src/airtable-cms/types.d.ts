@@ -1,6 +1,6 @@
 import { ImageDataLike } from 'gatsby-plugin-image'
 
-export interface AirtableCMSText {
+export interface AirtableCMSData {
   nodes: [
     {
       data: {

@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import getCMSText from '../../airtable-cms/getCMSText'
+import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
+import getCMSText from '../../airtable-cms/AirtableCMSText'
 
-import { AirtableCMSText } from '../../airtable-cms/types'
+import { AirtableCMSData } from '../../airtable-cms/types'
 
 import { ResourceSearchData } from '../../pages'
 import ResourceSearch from './ResourceSearch'
@@ -28,12 +29,16 @@ const Section = styled.section`
 `
 
 const IntroSection: React.FC<{
-  homePageText: AirtableCMSText
+  homePageText: AirtableCMSData
   resourceSearchData: ResourceSearchData
 }> = ({ resourceSearchData, homePageText }) => (
   <Section>
-    <h1>{getCMSText(homePageText, 'First Header')}</h1>
-    <h3>{getCMSText(homePageText, 'First Paragraph')}</h3>
+    <h1>
+      <AirtableCMSText name={'First Header'} data={homePageText} />
+    </h1>
+    <h3>
+      <AirtableCMSText name={'First Paragraph'} data={homePageText} />
+    </h3>
     <ResourceSearch {...{ homePageText, resourceSearchData }} />
   </Section>
 )

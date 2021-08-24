@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-
-import { AirtableCMSText } from '../../airtable-cms/types'
+import { AirtableCMSData } from '../../airtable-cms/types'
+import AirtableCMSImage from '../../airtable-cms/AirtableCMSImage'
 
 const ImageSection = styled.section`
   display: grid;
@@ -11,34 +10,20 @@ const ImageSection = styled.section`
   width: 100%;
   overflow: hidden;
 `
-const StyledImage = styled(GatsbyImage)`
+const StyledImage = styled(AirtableCMSImage)`
   object-fit: cover;
   height: 100%;
   width: 100%;
 `
 
-const ImageHeader: React.FC<{ homePageText: AirtableCMSText }> = ({
+const ImageHeader: React.FC<{ homePageText: AirtableCMSData }> = ({
   homePageText,
 }) => (
   <ImageSection>
-    <Image name={'Left Image'} {...{ homePageText }} />
-    <Image name={'Center Image'} {...{ homePageText }} />
-    <Image name={'Right Image'} {...{ homePageText }} />
+    <StyledImage name={'Left Image'} data={homePageText} />
+    <StyledImage name={'Center Image'} data={homePageText} />
+    <StyledImage name={'Right Image'} data={homePageText} />
   </ImageSection>
 )
-
-const Image: React.FC<{
-  homePageText: AirtableCMSText
-  name: string
-}> = ({ homePageText, name }) => {
-  const image = homePageText.nodes.find(i => i.data.Name === name)
-
-  if (image) {
-    const imageSources = getImage(image.data.Image.localFiles[0])
-    if (imageSources)
-      return <StyledImage image={imageSources} alt={image.data.Text} />
-  }
-  throw new Error(`Image ${name} not found.`)
-}
 
 export default ImageHeader

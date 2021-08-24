@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
-import { AirtableCMSText } from '../../airtable-cms/types'
-import getCMSText from '../../airtable-cms/getCMSText'
+import { AirtableCMSData } from '../../airtable-cms/types'
+import AirtableCMSText, { getCMSText } from '../../airtable-cms/AirtableCMSText'
 
 import ButtonLink from '../ui/ButtonLink'
 // @ts-ignore: implicit any
@@ -49,7 +49,7 @@ const ResourceSearch = ({
   homePageText,
   resourceSearchData,
 }: {
-  homePageText: AirtableCMSText
+  homePageText: AirtableCMSData
   resourceSearchData: ResourceSearchData
 }) => {
   const [selectedResource, setSelectedResource] = useState()
@@ -64,7 +64,7 @@ const ResourceSearch = ({
   return (
     <SearchControls>
       <ButtonLink to="/explore">
-        {getCMSText(homePageText, 'Button Text')}
+        <AirtableCMSText name={'Button Text'} data={homePageText} />
       </ButtonLink>
       <StyledTypeaheadControl
         className={''}
