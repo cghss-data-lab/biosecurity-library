@@ -1,3 +1,4 @@
+import React from 'react'
 import { AirtableCMSData } from './types'
 
 export const getCMSText = (data: AirtableCMSData, name: string) =>

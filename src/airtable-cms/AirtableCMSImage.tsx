@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { getImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
