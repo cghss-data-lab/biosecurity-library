@@ -7,8 +7,6 @@ export const getCMSText = (data: AirtableCMSData, name: string) =>
 const AirtableCMSText: React.FC<{
   name: string
   data: AirtableCMSData
-}> = ({ data, name }) => {
-  return <>{getCMSText(data, name)}</>
-}
+}> = ({ data, name }) => <>{getCMSText(data, name)}</>
 
 export default AirtableCMSText
