@@ -22,10 +22,11 @@ export const getCMSImage = (data: AirtableCMSData, name: string) => {
 const AirtableCMSImage: React.FC<{
   name: string
   data: AirtableCMSData
-}> = ({ data, name }) => {
+  className?: string
+}> = ({ data, name, className }) => {
   const { sources, alt } = getCMSImage(data, name)
 
-  return <GatsbyImage image={sources} alt={alt} />
+  return <GatsbyImage className={className} image={sources} alt={alt} />
 }
 
 export default AirtableCMSImage
