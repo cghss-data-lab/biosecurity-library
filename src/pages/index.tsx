@@ -3,7 +3,7 @@ import { useStaticQuery, PageProps, graphql } from 'gatsby'
 
 import FigmaProvider from '../figma/FigmaProvider'
 
-import { AirtableCMSText } from '../airtable-cms/types'
+import { AirtableCMSData } from '../airtable-cms/types'
 
 import ImageHeader from '../components/homepage/ImageHeader'
 import NavBar from '../components/layout/NavBar/NavBar'
@@ -27,7 +27,7 @@ const IndexPage: React.FC<PageProps> = () => {
   const {
     homePageText,
     resourceSearchData,
-  }: { homePageText: AirtableCMSText; resourceSearchData: ResourceSearchData } =
+  }: { homePageText: AirtableCMSData; resourceSearchData: ResourceSearchData } =
     useStaticQuery(graphql`
       query indexQuery {
         homePageText: allAirtable(filter: { table: { eq: "Landing Page" } }) {
