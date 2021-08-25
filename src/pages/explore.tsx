@@ -41,6 +41,59 @@ const ExplorePage: React.FC<PageProps> = () => {
             }
           }
         }
+        exploreTopics: allAirtable(
+          filter: {
+            table: { eq: "Resource Library" }
+            data: { Publish_INTERNAL: { eq: true } }
+          }
+        ) {
+          distinct(field: data___Resource_Type)
+        }
+        keyTopicAreas: allAirtable(
+          filter: {
+            table: { eq: "Resource Library" }
+            data: { Publish_INTERNAL: { eq: true } }
+          }
+        ) {
+          distinct(field: data___Key_Topic_Area_s_)
+        }
+        userRoles: allAirtable(
+          filter: {
+            table: { eq: "Resource Library" }
+            data: { Publish_INTERNAL: { eq: true } }
+          }
+        ) {
+          distinct(field: data___Target_user_role)
+        }
+        authorizingOrganization: allAirtable(
+          filter: {
+            table: { eq: "Resource Library" }
+            data: { Publish_INTERNAL: { eq: true } }
+          }
+        ) {
+          distinct(field: data___Authoring_Organization)
+        }
+        groupedResources: allAirtable(
+          filter: {
+            table: { eq: "Resource Library" }
+            data: { Publish_INTERNAL: { eq: true } }
+          }
+        ) {
+          group(field: data___Resource_Type) {
+            nodes {
+              table
+              data {
+                Resource_Name
+                Authoring_Organization
+                Target_user_role
+                Short_Description
+                Key_Topic_Area_s_
+                Key_Resource_INTERNAL_
+              }
+            }
+            fieldValue
+          }
+        }
       }
     `)
 
