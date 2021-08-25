@@ -16,7 +16,12 @@ export const getCMSImage = (data: AirtableCMSData, name: string) => {
 
     if (sources && alt) return { sources, alt }
   }
-  throw new Error(`Image ${name} not found.`)
+  throw new Error(
+    `Image ${name} not found in ` +
+      `Airtable. Does the query include the ` +
+      `right tables, and does one of those ` +
+      `tables include a section called ${name}?.`
+  )
 }
 
 const AirtableCMSImage: React.FC<{
@@ -25,7 +30,6 @@ const AirtableCMSImage: React.FC<{
   className?: string
 }> = ({ data, name, className }) => {
   const { sources, alt } = getCMSImage(data, name)
-
   return <GatsbyImage className={className} image={sources} alt={alt} />
 }
 

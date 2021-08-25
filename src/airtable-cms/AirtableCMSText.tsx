@@ -10,7 +10,12 @@ const AirtableCMSText: React.FC<{
 }> = ({ data, name }) => {
   const text = getCMSText(data, name)
   if (text) return <>{text}</>
-  throw new Error(`Text section ${name} not found.`)
+  throw new Error(
+    `Text section ${name} not found in ` +
+      `Airtable. Does the query include the ` +
+      `right tables, and does one of those ` +
+      `tables include a section called ${name}?.`
+  )
 }
 
 export default AirtableCMSText
