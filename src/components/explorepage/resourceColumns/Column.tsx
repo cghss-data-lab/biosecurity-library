@@ -18,7 +18,7 @@ const Column: React.FC<{ name: string; resources: ResourceGroup | undefined }> =
       <h3>{name}</h3>
       {resources &&
         resources.nodes.map(({ data }) => (
-          <p>
+          <p key={data.Short_Name}>
             <Link
               to={
                 '/resource/' +
