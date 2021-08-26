@@ -115,7 +115,20 @@ const ExplorePage: React.FC<PageProps> = () => {
     test: (data: ResourceGroup['nodes'][0]) => boolean
   }
 
-  const [filters, setFilters] = useState<Filter[]>([])
+  const [filters, setFilters] = useState<Filter[]>([
+    // example filters for testing, this array should
+    // be initialized empty
+    {
+      name: 'test',
+      test: ({ data }) => data.Target_user_role.includes('Legislative leader'),
+    },
+    // {
+    //   name: 'test',
+    //   test: node =>
+    //     node.data.Resource_Name ===
+    //     'Malaysian Educational Module on Responsible Conduct of Research',
+    // },
+  ])
 
   let resources = groupedResources
   if (filters.length > 0) {
