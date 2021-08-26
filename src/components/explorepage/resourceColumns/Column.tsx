@@ -1,5 +1,8 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
+
+import { urlString } from '../../../airtable-cms/utilities'
 
 import { ResourceGroup } from '../../../pages/explore'
 
@@ -16,7 +19,19 @@ const Column: React.FC<{ name: string; resources: ResourceGroup | undefined }> =
       <ColumnContainer>
         <h3>{name}</h3>
         {resources &&
-          resources.nodes.map(resource => <p>{resource.data.Resource_Name}</p>)}
+          resources.nodes.map(({ data }) => (
+            <p>
+              <Link
+                to={
+                  '/resource/' +
+                  urlString(data.Resource_Type) +
+                  urlString(data.Short_Name)
+                }
+              >
+                {data.Resource_Name}
+              </Link>
+            </p>
+          ))}
       </ColumnContainer>
     )
   }
