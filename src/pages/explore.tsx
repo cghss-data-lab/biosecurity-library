@@ -136,7 +136,7 @@ const ExplorePage: React.FC<PageProps> = () => {
     resources = filters.reduce(
       (prev, filter) =>
         prev.map(group => ({
-          fieldValue: group.fieldValue,
+          ...group,
           nodes: group.nodes.filter(filter.test),
         })),
       groupedResources
