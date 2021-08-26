@@ -56,7 +56,20 @@ const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
         onChange={(option: any) => {
           if (option) {
             setSelectedOptions(option)
+            setFilters(prev => [
+              ...prev,
+              {
+                name: `Key Topic Area: ${option.label}`,
+                test: ({ data }) =>
+                  data.Key_Topic_Area_s_.includes(option.label),
+              },
+            ])
             console.log(option)
+          } else {
+            setSelectedOptions(undefined)
+            setFilters(prev =>
+              prev.filter(filter => !filter.name.includes('Key Topic Area'))
+            )
           }
         }}
         renderItem={({ label }: { label: string }) => (
