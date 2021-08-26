@@ -19,34 +19,30 @@ const Header = styled.header`
   text-align: center;
 `
 
-const ExplorePage: React.FC<PageProps> = () => {
-  interface ResourceGroups {
-    group: [
-      {
-        fieldValue: string
-        nodes: [
-          {
-            data: {
-              Authoring_Organization: string
-              Key_Resource_INTERNAL: true | null
-              Key_Topic_Area_s_: string[]
-              Resource_Name: string
-              Short_Description: string
-              Target_user_role: string[]
-            }
-          }
-        ]
+export interface ResourceGroup {
+  fieldValue: string
+  nodes: [
+    {
+      data: {
+        Authoring_Organization: string
+        Key_Resource_INTERNAL: true | null
+        Key_Topic_Area_s_: string[]
+        Resource_Name: string
+        Short_Description: string
+        Target_user_role: string[]
       }
-    ]
-  }
+    }
+  ]
+}
 
+const ExplorePage: React.FC<PageProps> = () => {
   const {
     explorePageText,
-    groupedResources,
+    groupedResources: { group: groupedResources },
     exploreTopics,
   }: {
     explorePageText: AirtableCMSData
-    groupedResources: ResourceGroups
+    groupedResources: { group: ResourceGroup[] }
     exploreTopics: any
   } = useStaticQuery(graphql`
     query exploreQuery {
@@ -125,18 +121,20 @@ const ExplorePage: React.FC<PageProps> = () => {
 
   interface Filter {
     name: string
-    apply: (resources: ResourceGroups) => ResourceGroups
+    apply: (data: ResourceGroup) => ResourceGroup
   }
 
   const [filters, setFilters] = useState<Filter[]>([])
 
-  let filteredResources = groupedResources
-  if (filters.length > 0) {
-    filteredResources = filters.reduce(
-      (prev, filter) => filter.apply(prev),
-      groupedResources
-    )
-  }
+  let resources = groupedResources
+  // if (filters.length > 0) {
+  //   resources = filters.reduce(
+  //     (prev, filter) => filter.apply(prev),
+  //     groupedResources
+  //   )
+  // }
+
+  console.log(resources)
 
   return (
     <FigmaProvider>
