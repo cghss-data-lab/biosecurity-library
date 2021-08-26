@@ -30,10 +30,10 @@ const ExplorePage: React.FC<PageProps> = () => {
             data: {
               Authoring_Organization: string
               Key_Resource_INTERNAL: true | null
-              Key_Topic_Area_s_: [string]
+              Key_Topic_Area_s_: string[]
               Resource_Name: string
               Short_Description: string
-              Target_user_role: [string]
+              Target_user_role: string[]
             }
           }
         ]
