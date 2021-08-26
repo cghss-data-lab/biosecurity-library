@@ -40,11 +40,9 @@ const ExplorePage: React.FC<PageProps> = () => {
   const {
     explorePageText,
     groupedResources: { group: groupedResources },
-    exploreTopics,
   }: {
     explorePageText: AirtableCMSData
     groupedResources: { group: ResourceGroup[] }
-    exploreTopics: any
   } = useStaticQuery(graphql`
     query exploreQuery {
       explorePageText: allAirtable(filter: { table: { eq: "Explore Page" } }) {
@@ -112,7 +110,6 @@ const ExplorePage: React.FC<PageProps> = () => {
   `)
 
   console.log(groupedResources)
-  console.log(exploreTopics)
 
   interface Filter {
     name: string
@@ -122,10 +119,10 @@ const ExplorePage: React.FC<PageProps> = () => {
   const [filters, setFilters] = useState<Filter[]>([
     // example filters for testing, this array should
     // be initialized empty
-    {
-      name: 'test',
-      test: ({ data }) => data.Target_user_role.includes('Legislative leader'),
-    },
+    // {
+    //   name: 'test',
+    //   test: ({ data }) => data.Target_user_role.includes('Legislative leader'),
+    // },
     // {
     //   name: 'test',
     //   test: node =>
