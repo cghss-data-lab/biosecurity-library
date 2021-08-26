@@ -21,7 +21,30 @@ const Header = styled.header`
 `
 
 const ExplorePage: React.FC<PageProps> = () => {
-  const { explorePageText }: { explorePageText: AirtableCMSData } =
+  interface ResourceGroup {
+    group: [
+      {
+        fieldValue: string
+        nodes: [
+          {
+            data: {
+              Authoring_Organization: string
+              Key_Resource_INTERNAL: true | null
+              Key_Topic_Area_s_: [string]
+              Resource_Name: string
+              Short_Description: string
+              Target_user_role: [string]
+            }
+          }
+        ]
+      }
+    ]
+  }
+
+  const {
+    explorePageText,
+    groupedResources,
+  }: { explorePageText: AirtableCMSData; groupedResources: ResourceGroup } =
     useStaticQuery(graphql`
       query exploreQuery {
         explorePageText: allAirtable(
@@ -81,7 +104,6 @@ const ExplorePage: React.FC<PageProps> = () => {
         ) {
           group(field: data___Resource_Type) {
             nodes {
-              table
               data {
                 Resource_Name
                 Authoring_Organization
