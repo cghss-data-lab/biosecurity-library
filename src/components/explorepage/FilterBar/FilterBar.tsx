@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Filter } from '../../../pages/explore'
+
 import KeyTopic from './filters/KeyTopic'
+import TargetUserRole from './filters/TargetUserRole'
 
 const FilterSection = styled.section`
   display: flex;
@@ -26,7 +28,7 @@ const FilterBar: React.FC<FilterProps> = ({ filters, setFilters }) => {
       <KeyTopic {...{ filters, setFilters }} />
       <KeyTopic {...{ filters, setFilters }} />
       <KeyTopic {...{ filters, setFilters }} />
-      <KeyTopic {...{ filters, setFilters }} />
+      <TargetUserRole {...{ filters, setFilters }} />
     </FilterSection>
   )
 }
