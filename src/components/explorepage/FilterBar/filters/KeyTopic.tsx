@@ -7,6 +7,8 @@ import { FilterLabel, NameContainer } from '../DisplayComponents'
 import { FilterOptions, FilterProps } from '../FilterBar'
 
 const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
+  const name = 'Key topic'
+
   const {
     distinctOptions: { distinct: options },
   } = useStaticQuery<FilterOptions>(graphql`
@@ -25,10 +27,16 @@ const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
   return (
     <FilterLabel>
       <NameContainer>
-        <div>Key Topic Filter</div>
+        <div>Key topic</div>
         <button>ex</button>
       </NameContainer>
-      <FilterControl name="Key Topic" {...{ options, setFilters }} />
+      <FilterControl
+        {...{ name, options, setFilters }}
+        createFilter={(option, name) => ({
+          name: `${name}: ${option.label}`,
+          test: ({ data }) => data.Key_Topic_Area_s_.includes(option.label),
+        })}
+      />
     </FilterLabel>
   )
 }

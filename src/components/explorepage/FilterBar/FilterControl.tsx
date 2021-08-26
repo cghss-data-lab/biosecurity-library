@@ -7,9 +7,14 @@ import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
 
 import { Filter } from '../../../pages/explore'
 
+interface Option {
+  label: string
+}
+
 interface FilterControlProps {
   name: string
   options: string[]
+  createFilter: (option: Option, name: string) => Filter
   setFilters: React.Dispatch<React.SetStateAction<Filter[]>>
 }
 
@@ -21,6 +26,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
   name,
   options,
   setFilters,
+  createFilter,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<Selected>()
   return (
@@ -29,15 +35,12 @@ const FilterControl: React.FC<FilterControlProps> = ({
       placeholder={selectedOptions?.label || name}
       items={options.map(o => ({ label: o }))}
       value={selectedOptions}
-      onChange={(option: any) => {
+      onChange={(option: Option) => {
         if (option) {
           setSelectedOptions(option)
           setFilters(prev => [
-            ...prev,
-            {
-              name: `${name}: ${option.label}`,
-              test: ({ data }) => data.Key_Topic_Area_s_.includes(option.label),
-            },
+            ...prev.filter(filter => !filter.name.includes(name)),
+            createFilter(option, name),
           ])
         } else {
           setSelectedOptions(undefined)
