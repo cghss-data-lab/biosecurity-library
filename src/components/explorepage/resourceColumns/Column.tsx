@@ -13,27 +13,24 @@ const ColumnContainer = styled.div`
 `
 
 const Column: React.FC<{ name: string; resources: ResourceGroup | undefined }> =
-  ({ name, resources }) => {
-    console.log(resources)
-    return (
-      <ColumnContainer>
-        <h3>{name}</h3>
-        {resources &&
-          resources.nodes.map(({ data }) => (
-            <p>
-              <Link
-                to={
-                  '/resource/' +
-                  urlString(data.Resource_Type) +
-                  urlString(data.Short_Name)
-                }
-              >
-                {data.Resource_Name}
-              </Link>
-            </p>
-          ))}
-      </ColumnContainer>
-    )
-  }
+  ({ name, resources }) => (
+    <ColumnContainer>
+      <h3>{name}</h3>
+      {resources &&
+        resources.nodes.map(({ data }) => (
+          <p>
+            <Link
+              to={
+                '/resource/' +
+                urlString(data.Resource_Type) +
+                urlString(data.Short_Name)
+              }
+            >
+              {data.Resource_Name}
+            </Link>
+          </p>
+        ))}
+    </ColumnContainer>
+  )
 
 export default Column
