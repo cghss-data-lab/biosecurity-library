@@ -36,6 +36,11 @@ export interface ResourceGroup {
   }[]
 }
 
+export interface Filter {
+  name: string
+  test: (data: ResourceGroup['nodes'][0]) => boolean
+}
+
 const ExplorePage: React.FC<PageProps> = () => {
   const {
     explorePageText,
@@ -110,11 +115,6 @@ const ExplorePage: React.FC<PageProps> = () => {
   `)
 
   console.log(groupedResources)
-
-  interface Filter {
-    name: string
-    test: (data: ResourceGroup['nodes'][0]) => boolean
-  }
 
   const [filters, setFilters] = useState<Filter[]>([
     // example filters for testing, this array should
