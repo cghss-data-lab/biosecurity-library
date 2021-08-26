@@ -11,11 +11,11 @@ const ColumnsContainer = styled.section`
   justify-content: space-between;
 `
 
-interface QueryResult {
-  resourceTypes: {
-    distinct: string[]
-  }
-}
+// interface QueryResult {
+//   resourceTypes: {
+//     distinct: string[]
+//   }
+// }
 
 const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
   resources,
@@ -25,32 +25,30 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
   // down to no entries
 
   // depending on how the filters work, this should be unnecessary...
-  const {
-    resourceTypes: { distinct: columns },
-  }: QueryResult = useStaticQuery(graphql`
-    query resourceTypeQuery {
-      resourceTypes: allAirtable(
-        filter: {
-          table: { eq: "Resource Library" }
-          data: { Publish_INTERNAL: { eq: true } }
-        }
-      ) {
-        distinct(field: data___Resource_Type)
-      }
-    }
-  `)
+  // const {
+  //   resourceTypes: { distinct: columns },
+  // }: QueryResult = useStaticQuery(graphql`
+  //   query resourceTypeQuery {
+  //     resourceTypes: allAirtable(
+  //       filter: {
+  //         table: { eq: "Resource Library" }
+  //         data: { Publish_INTERNAL: { eq: true } }
+  //       }
+  //     ) {
+  //       distinct(field: data___Resource_Type)
+  //     }
+  //   }
+  // `)
 
   console.log(resources)
 
   return (
     <ColumnsContainer>
-      {columns.map(name => (
+      {resources.map(group => (
         <Column
-          key={name}
-          name={name}
-          resources={resources.find(
-            (group: ResourceGroup) => group.fieldValue === name
-          )}
+          key={group.fieldValue}
+          name={group.fieldValue}
+          resources={group}
         />
       ))}
     </ColumnsContainer>
