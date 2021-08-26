@@ -22,18 +22,16 @@ const Header = styled.header`
 
 export interface ResourceGroup {
   fieldValue: string
-  nodes: [
-    {
-      data: {
-        Authoring_Organization: string
-        Key_Resource_INTERNAL: true | null
-        Key_Topic_Area_s_: string[]
-        Resource_Name: string
-        Short_Description: string
-        Target_user_role: string[]
-      }
+  nodes: {
+    data: {
+      Authoring_Organization: string
+      Key_Resource_INTERNAL: true | null
+      Key_Topic_Area_s_: string[]
+      Resource_Name: string
+      Short_Description: string
+      Target_user_role: string[]
     }
-  ]
+  }[]
 }
 
 const ExplorePage: React.FC<PageProps> = () => {
