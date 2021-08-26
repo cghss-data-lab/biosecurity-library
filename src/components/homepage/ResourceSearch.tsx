@@ -13,8 +13,7 @@ import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
 import { ResourceSearchData } from '../../pages'
 
-const makeUrl = (string: string) =>
-  encodeURI(string.toLowerCase().trim().replace(/ /g, '-'))
+import { urlString } from '../../airtable-cms/utilities'
 
 const SearchControls = styled.div`
   display: flex;
@@ -74,9 +73,9 @@ const ResourceSearch = ({
         onChange={(resource: any) => {
           if (resource)
             navigate(
-              `/resource/${makeUrl(resource.Resource_Type)}/${makeUrl(
-                resource.key
-              )}`
+              `/resource/` +
+                urlString(resource.Resource_Type) +
+                urlString(resource.key)
             )
         }}
         renderItem={({ label }: { label: string }) => (
