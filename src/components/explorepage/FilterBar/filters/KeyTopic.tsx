@@ -1,15 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import { FilterOptions, FilterProps } from '../FilterBar'
-
-// @ts-ignore: implicit any
-import TypeaheadControl from '../../../ui/TypeaheadControl/TypeaheadControl'
-// @ts-ignore: implicit any
-import TypeaheadResult from '../../../ui/TypeaheadControl/TypeaheadResult'
-
-import { useState } from 'react'
 
 import FilterControl from '../FilterControl'
 import { FilterLabel, NameContainer } from '../displayComponents'
@@ -30,45 +22,13 @@ const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
     }
   `)
 
-  interface Selected {
-    label: string
-  }
-  const [selectedOptions, setSelectedOptions] = useState<Selected>()
-
   return (
     <FilterLabel>
       <NameContainer>
         <div>Key Topic Filter</div>
         <button>ex</button>
       </NameContainer>
-      <TypeaheadControl
-        className={''}
-        placeholder={selectedOptions?.label || 'key topics'}
-        items={options.map(o => ({ label: o }))}
-        value={selectedOptions}
-        onChange={(option: any) => {
-          if (option) {
-            setSelectedOptions(option)
-            setFilters(prev => [
-              ...prev,
-              {
-                name: `Key Topic Area: ${option.label}`,
-                test: ({ data }) =>
-                  data.Key_Topic_Area_s_.includes(option.label),
-              },
-            ])
-            console.log(option)
-          } else {
-            setSelectedOptions(undefined)
-            setFilters(prev =>
-              prev.filter(filter => !filter.name.includes('Key Topic Area'))
-            )
-          }
-        }}
-        renderItem={({ label }: { label: string }) => (
-          <TypeaheadResult>{label}</TypeaheadResult>
-        )}
-      />
+      <FilterControl name="Key Topic" {...{ options, setFilters }} />
     </FilterLabel>
   )
 }
