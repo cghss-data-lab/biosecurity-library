@@ -66,14 +66,6 @@ const ExplorePage: React.FC<PageProps> = () => {
           }
         }
       }
-      userRoles: allAirtable(
-        filter: {
-          table: { eq: "Resource Library" }
-          data: { Publish_INTERNAL: { eq: true } }
-        }
-      ) {
-        distinct(field: data___Target_user_role)
-      }
       authorizingOrganization: allAirtable(
         filter: {
           table: { eq: "Resource Library" }
@@ -136,6 +128,7 @@ const ExplorePage: React.FC<PageProps> = () => {
     )
   }
 
+  console.log(filters)
   console.log(resources)
 
   return (
