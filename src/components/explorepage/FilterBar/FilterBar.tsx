@@ -13,7 +13,7 @@ export interface FilterProps {
 
 // All the filter options queries should follow this interface
 export interface FilterOptions {
-  distinctOptions: { distinct: { options: string[] } }
+  distinctOptions: { distinct: string[] }
 }
 
 const FilterBar: React.FC<FilterProps> = ({ filters, setFilters }) => {
