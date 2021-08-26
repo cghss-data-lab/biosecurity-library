@@ -24,10 +24,12 @@ export interface ResourceGroup {
   fieldValue: string
   nodes: {
     data: {
+      Short_Name: string
+      Resource_Name: string
+      Resource_Type: string
       Authoring_Organization: string
       Key_Resource_INTERNAL: true | null
       Key_Topic_Area_s_: string[]
-      Resource_Name: string
       Short_Description: string
       Target_user_role: string[]
     }
@@ -93,7 +95,9 @@ const ExplorePage: React.FC<PageProps> = () => {
         group(field: data___Resource_Type) {
           nodes {
             data {
+              Short_Name
               Resource_Name
+              Resource_Type
               Authoring_Organization
               Target_user_role
               Short_Description
