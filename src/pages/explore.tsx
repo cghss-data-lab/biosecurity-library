@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql, PageProps, useStaticQuery } from 'gatsby'
 
 import FigmaProvider from '../figma/FigmaProvider'
@@ -15,13 +15,12 @@ const BannerImage = styled(AirtableCMSImage)`
   width: calc(100% - 10px);
   margin: 5px;
 `
-
 const Header = styled.header`
   text-align: center;
 `
 
 const ExplorePage: React.FC<PageProps> = () => {
-  interface ResourceGroup {
+  interface ResourceGroups {
     group: [
       {
         fieldValue: string
@@ -44,80 +43,100 @@ const ExplorePage: React.FC<PageProps> = () => {
   const {
     explorePageText,
     groupedResources,
-  }: { explorePageText: AirtableCMSData; groupedResources: ResourceGroup } =
-    useStaticQuery(graphql`
-      query exploreQuery {
-        explorePageText: allAirtable(
-          filter: { table: { eq: "Explore Page" } }
-        ) {
-          nodes {
-            data {
-              Name
-              Text
-              Image {
-                localFiles {
-                  childImageSharp {
-                    gatsbyImageData(height: 200, placeholder: TRACED_SVG)
-                  }
+    exploreTopics,
+  }: {
+    explorePageText: AirtableCMSData
+    groupedResources: ResourceGroups
+    exploreTopics: any
+  } = useStaticQuery(graphql`
+    query exploreQuery {
+      explorePageText: allAirtable(filter: { table: { eq: "Explore Page" } }) {
+        nodes {
+          data {
+            Name
+            Text
+            Image {
+              localFiles {
+                childImageSharp {
+                  gatsbyImageData(height: 200, placeholder: TRACED_SVG)
                 }
               }
             }
           }
         }
-        exploreTopics: allAirtable(
-          filter: {
-            table: { eq: "Resource Library" }
-            data: { Publish_INTERNAL: { eq: true } }
-          }
-        ) {
-          distinct(field: data___Resource_Type)
+      }
+      exploreTopics: allAirtable(
+        filter: {
+          table: { eq: "Resource Library" }
+          data: { Publish_INTERNAL: { eq: true } }
         }
-        keyTopicAreas: allAirtable(
-          filter: {
-            table: { eq: "Resource Library" }
-            data: { Publish_INTERNAL: { eq: true } }
-          }
-        ) {
-          distinct(field: data___Key_Topic_Area_s_)
+      ) {
+        distinct(field: data___Resource_Type)
+      }
+      keyTopicAreas: allAirtable(
+        filter: {
+          table: { eq: "Resource Library" }
+          data: { Publish_INTERNAL: { eq: true } }
         }
-        userRoles: allAirtable(
-          filter: {
-            table: { eq: "Resource Library" }
-            data: { Publish_INTERNAL: { eq: true } }
-          }
-        ) {
-          distinct(field: data___Target_user_role)
+      ) {
+        distinct(field: data___Key_Topic_Area_s_)
+      }
+      userRoles: allAirtable(
+        filter: {
+          table: { eq: "Resource Library" }
+          data: { Publish_INTERNAL: { eq: true } }
         }
-        authorizingOrganization: allAirtable(
-          filter: {
-            table: { eq: "Resource Library" }
-            data: { Publish_INTERNAL: { eq: true } }
-          }
-        ) {
-          distinct(field: data___Authoring_Organization)
+      ) {
+        distinct(field: data___Target_user_role)
+      }
+      authorizingOrganization: allAirtable(
+        filter: {
+          table: { eq: "Resource Library" }
+          data: { Publish_INTERNAL: { eq: true } }
         }
-        groupedResources: allAirtable(
-          filter: {
-            table: { eq: "Resource Library" }
-            data: { Publish_INTERNAL: { eq: true } }
-          }
-        ) {
-          group(field: data___Resource_Type) {
-            nodes {
-              data {
-                Resource_Name
-                Authoring_Organization
-                Target_user_role
-                Short_Description
-                Key_Topic_Area_s_
-                Key_Resource_INTERNAL_
-              }
+      ) {
+        distinct(field: data___Authoring_Organization)
+      }
+      groupedResources: allAirtable(
+        filter: {
+          table: { eq: "Resource Library" }
+          data: { Publish_INTERNAL: { eq: true } }
+        }
+      ) {
+        group(field: data___Resource_Type) {
+          nodes {
+            data {
+              Resource_Name
+              Authoring_Organization
+              Target_user_role
+              Short_Description
+              Key_Topic_Area_s_
+              Key_Resource_INTERNAL_
             }
-            fieldValue
           }
+          fieldValue
         }
       }
-    `)
+    }
+  `)
+
+  console.log(groupedResources)
+  console.log(exploreTopics)
+
+  interface Filter {
+    name: string
+    apply: (resources: ResourceGroups) => ResourceGroups
+  }
+
+  const [filters, setFilters] = useState<Filter[]>([])
+
+  let filteredResources = groupedResources
+  if (filters.length > 0) {
+    filteredResources = filters.reduce(
+      (prev, filter) => filter.apply(prev),
+      groupedResources
+    )
+  }
 
   return (
     <FigmaProvider>
