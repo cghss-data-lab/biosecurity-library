@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Filter } from '../../../pages/explore'
+import KeyTopic from './filters/KeyTopic'
 
 const FilterSection = styled.section``
 
@@ -18,7 +19,7 @@ export interface FilterOptions {
 const FilterBar: React.FC<FilterProps> = ({ filters, setFilters }) => {
   return (
     <FilterSection>
-      <h2>Filters go here</h2>
+      <KeyTopic {...{ filters, setFilters }} />
     </FilterSection>
   )
 }
