@@ -11,15 +11,8 @@ import TypeaheadResult from '../../../ui/TypeaheadControl/TypeaheadResult'
 
 import { useState } from 'react'
 
-const FilterLabel = styled.label`
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-`
-const NameContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
+import FilterControl from '../FilterControl'
+import { FilterLabel, NameContainer } from '../displayComponents'
 
 const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
   const {
