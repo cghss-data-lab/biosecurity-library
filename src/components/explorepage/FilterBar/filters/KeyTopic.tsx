@@ -1,10 +1,10 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
-import { FilterOptions, FilterProps } from '../FilterBar'
-
 import FilterControl from '../FilterControl'
-import { FilterLabel, NameContainer } from '../displayComponents'
+import { FilterLabel, NameContainer } from '../DisplayComponents'
+
+import { FilterOptions, FilterProps } from '../FilterBar'
 
 const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
   const {
