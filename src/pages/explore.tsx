@@ -112,18 +112,22 @@ const ExplorePage: React.FC<PageProps> = () => {
 
   interface Filter {
     name: string
-    apply: (data: ResourceGroup) => ResourceGroup
+    test: (data: ResourceGroup['nodes'][0]) => boolean
   }
 
   const [filters, setFilters] = useState<Filter[]>([])
 
   let resources = groupedResources
-  // if (filters.length > 0) {
-  //   resources = filters.reduce(
-  //     (prev, filter) => filter.apply(prev),
-  //     groupedResources
-  //   )
-  // }
+  if (filters.length > 0) {
+    resources = filters.reduce(
+      (prev, filter) =>
+        prev.map(group => ({
+          fieldValue: group.fieldValue,
+          nodes: group.nodes.filter(filter.test),
+        })),
+      groupedResources
+    )
+  }
 
   console.log(resources)
 
