@@ -66,14 +66,6 @@ const ExplorePage: React.FC<PageProps> = () => {
           }
         }
       }
-      keyTopicAreas: allAirtable(
-        filter: {
-          table: { eq: "Resource Library" }
-          data: { Publish_INTERNAL: { eq: true } }
-        }
-      ) {
-        distinct(field: data___Key_Topic_Area_s_)
-      }
       userRoles: allAirtable(
         filter: {
           table: { eq: "Resource Library" }
