@@ -4,12 +4,18 @@ import { Filter } from '../../../pages/explore'
 
 const FilterSection = styled.section``
 
-interface FilterBarProps {
+// This should be inhereted by each of the filters
+export interface FilterProps {
   filters: Filter[]
   setFilters: React.Dispatch<React.SetStateAction<Filter[]>>
 }
 
-const FilterBar: React.FC<FilterBarProps> = ({ filters, setFilters }) => {
+// All the filter options queries should follow this interface
+export interface FilterOptions {
+  distinctOptions: { distinct: { options: string[] } }
+}
+
+const FilterBar: React.FC<FilterProps> = ({ filters, setFilters }) => {
   return (
     <FilterSection>
       <h2>Filters go here</h2>
