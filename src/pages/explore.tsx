@@ -67,18 +67,12 @@ const ExplorePage: React.FC<PageProps> = () => {
         }
       }
       authorizingOrganization: allAirtable(
-        filter: {
-          table: { eq: "Resource Library" }
-          data: { Publish_INTERNAL: { eq: true } }
-        }
+        filter: { table: { eq: "Resource Library" } }
       ) {
         distinct(field: data___Authoring_Organization)
       }
       groupedResources: allAirtable(
-        filter: {
-          table: { eq: "Resource Library" }
-          data: { Publish_INTERNAL: { eq: true } }
-        }
+        filter: { table: { eq: "Resource Library" } }
       ) {
         group(field: data___Resource_Type) {
           nodes {

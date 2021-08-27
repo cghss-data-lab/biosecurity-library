@@ -14,10 +14,7 @@ const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
   } = useStaticQuery<FilterOptions>(graphql`
     query topicOptionsQuery {
       distinctOptions: allAirtable(
-        filter: {
-          table: { eq: "Resource Library" }
-          data: { Publish_INTERNAL: { eq: true } }
-        }
+        filter: { table: { eq: "Resource Library" } }
       ) {
         distinct(field: data___Key_Topic_Area_s_)
       }

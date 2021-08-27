@@ -11,12 +11,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   const result: any = await graphql(`
     {
-      resources: allAirtable(
-        filter: {
-          table: { eq: "Resource Library" }
-          data: { Publish_INTERNAL: { eq: true } }
-        }
-      ) {
+      resources: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         nodes {
           data {
             Resource_Name

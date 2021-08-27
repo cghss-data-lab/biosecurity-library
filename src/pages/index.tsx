@@ -46,10 +46,7 @@ const IndexPage: React.FC<PageProps> = () => {
           }
         }
         homePageResources: allAirtable(
-          filter: {
-            table: { eq: "Resource Library" }
-            data: { Publish_INTERNAL: { eq: true } }
-          }
+          filter: { table: { eq: "Resource Library" } }
         ) {
           group(field: data___Key_Topic_Area_s_) {
             fieldValue
@@ -57,10 +54,7 @@ const IndexPage: React.FC<PageProps> = () => {
           }
         }
         resourceSearchData: allAirtable(
-          filter: {
-            table: { eq: "Resource Library" }
-            data: { Publish_INTERNAL: { eq: true } }
-          }
+          filter: { table: { eq: "Resource Library" } }
         ) {
           nodes {
             data {
