@@ -9,6 +9,7 @@ const FilterSection = styled.section`
   display: flex;
   justify-content: stretch;
   gap: 15px;
+  margin-top: 50px;
 `
 
 // This should be inhereted by each of the filters

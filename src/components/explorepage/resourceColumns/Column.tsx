@@ -7,8 +7,8 @@ import { urlString } from '../../../airtable-cms/utilities'
 import { ResourceGroup } from '../../../pages/explore'
 
 const ColumnContainer = styled.div`
-  flex-basis: 0;
   flex-grow: 1;
+  flex-basis: 0;
   flex-shrink: 1;
 `
 
