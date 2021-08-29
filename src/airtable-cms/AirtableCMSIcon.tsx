@@ -1,9 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-
 import styled from 'styled-components'
-import { useEffect } from 'react'
-import { useState } from 'react'
 
 // replace the fill colors everywhere in the SVG
 // this intentionally ignores `fill="none"` because
@@ -11,7 +8,11 @@ import { useState } from 'react'
 const replaceFill = (svg: string, color: string) =>
   svg.replace(/fill="#[A-Z0-9]{6}"/g, `fill="${color}"`)
 
-const HoverParent = styled.div`
+const SVGContainer = styled.div`
+  // make the SVG responsive so
+  // it takes the size of the parent
+  // and stop it from sending mouseout
+  // events to the parent
   & > svg {
     width: 100%;
     height: 100%;
@@ -19,14 +20,11 @@ const HoverParent = styled.div`
   }
 `
 
-interface IconInterface {
-  name: string
-  color: string
-  hoverColor?: string
-  className?: string
-  style?: React.CSSProperties
-}
-
+// This query lives here because
+// it assumes the CMS airtable
+// base has this table already,
+// because it will be part
+// of the template.
 interface IconsQuery {
   iconsQuery: {
     nodes: {
@@ -41,6 +39,14 @@ interface IconsQuery {
       }
     }[]
   }
+}
+
+interface IconInterface {
+  name: string
+  color: string
+  hoverColor?: string
+  className?: string
+  style?: React.CSSProperties
 }
 
 const AirtableCMSIcon: React.FC<IconInterface> = ({
@@ -75,18 +81,23 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
   // can be any color format without needing to change
   // the color replacement regex.
   const [icon, setIcon] = useState('')
+
+  // this iconColor can be in any format now
+  // that it doesn't have to match the regex.
   const [iconColor, setIconColor] = useState(color)
 
+  // pull alt-text from airtable, add it as an aria-label
   const altText = icons.find(({ data }) => data.Name === name)?.data.Text
 
   useEffect(() => {
+    // request the icon file and parse it as a string
     const getIcon = async (iconURL: string) => {
-      const svg = await fetch(iconURL)
-      const blob = await svg.blob()
-      const text = await blob.text()
-      setIcon(text)
+      const file = await fetch(iconURL)
+      const svgString = await file.blob().then(blob => blob.text())
+      setIcon(svgString)
     }
 
+    // check if the icon exists in the table; get the url
     const iconURL = icons.find(({ data }) => data.Name === name)?.data.SVG
       .localFiles[0].publicURL
 
@@ -100,26 +111,23 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
       )
   }, [icons, name, color])
 
-  if (hoverColor) {
-    return (
-      <HoverParent
-        role="img"
-        aria-label={altText}
-        style={style}
-        className={className}
-        dangerouslySetInnerHTML={{ __html: replaceFill(icon, iconColor) }}
-        onMouseEnter={() => setIconColor(hoverColor)}
-        onMouseLeave={() => setIconColor(color)}
-      />
-    )
-  }
+  // only add mouseEnter and mouseLeave events
+  // if there is a hover color specified
+  let mouseHandlers = {}
+  if (hoverColor)
+    mouseHandlers = {
+      onMouseEnter: () => setIconColor(hoverColor),
+      onMouseLeave: () => setIconColor(color),
+    }
+
   return (
-    <HoverParent
+    <SVGContainer
       role="img"
       aria-label={altText}
       style={style}
       className={className}
       dangerouslySetInnerHTML={{ __html: replaceFill(icon, iconColor) }}
+      {...mouseHandlers}
     />
   )
 }
