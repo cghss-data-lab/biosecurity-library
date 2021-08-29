@@ -68,8 +68,6 @@ const IndexPage: React.FC<PageProps> = () => {
       }
     `)
 
-  console.log(homePageText)
-
   return (
     <FigmaProvider>
       <NavBar />
