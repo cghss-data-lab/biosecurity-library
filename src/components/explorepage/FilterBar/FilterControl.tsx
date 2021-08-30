@@ -33,7 +33,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
     <TypeaheadControl
       className={''}
       placeholder={selectedOptions?.label || name}
-      items={options.map(o => ({ label: o }))}
+      items={options.map(o => ({ label: o, key: o }))}
       value={selectedOptions}
       onChange={(option: Option) => {
         if (option) {
