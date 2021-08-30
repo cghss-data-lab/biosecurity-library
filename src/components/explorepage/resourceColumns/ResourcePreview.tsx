@@ -36,7 +36,7 @@ const IconContainer = styled.div`
 const ResourcePreview: React.FC<Resource> = ({ data }) => {
   const theme: any = useTheme()
   return (
-    <ResourceContainer key={data.Short_Name}>
+    <ResourceContainer>
       <Link
         to={
           '/resource/' +
