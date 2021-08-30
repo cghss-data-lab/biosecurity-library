@@ -12,6 +12,7 @@ import styled from 'styled-components'
 import AirtableCMSImage from '../airtable-cms/AirtableCMSImage'
 import ColumnSection from '../components/explorepage/resourceColumns/ColumnSection'
 import FilterBar from '../components/explorepage/FilterBar/FilterBar'
+import ActiveFilters from '../components/explorepage/FilterBar/ActiveFilters'
 
 const BannerImage = styled(AirtableCMSImage)`
   width: calc(100% - 10px);
@@ -140,6 +141,7 @@ const ExplorePage: React.FC<PageProps> = () => {
           </h1>
         </Header>
         <FilterBar {...{ filters, setFilters }} />
+        <ActiveFilters {...{ filters, setFilters }} />
         <ColumnSection {...{ resources }} />
       </Main>
     </FigmaProvider>
