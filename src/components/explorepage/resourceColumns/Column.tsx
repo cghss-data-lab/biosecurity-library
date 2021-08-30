@@ -6,6 +6,7 @@ import { urlString } from '../../../airtable-cms/utilities'
 
 import { ResourceGroup } from '../../../pages/explore'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import ResourcePreview from './Resource'
 
 const ColumnContainer = styled.div`
   flex-grow: 1;
@@ -45,19 +46,7 @@ const Column: React.FC<{
         <HeaderText>{name}</HeaderText>
       </Header>
       {resources &&
-        resources.nodes.map(({ data }) => (
-          <p key={data.Short_Name}>
-            <Link
-              to={
-                '/resource/' +
-                urlString(data.Resource_Type) +
-                urlString(data.Short_Name)
-              }
-            >
-              {data.Resource_Name}
-            </Link>
-          </p>
-        ))}
+        resources.nodes.map(({ data }) => <ResourcePreview {...{ data }} />)}
     </ColumnContainer>
   )
 }

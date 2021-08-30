@@ -21,21 +21,23 @@ const Header = styled.header`
   text-align: center;
 `
 
+export interface Resource {
+  data: {
+    Short_Name: string
+    Resource_Name: string
+    Resource_Type: string
+    Authoring_Organization: string
+    Key_Resource_INTERNAL: true | null
+    Key_Topic_Area_s_: string[]
+    Short_Description: string
+    Target_user_role: string[]
+    Recommended_usership: string
+  }
+}
+
 export interface ResourceGroup {
   fieldValue: string
-  nodes: {
-    data: {
-      Short_Name: string
-      Resource_Name: string
-      Resource_Type: string
-      Authoring_Organization: string
-      Key_Resource_INTERNAL: true | null
-      Key_Topic_Area_s_: string[]
-      Short_Description: string
-      Target_user_role: string[]
-      Recommended_usership: string
-    }
-  }[]
+  nodes: Resource[]
 }
 
 export interface Filter {
