@@ -33,6 +33,7 @@ export interface ResourceGroup {
       Key_Topic_Area_s_: string[]
       Short_Description: string
       Target_user_role: string[]
+      Recommended_usership: string
     }
   }[]
 }
@@ -85,6 +86,7 @@ const ExplorePage: React.FC<PageProps> = () => {
               Short_Description
               Key_Topic_Area_s_
               Key_Resource_INTERNAL_
+              Recommended_usership
             }
           }
           fieldValue

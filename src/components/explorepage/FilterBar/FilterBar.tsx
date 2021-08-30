@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Filter } from '../../../pages/explore'
 
 import KeyTopic from './filters/KeyTopic'
+import RecommendedUsership from './filters/RecommendedUsership'
 import TargetUserRole from './filters/TargetUserRole'
 
 const FilterSection = styled.section`
@@ -27,9 +28,8 @@ const FilterBar: React.FC<FilterProps> = ({ filters, setFilters }) => {
   return (
     <FilterSection>
       <KeyTopic {...{ filters, setFilters }} />
-      <KeyTopic {...{ filters, setFilters }} />
-      <KeyTopic {...{ filters, setFilters }} />
       <TargetUserRole {...{ filters, setFilters }} />
+      <RecommendedUsership {...{ filters, setFilters }} />
     </FilterSection>
   )
 }
