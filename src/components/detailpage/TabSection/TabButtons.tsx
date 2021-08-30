@@ -22,19 +22,26 @@ const Button = styled.button<ButtonProps>`
   border-left: 1px solid ${({ theme }) => theme.colorMedGray};
   padding: 17px 20px;
   text-align: left;
+  color: ${({ theme }) => theme.colorDarkest};
 
   &:last-of-type {
     border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
   }
 
   &:hover {
-    font-weight: 600;
+    background: ${({ theme }) => theme.colorVeryLightGray};
+
+    ${({ active, theme }) =>
+      active &&
+      `
+    background: ${theme.colorLightest};
+  `}
   }
 
   ${({ active, theme }) =>
     active &&
     `
-    background: ${theme.colorVeryLightGray};
+    background: ${theme.colorLightest};
     font-weight: 600;
   `}
 `
