@@ -21,6 +21,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
             Long_Description
             Key_Topic_Area_s_
             Authoring_Organization
+            Target_user_role
+            Potential_user_role
+            URL_for_Resource
+            Access_Information
+            Access_Limitations
+            Resource_Language
             Thumbnail_INTERNAL {
               localFiles {
                 childImageSharp {

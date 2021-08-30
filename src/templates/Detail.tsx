@@ -22,6 +22,12 @@ export interface PageContext {
     Short_Name: string
     Resource_Type: string
     Authoring_Organization: string
+    Target_user_role: string[]
+    Potential_user_role: string[]
+    URL_for_Resource: string
+    Access_Information: string
+    Access_Limitations: string
+    Resource_Language: string[]
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }
