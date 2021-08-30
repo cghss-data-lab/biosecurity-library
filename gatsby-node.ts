@@ -44,14 +44,16 @@ export const createPages: GatsbyNode['createPages'] = async ({
     }
   `)
 
-  result.data.resources.nodes.forEach(({ data }: { data: any }) => {
-    actions.createPage({
-      path:
-        'resource/' +
-        urlString(data.Resource_Type) +
-        urlString(data.Short_Name),
-      component: detailPageTemplate,
-      context: { data },
-    })
-  })
+  result.data.resources.nodes.forEach(
+    ({ data }: { data: PageContext['data'] }) => {
+      actions.createPage({
+        path:
+          'resource/' +
+          urlString(data.Resource_Type) +
+          urlString(data.Short_Name),
+        component: detailPageTemplate,
+        context: { data },
+      })
+    }
+  )
 }
