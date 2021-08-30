@@ -18,6 +18,7 @@ const Header = styled.header`
   color: ${({ theme }) => theme.colorWhite};
   text-align: center;
   padding: 10px;
+  min-height: 8em;
 `
 
 const HeaderText = styled.div`
