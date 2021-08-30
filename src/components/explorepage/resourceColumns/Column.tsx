@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 import { ResourceGroup } from '../../../pages/explore'
-import ResourcePreview from './Resource'
+import ResourcePreview from './ResourcePreview'
 
 const ColumnContainer = styled.div`
   flex-grow: 1;
