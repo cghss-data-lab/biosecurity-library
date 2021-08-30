@@ -43,8 +43,8 @@ const FilterControl: React.FC<FilterControlProps> = ({
             createFilter(option, name),
           ])
         } else {
-          setSelectedOptions(undefined)
-          setFilters(prev => prev.filter(filter => !filter.name.includes(name)))
+          // setSelectedOptions(undefined)
+          // setFilters(prev => prev.filter(filter => !filter.name.includes(name)))
         }
       }}
       renderItem={({ label }: { label: string }) => (
