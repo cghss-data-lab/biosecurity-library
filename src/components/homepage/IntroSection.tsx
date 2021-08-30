@@ -43,7 +43,8 @@ const IntroSection: React.FC<{
       <h3>
         <AirtableCMSText name={'First Paragraph'} data={homePageText} />
       </h3>
-      <AirtableCMSIcon
+      {/* icon component examples */}
+      {/* <AirtableCMSIcon
         name="Risk assessment"
         color="rgb(255, 150, 0)"
         hoverColor="#00FF00"
@@ -54,7 +55,7 @@ const IntroSection: React.FC<{
         color={theme.colorDarker}
         hoverColor={theme.colorLighter}
       />
-      <AirtableCMSIcon name="Lab research" color={theme.colorDarker} />
+      <AirtableCMSIcon name="Lab research" color={theme.colorDarker} /> */}
 
       <ResourceSearch {...{ homePageText, resourceSearchData }} />
     </Section>
