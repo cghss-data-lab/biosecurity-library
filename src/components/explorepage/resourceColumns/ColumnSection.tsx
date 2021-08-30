@@ -7,7 +7,11 @@ import { ResourceGroup } from '../../../pages/explore'
 
 const ColumnsContainer = styled.section`
   display: flex;
+  gap: 36px;
   justify-content: space-between;
+  padding-top: 40px;
+  margin-top: 40px;
+  border-top: 2px solid ${({ theme }) => theme.colorDarkGray};
 `
 
 const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
@@ -18,6 +22,8 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
       <Column
         key={group.fieldValue}
         name={group.fieldValue}
+        // this icon name needs to pull from airtable
+        icon={'Lab research'}
         resources={group}
       />
     ))}
