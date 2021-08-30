@@ -1,11 +1,9 @@
 import React from 'react'
-import { Link } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 
-import { urlString } from '../../../airtable-cms/utilities'
+import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 import { ResourceGroup } from '../../../pages/explore'
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 import ResourcePreview from './Resource'
 
 const ColumnContainer = styled.div`
