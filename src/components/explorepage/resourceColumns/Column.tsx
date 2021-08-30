@@ -44,7 +44,9 @@ const Column: React.FC<{
         <HeaderText>{name}</HeaderText>
       </Header>
       {resources &&
-        resources.nodes.map(({ data }) => <ResourcePreview {...{ data }} />)}
+        resources.nodes.map(({ data }) => (
+          <ResourcePreview key={data.Short_Name} {...{ data }} />
+        ))}
     </ColumnContainer>
   )
 }
