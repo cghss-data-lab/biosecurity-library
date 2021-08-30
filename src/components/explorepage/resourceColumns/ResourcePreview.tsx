@@ -1,10 +1,11 @@
 import React from 'react'
-import styled, { useTheme } from 'styled-components'
 import { Link } from 'gatsby'
+import styled, { useTheme } from 'styled-components'
+
+import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 import { Resource } from '../../../pages/explore'
 import { urlString } from '../../../airtable-cms/utilities'
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 const ResourceContainer = styled.section`
   background: ${({ theme }) => theme.colorVeryLightGray};
@@ -17,14 +18,12 @@ const Title = styled.div`
   font-size: 20px;
   margin-bottom: 8px;
 `
-
 const SubTitle = styled.div`
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   color: ${({ theme }) => theme.colorVeryDarkGray};
   font-weight: 500;
   font-size: 16px;
 `
-
 const IconContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
   padding-top: 10px;
