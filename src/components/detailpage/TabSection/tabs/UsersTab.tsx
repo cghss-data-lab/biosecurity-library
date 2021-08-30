@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { PageContext } from '../../../../templates/detail'
+import { commaSeparatedList } from '../../../../utilities/grammar'
 
 const ContentSection = styled.section`
   grid-area: content;
@@ -13,9 +14,9 @@ const ContentSection = styled.section`
 const UsersTab: React.FC<PageContext> = ({ data }) => (
   <ContentSection>
     <h5>TARGET USERS</h5>
-    {/* <p>{data.Short_Description}</p> */}
+    <p>{commaSeparatedList(data.Target_user_role)}</p>
     <h5>RECOMMENDED USERSHIP</h5>
-    {/* <p>{data.Reco}</p> */}
+    <p>{commaSeparatedList(data.Potential_user_role)}</p>
     <h5>KNOWN USERS</h5>
   </ContentSection>
 )
