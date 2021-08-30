@@ -9,9 +9,11 @@ const ColumnsContainer = styled.section`
   display: flex;
   gap: 36px;
   justify-content: space-between;
+  align-items: flex-start;
   padding-top: 40px;
   margin-top: 40px;
   border-top: 2px solid ${({ theme }) => theme.colorDarkGray};
+  margin-bottom: 10vw;
 `
 
 const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
