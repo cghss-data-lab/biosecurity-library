@@ -10,12 +10,7 @@ const ButtonColumn = styled.section`
   justify-content: flex-start;
   border-top: none;
 `
-
-interface ButtonProps {
-  readonly active: boolean
-}
-
-const Button = styled.button<ButtonProps>`
+const Button = styled.button<{ active: boolean }>`
   background: none;
   border: none;
   border-top: 1px solid ${({ theme }) => theme.colorMedGray};
