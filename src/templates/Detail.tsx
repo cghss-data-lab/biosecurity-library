@@ -28,6 +28,10 @@ export interface PageContext {
     Access_Information: string
     Access_Limitations: string
     Resource_Language: string[]
+    Edition: string
+    First_Release_Date: string
+    Last_Update_Date: string
+    Update_Frequency: string
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }
