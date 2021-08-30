@@ -27,6 +27,10 @@ const Button = styled.button<ButtonProps>`
     border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
   }
 
+  &:hover {
+    font-weight: 600;
+  }
+
   ${({ active, theme }) =>
     active &&
     `
