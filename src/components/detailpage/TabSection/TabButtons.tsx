@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { StyledProps } from 'styled-components'
+import styled from 'styled-components'
 
 import { Tab } from './TabSection'
 
@@ -30,20 +30,13 @@ const Button = styled.button<ButtonProps>`
 
   &:hover {
     background: ${({ theme }) => theme.colorVeryLightGray};
-
-    ${({ active, theme }) =>
-      active &&
-      `
-    background: ${theme.colorLightest};
-  `}
+    ${({ active, theme }) => active && `background: ${theme.colorLightest};`}
   }
 
   ${({ active, theme }) =>
     active &&
-    `
-    background: ${theme.colorLightest};
-    font-weight: 600;
-  `}
+    `background: ${theme.colorLightest}; 
+    font-weight: 600;`}
 `
 
 interface TabButtonsProps {
