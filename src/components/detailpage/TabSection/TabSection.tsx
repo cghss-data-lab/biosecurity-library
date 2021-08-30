@@ -4,6 +4,7 @@ import TabButtons from './TabButtons'
 import OverviewTab from './tabs/OverviewTab'
 
 import { PageContext } from '../../../templates/detail'
+import UsersTab from './tabs/UsersTab'
 
 export type Tab = {
   id: string
@@ -24,6 +25,7 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
     <>
       <TabButtons {...{ tabs, activeTab, setActiveTab }} />
       {activeTab.id === 'overview' && <OverviewTab {...{ data }} />}
+      {activeTab.id === 'users' && <UsersTab {...{ data }} />}
     </>
   )
 }
