@@ -5,6 +5,7 @@ import { PageContext } from '../../../templates/detail'
 
 const HeaderContainer = styled.header`
   grid-area: header;
+  padding-left: 50px;
 `
 
 const Header: React.FC<PageContext> = ({ data }) => (
