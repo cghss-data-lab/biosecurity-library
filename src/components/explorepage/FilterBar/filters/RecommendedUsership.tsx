@@ -28,7 +28,7 @@ const RecommendedUsership: React.FC<FilterProps> = ({
     <FilterLabel>
       <NameContainer>
         <div>{name}</div>
-        <button>ex</button>
+        <button>+</button>
       </NameContainer>
       <FilterControl
         {...{ name, options, setFilters }}

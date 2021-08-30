@@ -25,7 +25,7 @@ const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
     <FilterLabel>
       <NameContainer>
         <div>Key topic</div>
-        <button>ex</button>
+        <button>+</button>
       </NameContainer>
       <FilterControl
         {...{ name, options, setFilters }}

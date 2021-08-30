@@ -25,7 +25,7 @@ const TargetUserRole: React.FC<FilterProps> = ({ filters, setFilters }) => {
     <FilterLabel>
       <NameContainer>
         <div>{name}</div>
-        <button>ex</button>
+        <button>+</button>
       </NameContainer>
       <FilterControl
         {...{ name, options, setFilters }}
