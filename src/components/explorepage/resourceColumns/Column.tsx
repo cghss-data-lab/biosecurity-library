@@ -39,7 +39,6 @@ const Column: React.FC<{
         <AirtableCMSIcon
           name={icon}
           color={theme.colorGolden}
-          hoverColor={theme.colorWhite}
           style={{ height: 30 }}
         />
         <HeaderText>{name}</HeaderText>
