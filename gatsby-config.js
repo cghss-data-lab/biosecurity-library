@@ -23,7 +23,10 @@ module.exports = {
             baseId: `appmL0p5H21CiY7tL`,
             tableName: `Resource Library`,
             tableView: `CMS`,
-            mapping: { Thumbnail_INTERNAL: `fileNode` },
+            mapping: {
+              Thumbnail_INTERNAL: `fileNode`,
+              Files_INTERNAL: `fileNode`,
+            },
           },
           {
             baseId: `appmL0p5H21CiY7tL`,

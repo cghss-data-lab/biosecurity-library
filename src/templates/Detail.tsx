@@ -32,6 +32,13 @@ export interface PageContext {
     First_Release_Date: string
     Last_Update_Date: string
     Update_Frequency: string
+    Topic_Area_Icons: string
+    Files_INTERNAL: {
+      localFiles: {
+        publicURL: string
+        name: string
+      }[]
+    }
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }

@@ -21,6 +21,14 @@ const Thumbnail: React.FC<PageContext> = ({ data }) => {
             alt={data.Short_Name + 'thumbnail image'}
           />
         )}
+        {data.Files_INTERNAL && (
+          <a
+            style={{ padding: 10 }}
+            href={data.Files_INTERNAL.localFiles[0].publicURL}
+          >
+            Download
+          </a>
+        )}
       </ThumbnailContainer>
     )
   }

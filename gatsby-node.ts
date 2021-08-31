@@ -31,6 +31,13 @@ export const createPages: GatsbyNode['createPages'] = async ({
             First_Release_Date
             Last_Update_Date
             Update_Frequency
+            Topic_Area_Icons
+            Files_INTERNAL {
+              localFiles {
+                publicURL
+                name
+              }
+            }
             Thumbnail_INTERNAL {
               localFiles {
                 childImageSharp {
