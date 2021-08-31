@@ -40,6 +40,7 @@ export interface Resource {
 export interface ResourceGroup {
   fieldValue: string
   nodes: Resource[]
+  totalCount?: number
 }
 
 export interface Filter {
@@ -117,7 +118,11 @@ const ExplorePage: React.FC<PageProps> = () => {
     // },
   ])
 
-  let resources = groupedResources
+  let resources = groupedResources.map(group => ({
+    ...group,
+    totalCount: group.nodes.length,
+  }))
+
   if (filters.length > 0) {
     resources = filters.reduce(
       (prev, filter) =>
@@ -125,7 +130,7 @@ const ExplorePage: React.FC<PageProps> = () => {
           ...group,
           nodes: group.nodes.filter(filter.test),
         })),
-      groupedResources
+      resources
     )
   }
 
