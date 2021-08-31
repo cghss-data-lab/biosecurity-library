@@ -13,6 +13,11 @@ const TabContentContainer = styled.section`
 
   > p {
     margin: 0;
+
+    > a {
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
   }
 `
 
