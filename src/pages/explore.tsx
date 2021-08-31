@@ -33,6 +33,7 @@ export interface Resource {
     Short_Description: string
     Target_user_role: string[]
     Recommended_usership: string
+    Topic_Area_Icons: string
   }
 }
 
@@ -90,6 +91,7 @@ const ExplorePage: React.FC<PageProps> = () => {
               Key_Topic_Area_s_
               Key_Resource_INTERNAL_
               Recommended_usership
+              Topic_Area_Icons
             }
           }
           fieldValue

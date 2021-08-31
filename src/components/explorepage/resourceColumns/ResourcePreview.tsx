@@ -43,19 +43,19 @@ const ResourcePreview: React.FC<Resource> = ({ data }) => {
           urlString(data.Short_Name)
         }
       >
-        <Title>{data.Resource_Name}</Title>
+        <Title>{data.Short_Name}</Title>
         <SubTitle>{data.Authoring_Organization}</SubTitle>
         <IconContainer>
-          <AirtableCMSIcon
-            name="Lab research"
-            color={theme.colorDarkest}
-            style={{ height: 25 }}
-          />
-          <AirtableCMSIcon
-            name="Risk assessment"
-            color={theme.colorDarkest}
-            style={{ height: 25 }}
-          />
+          {JSON.parse(data.Topic_Area_Icons).map(
+            ({ name }: { name: string }) => (
+              <AirtableCMSIcon
+                key={name}
+                name={name}
+                color={theme.colorDarkest}
+                style={{ width: 30 }}
+              />
+            )
+          )}
         </IconContainer>
       </Link>
     </ResourceContainer>
