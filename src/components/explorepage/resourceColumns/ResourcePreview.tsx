@@ -46,16 +46,14 @@ const ResourcePreview: React.FC<Resource> = ({ data }) => {
         <Title>{data.Short_Name}</Title>
         <SubTitle>{data.Authoring_Organization}</SubTitle>
         <IconContainer>
-          {JSON.parse(data.Topic_Area_Icons).map(
-            ({ name }: { name: string }) => (
-              <AirtableCMSIcon
-                key={name}
-                name={name}
-                color={theme.colorDarkest}
-                style={{ width: 30 }}
-              />
-            )
-          )}
+          {JSON.parse(data.Topic_Area_Icons).map((name: string) => (
+            <AirtableCMSIcon
+              key={name}
+              name={name}
+              color={theme.colorDarkest}
+              style={{ width: 30 }}
+            />
+          ))}
         </IconContainer>
       </Link>
     </ResourceContainer>
