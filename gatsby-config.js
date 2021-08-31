@@ -69,6 +69,7 @@ module.exports = {
       },
       __key: 'pages',
     },
+    'talus-gatsby-transformer-svg',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
