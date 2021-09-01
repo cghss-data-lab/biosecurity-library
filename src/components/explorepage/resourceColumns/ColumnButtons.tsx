@@ -5,11 +5,13 @@ import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 const ExpandButton = styled.button`
+  grid-area: expand;
   border: none;
   background: none;
   margin-left: auto;
 `
 const ReturnButton = styled.button<{ hover: boolean }>`
+  grid-area: return;
   border: none;
   background: none;
   margin-right: auto;

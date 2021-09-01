@@ -13,9 +13,6 @@ const ColumnContainer = styled.div<{ expand: boolean }>`
   flex-shrink: 1;
   background: ${({ theme }) => theme.colorDarkest};
   border-radius: 5px;
-  /* transition: 500ms ease; */
-
-  /* ${({ expand }) => !expand && `flex-grow: 0.000001;`} */
 `
 const Header = styled.header`
   color: ${({ theme }) => theme.colorWhite};
@@ -36,24 +33,32 @@ const ResourceCount = styled.div`
   font-size: 14px;
   font-weight: 200;
 `
+const IconRow = styled.div`
+  margin-top: 5px;
+  display: grid;
+  grid-template-areas: 'return icon expand';
+  grid-template-columns: repeat(3, 1fr);
+`
 
 const Column: React.FC<{
   name: string
   expand: boolean
   resources: ResourceGroup
-  setExpandColumn: React.Dispatch<React.SetStateAction<string | undefined>>
+  setExpandColumn: (column: string | undefined) => void
 }> = ({ name, resources, expand, setExpandColumn }) => {
   const theme: any = useTheme()
   return (
     <ColumnContainer expand={expand}>
       <Header>
-        {!expand && <Expand onClick={() => setExpandColumn(name)} />}
-        {expand && <Return onClick={() => setExpandColumn(undefined)} />}
-        <AirtableCMSIcon
-          name={resources.fieldValue}
-          color={theme.colorGolden}
-          style={{ height: 30 }}
-        />
+        <IconRow>
+          {!expand && <Expand onClick={() => setExpandColumn(name)} />}
+          <AirtableCMSIcon
+            name={resources.fieldValue}
+            color={theme.colorGolden}
+            style={{ height: 30, gridArea: 'icon' }}
+          />
+          {expand && <Return onClick={() => setExpandColumn(undefined)} />}
+        </IconRow>
         <HeaderText>{name}</HeaderText>
         <ResourceCount>
           {resources.nodes.length} of {resources.totalCount} resources
