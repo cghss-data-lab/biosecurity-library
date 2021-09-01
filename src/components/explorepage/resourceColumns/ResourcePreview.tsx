@@ -49,16 +49,6 @@ const IconContainer = styled.div`
 
   gap: 8px;
 `
-const ResourceLink = styled.a`
-  grid-area: link;
-  display: flex;
-  gap: 5px;
-`
-const LinkIcon = styled(AirtableCMSIcon)`
-  width: 16px;
-  height: 16px;
-  margin-top: 1px;
-`
 const Users = styled.div`
   grid-area: users;
 `
