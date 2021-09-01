@@ -35,8 +35,8 @@ const NavBar: React.FC = () => (
       </HomeLink>
       <LinkList>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/explore">Explore</NavLink>
-        <NavLink to="/about">About</NavLink>
+        <NavLink to="/explore/">Explore</NavLink>
+        <NavLink to="/about/">About</NavLink>
       </LinkList>
     </Container>
   </Nav>
