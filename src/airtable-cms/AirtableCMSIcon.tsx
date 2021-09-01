@@ -2,11 +2,22 @@ import React, { useState } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
-// replace the fill colors everywhere in the SVG
-// this intentionally ignores `fill="none"` because
-// figma likes to use that for the entire SVG.
-const replaceFill = (svg: string, color: string) =>
-  svg.replace(/fill="#[A-Z0-9]{6}"/g, `fill="${color}"`)
+// replace the fill and stroke colors on all child
+// elements of the SVG; but only if those elements
+// already have a fill or stroke set.
+const replaceFill = (svg: string, color: string) => {
+  const parser = new DOMParser()
+  const svgDom = parser.parseFromString(svg, 'image/svg+xml')
+  const svgElement = svgDom.querySelector('svg')!
+  const children: Element[] = Array.from(svgElement.children)
+
+  for (let child of children) {
+    if (child.hasAttribute('fill')) child.setAttribute('fill', color)
+    if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
+  }
+
+  return svgDom.documentElement.outerHTML
+}
 
 const SVGContainer = styled.div`
   // make the SVG responsive so it takes the size of the parent;
