@@ -23,7 +23,7 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
   const [expandColumn, setExpandColumn] = useState<string | undefined>()
 
   const displayResources = expandColumn
-    ? resources.filter(r => r.fieldValue === expandColumn)
+    ? resources.filter(r => r.fieldValue === expandColumn)!
     : resources
 
   // const displayResources = resources
@@ -34,8 +34,6 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
         <Column
           key={group.fieldValue}
           name={group.fieldValue}
-          // this icon name needs to pull from airtable
-          icon={'Lab research'}
           resources={group}
           expand={group.fieldValue === expandColumn}
           setExpandColumn={setExpandColumn}

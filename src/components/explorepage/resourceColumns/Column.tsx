@@ -38,11 +38,10 @@ const ResourceCount = styled.div`
 
 const Column: React.FC<{
   name: string
-  icon: string
   expand: boolean
-  resources: ResourceGroup | undefined
+  resources: ResourceGroup
   setExpandColumn: React.Dispatch<React.SetStateAction<string | undefined>>
-}> = ({ name, icon, resources, expand, setExpandColumn }) => {
+}> = ({ name, resources, expand, setExpandColumn }) => {
   const theme: any = useTheme()
   return (
     <ColumnContainer expand={expand}>
@@ -52,13 +51,13 @@ const Column: React.FC<{
         }
       >
         <AirtableCMSIcon
-          name={icon}
+          name={resources.fieldValue}
           color={theme.colorGolden}
           style={{ height: 30 }}
         />
         <HeaderText>{name}</HeaderText>
         <ResourceCount>
-          {resources?.nodes.length} of {resources?.totalCount} resources
+          {resources.nodes.length} of {resources.totalCount} resources
         </ResourceCount>
       </Header>
       {resources &&
