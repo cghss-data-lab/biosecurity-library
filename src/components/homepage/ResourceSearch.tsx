@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
@@ -51,7 +51,6 @@ const ResourceSearch = ({
   homePageText: AirtableCMSData
   resourceSearchData: ResourceSearchData
 }) => {
-  const [selectedResource, setSelectedResource] = useState()
   const resources = resourceSearchData.nodes.map(r => ({
     key: r.data.Short_Name,
     label: r.data.Resource_Name,
@@ -69,7 +68,7 @@ const ResourceSearch = ({
         className={''}
         placeholder={getCMSText(homePageText, 'Search Placeholder')}
         items={resources}
-        value={selectedResource}
+        value={{}}
         onChange={(resource: any) => {
           if (resource)
             navigate(
