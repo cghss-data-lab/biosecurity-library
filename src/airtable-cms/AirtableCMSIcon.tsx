@@ -33,9 +33,9 @@ const SVGContainer = styled.div`
   }
 `
 
-// This query lives here because it assumes the CMS airtable
-// base has this table already, because the table will be part
-// of the template.
+// This query and interface lives here because it assumes the
+// CMS airtable base has this table already, because the table
+// will be part of the template.
 interface IconsQuery {
   iconsQuery: {
     nodes: {
@@ -91,21 +91,32 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
     }
   `)
 
-  const icon = icons.find(({ data }) => data.Name === name)!
+  const icon = icons.find(({ data }) => data.Name === name)
 
-  // this iconColor can be in any format
-  const [iconColor, setIconColor] = useState(color)
+  if (!icon) {
+    throw new Error(
+      `Icon ${name} not found in ` +
+        `Airtable. Does the airtable base include the ` +
+        `Icons table, and does that table include ` +
+        `an icon called ${name}?.`
+    )
+  }
+
+  const [hover, setHover] = useState(false)
+
+  const displayIcon = replaceFill(
+    icon.data.SVG.localFiles[0].childSvg.svgString,
+    hover && hoverColor ? hoverColor : color
+  )
 
   // only add mouseEnter and mouseLeave events
   // if there is a hover color specified
   let mouseHandlers = {}
   if (hoverColor)
     mouseHandlers = {
-      onMouseEnter: () => setIconColor(hoverColor),
-      onMouseLeave: () => setIconColor(color),
+      onMouseEnter: () => setHover(true),
+      onMouseLeave: () => setHover(false),
     }
-
-  const iconString = icon.data.SVG.localFiles[0].childSvg.svgString
 
   return (
     <SVGContainer
@@ -113,7 +124,7 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
       aria-label={icon.data.Text}
       style={style}
       className={className}
-      dangerouslySetInnerHTML={{ __html: replaceFill(iconString, iconColor) }}
+      dangerouslySetInnerHTML={{ __html: displayIcon }}
       {...mouseHandlers}
     />
   )
