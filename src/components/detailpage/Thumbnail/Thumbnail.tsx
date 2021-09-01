@@ -10,7 +10,6 @@ const ThumbnailContainer = styled.div`
 `
 
 const Thumbnail: React.FC<PageContext> = ({ data }) => {
-  console.log(data)
   const thumbnail = getImage(data.Thumbnail_INTERNAL?.localFiles[0])
   if (thumbnail) {
     return (

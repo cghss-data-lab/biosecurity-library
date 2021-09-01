@@ -112,8 +112,6 @@ const ExplorePage: React.FC<PageProps> = () => {
     }
   `)
 
-  console.log(groupedResources)
-
   const [filters, setFilters] = useState<Filter[]>([
     // example filters for testing, this array should
     // be initialized empty
@@ -144,9 +142,6 @@ const ExplorePage: React.FC<PageProps> = () => {
       resources
     )
   }
-
-  console.log(filters)
-  console.log(resources)
 
   return (
     <FigmaProvider>
