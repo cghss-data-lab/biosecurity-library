@@ -32,9 +32,9 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
   const handleExpandColumn = (column: string | undefined) => {
     setExpandColumn(column)
     if (column) {
-      history.pushState({}, '', '#' + column)
+      window.history.pushState({}, '', '#' + column)
     } else {
-      history.pushState({}, '', '#')
+      window.history.pushState({}, '', '#')
     }
   }
 

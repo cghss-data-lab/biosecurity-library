@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import AirtableCMSIcon from '../../airtable-cms/AirtableCMSIcon'
+// import AirtableCMSIcon from '../../airtable-cms/AirtableCMSIcon'
 import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
 
 import { AirtableCMSData } from '../../airtable-cms/types'
@@ -8,7 +8,7 @@ import { AirtableCMSData } from '../../airtable-cms/types'
 import { ResourceSearchData } from '../../pages'
 import ResourceSearch from './ResourceSearch'
 
-import { useTheme } from 'styled-components'
+// import { useTheme } from 'styled-components'
 
 const Section = styled.section`
   display: flex;
@@ -34,7 +34,7 @@ const IntroSection: React.FC<{
   homePageText: AirtableCMSData
   resourceSearchData: ResourceSearchData
 }> = ({ resourceSearchData, homePageText }) => {
-  const theme: any = useTheme()
+  // const theme: any = useTheme()
   return (
     <Section>
       <h1>
