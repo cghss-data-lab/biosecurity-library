@@ -7,7 +7,7 @@ import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 import { Resource } from '../../../pages/explore'
 import { urlString } from '../../../airtable-cms/utilities'
 
-const ResourceContainer = styled(Link)<{ expanded: boolean }>`
+const ResourceContainer = styled.section<{ expanded: boolean }>`
   background: ${({ theme }) => theme.colorVeryLightGray};
   padding: 20px;
   display: grid;
@@ -25,7 +25,7 @@ const ResourceContainer = styled(Link)<{ expanded: boolean }>`
       "icons author link users summary";
       grid-template-columns: 250px 200px 150px 200px auto;`}
 `
-const Title = styled.div`
+const Title = styled(Link)`
   grid-area: title;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   color: ${({ theme }) => theme.colorBlack};
@@ -54,15 +54,16 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
 }) => {
   const theme: any = useTheme()
   return (
-    <ResourceContainer
-      expanded={expand}
-      to={
-        '/resource/' +
-        urlString(data.Resource_Type) +
-        urlString(data.Short_Name)
-      }
-    >
-      <Title>{data.Short_Name}</Title>
+    <ResourceContainer expanded={expand}>
+      <Title
+        to={
+          '/resource/' +
+          urlString(data.Resource_Type) +
+          urlString(data.Short_Name)
+        }
+      >
+        {data.Short_Name}
+      </Title>
       <Author>{data.Authoring_Organization}</Author>
       <IconContainer>
         {JSON.parse(data.Topic_Area_Icons).map((name: string) => (
