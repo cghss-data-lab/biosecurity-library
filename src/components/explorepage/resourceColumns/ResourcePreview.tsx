@@ -50,6 +50,13 @@ const IconContainer = styled.div`
 `
 const ResourceLink = styled.a`
   grid-area: link;
+  display: flex;
+  gap: 5px;
+`
+const LinkIcon = styled(AirtableCMSIcon)`
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
 `
 const Users = styled.div`
   grid-area: users;
@@ -87,7 +94,10 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       </IconContainer>
       {expand && (
         <>
-          <ResourceLink>Link</ResourceLink>
+          <ResourceLink>
+            Link
+            <LinkIcon name="External link" color={theme.colorDarker} />
+          </ResourceLink>
           <Users>{data.Target_user_role}</Users>
           <Summary>{data.Short_Description}</Summary>
         </>
