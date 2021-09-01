@@ -29,7 +29,7 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
     locationHash !== 'undefined' ? locationHash : undefined
   )
 
-  const handleExpandColumn = (column: string) => {
+  const handleExpandColumn = (column: string | undefined) => {
     setExpandColumn(column)
     if (column) {
       history.pushState({}, '', '#' + column)
