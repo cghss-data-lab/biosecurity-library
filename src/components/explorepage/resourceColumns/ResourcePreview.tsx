@@ -29,7 +29,7 @@ const ResourceContainer = styled.section<{ expanded: boolean }>`
 const Title = styled(Link)`
   grid-area: title;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  color: ${({ theme }) => theme.colorBlack};
+  color: ${({ theme }) => theme.colorBlack} !important;
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 8px;
