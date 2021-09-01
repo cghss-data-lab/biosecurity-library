@@ -32,7 +32,6 @@ const Title = styled(Link)`
   color: ${({ theme }) => theme.colorBlack} !important;
   font-weight: bold;
   font-size: 20px;
-  margin-bottom: 8px;
 `
 const Author = styled.div`
   grid-area: author;
