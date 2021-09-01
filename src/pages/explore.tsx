@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { graphql, PageProps, useStaticQuery } from 'gatsby'
+import { ImageDataLike } from 'gatsby-plugin-image'
 
 import FigmaProvider from '../figma/FigmaProvider'
 
@@ -34,6 +35,9 @@ export interface Resource {
     Target_user_role: string[]
     Recommended_usership: string
     Topic_Area_Icons: string
+    Thumbnail_INTERNAL: {
+      localFiles: ImageDataLike[]
+    }
   }
 }
 
@@ -93,6 +97,13 @@ const ExplorePage: React.FC<PageProps> = () => {
               Key_Resource_INTERNAL_
               Recommended_usership
               Topic_Area_Icons
+              Thumbnail_INTERNAL {
+                localFiles {
+                  childImageSharp {
+                    gatsbyImageData(width: 100, placeholder: BLURRED)
+                  }
+                }
+              }
             }
           }
           fieldValue
