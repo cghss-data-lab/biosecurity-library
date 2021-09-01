@@ -48,6 +48,7 @@ export const Return: React.FC<{ onClick: () => void }> = ({ onClick }) => {
       <AirtableCMSIcon
         name="Return"
         color={hover ? theme.colorGolden : theme.colorWhite}
+        style={{ marginTop: 2 }}
       />
       Return to all
     </ReturnButton>
