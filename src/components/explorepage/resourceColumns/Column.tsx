@@ -4,6 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 import { ResourceGroup } from '../../../pages/explore'
+import { Expand, Return } from './ColumnButtons'
 import ResourcePreview from './ResourcePreview'
 
 const ColumnContainer = styled.div<{ expand: boolean }>`
@@ -35,19 +36,6 @@ const ResourceCount = styled.div`
   font-size: 14px;
   font-weight: 200;
 `
-const ExpandButton = styled.button`
-  border: none;
-  background: none;
-  margin-left: auto;
-`
-const ReturnButton = styled.button`
-  border: none;
-  background: none;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.colorWhite};
-`
 
 const Column: React.FC<{
   name: string
@@ -59,25 +47,8 @@ const Column: React.FC<{
   return (
     <ColumnContainer expand={expand}>
       <Header>
-        {!expand && (
-          <ExpandButton onClick={() => setExpandColumn(name)}>
-            <AirtableCMSIcon
-              name="Expand column"
-              color={theme.colorWhite}
-              hoverColor={theme.colorGolden}
-            />
-          </ExpandButton>
-        )}
-        {expand && (
-          <ReturnButton onClick={() => setExpandColumn(undefined)}>
-            <AirtableCMSIcon
-              name="Return"
-              color={theme.colorWhite}
-              hoverColor={theme.colorOrange}
-            />
-            Return to all
-          </ReturnButton>
-        )}
+        {!expand && <Expand onClick={() => setExpandColumn(name)} />}
+        {expand && <Return onClick={() => setExpandColumn(undefined)} />}
         <AirtableCMSIcon
           name={resources.fieldValue}
           color={theme.colorGolden}
