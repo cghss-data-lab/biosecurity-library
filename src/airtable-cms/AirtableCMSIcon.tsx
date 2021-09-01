@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import { parse } from 'node-html-parser'
+import { HTMLElement, parse } from 'node-html-parser'
 
 // replace the fill and stroke colors on all child
 // elements of the SVG; but only if those elements
@@ -12,10 +12,12 @@ const replaceFill = (svg: string, color: string) => {
   // so that it will support server-side-rendering.
   const svgDom = parse(svg)
   const svgElement = svgDom.querySelector('svg')!
-  const children: any[] = svgElement.childNodes
+  const children = svgElement.childNodes
 
   for (let child of children) {
-    if ('attributes' in child) {
+    // note this is the node-html-parser implementation
+    // of the HTMLElement class, not a native HTMLElement
+    if (child instanceof HTMLElement) {
       if (child.hasAttribute('fill')) child.setAttribute('fill', color)
       if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
     }
