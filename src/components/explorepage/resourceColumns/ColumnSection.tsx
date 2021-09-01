@@ -20,13 +20,27 @@ const ColumnsContainer = styled.section`
 const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
   resources,
 }) => {
-  const [expandColumn, setExpandColumn] = useState<string | undefined>()
+  let locationHash
+  if (typeof window !== 'undefined') {
+    locationHash = decodeURI(window?.location.hash.split('#')[1])
+  }
+
+  const [expandColumn, setExpandColumn] = useState<string | undefined>(
+    locationHash !== 'undefined' ? locationHash : undefined
+  )
+
+  const handleExpandColumn = (column: string) => {
+    setExpandColumn(column)
+    if (column) {
+      history.pushState({}, '', '#' + column)
+    } else {
+      history.pushState({}, '', '#')
+    }
+  }
 
   const displayResources = expandColumn
     ? resources.filter(r => r.fieldValue === expandColumn)!
     : resources
-
-  // const displayResources = resources
 
   return (
     <ColumnsContainer>
@@ -36,7 +50,7 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
           name={group.fieldValue}
           resources={group}
           expand={group.fieldValue === expandColumn}
-          setExpandColumn={setExpandColumn}
+          setExpandColumn={handleExpandColumn}
         />
       ))}
     </ColumnsContainer>
