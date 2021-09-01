@@ -11,6 +11,7 @@ const ResourceContainer = styled.section<{ expanded: boolean }>`
   background: ${({ theme }) => theme.colorVeryLightGray};
   padding: 20px;
   display: grid;
+  gap: 10px;
   grid-template-areas:
     'title'
     'author'
@@ -23,7 +24,7 @@ const ResourceContainer = styled.section<{ expanded: boolean }>`
     `grid-template-areas: 
       "title author link users summary"
       "icons author link users summary";
-      grid-template-columns: 250px 200px 150px 200px auto;`}
+      grid-template-columns: 250px 180px 100px 250px auto;`}
 `
 const Title = styled(Link)`
   grid-area: title;
@@ -42,10 +43,19 @@ const Author = styled.div`
 `
 const IconContainer = styled.div`
   grid-area: icons;
-  padding-top: 10px;
-  padding-bottom: 15px;
   display: flex;
+  align-items: flex-start;
+
   gap: 8px;
+`
+const ResourceLink = styled.a`
+  grid-area: link;
+`
+const Users = styled.div`
+  grid-area: users;
+`
+const Summary = styled.div`
+  grid-area: summary;
 `
 
 const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
@@ -75,6 +85,13 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
           />
         ))}
       </IconContainer>
+      {expand && (
+        <>
+          <ResourceLink>Link</ResourceLink>
+          <Users>{data.Target_user_role}</Users>
+          <Summary>{data.Short_Description}</Summary>
+        </>
+      )}
     </ResourceContainer>
   )
 }
