@@ -20,7 +20,7 @@ const Header = styled.header`
   color: ${({ theme }) => theme.colorWhite};
   text-align: center;
   padding: 10px;
-  min-height: 8em;
+  min-height: 10em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

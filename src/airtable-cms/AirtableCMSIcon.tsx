@@ -2,21 +2,25 @@ import React, { useState } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
+import { parse } from 'node-html-parser'
+
 // replace the fill and stroke colors on all child
 // elements of the SVG; but only if those elements
 // already have a fill or stroke set.
 const replaceFill = (svg: string, color: string) => {
-  const parser = new DOMParser()
-  const svgDom = parser.parseFromString(svg, 'image/svg+xml')
+  // this uses node-html-parser instead of native DOM
+  // so that it will support server-side-rendering.
+  const svgDom = parse(svg)
   const svgElement = svgDom.querySelector('svg')!
-  const children: Element[] = Array.from(svgElement.children)
+  const children: any[] = svgElement.childNodes
 
   for (let child of children) {
-    if (child.hasAttribute('fill')) child.setAttribute('fill', color)
-    if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
+    if ('attributes' in child) {
+      if (child.hasAttribute('fill')) child.setAttribute('fill', color)
+      if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
+    }
   }
-
-  return svgDom.documentElement.outerHTML
+  return svgDom.toString()
 }
 
 const SVGContainer = styled.div`
