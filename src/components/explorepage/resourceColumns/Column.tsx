@@ -35,6 +35,19 @@ const ResourceCount = styled.div`
   font-size: 14px;
   font-weight: 200;
 `
+const ExpandButton = styled.button`
+  border: none;
+  background: none;
+  margin-left: auto;
+`
+const ReturnButton = styled.button`
+  border: none;
+  background: none;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  color: ${({ theme }) => theme.colorWhite};
+`
 
 const Column: React.FC<{
   name: string
@@ -45,11 +58,26 @@ const Column: React.FC<{
   const theme: any = useTheme()
   return (
     <ColumnContainer expand={expand}>
-      <Header
-        onClick={() =>
-          setExpandColumn(prev => (prev === name ? undefined : name))
-        }
-      >
+      <Header>
+        {!expand && (
+          <ExpandButton onClick={() => setExpandColumn(name)}>
+            <AirtableCMSIcon
+              name="Expand column"
+              color={theme.colorWhite}
+              hoverColor={theme.colorGolden}
+            />
+          </ExpandButton>
+        )}
+        {expand && (
+          <ReturnButton onClick={() => setExpandColumn(undefined)}>
+            <AirtableCMSIcon
+              name="Return"
+              color={theme.colorWhite}
+              hoverColor={theme.colorOrange}
+            />
+            Return to all
+          </ReturnButton>
+        )}
         <AirtableCMSIcon
           name={resources.fieldValue}
           color={theme.colorGolden}
