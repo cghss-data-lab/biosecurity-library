@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Column from './Column'
 
 import { ResourceGroup } from '../../../pages/explore'
+import { useState } from 'react'
 
 const ColumnsContainer = styled.section`
   display: flex;
@@ -18,18 +19,30 @@ const ColumnsContainer = styled.section`
 
 const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
   resources,
-}) => (
-  <ColumnsContainer>
-    {resources.map(group => (
-      <Column
-        key={group.fieldValue}
-        name={group.fieldValue}
-        // this icon name needs to pull from airtable
-        icon={'Lab research'}
-        resources={group}
-      />
-    ))}
-  </ColumnsContainer>
-)
+}) => {
+  const [expandColumn, setExpandColumn] = useState<string | undefined>()
+
+  const displayResources = expandColumn
+    ? resources.filter(r => r.fieldValue === expandColumn)
+    : resources
+
+  // const displayResources = resources
+
+  return (
+    <ColumnsContainer>
+      {displayResources.map(group => (
+        <Column
+          key={group.fieldValue}
+          name={group.fieldValue}
+          // this icon name needs to pull from airtable
+          icon={'Lab research'}
+          resources={group}
+          expand={group.fieldValue === expandColumn}
+          setExpandColumn={setExpandColumn}
+        />
+      ))}
+    </ColumnsContainer>
+  )
+}
 
 export default ColumnSection

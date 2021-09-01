@@ -6,14 +6,16 @@ import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 import { ResourceGroup } from '../../../pages/explore'
 import ResourcePreview from './ResourcePreview'
 
-const ColumnContainer = styled.div`
+const ColumnContainer = styled.div<{ expand: boolean }>`
   flex-grow: 1;
   flex-basis: 0;
   flex-shrink: 1;
   background: ${({ theme }) => theme.colorDarkest};
   border-radius: 5px;
-`
+  /* transition: 500ms ease; */
 
+  /* ${({ expand }) => !expand && `flex-grow: 0.000001;`} */
+`
 const Header = styled.header`
   color: ${({ theme }) => theme.colorWhite};
   text-align: center;
@@ -23,7 +25,6 @@ const Header = styled.header`
   flex-direction: column;
   justify-content: space-between;
 `
-
 const HeaderText = styled.div`
   font-family: 'Rawline', Arial, Helvetica, sans-serif;
   font-size: 20px;
@@ -38,12 +39,18 @@ const ResourceCount = styled.div`
 const Column: React.FC<{
   name: string
   icon: string
+  expand: boolean
   resources: ResourceGroup | undefined
-}> = ({ name, icon, resources }) => {
+  setExpandColumn: React.Dispatch<React.SetStateAction<string | undefined>>
+}> = ({ name, icon, resources, expand, setExpandColumn }) => {
   const theme: any = useTheme()
   return (
-    <ColumnContainer>
-      <Header>
+    <ColumnContainer expand={expand}>
+      <Header
+        onClick={() =>
+          setExpandColumn(prev => (prev === name ? undefined : name))
+        }
+      >
         <AirtableCMSIcon
           name={icon}
           color={theme.colorGolden}
@@ -56,7 +63,7 @@ const Column: React.FC<{
       </Header>
       {resources &&
         resources.nodes.map(({ data }) => (
-          <ResourcePreview key={data.Short_Name} {...{ data }} />
+          <ResourcePreview key={data.Short_Name} {...{ data, expand }} />
         ))}
     </ColumnContainer>
   )
