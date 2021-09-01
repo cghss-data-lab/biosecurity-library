@@ -16,7 +16,7 @@ const ResourceContainer = styled.section<{ expanded: boolean }>`
     'title'
     'author'
     'icons';
-
+  grid-template-rows: min-content 1fr;
   border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
 
   ${({ expanded }) =>
