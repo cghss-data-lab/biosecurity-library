@@ -105,10 +105,6 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       </IconContainer>
       {expand && (
         <>
-          {/* <ResourceLink>
-            Link
-            <LinkIcon name="External link" color={theme.colorDarker} />
-          </ResourceLink> */}
           <Users>
             <p>{commaSeparatedList(data.Target_user_role)}</p>
           </Users>
