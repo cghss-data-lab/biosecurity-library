@@ -60,9 +60,9 @@ const ThumbnailContainer = styled.div`
   width: 100px;
   /* height: 100px; */
   padding-right: 15px;
-  > div {
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.24);
-  }
+`
+const Thumbnail = styled(GatsbyImage)`
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.24);
 `
 
 const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
@@ -76,7 +76,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       {expand && (
         <ThumbnailContainer>
           {thumbnail && (
-            <GatsbyImage
+            <Thumbnail
               image={thumbnail}
               alt={data.Short_Name + 'thumbnail image'}
             />
