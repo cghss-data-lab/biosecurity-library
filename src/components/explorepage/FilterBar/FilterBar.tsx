@@ -4,7 +4,7 @@ import { Filter } from '../../../pages/explore'
 import AuthoringOrganization from './filters/AuthoringOrganization'
 
 import KeyTopic from './filters/KeyTopic'
-import RecommendedUsership from './filters/RecommendedUsership'
+import UserRollup from './filters/RecommendedUsership'
 import TargetUserRole from './filters/TargetUserRole'
 
 const FilterSection = styled.section`
@@ -30,7 +30,7 @@ const FilterBar: React.FC<FilterProps> = ({ filters, setFilters }) => {
     <FilterSection>
       <KeyTopic {...{ filters, setFilters }} />
       <TargetUserRole {...{ filters, setFilters }} />
-      <RecommendedUsership {...{ filters, setFilters }} />
+      <UserRollup {...{ filters, setFilters }} />
       <AuthoringOrganization {...{ filters, setFilters }} />
     </FilterSection>
   )

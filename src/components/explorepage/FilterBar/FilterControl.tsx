@@ -39,7 +39,8 @@ const FilterControl: React.FC<FilterControlProps> = ({
         if (option) {
           setSelectedOptions(option)
           setFilters(prev => [
-            ...prev.filter(filter => !filter.name.includes(name)),
+            // ...prev.filter(filter => !filter.name.includes(name)),
+            ...prev,
             createFilter(option, name),
           ])
         } else {

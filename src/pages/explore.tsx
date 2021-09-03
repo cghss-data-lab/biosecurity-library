@@ -33,7 +33,7 @@ export interface Resource {
     Key_Topic_Area_s_: string[]
     Short_Description: string
     Target_user_role: string[]
-    Recommended_usership: string
+    User_Roll_Up: string[]
     Topic_Area_Icons: string
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
@@ -95,7 +95,7 @@ const ExplorePage: React.FC<PageProps> = () => {
               Short_Description
               Key_Topic_Area_s_
               Key_Resource_INTERNAL_
-              Recommended_usership
+              User_Roll_Up
               Topic_Area_Icons
               Thumbnail_INTERNAL {
                 localFiles {

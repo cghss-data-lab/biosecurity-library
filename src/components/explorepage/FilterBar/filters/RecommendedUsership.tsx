@@ -6,20 +6,17 @@ import { FilterLabel, NameContainer } from '../DisplayComponents'
 
 import { FilterOptions, FilterProps } from '../FilterBar'
 
-const RecommendedUsership: React.FC<FilterProps> = ({
-  filters,
-  setFilters,
-}) => {
+const UserRollup: React.FC<FilterProps> = ({ filters, setFilters }) => {
   const name = 'Recommended usership'
 
   const {
     distinctOptions: { distinct: options },
   } = useStaticQuery<FilterOptions>(graphql`
-    query recommendedUsershipQuery {
+    query userRollupQuery {
       distinctOptions: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        distinct(field: data___Recommended_usership)
+        distinct(field: data___User_Roll_Up)
       }
     }
   `)
@@ -34,11 +31,11 @@ const RecommendedUsership: React.FC<FilterProps> = ({
         {...{ name, options, setFilters }}
         createFilter={(option, name) => ({
           name: `${name}: ${option.label}`,
-          test: ({ data }) => data.Recommended_usership.includes(option.label),
+          test: ({ data }) => data.User_Roll_Up.includes(option.label),
         })}
       />
     </FilterLabel>
   )
 }
 
-export default RecommendedUsership
+export default UserRollup

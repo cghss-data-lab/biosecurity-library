@@ -59,16 +59,16 @@ interface IconsQuery {
 interface IconInterface {
   name: string
   color: string
-  hoverColor?: string
   className?: string
+  hoverColor?: string
   style?: React.CSSProperties
 }
 
 const AirtableCMSIcon: React.FC<IconInterface> = ({
   name,
   color,
-  hoverColor,
   className,
+  hoverColor,
   style,
 }) => {
   const {
