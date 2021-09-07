@@ -193,8 +193,8 @@ const ExplorePage: React.FC<PageProps> = () => {
             expandDefinitions,
             setExpandDefinitions,
           }}
-        />
-        <ActiveFilters {...{ filters, setFilters }} /> */}
+        /> */}
+        <ActiveFilters {...{ exploreState, setExploreState }} />
         <ColumnSection {...{ resources }} />
       </Main>
     </FigmaProvider>
