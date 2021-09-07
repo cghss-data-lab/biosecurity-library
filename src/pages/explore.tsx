@@ -12,8 +12,8 @@ import Main from '../components/layout/Main'
 import styled from 'styled-components'
 import AirtableCMSImage from '../airtable-cms/AirtableCMSImage'
 import ColumnSection from '../components/explorepage/resourceColumns/ColumnSection'
-import FilterBar from '../components/explorepage/FilterBar/FilterBar'
-import ActiveFilters from '../components/explorepage/FilterBar/ActiveFilters'
+// import FilterBar from '../components/explorepage/FilterBar/FilterBar'
+// import ActiveFilters from '../components/explorepage/FilterBar/ActiveFilters'
 
 const BannerImage = styled(AirtableCMSImage)`
   width: calc(100% - 10px);
@@ -47,14 +47,27 @@ export interface ResourceGroup {
   totalCount?: number
 }
 
-export interface Filter {
-  name: string
-  test: (data: ResourceGroup['nodes'][0]) => boolean
 export interface Definition {
   data: {
     Column: string[]
     Definition: string
     Glossary_Name: string
+  }
+}
+
+// export interface Filter {
+//   name: string
+//   test: (data: ResourceGroup['nodes'][0]) => boolean
+// }
+
+export interface ExploreState {
+  defs?: string
+  type?: string
+  filters?: {
+    Key_Topic_Area_s_?: string[]
+    Target_user_role?: string[]
+    User_Roll_Up?: string[]
+    Authoring_Organization?: string[]
   }
 }
 
@@ -129,33 +142,60 @@ const ExplorePage: React.FC<PageProps> = () => {
     }
   `)
 
-  const [filters, setFilters] = useState<Filter[]>([
-    // example filters for testing, this array should
-    // be initialized empty
-    // {
-    //   name: 'test',
-    //   test: ({ data }) => data.Target_user_role.includes('Legislative leader'),
-    // },
-    // {
-    //   name: 'test',
-    //   test: node =>
-    //     node.data.Resource_Name ===
-    //     'Malaysian Educational Module on Responsible Conduct of Research',
-    // },
-  ])
   console.log(definitions)
+
+  const [exploreState] = useState<ExploreState>({
+    defs: 'Key_Topic_Area_s_',
+    type: 'Type name',
+    filters: {
+      // Key_Topic_Area_s_: ['Risk assessment'],
+      Authoring_Organization: ['World Health Organization (WHO)'],
+    },
+  })
+
+  // const [filters, setFilters] = useState<Filter[]>([
+  //   // example filters for testing, this array should
+  //   // be initialized empty
+  //   // {
+  //   //   name: 'test',
+  //   //   test: ({ data }) => data.Target_user_role.includes('Legislative leader'),
+  //   // },
+  //   // {
+  //   //   name: 'test',
+  //   //   test: node =>
+  //   //     node.data.Resource_Name ===
+  //   //     'Malaysian Educational Module on Responsible Conduct of Research',
+  //   // },
+  // ])
 
   let resources = groupedResources.map(group => ({
     ...group,
     totalCount: group.nodes.length,
   }))
 
-  if (filters.length > 0) {
-    resources = filters.reduce(
-      (prev, filter) =>
+  // if (filters.length > 0) {
+  //   resources = filters.reduce(
+  //     (prev, filter) =>
+  //       prev.map(group => ({
+  //         ...group,
+  //         nodes: group.nodes.filter(filter.test),
+  //       })),
+  //     resources
+  //   )
+  // }
+
+  if (exploreState.filters && Object.keys(exploreState.filters).length > 0) {
+    resources = Object.entries(exploreState.filters).reduce(
+      (prev, [field, values]) =>
         prev.map(group => ({
           ...group,
-          nodes: group.nodes.filter(filter.test),
+          nodes: group.nodes.filter(node =>
+            values.some(value =>
+              node.data[field as keyof typeof exploreState.filters].includes(
+                value
+              )
+            )
+          ),
         })),
       resources
     )
@@ -171,8 +211,16 @@ const ExplorePage: React.FC<PageProps> = () => {
             <AirtableCMSText name={'First Header'} data={explorePageText} />
           </h1>
         </Header>
-        <FilterBar {...{ filters, setFilters }} />
-        <ActiveFilters {...{ filters, setFilters }} />
+        {/* <FilterBar
+          {...{
+            filters,
+            setFilters,
+            definitions,
+            expandDefinitions,
+            setExpandDefinitions,
+          }}
+        />
+        <ActiveFilters {...{ filters, setFilters }} /> */}
         <ColumnSection {...{ resources }} />
       </Main>
     </FigmaProvider>
