@@ -168,38 +168,12 @@ const ExplorePage: React.FC<PageProps> = () => {
   //   // },
   // ])
 
-  let resources = groupedResources.map(group => ({
+  let resources: ResourceGroup[] = groupedResources.map(group => ({
     ...group,
     totalCount: group.nodes.length,
   }))
 
-  // if (filters.length > 0) {
-  //   resources = filters.reduce(
-  //     (prev, filter) =>
-  //       prev.map(group => ({
-  //         ...group,
-  //         nodes: group.nodes.filter(filter.test),
-  //       })),
-  //     resources
-  //   )
-  // }
-
-  if (exploreState.filters && Object.keys(exploreState.filters).length > 0) {
-    resources = Object.entries(exploreState.filters).reduce(
-      (prev, [field, values]) =>
-        prev.map(group => ({
-          ...group,
-          nodes: group.nodes.filter(node =>
-            values.some(value =>
-              node.data[field as keyof typeof exploreState.filters].includes(
-                value
-              )
-            )
-          ),
-        })),
-      resources
-    )
-  }
+  resources = applyFilters(resources, exploreState.filters)
 
   return (
     <FigmaProvider>
