@@ -6,7 +6,11 @@ import { FilterLabel, NameContainer } from '../DisplayComponents'
 
 import { FilterOptions, FilterProps } from '../FilterBar'
 
-const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
+const KeyTopic: React.FC<FilterProps> = ({
+  filters,
+  setFilters,
+  setExpandDefinitions,
+}) => {
   const name = 'Key topic'
 
   const {
@@ -25,7 +29,7 @@ const KeyTopic: React.FC<FilterProps> = ({ filters, setFilters }) => {
     <FilterLabel>
       <NameContainer>
         <div>Key topic</div>
-        <button>+</button>
+        <button onClick={() => setExpandDefinitions(name)}>+</button>
       </NameContainer>
       <FilterControl
         {...{ name, options, setFilters }}

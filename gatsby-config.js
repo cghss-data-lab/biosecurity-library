@@ -30,6 +30,11 @@ module.exports = {
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
+            tableName: `Glossary`,
+            tableView: `CMS`,
+          },
+          {
+            baseId: `appmL0p5H21CiY7tL`,
             tableName: `Landing Page`,
             tableView: `CMS`,
             mapping: { Image: `fileNode` },

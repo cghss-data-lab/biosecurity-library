@@ -50,15 +50,23 @@ export interface ResourceGroup {
 export interface Filter {
   name: string
   test: (data: ResourceGroup['nodes'][0]) => boolean
+export interface Definition {
+  data: {
+    Column: string[]
+    Definition: string
+    Glossary_Name: string
+  }
 }
 
 const ExplorePage: React.FC<PageProps> = () => {
   const {
     explorePageText,
     groupedResources: { group: groupedResources },
+    definitions: { nodes: definitions },
   }: {
     explorePageText: AirtableCMSData
     groupedResources: { group: ResourceGroup[] }
+    definitions: { nodes: Definition[] }
   } = useStaticQuery(graphql`
     query exploreQuery {
       explorePageText: allAirtable(filter: { table: { eq: "Explore Page" } }) {
@@ -109,6 +117,15 @@ const ExplorePage: React.FC<PageProps> = () => {
           fieldValue
         }
       }
+      definitions: allAirtable(filter: { table: { eq: "Glossary" } }) {
+        nodes {
+          data {
+            Glossary_Name
+            Definition
+            Column
+          }
+        }
+      }
     }
   `)
 
@@ -126,6 +143,7 @@ const ExplorePage: React.FC<PageProps> = () => {
     //     'Malaysian Educational Module on Responsible Conduct of Research',
     // },
   ])
+  console.log(definitions)
 
   let resources = groupedResources.map(group => ({
     ...group,
