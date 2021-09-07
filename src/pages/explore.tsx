@@ -55,11 +55,6 @@ export interface Definition {
   }
 }
 
-// export interface Filter {
-//   name: string
-//   test: (data: ResourceGroup['nodes'][0]) => boolean
-// }
-
 export interface ExploreState {
   defs?: string
   type?: string
