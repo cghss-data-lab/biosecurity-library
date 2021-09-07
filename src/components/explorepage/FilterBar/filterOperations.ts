@@ -40,3 +40,26 @@ export const removeFilter: FilterFunction = (filter, setExploreState) => {
       }
     })
 }
+
+type ApplyFilterFunction = (
+  resources: ResourceGroup[],
+  filters: ExploreState['filters']
+) => ResourceGroup[]
+
+export const applyFilters: ApplyFilterFunction = (resources, filters) => {
+  // check if there even are filters
+  if (!filters || Object.keys(filters).length === 0) return resources
+  // if there are, apply them and return resources
+  return Object.entries(filters).reduce(
+    (prev, [field, values]) =>
+      prev.map(group => ({
+        ...group,
+        nodes: group.nodes.filter(node =>
+          values.some(value =>
+            node.data[field as keyof typeof filters].includes(value)
+          )
+        ),
+      })),
+    resources
+  )
+}
