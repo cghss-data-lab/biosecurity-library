@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { ExploreState } from '../../../pages/explore'
 
 // @ts-ignore: implicit any
 import TypeaheadControl from '../../ui/TypeaheadControl/TypeaheadControl'
 // @ts-ignore: implicit any
 import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
-
-import { Filter } from '../../../pages/explore'
+import { FilterLabel, NameContainer } from './DisplayComponents'
+import { addFilter } from './filterOperations'
 
 interface Option {
   label: string
@@ -14,8 +15,8 @@ interface Option {
 interface FilterControlProps {
   name: string
   options: string[]
-  createFilter: (option: Option, name: string) => Filter
-  setFilters: React.Dispatch<React.SetStateAction<Filter[]>>
+  exploreState: ExploreState
+  setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
 }
 
 interface Selected {
@@ -25,33 +26,38 @@ interface Selected {
 const FilterControl: React.FC<FilterControlProps> = ({
   name,
   options,
-  setFilters,
-  createFilter,
+  exploreState,
+  setExploreState,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<Selected>()
   return (
-    <TypeaheadControl
-      className={''}
-      placeholder={selectedOptions?.label || name}
-      items={options.map(o => ({ label: o, key: o }))}
-      value={selectedOptions}
-      onChange={(option: Option) => {
-        if (option) {
-          setSelectedOptions(option)
-          setFilters(prev => [
-            // ...prev.filter(filter => !filter.name.includes(name)),
-            ...prev,
-            createFilter(option, name),
-          ])
-        } else {
-          setSelectedOptions(undefined)
-          setFilters(prev => prev.filter(filter => !filter.name.includes(name)))
-        }
-      }}
-      renderItem={({ label }: { label: string }) => (
-        <TypeaheadResult>{label}</TypeaheadResult>
-      )}
-    />
+    <FilterLabel>
+      <NameContainer>
+        <div>{name.replace(/_/g, ' ')}</div>
+        <button
+          onClick={() => setExploreState(prev => ({ ...prev, defs: name }))}
+        >
+          +
+        </button>
+      </NameContainer>
+      <TypeaheadControl
+        className={''}
+        placeholder={selectedOptions?.label || name.replace(/_/g, ' ')}
+        items={options.map(o => ({ label: o, key: o }))}
+        value={selectedOptions}
+        onChange={(option: Option) => {
+          if (option) {
+            setSelectedOptions(option)
+            addFilter({ [name]: [option.label] }, setExploreState)
+          } else {
+            setSelectedOptions(undefined)
+          }
+        }}
+        renderItem={({ label }: { label: string }) => (
+          <TypeaheadResult>{label}</TypeaheadResult>
+        )}
+      />
+    </FilterLabel>
   )
 }
 
