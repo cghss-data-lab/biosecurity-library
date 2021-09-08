@@ -2,12 +2,11 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import FilterControl from '../FilterControl'
-import { FilterLabel, NameContainer } from '../DisplayComponents'
 
 import { FilterOptions, FilterProps } from '../FilterBar'
 
 const KeyTopic: React.FC<FilterProps> = ({ exploreState, setExploreState }) => {
-  const name = 'Key topic'
+  const name = 'Key_Topic_Area_s_'
 
   const {
     distinctOptions: { distinct: options },
@@ -21,25 +20,7 @@ const KeyTopic: React.FC<FilterProps> = ({ exploreState, setExploreState }) => {
     }
   `)
 
-  return (
-    <FilterLabel>
-      <NameContainer>
-        <div>Key topic</div>
-        <button
-          onClick={() => setExploreState(prev => ({ ...prev, defs: name }))}
-        >
-          +
-        </button>
-      </NameContainer>
-      <FilterControl
-        {...{ name, options, exploreState, setExploreState }}
-        createFilter={(option, name) => ({
-          name: `${name}: ${option.label}`,
-          test: ({ data }) => data.Key_Topic_Area_s_.includes(option.label),
-        })}
-      />
-    </FilterLabel>
-  )
+  return <FilterControl {...{ name, options, exploreState, setExploreState }} />
 }
 
 export default KeyTopic
