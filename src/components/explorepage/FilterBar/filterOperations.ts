@@ -1,5 +1,5 @@
 import React from 'react'
-import { ExploreState } from '../../../pages/explore'
+import { ExploreState, ResourceGroup } from '../../../pages/explore'
 
 type FilterFunction = (
   filter: ExploreState['filters'],
