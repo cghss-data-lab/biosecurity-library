@@ -34,9 +34,11 @@ const DefinitionButton = styled.button`
 
 // This should be inhereted by each of the filters
 export interface FilterProps {
-  filters: Filter[]
-  setFilters: React.Dispatch<React.SetStateAction<Filter[]>>
-  setExpandDefinitions: React.Dispatch<React.SetStateAction<string>>
+  // filters: Filter[]
+  // setFilters: React.Dispatch<React.SetStateAction<Filter[]>>
+  // setExpandDefinitions: React.Dispatch<React.SetStateAction<string>>
+  exploreState: ExploreState
+  setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
 }
 
 // All the filter options queries should follow this interface
