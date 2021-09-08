@@ -6,8 +6,22 @@ type FilterFunction = (
   setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
 ) => void
 
-// addFilter should go here too
-// const addFilter = () => {}
+export const addFilter: FilterFunction = (filter, setExploreState) => {
+  // early return if there's no filter passed
+  if (!filter) return
+
+  // cast types for the keys because typescript drops them
+  const [filterKey] = Object.keys(filter) as [keyof typeof filter]
+  const [filterVal] = Object.values(filter)
+
+  setExploreState(prev => ({
+    ...prev,
+    filters: {
+      ...(prev.filters && prev.filters),
+      [filterKey]: [...(prev.filters?.[filterKey] ?? []), ...filterVal],
+    },
+  }))
+}
 
 export const removeFilter: FilterFunction = (filter, setExploreState) => {
   if (filter)
