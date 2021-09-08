@@ -5,17 +5,9 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css' // optional
 
 import { Definition, ExploreState } from '../../../pages/explore'
-import AuthoringOrganization from './filters/AuthoringOrganization'
-import KeyTopic from './filters/KeyTopic'
-import UserRollup from './filters/RecommendedUsership'
-import TargetUserRole from './filters/TargetUserRole'
 
-const FilterSection = styled.section`
-  display: flex;
-  justify-content: stretch;
-  gap: 15px;
-  margin-top: 50px;
-`
+import FilterSection from './FilterSection'
+
 const DefinitionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -30,15 +22,9 @@ const DefinitionButton = styled.button`
   background: rgba(0, 0, 0, 0.025);
 `
 
-// This interface should be used by each of the filters
 export interface FilterProps {
   exploreState: ExploreState
   setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
-}
-
-// All the filter options queries should follow this interface
-export interface FilterOptions {
-  distinctOptions: { distinct: string[] }
 }
 
 interface FilterBarProps extends FilterProps {
@@ -61,12 +47,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
             </Tippy>
           ))}
     </DefinitionsContainer>
-    <FilterSection>
-      <KeyTopic {...{ exploreState, setExploreState }} />
-      <TargetUserRole {...{ exploreState, setExploreState }} />
-      <UserRollup {...{ exploreState, setExploreState }} />
-      <AuthoringOrganization {...{ exploreState, setExploreState }} />
-    </FilterSection>
+    <FilterSection {...{ exploreState, setExploreState }} />
   </>
 )
 
