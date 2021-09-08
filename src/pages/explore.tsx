@@ -184,15 +184,13 @@ const ExplorePage: React.FC<PageProps> = () => {
             <AirtableCMSText name={'First Header'} data={explorePageText} />
           </h1>
         </Header>
-        {/* <FilterBar
+        <FilterBar
           {...{
-            filters,
-            setFilters,
             definitions,
-            expandDefinitions,
-            setExpandDefinitions,
+            exploreState,
+            setExploreState,
           }}
-        /> */}
+        />
         <ActiveFilters {...{ exploreState, setExploreState }} />
         <ColumnSection {...{ resources }} />
       </Main>
