@@ -57,14 +57,18 @@ export interface Definition {
   }
 }
 
+export enum FilterFields {
+  Target_user_role = 'Target_user_role',
+  User_Roll_Up = 'User_Roll_Up',
+  Authoring_Organization = 'Authoring_Organization',
+  Key_Topic_Area_s_ = 'Key_Topic_Area_s_',
+}
+
 export interface ExploreState {
   defs?: string
   type?: string
   filters?: {
-    Key_Topic_Area_s_?: string[]
-    Target_user_role?: string[]
-    User_Roll_Up?: string[]
-    Authoring_Organization?: string[]
+    [key in FilterFields]?: string[]
   }
 }
 
