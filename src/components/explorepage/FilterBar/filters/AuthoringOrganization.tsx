@@ -2,15 +2,14 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import FilterControl from '../FilterControl'
-import { FilterLabel, NameContainer } from '../DisplayComponents'
 
 import { FilterOptions, FilterProps } from '../FilterBar'
 
 const AuthoringOrganization: React.FC<FilterProps> = ({
-  filters,
-  setFilters,
+  exploreState,
+  setExploreState,
 }) => {
-  const name = 'Authoring Organization'
+  const name = 'Authoring_Organization'
 
   const {
     distinctOptions: { distinct: options },
@@ -24,22 +23,7 @@ const AuthoringOrganization: React.FC<FilterProps> = ({
     }
   `)
 
-  return (
-    <FilterLabel>
-      <NameContainer>
-        <div>{name}</div>
-        <button>+</button>
-      </NameContainer>
-      <FilterControl
-        {...{ name, options, setFilters }}
-        createFilter={(option, name) => ({
-          name: `${name}: ${option.label}`,
-          test: ({ data }) =>
-            data.Authoring_Organization.includes(option.label),
-        })}
-      />
-    </FilterLabel>
-  )
+  return <FilterControl {...{ name, options, exploreState, setExploreState }} />
 }
 
 export default AuthoringOrganization
