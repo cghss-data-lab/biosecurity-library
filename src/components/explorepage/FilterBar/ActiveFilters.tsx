@@ -7,6 +7,8 @@ import { removeFilter } from './filterOperations'
 
 const FilterContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
   margin-top: 30px;
 `
 
