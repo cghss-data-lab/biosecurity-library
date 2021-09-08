@@ -24,35 +24,37 @@ export const addFilter: FilterFunction = (filter, setExploreState) => {
 }
 
 export const removeFilter: FilterFunction = (filter, setExploreState) => {
-  if (filter)
-    setExploreState(prev => {
-      if (!prev.filters) return prev
+  // early return if there's no filter passed
+  if (!filter) return
 
-      const [filterKey, filterVal] = Object.entries(filter)[0] as [
-        keyof typeof prev.filters,
-        typeof prev.filters[keyof typeof prev.filters]
-      ]
+  // cast types for the keys because typescript drops them
+  const filterKey = Object.keys(filter)[0] as keyof typeof filter
+  const filterVal = Object.values(filter)[0]
 
-      // remove only the value selected for removal
-      // from the array of values in the filter
-      let newValues = prev.filters[filterKey]?.filter(
-        val => !filterVal?.includes(val)
-      )
+  setExploreState(prev => {
+    // early return if there are no filters to remove
+    if (!prev.filters) return prev
 
-      if (newValues?.length === 0) {
-        // remove the filter completely if there are no more values
-        const { [filterKey]: _, ...newFilters } = prev.filters
-        return { ...prev, filters: newFilters }
-      }
+    // remove only the value selected for removal
+    // from the array of values in the filter
+    let newValues = prev.filters[filterKey]?.filter(
+      val => !filterVal?.includes(val)
+    )
 
-      return {
-        ...prev,
-        filters: {
-          ...prev.filters,
-          [filterKey]: newValues,
-        },
-      }
-    })
+    // remove the filter completely if there are no more values
+    if (newValues?.length === 0) {
+      const { [filterKey]: _, ...newFilters } = prev.filters
+      return { ...prev, filters: newFilters }
+    }
+
+    return {
+      ...prev,
+      filters: {
+        ...prev.filters,
+        [filterKey]: newValues,
+      },
+    }
+  })
 }
 
 type ApplyFilterFunction = (
@@ -63,6 +65,7 @@ type ApplyFilterFunction = (
 export const applyFilters: ApplyFilterFunction = (resources, filters) => {
   // check if there even are filters
   if (!filters || Object.keys(filters).length === 0) return resources
+
   // if there are, apply them and return resources
   return Object.entries(filters).reduce(
     (prev, [field, values]) =>
