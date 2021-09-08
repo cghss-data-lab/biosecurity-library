@@ -138,17 +138,19 @@ const ExplorePage: React.FC<PageProps> = () => {
     }
   `)
 
-  console.log(definitions)
-
-  const [exploreState] = useState<ExploreState>({
+  const [exploreState, setExploreState] = useState<ExploreState>({
     defs: 'Key_Topic_Area_s_',
     type: 'Type name',
     filters: {
-      // Key_Topic_Area_s_: ['Risk assessment'],
-      Authoring_Organization: ['World Health Organization (WHO)'],
+      Key_Topic_Area_s_: ['Risk assessment'],
+      Authoring_Organization: [
+        'World Health Organization (WHO)',
+        'United States National Institutes of Health (US NIH)',
+      ],
     },
   })
 
+  console.log(exploreState)
   // const [filters, setFilters] = useState<Filter[]>([
   //   // example filters for testing, this array should
   //   // be initialized empty
