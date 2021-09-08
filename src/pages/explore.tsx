@@ -7,14 +7,15 @@ import FigmaProvider from '../figma/FigmaProvider'
 import { AirtableCMSData } from '../airtable-cms/types'
 import AirtableCMSText from '../airtable-cms/AirtableCMSText'
 
+import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
+
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import styled from 'styled-components'
 import AirtableCMSImage from '../airtable-cms/AirtableCMSImage'
 import ColumnSection from '../components/explorepage/resourceColumns/ColumnSection'
-// import FilterBar from '../components/explorepage/FilterBar/FilterBar'
+import FilterBar from '../components/explorepage/FilterBar/FilterBar'
 import ActiveFilters from '../components/explorepage/FilterBar/ActiveFilters'
-import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
 
 const BannerImage = styled(AirtableCMSImage)`
   width: calc(100% - 10px);
