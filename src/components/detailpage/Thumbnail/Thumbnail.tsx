@@ -21,12 +21,19 @@ const Thumbnail: React.FC<PageContext> = ({ data }) => {
           />
         )}
         {data.Files_INTERNAL && (
-          <a
-            style={{ padding: 10 }}
-            href={data.Files_INTERNAL.localFiles[0].publicURL}
-          >
-            Download
-          </a>
+          <>
+            {/* Leaving this here to maybe add previews later */}
+            {/* <iframe
+              title="document preview"
+              src={data.Files_INTERNAL.localFiles[0].publicURL}
+            /> */}
+            <a
+              style={{ padding: 10 }}
+              href={data.Files_INTERNAL.localFiles[0].publicURL}
+            >
+              Download
+            </a>
+          </>
         )}
       </ThumbnailContainer>
     )
