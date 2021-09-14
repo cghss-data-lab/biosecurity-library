@@ -7,6 +7,7 @@ import 'tippy.js/dist/tippy.css' // optional
 import { Definition, ExploreState } from '../../../pages/explore'
 
 import FilterSection from './FilterSection'
+import { cleanAirtableKey } from '../../../airtable-cms/utilities'
 
 const DefinitionsContainer = styled.div`
   display: flex;
@@ -38,9 +39,13 @@ const FilterBar: React.FC<FilterBarProps> = ({
 }) => (
   <>
     <DefinitionsContainer>
-      {exploreState.defs !== '' &&
+      {exploreState.defs &&
         definitions
-          .filter(def => def.data.Column[0] === exploreState.defs)
+          .filter(def =>
+            def.data.Column.some(col =>
+              exploreState.defs?.includes(cleanAirtableKey(col))
+            )
+          )
           .map(def => (
             <Tippy key={def.data.Glossary_Name} content={def.data.Definition}>
               <DefinitionButton>{def.data.Glossary_Name}</DefinitionButton>
