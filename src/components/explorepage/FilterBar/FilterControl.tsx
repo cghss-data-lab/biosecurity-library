@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 import { ExploreState } from '../../../pages/explore'
 
-// @ts-ignore: implicit any
-import TypeaheadControl from '../../ui/TypeaheadControl/TypeaheadControl'
-// @ts-ignore: implicit any
+import TypeaheadControl, {
+  Item,
+} from '../../ui/TypeaheadControl/TypeaheadControl'
 import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
 import { FilterLabel, NameContainer } from './DisplayComponents'
 import { addFilter } from './filterOperations'
-
-interface Option {
-  label: string
-}
 
 interface FilterControlProps {
   name: string
@@ -19,17 +15,13 @@ interface FilterControlProps {
   setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
 }
 
-interface Selected {
-  label: string
-}
-
 const FilterControl: React.FC<FilterControlProps> = ({
   name,
   options,
   // exploreState,
   setExploreState,
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState<Selected>()
+  const [selectedOptions, setSelectedOptions] = useState<Item>()
   return (
     <FilterLabel>
       <NameContainer>
@@ -45,15 +37,15 @@ const FilterControl: React.FC<FilterControlProps> = ({
         placeholder={selectedOptions?.label || name.replace(/_/g, ' ')}
         items={options.map(o => ({ label: o, key: o }))}
         value={selectedOptions}
-        onChange={(option: Option) => {
-          if (option) {
-            setSelectedOptions(option)
-            addFilter({ [name]: [option.label] }, setExploreState)
+        onChange={(item: Item | undefined) => {
+          if (item) {
+            setSelectedOptions(item)
+            addFilter({ [name]: [item.label] }, setExploreState)
           } else {
             setSelectedOptions(undefined)
           }
         }}
-        renderItem={({ label }: { label: string }) => (
+        RenderItem={({ item: { label } }) => (
           <TypeaheadResult>{label}</TypeaheadResult>
         )}
       />
