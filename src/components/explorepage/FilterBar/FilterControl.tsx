@@ -26,7 +26,7 @@ interface Selected {
 const FilterControl: React.FC<FilterControlProps> = ({
   name,
   options,
-  exploreState,
+  // exploreState,
   setExploreState,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<Selected>()
