@@ -37,7 +37,7 @@ export const ItemButton = styled.button`
 `
 
 const clearButtonHeight = 18
-export const ClearSearchButton = styled.button`
+export const ClearSearchButton = styled.button<{ searchString: string }>`
   position: absolute;
   top: calc(50% - ${clearButtonHeight / 2}px);
   right: 5px;
