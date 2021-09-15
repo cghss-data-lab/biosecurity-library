@@ -48,7 +48,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   const results = fuse.search(searchString).map(({ item }) => item)
 
   // accept top result if enter is pressed
-  const handleKeyUp = (e: React.KeyboardEvent) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       onChange(results[0] || items[0])
       inputRef.current!.blur()
@@ -93,7 +93,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
         autoComplete="off"
         name="special-auto-fill"
         ref={inputRef}
-        onKeyUp={handleKeyUp}
+        onKeyPress={handleKeyPress}
         value={searchString}
         onChange={e => setSearchString(e.target.value)}
         placeholder={placeholder}
