@@ -28,11 +28,11 @@ const FilterControl: React.FC<FilterControlProps> = ({
         <div>{name.replace(/_/g, ' ')}</div>
         <button
           onClick={() =>
-            setExploreState(prev =>
-              prev.defs !== name
-                ? { ...prev, defs: name }
-                : { ...prev, defs: undefined }
-            )
+            setExploreState(prev => {
+              if (prev.defs !== name) return prev
+              const { defs: _, ...next } = prev
+              return next
+            })
           }
         >
           {exploreState.defs === name ? '-' : '+'}
