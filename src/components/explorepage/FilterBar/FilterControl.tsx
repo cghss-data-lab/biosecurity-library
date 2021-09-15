@@ -18,7 +18,7 @@ interface FilterControlProps {
 const FilterControl: React.FC<FilterControlProps> = ({
   name,
   options,
-  // exploreState,
+  exploreState,
   setExploreState,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<Item>()
@@ -27,9 +27,15 @@ const FilterControl: React.FC<FilterControlProps> = ({
       <NameContainer>
         <div>{name.replace(/_/g, ' ')}</div>
         <button
-          onClick={() => setExploreState(prev => ({ ...prev, defs: name }))}
+          onClick={() =>
+            setExploreState(prev =>
+              prev.defs !== name
+                ? { ...prev, defs: name }
+                : { ...prev, defs: undefined }
+            )
+          }
         >
-          +
+          {exploreState.defs === name ? '-' : '+'}
         </button>
       </NameContainer>
       <TypeaheadControl
