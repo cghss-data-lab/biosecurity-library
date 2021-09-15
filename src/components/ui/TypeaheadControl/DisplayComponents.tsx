@@ -28,12 +28,23 @@ export const Results = styled.div`
   align-items: flex-start;
   z-index: 1;
 `
+
+export const Selected = styled(Results)`
+  border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+`
+
 export const ItemButton = styled.button`
   background: none;
   border: none;
   width: 100%;
   margin: 0;
   padding: 0;
+`
+
+export const SelectedItem = styled.div`
+  width: 100%;
 `
 
 const clearButtonHeight = 18
