@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ExploreState } from '../../../pages/explore'
 
 import TypeaheadControl, {
@@ -21,7 +21,11 @@ const FilterControl: React.FC<FilterControlProps> = ({
   exploreState,
   setExploreState,
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState<Item>()
+
+  const selectedOptions = exploreState.filters?.[
+    name as keyof typeof exploreState.filters
+  ]?.map(s => ({ label: s, key: s }))
+
   return (
     <FilterLabel>
       <NameContainer>
@@ -40,15 +44,12 @@ const FilterControl: React.FC<FilterControlProps> = ({
       </NameContainer>
       <TypeaheadControl
         className={''}
-        placeholder={selectedOptions?.label || name.replace(/_/g, ' ')}
+        placeholder={`${selectedOptions?.length ?? 0} of ${options.length}`}
         items={options.map(o => ({ label: o, key: o }))}
-        value={selectedOptions}
+        values={selectedOptions ?? []}
         onChange={(item: Item | undefined) => {
           if (item) {
-            setSelectedOptions(item)
             addFilter({ [name]: [item.label] }, setExploreState)
-          } else {
-            setSelectedOptions(undefined)
           }
         }}
         RenderItem={({ item: { label } }) => (
