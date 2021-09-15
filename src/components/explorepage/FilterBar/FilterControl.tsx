@@ -5,7 +5,7 @@ import { ExploreState } from '../../../pages/explore'
 import TypeaheadControl from '../../ui/TypeaheadControl/TypeaheadControl'
 // @ts-ignore: implicit any
 import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
-import { FilterLabel, NameContainer } from './DisplayComponents'
+import { FilterLabel, NameContainer } from './displayComponents'
 import { addFilter } from './filterOperations'
 
 interface Option {
