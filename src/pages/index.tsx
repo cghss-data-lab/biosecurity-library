@@ -6,8 +6,8 @@ import FigmaProvider from '../figma/FigmaProvider'
 import { AirtableCMSData } from '../airtable-cms/types'
 
 import ImageHeader from '../components/homepage/ImageHeader'
-import NavBar from '../components/layout/NavBar/NavBar'
-import Main from '../components/layout/Main'
+import NavBar from '../components/Layout/NavBar/NavBar'
+import Main from '../components/Layout/Main'
 import IntroSection from '../components/homepage/IntroSection'
 
 export interface ResourceSearchData {

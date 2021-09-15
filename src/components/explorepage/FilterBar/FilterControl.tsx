@@ -5,7 +5,7 @@ import TypeaheadControl, {
   Item,
 } from '../../ui/TypeaheadControl/TypeaheadControl'
 import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
-import { FilterLabel, NameContainer } from './DisplayComponents'
+import { FilterLabel, NameContainer } from './displayComponents'
 import { addFilter } from './filterOperations'
 
 interface FilterControlProps {
