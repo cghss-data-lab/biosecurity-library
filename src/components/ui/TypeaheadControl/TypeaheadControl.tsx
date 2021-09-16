@@ -60,6 +60,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   // accept top result if enter is pressed
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
+      e.preventDefault()
       onAdd(results[0] || items[0])
       inputRef.current!.blur()
       setShowResults(false)

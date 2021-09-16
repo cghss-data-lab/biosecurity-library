@@ -54,9 +54,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
         placeholder={`${selectedOptionKeys?.length ?? 0} of ${options.length}`}
         items={getItems(remainingOptionKeys)}
         values={getItems(selectedOptionKeys ?? [])}
-        onAdd={item => {
-          addFilter({ [name]: [item.label] }, setExploreState)
-        }}
+        onAdd={item => addFilter({ [name]: [item.label] }, setExploreState)}
         onRemove={item =>
           removeFilter({ [name]: [item.label] }, setExploreState)
         }
