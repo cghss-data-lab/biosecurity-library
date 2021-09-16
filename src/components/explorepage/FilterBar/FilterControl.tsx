@@ -8,6 +8,9 @@ import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
 import { FilterLabel, NameContainer } from './displayComponents'
 import { addFilter } from './filterOperations'
 
+const getItems = (keys: string[]) =>
+  keys.map(key => ({ label: key, key: key })) as Item[]
+
 interface FilterControlProps {
   name: string
   options: string[]
@@ -21,10 +24,12 @@ const FilterControl: React.FC<FilterControlProps> = ({
   exploreState,
   setExploreState,
 }) => {
+  const selectedOptionKeys =
+    exploreState.filters?.[name as keyof typeof exploreState.filters]
 
-  const selectedOptions = exploreState.filters?.[
-    name as keyof typeof exploreState.filters
-  ]?.map(s => ({ label: s, key: s }))
+  const remainingOptionKeys = options.filter(
+    option => !selectedOptionKeys?.includes(option)
+  )
 
   return (
     <FilterLabel>
@@ -44,9 +49,9 @@ const FilterControl: React.FC<FilterControlProps> = ({
       </NameContainer>
       <TypeaheadControl
         className={''}
-        placeholder={`${selectedOptions?.length ?? 0} of ${options.length}`}
-        items={options.map(o => ({ label: o, key: o }))}
-        values={selectedOptions ?? []}
+        placeholder={`${selectedOptionKeys?.length ?? 0} of ${options.length}`}
+        items={getItems(remainingOptionKeys)}
+        values={getItems(selectedOptionKeys ?? [])}
         onChange={(item: Item | undefined) => {
           if (item) {
             addFilter({ [name]: [item.label] }, setExploreState)
