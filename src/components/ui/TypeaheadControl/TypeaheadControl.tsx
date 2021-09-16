@@ -7,7 +7,12 @@ import {
   Results,
   ItemButton,
   SearchIcon,
+  Selected,
+  SelectedItem,
 } from './DisplayComponents'
+
+import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import { useTheme } from 'styled-components'
 
 export interface Item {
   key: string
@@ -40,6 +45,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   className,
   disabled = false,
 }) => {
+  const theme: any = useTheme()
   const [searchString, setSearchString] = useState('')
   const [showResults, setShowResults] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -107,7 +113,26 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
       <SearchIcon searchString={searchString} />
 
       <Results style={{ display: showResults ? 'flex' : 'none' }}>
-        {(results.length > 0 && searchString !== value?.label
+        {multiselect && values.length > 0 && (
+          <Selected>
+            {values.map((item: Item) => (
+              <SelectedItem
+                onClick={() => {
+                  setShowResults(false)
+                  onRemove(item)
+                }}
+              >
+                {item.label}
+                <AirtableCMSIcon
+                  name="Remove"
+                  color={theme.colorBlack}
+                  style={{ flexShrink: 0 }}
+                />
+              </SelectedItem>
+            ))}
+          </Selected>
+        )}
+        {(results.length > 0 && searchString !== values[0]?.label
           ? results
           : items
         ).map(item => (
