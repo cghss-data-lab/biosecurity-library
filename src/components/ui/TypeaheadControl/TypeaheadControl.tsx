@@ -6,7 +6,7 @@ import {
   SearchBar,
   Results,
   ItemButton,
-  ClearSearchButton,
+  SearchIcon,
 } from './DisplayComponents'
 
 export interface Item {
@@ -98,19 +98,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
         onChange={e => setSearchString(e.target.value)}
         placeholder={placeholder}
       />
-      <ClearSearchButton
-        // need to prevent focus from propagating up to
-        // the container component and opening the dropdown
-        onFocus={e => e.stopPropagation()}
-        onClick={() => {
-          if (searchString !== '') {
-            setShowResults(false)
-            setSearchString('')
-            onChange(undefined)
-          }
-        }}
-        searchString={searchString}
-      />
+      <SearchIcon searchString={searchString} />
 
       <Results style={{ display: showResults ? 'flex' : 'none' }}>
         {(results.length > 0 && searchString !== value?.label
