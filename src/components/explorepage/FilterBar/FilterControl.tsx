@@ -39,7 +39,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
         <button
           onClick={() =>
             setExploreState(prev => {
-              if (prev.defs !== name) return prev
+              if (prev.defs !== name) return { ...prev, defs: name }
               const { defs: _, ...next } = prev
               return next
             })
