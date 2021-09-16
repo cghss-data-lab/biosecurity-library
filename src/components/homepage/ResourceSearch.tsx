@@ -6,7 +6,7 @@ import { AirtableCMSData } from '../../airtable-cms/types'
 import AirtableCMSText, { getCMSText } from '../../airtable-cms/AirtableCMSText'
 
 import ButtonLink from '../ui/ButtonLink'
-import TypeaheadControl, { Item } from '../ui/TypeaheadControl/TypeaheadControl'
+import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
 import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
 import { ResourceSearchData } from '../../pages'
@@ -42,13 +42,10 @@ const StyledTypeaheadControl = styled(TypeaheadControl)`
   }
 `
 
-const ResourceSearch = ({
-  homePageText,
-  resourceSearchData,
-}: {
+const ResourceSearch: React.FC<{
   homePageText: AirtableCMSData
   resourceSearchData: ResourceSearchData
-}) => {
+}> = ({ homePageText, resourceSearchData }) => {
   const resources = resourceSearchData.nodes.map(r => ({
     key: r.data.Short_Name,
     label: r.data.Resource_Name,
