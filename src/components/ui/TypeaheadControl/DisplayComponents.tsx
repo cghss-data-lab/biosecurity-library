@@ -10,6 +10,10 @@ export const SearchBar = styled.input`
   border-radius: 5px;
   padding: 0.33rem 0.5rem;
   font-weight: normal;
+
+  &:focus {
+    outline: none;
+  }
 `
 export const Results = styled.div`
   position: absolute;
