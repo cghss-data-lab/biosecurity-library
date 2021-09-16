@@ -53,7 +53,7 @@ export const SelectedItem = styled(ItemButton)`
   width: 100%;
   font-size: 16px;
   text-align: left;
-  padding: 8px 6px;
+  padding: 8px 6px 4px 6px;
   /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
   transition: 150ms ease;
   font-weight: 800;
