@@ -144,15 +144,15 @@ const ExplorePage: React.FC<PageProps> = () => {
   `)
 
   const [exploreState, setExploreState] = useState<ExploreState>({
-    defs: 'Key_Topic_Area_s_',
-    type: 'Type name',
-    filters: {
-      Key_Topic_Area_s_: ['Risk assessment'],
-      Authoring_Organization: [
-        'World Health Organization (WHO)',
-        'United States National Institutes of Health (US NIH)',
-      ],
-    },
+    // defs: 'Key_Topic_Area_s_',
+    // type: 'Type name',
+    // filters: {
+    //   Key_Topic_Area_s_: ['Risk assessment'],
+    //   Authoring_Organization: [
+    //     'World Health Organization (WHO)',
+    //     'United States National Institutes of Health (US NIH)',
+    //   ],
+    // },
   })
 
   console.log(exploreState)
