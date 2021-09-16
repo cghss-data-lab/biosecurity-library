@@ -29,10 +29,14 @@ export const Results = styled.div`
   z-index: 1;
 `
 
-export const Selected = styled(Results)`
+export const Selected = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
   padding-bottom: 5px;
+  padding-top: 10px;
   margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 `
 
 export const ItemButton = styled.button`
@@ -43,8 +47,20 @@ export const ItemButton = styled.button`
   padding: 0;
 `
 
-export const SelectedItem = styled.div`
+export const SelectedItem = styled(ItemButton)`
+  display: flex;
+  justify-content: space-between;
   width: 100%;
+  font-size: 16px;
+  text-align: left;
+  padding: 8px 6px;
+  /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
+  transition: 150ms ease;
+  font-weight: 800;
+  background-color: rgba(100, 0, 50, 0);
+  &:hover {
+    background-color: rgba(100, 0, 50, 0.08);
+  }
 `
 
 const clearButtonHeight = 18
