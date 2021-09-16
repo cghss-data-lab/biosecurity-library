@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 import Column from './Column'
 
-import { ResourceGroup } from '../../../pages/explore'
-import { useState } from 'react'
+import { ExploreState, ResourceGroup } from '../../../pages/explore'
+// import { useState } from 'react'
 
 const ColumnsContainer = styled.section`
   display: flex;
@@ -17,29 +17,27 @@ const ColumnsContainer = styled.section`
   margin-bottom: 10vw;
 `
 
-const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
+interface ColumnSectionProps {
+  exploreState: ExploreState
+  setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
+  resources: ResourceGroup[]
+}
+
+const ColumnSection: React.FC<ColumnSectionProps> = ({
   resources,
+  exploreState,
+  setExploreState,
 }) => {
-  let locationHash
-  if (typeof window !== 'undefined') {
-    locationHash = decodeURI(window?.location.hash.split('#')[1])
-  }
-
-  const [expandColumn, setExpandColumn] = useState<string | undefined>(
-    locationHash !== 'undefined' ? locationHash : undefined
-  )
-
   const handleExpandColumn = (column: string | undefined) => {
-    setExpandColumn(column)
-    if (column) {
-      window.history.pushState({}, '', '#' + column)
-    } else {
-      window.history.pushState({}, '', '#')
-    }
+    setExploreState(prev => {
+      if (column) return { ...prev, type: column }
+      const { type: _, ...newState } = prev
+      return newState
+    })
   }
 
-  const displayResources = expandColumn
-    ? resources.filter(r => r.fieldValue === expandColumn)!
+  const displayResources = exploreState.type
+    ? resources.filter(r => r.fieldValue === exploreState.type)
     : resources
 
   return (
@@ -49,7 +47,7 @@ const ColumnSection: React.FC<{ resources: ResourceGroup[] }> = ({
           key={group.fieldValue}
           name={group.fieldValue}
           resources={group}
-          expand={group.fieldValue === expandColumn}
+          expand={group.fieldValue === exploreState.type}
           setExpandColumn={handleExpandColumn}
         />
       ))}

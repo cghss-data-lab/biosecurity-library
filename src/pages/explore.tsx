@@ -166,21 +166,6 @@ const ExplorePage: React.FC<PageProps> = () => {
     }
   }, [exploreState])
 
-  // const [filters, setFilters] = useState<Filter[]>([
-  //   // example filters for testing, this array should
-  //   // be initialized empty
-  //   // {
-  //   //   name: 'test',
-  //   //   test: ({ data }) => data.Target_user_role.includes('Legislative leader'),
-  //   // },
-  //   // {
-  //   //   name: 'test',
-  //   //   test: node =>
-  //   //     node.data.Resource_Name ===
-  //   //     'Malaysian Educational Module on Responsible Conduct of Research',
-  //   // },
-  // ])
-
   let resources: ResourceGroup[] = groupedResources.map(group => ({
     ...group,
     totalCount: group.nodes.length,
@@ -206,7 +191,7 @@ const ExplorePage: React.FC<PageProps> = () => {
           }}
         />
         <ActiveFilters {...{ exploreState, setExploreState }} />
-        <ColumnSection {...{ resources }} />
+        <ColumnSection {...{ exploreState, setExploreState, resources }} />
       </Main>
     </FigmaProvider>
   )
