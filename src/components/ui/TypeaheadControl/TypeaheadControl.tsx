@@ -116,12 +116,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
         {multiselect && values.length > 0 && (
           <Selected>
             {values.map((item: Item) => (
-              <SelectedItem
-                onClick={() => {
-                  setShowResults(false)
-                  onRemove(item)
-                }}
-              >
+              <SelectedItem onClick={() => onRemove(item)}>
                 {item.label}
                 <AirtableCMSIcon
                   name="Remove"
@@ -136,13 +131,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
           ? results
           : items
         ).map(item => (
-          <ItemButton
-            key={item.key}
-            onClick={() => {
-              setShowResults(false)
-              onAdd(item)
-            }}
-          >
+          <ItemButton key={item.key} onClick={() => onAdd(item)}>
             <RenderItem {...{ item }} />
           </ItemButton>
         ))}
