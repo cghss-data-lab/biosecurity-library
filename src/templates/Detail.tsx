@@ -2,8 +2,8 @@ import React from 'react'
 import { ImageDataLike } from 'gatsby-plugin-image'
 
 // layout components
-import Main from '../components/Layout/Main'
-import NavBar from '../components/Layout/NavBar/NavBar'
+import Main from '../components/layout/Main'
+import NavBar from '../components/layout/NavBar/NavBar'
 import FigmaProvider from '../figma/FigmaProvider'
 
 // page-specific components

@@ -9,8 +9,8 @@ import AirtableCMSText from '../airtable-cms/AirtableCMSText'
 
 import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
 
-import NavBar from '../components/Layout/NavBar/NavBar'
-import Main from '../components/Layout/Main'
+import NavBar from '../components/layout/NavBar/NavBar'
+import Main from '../components/layout/Main'
 import styled from 'styled-components'
 import AirtableCMSImage from '../airtable-cms/AirtableCMSImage'
 import ColumnSection from '../components/explorepage/resourceColumns/ColumnSection'
