@@ -155,7 +155,6 @@ const ExplorePage: React.FC<PageProps> = () => {
     // },
   })
 
-  console.log(exploreState)
   // const [filters, setFilters] = useState<Filter[]>([
   //   // example filters for testing, this array should
   //   // be initialized empty
