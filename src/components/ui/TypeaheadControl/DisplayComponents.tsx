@@ -64,7 +64,7 @@ export const SelectedItem = styled(ItemButton)`
 `
 
 const clearButtonHeight = 18
-export const SearchIcon = styled.button<{ searchString: string }>`
+export const SearchIcon = styled.div<{ searchString: string }>`
   display: ${({ searchString }) => (searchString === '' ? 'block' : 'none')};
   position: absolute;
   top: calc(50% - ${clearButtonHeight / 2}px);
