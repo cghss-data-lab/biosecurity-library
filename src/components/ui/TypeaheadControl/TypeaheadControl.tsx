@@ -64,6 +64,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
       onAdd(results[0] || items[0])
       inputRef.current!.blur()
       setShowResults(false)
+      setSearchString('')
     }
   }
 
