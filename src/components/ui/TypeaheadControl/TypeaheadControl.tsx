@@ -82,6 +82,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   const onFocusHandler = () => {
     clearTimeout(blurTimeout)
     setShowResults(true)
+    inputRef.current!.focus()
   }
 
   useEffect(() => {
