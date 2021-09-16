@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { graphql, PageProps, useStaticQuery } from 'gatsby'
 import { ImageDataLike } from 'gatsby-plugin-image'
+import qs from 'qs'
 
 import FigmaProvider from '../figma/FigmaProvider'
 
@@ -143,17 +144,27 @@ const ExplorePage: React.FC<PageProps> = () => {
     }
   `)
 
-  const [exploreState, setExploreState] = useState<ExploreState>({
-    // defs: 'Key_Topic_Area_s_',
-    // type: 'Type name',
-    // filters: {
-    //   Key_Topic_Area_s_: ['Risk assessment'],
-    //   Authoring_Organization: [
-    //     'World Health Organization (WHO)',
-    //     'United States National Institutes of Health (US NIH)',
-    //   ],
-    // },
-  })
+  const [exploreState, setExploreState] = useState<ExploreState>(
+    typeof window !== undefined
+      ? qs.parse(window.location.search.split('?')[1])
+      : {}
+  )
+
+  // store explore state in the query string whenever it chagnges
+  useEffect(() => {
+    if (
+      typeof window !== undefined &&
+      window.location.search.split('?')[1] !== qs.stringify(exploreState)
+    ) {
+      const newURL =
+        window.location.origin +
+        window.location.pathname +
+        '?' +
+        qs.stringify(exploreState)
+
+      window.history.replaceState({}, '', newURL)
+    }
+  }, [exploreState])
 
   // const [filters, setFilters] = useState<Filter[]>([
   //   // example filters for testing, this array should
