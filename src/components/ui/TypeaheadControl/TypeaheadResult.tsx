@@ -5,8 +5,8 @@ const TypeaheadResult = styled.span`
   width: 100%;
   font-size: 16px;
   text-align: left;
-  padding: 8px 6px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 12px;
+  /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
   background-color: rgba(0, 50, 100, 0);
   transition: 150ms ease;
 
