@@ -18,6 +18,7 @@ export interface Item {
 interface TypeaheadControlProps {
   multiselect?: boolean
   items: Item[]
+  values: Item[]
   onAdd: (item: Item) => void
   onRemove: (item: Item) => void
   placeholder: string
@@ -30,6 +31,7 @@ interface TypeaheadControlProps {
 const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   multiselect,
   items,
+  values,
   onAdd,
   onRemove,
   placeholder,
@@ -65,7 +67,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
     // set it to close next tick
     blurTimeout = setTimeout(() => {
       setShowResults(false)
-      if (!value) setSearchString('')
+      if (!values) setSearchString('')
     })
   }
 
@@ -76,11 +78,13 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
     setShowResults(true)
   }
 
-  useEffect(() => setSearchString((value && value.label) || ''), [value])
+  useEffect(() => {
+    if (values && !multiselect) setSearchString(values[0].label)
+  }, [values, multiselect])
 
   useEffect(() => {
-    if (disabled && !value) setSearchString('')
-  }, [disabled, value])
+    if (disabled && !values) setSearchString('')
+  }, [disabled, values])
 
   return (
     <Container
