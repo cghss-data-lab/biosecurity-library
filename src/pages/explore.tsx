@@ -145,7 +145,7 @@ const ExplorePage: React.FC<PageProps> = () => {
   `)
 
   const [exploreState, setExploreState] = useState<ExploreState>(
-    typeof window !== undefined
+    typeof window !== 'undefined'
       ? qs.parse(window.location.search.split('?')[1])
       : {}
   )
@@ -153,7 +153,7 @@ const ExplorePage: React.FC<PageProps> = () => {
   // store explore state in the query string whenever it chagnges
   useEffect(() => {
     if (
-      typeof window !== undefined &&
+      typeof window !== 'undefined' &&
       window.location.search.split('?')[1] !== qs.stringify(exploreState)
     ) {
       const newURL =
