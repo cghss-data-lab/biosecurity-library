@@ -88,7 +88,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   }
 
   useEffect(() => {
-    if (values && !multiselect) setSearchString(values[0].label)
+    if (values.length > 0 && !multiselect) setSearchString(values[0]?.label)
   }, [values, multiselect])
 
   useEffect(() => {

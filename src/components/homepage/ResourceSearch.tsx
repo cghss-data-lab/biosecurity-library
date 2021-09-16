@@ -6,9 +6,7 @@ import { AirtableCMSData } from '../../airtable-cms/types'
 import AirtableCMSText, { getCMSText } from '../../airtable-cms/AirtableCMSText'
 
 import ButtonLink from '../ui/ButtonLink'
-// @ts-ignore: implicit any
-import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
-// @ts-ignore: implicit any
+import TypeaheadControl, { Item } from '../ui/TypeaheadControl/TypeaheadControl'
 import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
 import { ResourceSearchData } from '../../pages'
@@ -66,10 +64,10 @@ const ResourceSearch = ({
       </ButtonLink>
       <StyledTypeaheadControl
         className={''}
-        placeholder={getCMSText(homePageText, 'Search Placeholder')}
+        placeholder={getCMSText(homePageText, 'Search Placeholder') ?? ''}
         items={resources}
-        value={{}}
-        onChange={(resource: any) => {
+        values={[]}
+        onAdd={resource => {
           if (resource)
             navigate(
               `/resource/` +
@@ -77,7 +75,8 @@ const ResourceSearch = ({
                 urlString(resource.key)
             )
         }}
-        renderItem={({ label }: { label: string }) => (
+        onRemove={() => {}}
+        RenderItem={({ item: { label } }) => (
           <TypeaheadResult>{label}</TypeaheadResult>
         )}
       />
