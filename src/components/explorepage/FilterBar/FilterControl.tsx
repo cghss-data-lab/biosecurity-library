@@ -4,9 +4,10 @@ import { ExploreState } from '../../../pages/explore'
 import TypeaheadControl, {
   Item,
 } from '../../ui/TypeaheadControl/TypeaheadControl'
+
 import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
 import { FilterLabel, NameContainer } from './displayComponents'
-import { addFilter } from './filterOperations'
+import { addFilter, removeFilter } from './filterOperations'
 
 const getItems = (keys: string[]) =>
   keys.map(key => ({ label: key, key: key })) as Item[]
@@ -48,15 +49,17 @@ const FilterControl: React.FC<FilterControlProps> = ({
         </button>
       </NameContainer>
       <TypeaheadControl
+        multiselect
         className={''}
         placeholder={`${selectedOptionKeys?.length ?? 0} of ${options.length}`}
         items={getItems(remainingOptionKeys)}
         values={getItems(selectedOptionKeys ?? [])}
-        onChange={(item: Item | undefined) => {
-          if (item) {
-            addFilter({ [name]: [item.label] }, setExploreState)
-          }
+        onAdd={item => {
+          addFilter({ [name]: [item.label] }, setExploreState)
         }}
+        onRemove={item =>
+          removeFilter({ [name]: [item.label] }, setExploreState)
+        }
         RenderItem={({ item: { label } }) => (
           <TypeaheadResult>{label}</TypeaheadResult>
         )}
