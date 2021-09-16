@@ -16,6 +16,7 @@ export interface Item {
 }
 
 interface TypeaheadControlProps {
+  multiselect?: boolean
   items: Item[]
   value: Item | undefined
   onChange: (item?: Item) => void
@@ -27,6 +28,7 @@ interface TypeaheadControlProps {
 }
 
 const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
+  multiselect,
   items,
   value,
   onChange,
