@@ -18,8 +18,8 @@ export interface Item {
 interface TypeaheadControlProps {
   multiselect?: boolean
   items: Item[]
-  value: Item | undefined
-  onChange: (item?: Item) => void
+  onAdd: (item: Item) => void
+  onRemove: (item: Item) => void
   placeholder: string
   RenderItem: React.FC<{ item: Item }>
   searchKeys?: Fuse.FuseOptionKey[]
@@ -30,8 +30,8 @@ interface TypeaheadControlProps {
 const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   multiselect,
   items,
-  value,
-  onChange,
+  onAdd,
+  onRemove,
   placeholder,
   RenderItem,
   searchKeys = ['key', 'label'],
@@ -52,7 +52,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   // accept top result if enter is pressed
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
-      onChange(results[0] || items[0])
+      onAdd(results[0] || items[0])
       inputRef.current!.blur()
       setShowResults(false)
     }
@@ -111,7 +111,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
             key={item.key}
             onClick={() => {
               setShowResults(false)
-              onChange(item)
+              onAdd(item)
             }}
           >
             <RenderItem {...{ item }} />
