@@ -57,6 +57,55 @@ export const removeFilter: FilterFunction = (filter, setExploreState) => {
   })
 }
 
+export const toggleFilter: FilterFunction = (filter, setExploreState) => {
+  // early return if there's no filter passed
+  if (!filter) return
+
+  // cast types for the keys because typescript drops them
+  const filterKey = Object.keys(filter)[0] as keyof typeof filter
+  const filterVal = Object.values(filter)[0]
+
+  setExploreState(prev => {
+    if (!prev.filters)
+      return {
+        ...prev,
+        filters: {
+          [filterKey]: [filterVal],
+        },
+      }
+
+    if (prev.filters[filterKey]?.includes(filterVal[0])) {
+      // remove only the value selected for removal
+      // from the array of values in the filter
+      let newValues = prev.filters[filterKey]?.filter(
+        val => !filterVal?.includes(val)
+      )
+
+      // remove the filter completely if there are no more values
+      if (newValues?.length === 0) {
+        const { [filterKey]: _, ...newFilters } = prev.filters
+        return { ...prev, filters: newFilters }
+      }
+
+      return {
+        ...prev,
+        filters: {
+          ...prev.filters,
+          [filterKey]: newValues,
+        },
+      }
+    }
+
+    return {
+      ...prev,
+      filters: {
+        ...(prev.filters && prev.filters),
+        [filterKey]: [...(prev.filters?.[filterKey] ?? []), ...filterVal],
+      },
+    }
+  })
+}
+
 type ApplyFilterFunction = (
   resources: ResourceGroup[],
   filters: ExploreState['filters']

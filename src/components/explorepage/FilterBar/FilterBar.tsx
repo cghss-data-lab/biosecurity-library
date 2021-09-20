@@ -8,6 +8,7 @@ import { Definition, ExploreState } from '../../../pages/explore'
 
 import FilterSection from './FilterSection'
 import { cleanAirtableKey } from '../../../airtable-cms/utilities'
+import { toggleFilter } from './filterOperations'
 
 const DefinitionsContainer = styled.div`
   display: flex;
@@ -48,7 +49,16 @@ const FilterBar: React.FC<FilterBarProps> = ({
           )
           .map(def => (
             <Tippy key={def.data.Glossary_Name} content={def.data.Definition}>
-              <DefinitionButton>{def.data.Glossary_Name}</DefinitionButton>
+              <DefinitionButton
+                onClick={() => {
+                  toggleFilter(
+                    { [exploreState.defs!]: [def.data.Glossary_Name] },
+                    setExploreState
+                  )
+                }}
+              >
+                {def.data.Glossary_Name}
+              </DefinitionButton>
             </Tippy>
           ))}
     </DefinitionsContainer>

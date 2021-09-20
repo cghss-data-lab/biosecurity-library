@@ -72,7 +72,6 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
 }) => {
   const theme: any = useTheme()
   const thumbnail = getImage(data.Thumbnail_INTERNAL?.localFiles[0])
-  console.log(data.Short_Name, expand)
   return (
     <ResourceContainer expanded={expand}>
       {expand && (
