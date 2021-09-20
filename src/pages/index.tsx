@@ -23,57 +23,70 @@ export interface ResourceSearchData {
   ]
 }
 
+export interface HomePageResources {
+  group: {
+    fieldValue: string
+    totalCount: number
+  }[]
+}
+
 const IndexPage: React.FC<PageProps> = () => {
   const {
     homePageText,
     resourceSearchData,
-  }: { homePageText: AirtableCMSData; resourceSearchData: ResourceSearchData } =
-    useStaticQuery(graphql`
-      query indexQuery {
-        homePageText: allAirtable(filter: { table: { eq: "Landing Page" } }) {
-          nodes {
-            data {
-              Name
-              Text
-              Image {
-                localFiles {
-                  childImageSharp {
-                    gatsbyImageData(height: 200, placeholder: TRACED_SVG)
-                  }
+    homePageResources,
+  }: {
+    homePageText: AirtableCMSData
+    resourceSearchData: ResourceSearchData
+    homePageResources: HomePageResources
+  } = useStaticQuery(graphql`
+    query indexQuery {
+      homePageText: allAirtable(filter: { table: { eq: "Landing Page" } }) {
+        nodes {
+          data {
+            Name
+            Text
+            Image {
+              localFiles {
+                childImageSharp {
+                  gatsbyImageData(height: 200, placeholder: TRACED_SVG)
                 }
               }
             }
           }
         }
-        homePageResources: allAirtable(
-          filter: { table: { eq: "Resource Library" } }
-        ) {
-          group(field: data___Key_Topic_Area_s_) {
-            fieldValue
-            totalCount
-          }
+      }
+      homePageResources: allAirtable(
+        filter: { table: { eq: "Resource Library" } }
+      ) {
+        group(field: data___Key_Topic_Area_s_) {
+          fieldValue
+          totalCount
         }
-        resourceSearchData: allAirtable(
-          filter: { table: { eq: "Resource Library" } }
-        ) {
-          nodes {
-            data {
-              Resource_Name
-              Resource_Type
-              Short_Name
-              Short_Description
-            }
+      }
+      resourceSearchData: allAirtable(
+        filter: { table: { eq: "Resource Library" } }
+      ) {
+        nodes {
+          data {
+            Resource_Name
+            Resource_Type
+            Short_Name
+            Short_Description
           }
         }
       }
-    `)
+    }
+  `)
 
   return (
     <FigmaProvider>
       <NavBar />
       <ImageHeader {...{ homePageText }} />
       <Main>
-        <IntroSection {...{ homePageText, resourceSearchData }} />
+        <IntroSection
+          {...{ homePageText, resourceSearchData, homePageResources }}
+        />
       </Main>
     </FigmaProvider>
   )

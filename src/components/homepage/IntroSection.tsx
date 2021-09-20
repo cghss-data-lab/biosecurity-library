@@ -5,7 +5,8 @@ import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
 
 import { AirtableCMSData } from '../../airtable-cms/types'
 
-import { ResourceSearchData } from '../../pages'
+import { HomePageResources, ResourceSearchData } from '../../pages'
+import BarChart from './barChart/BarChart'
 import ResourceSearch from './ResourceSearch'
 
 // import { useTheme } from 'styled-components'
@@ -33,7 +34,8 @@ const Section = styled.section`
 const IntroSection: React.FC<{
   homePageText: AirtableCMSData
   resourceSearchData: ResourceSearchData
-}> = ({ resourceSearchData, homePageText }) => {
+  homePageResources: HomePageResources
+}> = ({ resourceSearchData, homePageText, homePageResources }) => {
   // const theme: any = useTheme()
   return (
     <Section>
@@ -58,6 +60,7 @@ const IntroSection: React.FC<{
       <AirtableCMSIcon name="Lab research" color={theme.colorDarker} /> */}
 
       <ResourceSearch {...{ homePageText, resourceSearchData }} />
+      <BarChart {...{ homePageResources }} />
     </Section>
   )
 }
