@@ -94,6 +94,7 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
   `)
 
   const icon = icons.find(({ data }) => data.Name === name)
+  const [hover, setHover] = useState(false)
 
   if (!icon) {
     return <></>
@@ -104,8 +105,6 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
     //     `an icon called ${name}?.`
     // )
   }
-
-  const [hover, setHover] = useState(false)
 
   const displayIcon = replaceFill(
     icon.data.SVG.localFiles[0].childSvg.svgString,
