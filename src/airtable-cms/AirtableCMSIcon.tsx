@@ -96,12 +96,13 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
   const icon = icons.find(({ data }) => data.Name === name)
 
   if (!icon) {
-    throw new Error(
-      `Icon ${name} not found in ` +
-        `Airtable. Does the airtable base include the ` +
-        `Icons table, and does that table include ` +
-        `an icon called ${name}?.`
-    )
+    return <></>
+    // throw new Error(
+    //   `Icon ${name} not found in ` +
+    //     `Airtable. Does the airtable base include the ` +
+    //     `Icons table, and does that table include ` +
+    //     `an icon called ${name}?.`
+    // )
   }
 
   const [hover, setHover] = useState(false)
