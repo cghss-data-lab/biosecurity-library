@@ -16,7 +16,7 @@ const DefinitionsContainer = styled.div`
   flex-wrap: wrap;
   gap: 20px;
 `
-const DefinitionButton = styled.button`
+const DefinitionButton = styled.button<{ active: boolean | undefined }>`
   border: none;
   background: none;
   padding: 10px 15px;
@@ -29,6 +29,16 @@ const DefinitionButton = styled.button`
   width: 200px;
   min-height: 53px;
   text-align: left;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colorLightest};
+  }
+
+  ${({ active, theme }) =>
+    active &&
+    `
+      background: ${theme.colorLighter};
+    `}
 `
 
 export interface FilterProps {
@@ -65,6 +75,9 @@ const FilterBar: React.FC<FilterBarProps> = ({
                       setExploreState
                     )
                   }}
+                  active={exploreState.filters?.[
+                    exploreState.defs! as keyof typeof exploreState.filters
+                  ]?.includes(def.data.Glossary_Name)}
                 >
                   <AirtableCMSIcon
                     name={def.data.Glossary_Name}
