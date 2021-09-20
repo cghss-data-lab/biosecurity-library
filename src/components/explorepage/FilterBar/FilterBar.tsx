@@ -38,6 +38,9 @@ const DefinitionButton = styled.button<{ active: boolean | undefined }>`
     active &&
     `
       background: ${theme.colorLighter};
+      &:hover {
+        background-color: ${theme.colorLighter};
+      }
     `}
 `
 
