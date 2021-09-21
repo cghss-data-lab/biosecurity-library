@@ -6,7 +6,8 @@ import TypeaheadControl, {
 } from '../../ui/TypeaheadControl/TypeaheadControl'
 
 import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
-import { FilterLabel, NameContainer } from './displayComponents'
+import { FilterContainer, NameContainer } from './displayComponents'
+import ExpandDefinitionsButton from './ExpandDefinitionsButton'
 import { addFilter, removeFilter } from './filterOperations'
 
 const getItems = (keys: string[]) =>
@@ -33,20 +34,10 @@ const FilterControl: React.FC<FilterControlProps> = ({
   )
 
   return (
-    <FilterLabel>
+    <FilterContainer>
       <NameContainer>
         <div>{name.replace(/_/g, ' ')}</div>
-        <button
-          onClick={() =>
-            setExploreState(prev => {
-              if (prev.defs !== name) return { ...prev, defs: name }
-              const { defs: _, ...next } = prev
-              return next
-            })
-          }
-        >
-          {exploreState.defs === name ? '-' : '+'}
-        </button>
+        <ExpandDefinitionsButton {...{ name, exploreState, setExploreState }} />
       </NameContainer>
       <TypeaheadControl
         multiselect
@@ -62,7 +53,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
           <TypeaheadResult>{label}</TypeaheadResult>
         )}
       />
-    </FilterLabel>
+    </FilterContainer>
   )
 }
 
