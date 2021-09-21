@@ -35,7 +35,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
 
   return (
     <FilterContainer>
-      <NameContainer>
+      <NameContainer expanded={exploreState.defs === name}>
         <div>{name.replace(/_/g, ' ')}</div>
         <ExpandDefinitionsButton {...{ name, exploreState, setExploreState }} />
       </NameContainer>
