@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
-import { PageContext } from '../../../templates/detail'
+import { PageContext } from '../../../templates/Detail'
 
 const HeaderContainer = styled.header`
   grid-area: header;
@@ -18,12 +18,12 @@ const Header: React.FC<PageContext> = ({ data }) => {
   const theme: any = useTheme()
   return (
     <HeaderContainer>
-      <h2>{data.Resource_Name}</h2>
+      <h2>{data.Unique_ID}</h2>
       <h6>[{data.Short_Name.trim()}]</h6>
       <h4>
         by{' '}
         <strong>
-          <a href="#">{data.Authoring_Organization}</a>
+          <a href="/">{data.Authoring_Organization}</a>
         </strong>
       </h4>
       <p>{data.Short_Description}</p>

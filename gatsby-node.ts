@@ -14,7 +14,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       resources: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         nodes {
           data {
-            Resource_Name
+            Unique_ID
             Resource_Type
             Short_Name
             Short_Description

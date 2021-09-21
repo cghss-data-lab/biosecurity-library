@@ -18,7 +18,7 @@ export interface PageContext {
     Short_Description: string
     Long_Description: string
     Key_Topic_Area_s_: string[]
-    Resource_Name: string
+    Unique_ID: string
     Short_Name: string
     Resource_Type: string
     Authoring_Organization: string

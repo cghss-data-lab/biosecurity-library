@@ -30,7 +30,7 @@ const Header = styled.header`
 export interface Resource {
   data: {
     Short_Name: string
-    Resource_Name: string
+    Unique_ID: string
     Resource_Type: string
     Authoring_Organization: string
     Key_Resource_INTERNAL: true | null
@@ -103,7 +103,7 @@ const ExplorePage: React.FC<PageProps> = () => {
           nodes {
             data {
               Short_Name
-              Resource_Name
+              Unique_ID
               Resource_Type
               Authoring_Organization
               Target_user_role

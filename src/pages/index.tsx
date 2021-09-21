@@ -14,7 +14,7 @@ export interface ResourceSearchData {
   nodes: [
     {
       data: {
-        Resource_Name: string
+        Unique_ID: string
         Short_Name: string
         Description: string
         Resource_Type: string
@@ -69,7 +69,7 @@ const IndexPage: React.FC<PageProps> = () => {
       ) {
         nodes {
           data {
-            Resource_Name
+            Unique_ID
             Resource_Type
             Short_Name
             Short_Description
