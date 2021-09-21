@@ -9,6 +9,7 @@ import { AirtableCMSData } from '../airtable-cms/types'
 import AirtableCMSText from '../airtable-cms/AirtableCMSText'
 
 import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
+import { Filters } from '../components/explorepage/exploreReducer'
 
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
@@ -58,19 +59,10 @@ export interface Definition {
   }
 }
 
-export enum FilterFields {
-  Target_user_role = 'Target_user_role',
-  User_Roll_Up = 'User_Roll_Up',
-  Authoring_Organization = 'Authoring_Organization',
-  Key_Topic_Area_s_ = 'Key_Topic_Area_s_',
-}
-
 export interface ExploreState {
   defs?: string
   type?: string
-  filters?: {
-    [key in FilterFields]?: string[]
-  }
+  filters?: Filters
 }
 
 const ExplorePage: React.FC<PageProps> = () => {

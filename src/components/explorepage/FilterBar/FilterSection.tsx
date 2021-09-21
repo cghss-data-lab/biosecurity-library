@@ -1,7 +1,8 @@
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
-import { FilterFields } from '../../../pages/explore'
+// import { FilterFields } from '../../../pages/explore'
+import { FilterFields } from '../exploreReducer'
 import { FilterProps } from './FilterBar'
 import FilterControl from './FilterControl'
 
