@@ -93,7 +93,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       >
         {data.Short_Name}
       </Title>
-      <Author>{data.Authoring_Organization.split(';')[0]} et al.</Author>
+      <Author>{data.Authoring_Organization}</Author>
       <IconContainer>
         {JSON.parse(data.Topic_Area_Icons).map((name: string) => (
           <AirtableCMSIcon
