@@ -20,7 +20,7 @@ module.exports = {
         concurrency: 5,
         tables: [
           {
-            baseId: `appmL0p5H21CiY7tL`,
+            baseId: `app708Ctx0rz1c1n7`,
             tableName: `Resource Library`,
             tableView: `CMS`,
             mapping: {
