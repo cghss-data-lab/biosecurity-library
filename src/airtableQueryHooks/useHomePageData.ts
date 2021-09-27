@@ -5,10 +5,10 @@ export interface ResourceSearchData {
   nodes: [
     {
       data: {
-        Unique_ID: string
-        Short_Name: string
-        Description: string
-        Resource_Type: string
+        Resource_name: string
+        Short_name: string
+        Short_description: string
+        Resource_type: string
       }
     }
   ]
@@ -60,10 +60,10 @@ const useHomePageData = () => {
       ) {
         nodes {
           data {
-            Unique_ID
-            Resource_Type
-            Short_Name
-            Short_Description
+            Resource_name
+            Resource_type
+            Short_name
+            Short_description
           }
         }
       }

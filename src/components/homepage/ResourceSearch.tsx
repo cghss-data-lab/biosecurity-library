@@ -9,7 +9,7 @@ import ButtonLink from '../ui/ButtonLink'
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
 import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
-import { ResourceSearchData } from '../../pages'
+import { ResourceSearchData } from '../../airtableQueryHooks/useHomePageData'
 
 import { urlString } from '../../airtable-cms/utilities'
 
@@ -47,11 +47,11 @@ const ResourceSearch: React.FC<{
   resourceSearchData: ResourceSearchData
 }> = ({ homePageText, resourceSearchData }) => {
   const resources = resourceSearchData.nodes.map(r => ({
-    key: r.data.Short_Name,
-    label: r.data.Resource_Name,
-    Description: r.data.Description,
-    Resource_Name: r.data.Resource_Name,
-    Resource_Type: r.data.Resource_Type,
+    key: r.data.Short_name,
+    label: r.data.Resource_name,
+    Description: r.data.Short_description,
+    Resource_Name: r.data.Resource_name,
+    Resource_Type: r.data.Resource_type,
   }))
 
   return (
