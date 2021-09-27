@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { graphql, PageProps, useStaticQuery } from 'gatsby'
-import { ImageDataLike } from 'gatsby-plugin-image'
+import { PageProps } from 'gatsby'
 import qs from 'qs'
 
 import FigmaProvider from '../figma/FigmaProvider'
 
-import { AirtableCMSData } from '../airtable-cms/types'
-import AirtableCMSText from '../airtable-cms/AirtableCMSText'
-
 import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
 import { Filters } from '../components/explorepage/exploreReducer'
+
+import AirtableCMSImage from '../airtable-cms/AirtableCMSImage'
+import AirtableCMSText from '../airtable-cms/AirtableCMSText'
 
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import styled from 'styled-components'
-import AirtableCMSImage from '../airtable-cms/AirtableCMSImage'
 import ColumnSection from '../components/explorepage/resourceColumns/ColumnSection'
 import FilterBar from '../components/explorepage/FilterBar/FilterBar'
 import ActiveFilters from '../components/explorepage/FilterBar/ActiveFilters'
+import useExplorePageData, {
+  ResourceGroup,
+} from '../airtableQueryHooks/useExplorePageData'
 
 const BannerImage = styled(AirtableCMSImage)`
   width: calc(100% - 10px);
@@ -27,38 +28,6 @@ const Header = styled.header`
   text-align: center;
 `
 
-export interface Resource {
-  data: {
-    Short_Name: string
-    Unique_ID: string
-    Resource_Type: string
-    Authoring_Organization: string
-    Key_Resource_INTERNAL: true | null
-    Key_Topic_Area_s_: string[]
-    Short_Description: string
-    Target_user_role: string[]
-    User_Roll_Up: string[]
-    Topic_Area_Icons: string
-    Thumbnail_INTERNAL: {
-      localFiles: ImageDataLike[]
-    }
-  }
-}
-
-export interface ResourceGroup {
-  fieldValue: string
-  nodes: Resource[]
-  totalCount?: number
-}
-
-export interface Definition {
-  data: {
-    Column: string[]
-    Definition: string
-    Glossary_Name: string
-  }
-}
-
 export interface ExploreState {
   defs?: string
   type?: string
@@ -66,75 +35,8 @@ export interface ExploreState {
 }
 
 const ExplorePage: React.FC<PageProps> = () => {
-  const {
-    explorePageText,
-    groupedResources: { group: groupedResources },
-    definitions: { nodes: definitions },
-  }: {
-    explorePageText: AirtableCMSData
-    groupedResources: { group: ResourceGroup[] }
-    definitions: { nodes: Definition[] }
-  } = useStaticQuery(graphql`
-    query exploreQuery {
-      explorePageText: allAirtable(filter: { table: { eq: "Explore Page" } }) {
-        nodes {
-          data {
-            Name
-            Text
-            Image {
-              localFiles {
-                childImageSharp {
-                  gatsbyImageData(height: 200, placeholder: TRACED_SVG)
-                }
-              }
-            }
-          }
-        }
-      }
-      authorizingOrganization: allAirtable(
-        filter: { table: { eq: "Resource Library" } }
-      ) {
-        distinct(field: data___Authoring_Organization)
-      }
-      groupedResources: allAirtable(
-        filter: { table: { eq: "Resource Library" } }
-      ) {
-        group(field: data___Resource_Type) {
-          nodes {
-            data {
-              Short_Name
-              Unique_ID
-              Resource_Type
-              Authoring_Organization
-              Target_user_role
-              Short_Description
-              Key_Topic_Area_s_
-              Key_Resource_INTERNAL_
-              User_Roll_Up
-              Topic_Area_Icons
-              Thumbnail_INTERNAL {
-                localFiles {
-                  childImageSharp {
-                    gatsbyImageData(width: 100, placeholder: BLURRED)
-                  }
-                }
-              }
-            }
-          }
-          fieldValue
-        }
-      }
-      definitions: allAirtable(filter: { table: { eq: "Glossary" } }) {
-        nodes {
-          data {
-            Glossary_Name
-            Definition
-            Column
-          }
-        }
-      }
-    }
-  `)
+  const { explorePageText, groupedResources, definitions } =
+    useExplorePageData()
 
   const [exploreState, setExploreState] = useState<ExploreState>(
     typeof window !== 'undefined'
