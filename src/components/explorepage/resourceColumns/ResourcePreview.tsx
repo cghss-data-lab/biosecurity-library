@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components'
 
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
-import { Resource } from '../../../pages/explore'
+import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { urlString } from '../../../airtable-cms/utilities'
 import { commaSeparatedList } from '../../../utilities/grammar'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
