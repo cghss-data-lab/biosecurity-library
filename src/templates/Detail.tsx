@@ -32,7 +32,7 @@ export interface PageContext {
     First_release_date: string
     Last_update_date: string
     Update_frequency: string
-    Topic_area_icons: string
+    // Topic_area_icons: string
     Files_INTERNAL: {
       localFiles: {
         publicURL: string
