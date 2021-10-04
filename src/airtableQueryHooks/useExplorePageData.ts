@@ -5,7 +5,7 @@ import { AirtableCMSData } from '../airtable-cms/types'
 export interface Resource {
   data: {
     Short_Name: string
-    Unique_ID: string
+    Resource_name: string
     Resource_Type: string
     Authoring_Organization: string
     Key_Resource_INTERNAL: true | null
@@ -72,7 +72,7 @@ const useExplorePageData = () => {
           nodes {
             data {
               Short_Name
-              Unique_ID
+              Resource_name
               Resource_Type
               Authoring_Organization
               Target_user_role

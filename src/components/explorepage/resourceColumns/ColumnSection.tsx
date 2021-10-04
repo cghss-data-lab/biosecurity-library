@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 import Column from './Column'
 
-import { ExploreState, ResourceGroup } from '../../../pages/explore'
-// import { useState } from 'react'
+import { ExploreState } from '../../../pages/explore'
+import { ResourceGroup } from '../../../airtableQueryHooks/useExplorePageData'
 
 const ColumnsContainer = styled.section`
   display: flex;

@@ -12,7 +12,7 @@ const Div = styled.div`
 
 const Breadcrumbs: React.FC<PageContext> = ({ data }) => (
   <Div className={styles.breadcrumbs}>
-    Home / {data.Resource_Type} / {data.Unique_ID}
+    Home / {data.Resource_type} / {data.Short_name}
   </Div>
 )
 

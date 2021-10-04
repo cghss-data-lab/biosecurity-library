@@ -14,24 +14,23 @@ export const createPages: GatsbyNode['createPages'] = async ({
       resources: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         nodes {
           data {
-            Unique_ID
-            Resource_Type
-            Short_Name
-            Short_Description
-            Long_Description
-            Key_Topic_Area_s_
-            Authoring_Organization
+            Resource_name
+            Resource_type
+            Short_name
+            Short_description
+            Long_description
+            Key_topic_area
+            Authoring_organization
             Target_user_role
             Potential_user_role
-            URL_for_Resource
-            Access_Information
-            Access_Limitations
-            Resource_Language
+            URL_for_resource
+            Access_information
+            Access_limitations
+            Resource_language
             Edition
-            First_Release_Date
-            Last_Update_Date
-            Update_Frequency
-            Topic_Area_Icons
+            First_release_date
+            Last_update_date
+            Update_frequency
             Files_INTERNAL {
               localFiles {
                 publicURL
@@ -51,13 +50,16 @@ export const createPages: GatsbyNode['createPages'] = async ({
     }
   `)
 
+  // removed:
+  // Topic_Area_Icons
+
   result.data.resources.nodes.forEach(
     ({ data }: { data: PageContext['data'] }) => {
       actions.createPage({
         path:
           'resource/' +
-          urlString(data.Resource_Type) +
-          urlString(data.Short_Name),
+          urlString(data.Resource_type) +
+          urlString(data.Short_name),
         component: detailPageTemplate,
         context: { data },
       })

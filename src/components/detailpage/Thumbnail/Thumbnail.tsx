@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { PageContext } from '../../../templates/detail'
+import { PageContext } from '../../../templates/Detail'
 
 const ThumbnailContainer = styled.div`
   grid-area: thumbnail;
@@ -17,7 +17,7 @@ const Thumbnail: React.FC<PageContext> = ({ data }) => {
         {thumbnail && (
           <GatsbyImage
             image={thumbnail}
-            alt={data.Short_Name + 'thumbnail image'}
+            alt={data.Short_name + 'thumbnail image'}
           />
         )}
         {data.Files_INTERNAL && (

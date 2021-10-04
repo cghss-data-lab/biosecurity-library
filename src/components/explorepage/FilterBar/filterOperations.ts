@@ -1,5 +1,7 @@
 import React from 'react'
-import { ExploreState, ResourceGroup } from '../../../pages/explore'
+
+import { ExploreState } from '../../../pages/explore'
+import { ResourceGroup } from '../../../airtableQueryHooks/useExplorePageData'
 
 type FilterFunction = (
   filter: ExploreState['filters'],

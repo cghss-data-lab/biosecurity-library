@@ -6,7 +6,8 @@ import OverviewTab from './tabs/OverviewTab'
 import UsersTab from './tabs/UsersTab'
 import AccessTab from './tabs/AccessTab'
 
-import { PageContext } from '../../../templates/detail'
+import { PageContext } from '../../../templates/Detail'
+
 import ReleasesTab from './tabs/ReleasesTab'
 
 export type Tab = {

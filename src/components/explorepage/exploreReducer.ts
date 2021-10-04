@@ -1,3 +1,10 @@
+// This file is not currently used.
+// this is a better development pattern, and should
+// replace the current implementation (which uses)
+// the filterOperations.ts file; this needs to be
+// expanded to reduce all states of exploreState
+// before it can fully replace that system though.
+
 import { ExploreState } from '../../pages/explore'
 
 // All the valid fields for filtering

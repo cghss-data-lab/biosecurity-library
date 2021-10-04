@@ -1,7 +1,8 @@
 import React from 'react'
 import TabContentContainer from '../TabContentContainer'
 
-import { PageContext } from '../../../../templates/detail'
+import { PageContext } from '../../../../templates/Detail'
+
 import { commaSeparatedList } from '../../../../utilities/grammar'
 
 const UsersTab: React.FC<PageContext> = ({ data }) => (

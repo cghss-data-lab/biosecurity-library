@@ -15,24 +15,24 @@ import TabSection from '../components/detailpage/TabSection/TabSection'
 
 export interface PageContext {
   data: {
-    Short_Description: string
-    Long_Description: string
-    Key_Topic_Area_s_: string[]
-    Unique_ID: string
-    Short_Name: string
-    Resource_Type: string
-    Authoring_Organization: string
+    Short_description: string
+    Long_description: string
+    Key_topic_area: string[]
+    Resource_name: string
+    Short_name: string
+    Resource_type: string
+    Authoring_organization: string
     Target_user_role: string[]
     Potential_user_role: string[]
-    URL_for_Resource: string
-    Access_Information: string
-    Access_Limitations: string
-    Resource_Language: string[]
+    URL_for_resource: string
+    Access_information: string
+    Access_limitations: string
+    Resource_language: string[]
     Edition: string
-    First_Release_Date: string
-    Last_Update_Date: string
-    Update_Frequency: string
-    Topic_Area_Icons: string
+    First_release_date: string
+    Last_update_date: string
+    Update_frequency: string
+    Topic_area_icons: string
     Files_INTERNAL: {
       localFiles: {
         publicURL: string

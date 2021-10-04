@@ -4,12 +4,14 @@ import styled, { useTheme } from 'styled-components'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css' // optional
 
-import { Definition, ExploreState } from '../../../pages/explore'
+import { Definition } from '../../../airtableQueryHooks/useExplorePageData'
+import { ExploreState } from '../../../pages/explore'
+
+import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import { cleanAirtableKey } from '../../../airtable-cms/utilities'
 
 import FilterSection from './FilterSection'
-import { cleanAirtableKey } from '../../../airtable-cms/utilities'
 import { toggleFilter } from './filterOperations'
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 const DefinitionsContainer = styled.div`
   display: flex;

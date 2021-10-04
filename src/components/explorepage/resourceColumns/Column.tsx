@@ -3,8 +3,9 @@ import styled, { useTheme } from 'styled-components'
 
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
-import { ResourceGroup } from '../../../pages/explore'
+import { ResourceGroup } from '../../../airtableQueryHooks/useExplorePageData'
 import { Expand, Return } from './ColumnButtons'
+
 import ResourcePreview from './ResourcePreview'
 
 const ColumnContainer = styled.div<{ expand: boolean }>`

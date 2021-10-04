@@ -5,7 +5,11 @@ import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
 
 import { AirtableCMSData } from '../../airtable-cms/types'
 
-import { HomePageResources, ResourceSearchData } from '../../pages'
+import {
+  HomePageResources,
+  ResourceSearchData,
+} from '../../airtableQueryHooks/useHomePageData'
+
 import BarChart from './barChart/BarChart'
 import ResourceSearch from './ResourceSearch'
 

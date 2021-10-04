@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import { HomePageResources } from '../../../pages'
+import { HomePageResources } from '../../../airtableQueryHooks/useHomePageData'
 
 const Svg = styled.svg`
   margin-top: 30px;
