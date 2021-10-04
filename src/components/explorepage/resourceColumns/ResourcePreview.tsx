@@ -79,7 +79,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
           {thumbnail && (
             <Thumbnail
               image={thumbnail}
-              alt={data.Short_Name + 'thumbnail image'}
+              alt={data.Short_name + 'thumbnail image'}
             />
           )}
         </ThumbnailContainer>
@@ -87,15 +87,24 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       <Title
         to={
           '/resource/' +
-          urlString(data.Resource_Type) +
-          urlString(data.Short_Name)
+          urlString(data.Resource_type) +
+          urlString(data.Short_name)
         }
       >
-        {data.Short_Name}
+        {data.Short_name}
       </Title>
-      <Author>{data.Authoring_Organization}</Author>
+      <Author>{data.Authoring_organization}</Author>
       <IconContainer>
-        {JSON.parse(data.Topic_Area_Icons).map((name: string) => (
+        {/* The Topic Area Icons column doesn't exist right now */}
+        {/* {JSON.parse(data.Topic_area_icons).map((name: string) => (
+          <AirtableCMSIcon
+            key={name}
+            name={name}
+            color={theme.colorDarkest}
+            style={{ width: 30 }}
+          />
+        ))} */}
+        {data.Key_topic_area.map(name => (
           <AirtableCMSIcon
             key={name}
             name={name}
@@ -110,7 +119,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
             <p>{commaSeparatedList(data.Target_user_role)}</p>
           </Users>
           <Summary>
-            <p>{data.Short_Description}</p>
+            <p>{data.Short_description}</p>
           </Summary>
         </>
       )}

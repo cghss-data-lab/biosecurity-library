@@ -10,9 +10,9 @@ import { ExploreState } from '../../pages/explore'
 // All the valid fields for filtering
 export enum FilterFields {
   Target_user_role = 'Target_user_role',
-  User_Roll_Up = 'User_Roll_Up',
-  Authoring_Organization = 'Authoring_Organization',
-  Key_Topic_Area_s_ = 'Key_Topic_Area_s_',
+  User_roll_up = 'User_roll_up',
+  Authoring_organization = 'Authoring_organization',
+  Key_topic_area = 'Key_topic_area',
 }
 
 // Filter object

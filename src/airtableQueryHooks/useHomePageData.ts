@@ -50,7 +50,7 @@ const useHomePageData = () => {
       homePageResources: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        group(field: data___Key_Topic_Area_s_) {
+        group(field: data___Key_topic_area) {
           fieldValue
           totalCount
         }

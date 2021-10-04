@@ -4,21 +4,23 @@ import { AirtableCMSData } from '../airtable-cms/types'
 
 export interface Resource {
   data: {
-    Short_Name: string
+    Short_name: string
     Resource_name: string
-    Resource_Type: string
-    Authoring_Organization: string
-    Key_Resource_INTERNAL: true | null
-    Key_Topic_Area_s_: string[]
-    Short_Description: string
+    Resource_type: string
+    Authoring_organization: string
+    Key_resource_INTERNAL: true | null
+    Key_topic_area: string[]
+    Short_description: string
     Target_user_role: string[]
-    User_Roll_Up: string[]
-    Topic_Area_Icons: string
+    User_roll_up: string[]
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }
   }
 }
+
+// removing:
+// Topic_area_icons: string
 
 export interface ResourceGroup {
   fieldValue: string
@@ -63,24 +65,24 @@ const useExplorePageData = () => {
       authorizingOrganization: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        distinct(field: data___Authoring_Organization)
+        distinct(field: data___Authoring_organization)
       }
       groupedResources: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        group(field: data___Resource_Type) {
+        group(field: data___Resource_type) {
           nodes {
             data {
-              Short_Name
+              Short_name
               Resource_name
-              Resource_Type
-              Authoring_Organization
+              Resource_type
+              Authoring_organization
               Target_user_role
-              Short_Description
-              Key_Topic_Area_s_
-              Key_Resource_INTERNAL_
-              User_Roll_Up
-              Topic_Area_Icons
+              Short_description
+              Key_topic_area
+              Key_resource_INTERNAL
+              User_roll_up
+              # Topic_area_icons
               Thumbnail_INTERNAL {
                 localFiles {
                   childImageSharp {
