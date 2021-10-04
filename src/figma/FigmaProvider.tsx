@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import * as styles from './semanticStyles.module.scss'
+import styles from './semanticStyles.module.scss'
 
 import './fonts.css'
 
