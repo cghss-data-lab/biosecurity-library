@@ -16,6 +16,12 @@ const IconContainer = styled.div`
 
 const Header: React.FC<PageContext> = ({ data }) => {
   const theme: any = useTheme()
+
+  // get icon data if available from query result, empty array otherwise
+  // TODO fix GraphQL query so icon data avail. again
+  const iconData: string[] =
+    data.Topic_area_icons !== undefined ? JSON.parse(data.Topic_area_icons) : []
+
   return (
     <HeaderContainer>
       <h2>{data.Resource_name}</h2>
@@ -28,7 +34,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
       </h4>
       <p>{data.Short_description}</p>
       <IconContainer>
-        {JSON.parse(data.Topic_area_icons).map((name: string) => (
+        {iconData.map((name: string) => (
           <AirtableCMSIcon
             key={name}
             name={name}
