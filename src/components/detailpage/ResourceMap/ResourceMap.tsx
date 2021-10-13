@@ -1,5 +1,5 @@
 /**
- * Network map showing resources that cite or otherwise depend on each other.
+ * Resource map showing links between resources that depend on each other.
  * TODO complete with real data
  */
 
