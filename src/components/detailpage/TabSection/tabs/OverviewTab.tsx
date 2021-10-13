@@ -4,6 +4,7 @@ import TabContentContainer from '../TabContentContainer'
 
 import { PageContext } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
+import { ResourceMap } from '../../ResourceMap/ResourceMap'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => (
   <TabContentContainer>
@@ -13,6 +14,10 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => (
     <p>{data.Resource_type}</p>
     <h5>CATEGORIES</h5>
     <p>{commaSeparatedList(data.Key_topic_area)}</p>
+    <h5>RESOURCE MAP</h5>
+    <p>
+      <ResourceMap />
+    </p>
   </TabContentContainer>
 )
 
