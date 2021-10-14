@@ -4,7 +4,7 @@ import TabContentContainer from '../TabContentContainer'
 
 import { PageContext } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
-import { ResourceMap } from '../../ResourceMap/ResourceMap'
+import ResourceMap from '../../ResourceMap/ResourceMap'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => (
   <TabContentContainer>

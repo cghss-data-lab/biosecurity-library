@@ -72,3 +72,5 @@ function initNode(label: string, id: number | string): GraphNode {
     _size: 1,
   }
 }
+
+export default ResourceMap
