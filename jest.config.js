@@ -1,5 +1,7 @@
 // https://www.gatsbyjs.com/docs/how-to/testing/unit-testing/
+/** @type {import('@jest/types').Config.InitialOptions} */
 module.exports = {
+  testEnvironment: 'jsdom',
   transform: {
     '^.+\\.[jt]sx?$': '<rootDir>/jest-preprocess.js',
   },
