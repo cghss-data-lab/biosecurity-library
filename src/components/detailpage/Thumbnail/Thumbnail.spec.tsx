@@ -1,17 +1,16 @@
 import React from 'react'
-import renderer from 'react-test-renderer'
+import { render } from '@testing-library/react'
+import { PageContext } from '../../../templates/Detail'
 import Thumbnail from './Thumbnail'
 
 describe('Thumbnail', () => {
   it('renders correctly', () => {
-    const tree = renderer
-      .create(<Thumbnail data={MOCK_RESOURCE_DATA} />)
-      .toJSON()
-    expect(tree).toMatchSnapshot()
+    const result = render(<Thumbnail data={MOCK_RESOURCE_DATA} />)
+    expect(result).toMatchSnapshot()
   })
 })
 
-const MOCK_RESOURCE_DATA = {
+const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Short_description: 'Test',
   Long_description: 'Test',
   Key_topic_area: ['Test'],
@@ -36,4 +35,5 @@ const MOCK_RESOURCE_DATA = {
   Thumbnail_INTERNAL: {
     localFiles: [],
   },
+  Auto_other_resources_cited: ['Test 2'],
 }
