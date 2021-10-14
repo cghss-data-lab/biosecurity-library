@@ -1,24 +1,54 @@
 /**
  * Resource map showing links between resources that depend on each other.
- * TODO complete with real data
+ * TODO complete with true data
  */
 
 import React from 'react'
 import { GraphNode, Network } from '@mvanmaele/mvanmaele-test.viz.network'
+import { PageContext } from '../../../templates/Detail'
+
+const LABEL_FIELD: 'Resource_name' | 'Short_name' = 'Short_name'
+const RELATED_FIELDS: 'Auto_other_resources_cited'[] = [
+  'Auto_other_resources_cited',
+]
+
+// interface ResourceMapProps {}
 /**
  * TODO
  * @returns Resource map
  */
-export const ResourceMap = () => {
+export const ResourceMap: React.FC<PageContext> = ({ data }) => {
+  const hideMap: boolean =
+    data === undefined || data.Auto_other_resources_cited === null
   // TODO replace demo data with real data
+  if (hideMap) return null
   return (
     <Network
       initGraphData={{
-        nodes: [initNode('Node 1', 1), initNode('Node 2', 2)],
-        links: [{ source: 1, target: 2, value: 1 }],
+        nodes: getResourceMapNodes(data),
+        links: [],
+        // links: [{ source: 1, target: 2, value: 1 }],
       }}
     />
   )
+}
+
+/**
+ * Returns a list of resource map nodes that are related to the node with the
+ * given data.
+ * @param data The resource's data from its Airtable record
+ * @returns The list of nodes that are related to this one
+ */
+function getResourceMapNodes(data: PageContext['data']): GraphNode[] {
+  const nodes: GraphNode[] = [initNode(data[LABEL_FIELD], data[LABEL_FIELD])]
+  RELATED_FIELDS.forEach(field => {
+    data[field].forEach(id => {
+      // TODO parse name from ID
+      // TODO parse links
+      nodes.push(initNode(id, id))
+    })
+  })
+  return nodes
 }
 
 /**
@@ -27,7 +57,7 @@ export const ResourceMap = () => {
  * @param id Node unique ID
  * @returns Initialized node
  */
-function initNode(label: string, id: number): GraphNode {
+function initNode(label: string, id: number | string): GraphNode {
   return {
     _label: label,
     _id: id,

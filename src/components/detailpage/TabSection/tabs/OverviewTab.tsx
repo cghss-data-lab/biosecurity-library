@@ -16,7 +16,7 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => (
     <p>{commaSeparatedList(data.Key_topic_area)}</p>
     <h5>RESOURCE MAP</h5>
     <p>
-      <ResourceMap />
+      <ResourceMap {...{ data }} />
     </p>
   </TabContentContainer>
 )
