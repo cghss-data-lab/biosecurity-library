@@ -19,7 +19,13 @@ const RELATED_FIELDS: 'Auto_other_resources_cited'[] = [
  */
 export const ResourceMap: React.FC<PageContext> = ({ data }) => {
   const hideMap: boolean =
-    data === undefined || data.Auto_other_resources_cited === null
+    data === undefined ||
+    data.Auto_other_resources_cited === null ||
+    data.Auto_other_resources_cited.length === 0
+
+  console.log(data)
+  console.log('hideMap = ' + hideMap)
+
   // TODO replace demo data with real data
   if (hideMap) return null
   return (
