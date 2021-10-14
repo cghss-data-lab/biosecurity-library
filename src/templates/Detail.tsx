@@ -33,6 +33,7 @@ export interface PageContext {
     Last_update_date: string
     Update_frequency: string
     Topic_area_icons: string
+    Auto_other_resources_cited: string[]
     Files_INTERNAL: {
       localFiles: {
         publicURL: string
