@@ -23,9 +23,6 @@ export const ResourceMap: React.FC<PageContext> = ({ data }) => {
     data.Auto_other_resources_cited === null ||
     data.Auto_other_resources_cited.length === 0
 
-  console.log(data)
-  console.log('hideMap = ' + hideMap)
-
   // TODO replace demo data with real data
   if (hideMap) return null
   return (
