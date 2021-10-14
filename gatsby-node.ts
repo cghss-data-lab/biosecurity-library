@@ -31,6 +31,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             First_release_date
             Last_update_date
             Update_frequency
+            Auto_other_resources_cited
             Files_INTERNAL {
               localFiles {
                 publicURL
@@ -55,6 +56,9 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   result.data.resources.nodes.forEach(
     ({ data }: { data: PageContext['data'] }) => {
+      console.log('data')
+      console.log(data)
+
       actions.createPage({
         path:
           'resource/' +
