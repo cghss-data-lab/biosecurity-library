@@ -51,6 +51,8 @@
     "typescript-styled-plugin": "^0.18.1"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "@types/react-test-renderer": "^17.0.1",
     "@types/styled-components": "^5.1.12",
     "babel-jest": "^27.2.5",
     "babel-preset-gatsby": "^1.14.0",
