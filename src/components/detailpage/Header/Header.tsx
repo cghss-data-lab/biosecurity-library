@@ -34,11 +34,19 @@ const Header: React.FC<PageContext> = ({ data }) => {
       </h4>
       <p>{data.Short_description}</p>
       <IconContainer>
-        {iconData.map((name: string) => (
+        {/* {JSON.parse(data.Topic_area_icons).map((name: string) => (
           <AirtableCMSIcon
             key={name}
             name={name}
             color={theme.colorOrange}
+            style={{ width: 30 }}
+          />
+        ))} */}
+        {data.Key_topic_area.map(name => (
+          <AirtableCMSIcon
+            key={name}
+            name={name}
+            color={theme.colorDarkest}
             style={{ width: 30 }}
           />
         ))}

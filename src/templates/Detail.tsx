@@ -36,6 +36,7 @@ export interface PageContext {
     Update_frequency: string
     Topic_area_icons: string
     Auto_other_resources_cited: string[]
+    // Topic_area_icons: string
     Files_INTERNAL: {
       localFiles: {
         publicURL: string

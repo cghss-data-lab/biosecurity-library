@@ -84,6 +84,7 @@ interface IconInterface {
   className?: string
   hoverColor?: string
   style?: React.CSSProperties
+  noEmitError?: boolean
 }
 
 const AirtableCMSIcon: React.FC<IconInterface> = ({
@@ -92,6 +93,7 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
   className,
   hoverColor,
   style,
+  noEmitError = false,
 }) => {
   const {
     iconsQuery: { nodes: icons },
@@ -119,13 +121,14 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
   const [hover, setHover] = useState(false)
 
   if (!icon) {
-    return <></>
-    // throw new Error(
-    //   `Icon ${name} not found in ` +
-    //     `Airtable. Does the airtable base include the ` +
-    //     `Icons table, and does that table include ` +
-    //     `an icon called ${name}?.`
-    // )
+    if (noEmitError) return <></>
+
+    throw new Error(
+      `Icon ${name} not found in ` +
+        `Airtable. Does the airtable base include the ` +
+        `Icons table, and does that table include ` +
+        `an icon called ${name}?.`
+    )
   }
 
   const displayIcon = replaceFill(
