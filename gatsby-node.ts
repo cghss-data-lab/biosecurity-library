@@ -2,6 +2,11 @@ import path from 'path'
 import { GatsbyNode } from 'gatsby'
 import { urlString } from './src/airtable-cms/utilities'
 import { PageContext } from './src/templates/Detail'
+import {
+  getResourceMapData,
+  getFullResourceMapData,
+} from './src/components/detailpage/ResourceMap/helpers/resourceMapHelpers'
+import { AppGraphData } from '@mvanmaele/mvanmaele-test.viz.network'
 
 export const createPages: GatsbyNode['createPages'] = async ({
   actions,
@@ -14,6 +19,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
       resources: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         nodes {
           data {
+            Record_ID_INTERNAL
             Resource_name
             Resource_type
             Short_name
@@ -54,18 +60,27 @@ export const createPages: GatsbyNode['createPages'] = async ({
   // removed:
   // Topic_Area_Icons
 
+  const fullResourceMapData: AppGraphData = getFullResourceMapData(
+    result.data.resources.nodes,
+    ['Auto_other_resources_cited'],
+    'Short_name',
+    'Record_ID_INTERNAL',
+    'Resource_type'
+  )
+
   result.data.resources.nodes.forEach(
     ({ data }: { data: PageContext['data'] }) => {
-      console.log('data')
-      console.log(data)
-
+      const resourceMapData: AppGraphData = getResourceMapData(
+        data.Record_ID_INTERNAL,
+        fullResourceMapData
+      )
       actions.createPage({
         path:
           'resource/' +
           urlString(data.Resource_type) +
           urlString(data.Short_name),
         component: detailPageTemplate,
-        context: { data },
+        context: { data: { ...data, resourceMapData } },
       })
     }
   )

@@ -1,5 +1,6 @@
 import React from 'react'
 import { ImageDataLike } from 'gatsby-plugin-image'
+import * as network from '@mvanmaele/mvanmaele-test.viz.network'
 
 // layout components
 import Main from '../components/layout/Main'
@@ -15,6 +16,7 @@ import TabSection from '../components/detailpage/TabSection/TabSection'
 
 export interface PageContext {
   data: {
+    Record_ID_INTERNAL: string
     Short_description: string
     Long_description: string
     Key_topic_area: string[]
@@ -43,6 +45,14 @@ export interface PageContext {
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }
+
+    // Below: Additional data elements not directly sourced from Airtable.
+
+    /**
+     * Optional: Resource map nodes/links data to render in a network map on the
+     * resource's page. Defaults to undefined (no map rendered).
+     */
+    resourceMapData?: network.AppGraphData
   }
 }
 

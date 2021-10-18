@@ -2,10 +2,10 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import ResourceMap from './ResourceMap'
 import { PageContext } from '../../../templates/Detail'
+import * as network from '@mvanmaele/mvanmaele-test.viz.network'
 
-const LINK_FIELD: 'Auto_other_resources_cited' = 'Auto_other_resources_cited'
-
-const MOCK_RESOURCE_DATA: PageContext['data'] = {
+export const MOCK_RESOURCE_DATA: PageContext['data'] = {
+  Record_ID_INTERNAL: 'recTest',
   Short_description: 'Test',
   Long_description: 'Test',
   Key_topic_area: ['Test'],
@@ -30,14 +30,23 @@ const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Thumbnail_INTERNAL: {
     localFiles: [],
   },
-  [LINK_FIELD]: ['Test2'],
+  Auto_other_resources_cited: ['recTest'],
+}
+
+/**
+ * Mock nodes/links based on resource data structure for testing purposes.
+ */
+const MOCK_NAME: string = MOCK_RESOURCE_DATA.Resource_name
+export const MOCK_GRAPH_DATA: network.AppGraphData = {
+  nodes: [initMockNode(MOCK_NAME, MOCK_NAME)],
+  links: [{ source: MOCK_NAME, target: MOCK_NAME }],
 }
 
 describe('ResourceMap', () => {
   // is it hidden when it should be?
   it('should not render if there are no links to show', () => {
     const { container: containerNoLinks } = render(
-      <ResourceMap data={{ ...MOCK_RESOURCE_DATA, [LINK_FIELD]: [] }} />
+      <ResourceMap graphData={{ nodes: MOCK_GRAPH_DATA.nodes, links: [] }} />
     )
     const canvases: NodeListOf<HTMLCanvasElement> =
       containerNoLinks.querySelectorAll('canvas')
@@ -46,7 +55,7 @@ describe('ResourceMap', () => {
 
   // otherwise: if rendered:
   it('should render with one canvas element', () => {
-    const { container } = render(<ResourceMap data={MOCK_RESOURCE_DATA} />)
+    const { container } = render(<ResourceMap graphData={MOCK_GRAPH_DATA} />)
     const canvases: NodeListOf<HTMLCanvasElement> =
       container.querySelectorAll('canvas')
     expect(canvases.length).toEqual(1)
@@ -56,3 +65,25 @@ describe('ResourceMap', () => {
   //   expect(false).toStrictEqual(true) // TODO implement
   // })
 })
+
+/**
+ * Return initialized mock graph node with given label and unique ID
+ * @param label Node label
+ * @param id Node unique ID
+ * @returns Initialized mock node
+ */
+function initMockNode(label: string, id: number | string): network.GraphNode {
+  return {
+    _label: label,
+    _id: id,
+    _color: 'skyblue',
+    _shape: 'circle',
+    _nodeType: 'default',
+    _show: true,
+    _fontSize: 16,
+    _icon: '',
+    _showLabel: true,
+    _labelPos: 'bottom',
+    _size: 1,
+  }
+}

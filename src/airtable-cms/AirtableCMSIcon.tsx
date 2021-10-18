@@ -4,10 +4,15 @@ import styled from 'styled-components'
 
 import { HTMLElement, parse } from 'node-html-parser'
 
+// TODO
+export const getIconSvg = () => {
+  throw new Error('Not implemented')
+}
+
 // replace the fill and stroke colors on all child
 // elements of the SVG; but only if those elements
 // already have a fill or stroke set.
-const replaceFill = (svg: string, color: string) => {
+export const replaceFill = (svg: string, color: string) => {
   // this uses node-html-parser instead of native DOM
   // so that it will support server-side-rendering.
   const svgDom = parse(svg)
@@ -38,8 +43,25 @@ const SVGContainer = styled.div`
 // This query and interface lives here because it assumes the
 // CMS airtable base has this table already, because the table
 // will be part of the template.
-interface IconsQuery {
+export interface IconsQuery {
   iconsQuery: {
+    nodes: {
+      data: {
+        Name: string
+        Text: string
+        SVG: {
+          localFiles: {
+            childSvg: {
+              svgString: string
+            }
+          }[]
+        }
+      }
+    }[]
+  }
+}
+export interface IconsQueryMap {
+  iconsQueryMap: {
     nodes: {
       data: {
         Name: string
