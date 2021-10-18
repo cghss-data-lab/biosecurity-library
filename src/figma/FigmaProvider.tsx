@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import styles from './semanticStyles.module.scss'
+import { semanticStyles } from './semanticStyles.module.scss'
 
 import './fonts.css'
 
@@ -11,7 +11,7 @@ const figmaStyles = require('sass-extract-loader?{"plugins":["sass-extract-js"]}
 
 const FigmaProvider: React.FC = ({ children }) => (
   <ThemeProvider theme={figmaStyles}>
-    <div className={styles.semanticStyles}>{children}</div>
+    <div className={semanticStyles}>{children}</div>
   </ThemeProvider>
 )
 
