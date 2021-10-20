@@ -14,6 +14,7 @@ import {
   GraphLink,
   // LinkDirections,
 } from '@mvanmaele/mvanmaele-test.viz.network'
+import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../utilities/urls'
 
 /**
@@ -66,7 +67,7 @@ export function getFullResourceMapData(
   const links: GraphLink[] = []
   // create one node per query response datum
   queryResponse.forEach(({ data }) => {
-    const node: GraphNode = initResourceMapNode(
+    const node: HyperlinkedNode = initResourceMapNode(
       data,
       nameField,
       idField,
@@ -108,12 +109,12 @@ export function getFullResourceMapData(
  * Returns nodes/links for just the defined resource's resource map.
  * @param resourceId The ID of the resource for the purposes of the resource map
  * @param allResourceMapData Nodes and links data for all resources
- * @returns {AppGraphData} The nodes/links for just the defined resource
+ * @returns {HyperlinkedGraphData} The nodes/links for just the resource
  */
 export function getResourceMapData(
   resourceId: string,
   allResourceMapData: AppGraphData
-): AppGraphData {
+): HyperlinkedGraphData {
   const node: GraphNode | undefined = allResourceMapData.nodes.find(
     n => n._id === resourceId
   )
@@ -139,7 +140,7 @@ export function initResourceMapNode(
   nameField: keyof Omit<PageContext['data'], 'resourceMapData'>, // omit undef
   idField: DefinedPageDataFields,
   iconField?: DefinedPageDataFields
-): GraphNode {
+): HyperlinkedNode {
   return {
     url: urls.getDetailURL(data),
     _label: data[nameField].toString(),
@@ -293,26 +294,34 @@ function getLinksForNodesWithIds(
  * Given a list of graph links, returns the node IDs for all sources and
  * targets of those links as a unique list.
  * @param links The links
+ * @param sides Optional: Whether to return IDs for source, targ, or both
  * @returns The list of IDs
  */
-function getNodeIdsForLinks(links: GraphLink[]): (string | number)[] {
+export function getNodeIdsForLinks(
+  links: GraphLink[],
+  sides: 'source' | 'target' | 'both' = 'both'
+): (string | number)[] {
   // TODO Refactor method
   if (links.length === 0) return []
   const isStruct: boolean = (links[0].source as GraphNode)._id !== undefined
+  if (sides === 'both')
+    return isStruct
+      ? [
+          ...new Set(
+            links
+              .map(n => [
+                (n.source as GraphNode)._id,
+                (n.target as GraphNode)._id,
+              ])
+              .flat()
+          ),
+        ]
+      : [
+          ...new Set(
+            links.map(n => [n.source as string, n.target as string]).flat()
+          ),
+        ]
   return isStruct
-    ? [
-        ...new Set(
-          links
-            .map(n => [
-              (n.source as GraphNode)._id,
-              (n.target as GraphNode)._id,
-            ])
-            .flat()
-        ),
-      ]
-    : [
-        ...new Set(
-          links.map(n => [n.source as string, n.target as string]).flat()
-        ),
-      ]
+    ? [...new Set(links.map(n => [(n[sides] as GraphNode)._id]).flat())]
+    : [...new Set(links.map(n => [n[sides] as string]).flat())]
 }

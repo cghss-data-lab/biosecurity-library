@@ -1,31 +1,28 @@
 /**
  * Resource map showing links between resources that depend on each other.
- * TODO don't break when tabs changed to and then back to its tab
- * TODO allow curved/straight edges to be toggled
  * TODO allow edge color to be set dynamically
- * TODO faster rendering (shorten cooldown so "zoom" happens sooner)
- * TODO click node to go to resource page
  * TODO legend defining edges and resource types
  * TODO allow max words in label lines to be controlled
  * TODO don't make hovered labels reflow when they're longer than container
  */
 
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import {
   IconsQueryMap,
   replaceFill,
 } from '../../../airtable-cms/AirtableCMSIcon'
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
+import { getNodeIdsForLinks } from './helpers/resourceMapHelpers'
 type Icon = {
   data: { Name: string; Text: string; SVG: any }
 }
 
 const CONTAINER_SIZE: number = 500
 const Container = styled.div`
-  width: ${CONTAINER_SIZE}px;
+  width: 100%;
   height: ${CONTAINER_SIZE}px;
 `
 
@@ -36,7 +33,7 @@ const Container = styled.div`
 export const ResourceMap: React.FC<{
   selectedNodeId?: string
   graphData?: network.AppGraphData
-}> = ({ selectedNodeId, graphData, children }) => {
+}> = ({ selectedNodeId, graphData }) => {
   const {
     iconsQueryMap: { nodes: icons },
   } = useStaticQuery<IconsQueryMap>(graphql`
@@ -58,22 +55,84 @@ export const ResourceMap: React.FC<{
       }
     }
   `)
+
+  const formattedGraphData: network.AppGraphData | undefined = useMemo(
+    () => formatGraphData(graphData, icons),
+    [graphData, icons]
+  )
+
   if (
     graphData === undefined ||
     graphData.nodes.length === 0 ||
     graphData.links.length === 0
   )
     return null
-  const cites: number = getUniqueNodeIdCount(
-    graphData,
-    'target',
-    selectedNodeId
+
+  /**
+   * Fired when node is clicked to navigate to that node's resource page
+   * @param n The clicked node object
+   */
+  const onNodeClick = (n: {
+    url?: string
+    _id?: string
+    id?: string | number
+  }): void => {
+    if (n.url !== undefined && n._id !== selectedNodeId) {
+      navigate(n.url)
+    }
+  }
+
+  const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
+  return (
+    <section>
+      <p>{citationDesc}</p>
+      <em>Click resource in map to go to page</em>
+      <Container>
+        <network.Network
+          containerStyle={{ transition: 'opacity .25s ease-in-out' }}
+          linkCurvature={0}
+          warmupTicks={1000}
+          zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
+          interactionSettings={{
+            enableZoomInteraction: false,
+            enablePanInteraction: false,
+            maxZoom: 5,
+          }}
+          onNodeClick={onNodeClick}
+          selectedNode={selectedNodeId}
+          initGraphData={formattedGraphData}
+        />
+      </Container>
+    </section>
   )
-  const citedBy: number = getUniqueNodeIdCount(
-    graphData,
-    'source',
-    selectedNodeId
-  )
+}
+
+export default ResourceMap
+
+/**
+ * Returns text describing how many resources this one cites or is cited by
+ * @param resId The ID of the resource whose page it is
+ * @param graphData The nodes and links
+ * @returns Text describing citation counts
+ */
+function getCitationCountText(
+  resId: string | undefined,
+  graphData: network.AppGraphData
+): string {
+  if (resId === undefined) return ''
+  const cites: number = getUniqueNodeIdCount(graphData, 'target', resId)
+  const citedBy: number = getUniqueNodeIdCount(graphData, 'source', resId)
+  const citationDesc: string = getCitationString(cites, citedBy)
+  return citationDesc
+}
+
+/**
+ * Returns text describing how many resources this one cites or is cited by
+ * @param cites Number of other resources cited
+ * @param citedBy Number of other resources cited by
+ * @returns Text describing the counts
+ */
+function getCitationString(cites: number, citedBy: number) {
   let text: string = 'This resource '
   const pieces: string[] = []
   if (cites > 0)
@@ -87,26 +146,8 @@ export const ResourceMap: React.FC<{
     else text += s
   })
   text += ` that ${cites + citedBy === 1 ? 'is' : 'are'} also in the library.`
-  return (
-    <p>
-      <p>{text}</p>
-      <em>Click resource in map to go to page</em>
-      <Container>
-        <network.Network
-          interactionSettings={{
-            enableZoomInteraction: false,
-            enablePanInteraction: false,
-            maxZoom: 5,
-          }}
-          selectedNode={selectedNodeId}
-          initGraphData={formatGraphData(graphData, icons)}
-        />
-      </Container>
-    </p>
-  )
+  return text
 }
-
-export default ResourceMap
 
 /**
  * Returns the count of unique target/source connections the selected node
@@ -143,13 +184,45 @@ function getUniqueNodeIdCount(
  * @returns The graph data formatted for display in the resource map
  */
 function formatGraphData(
-  graphData: network.AppGraphData,
+  graphData: network.AppGraphData = { nodes: [], links: [] },
   icons: Icon[]
 ): network.AppGraphData | undefined {
+  const formattedNodes: network.GraphNode[] = getFormattedNodes(
+    graphData,
+    icons
+  )
+  const formattedLinks: network.GraphLink[] = getFormattedLinks(
+    graphData,
+    formattedNodes
+  )
   return {
-    nodes: formatNodes(graphData, icons),
-    links: graphData.links,
+    nodes: formattedNodes,
+    links: formattedLinks,
   }
+}
+
+/**
+ * Formats the graph data's links for display in the resource map and returns
+ * a version of the grpah data with those links
+ * @param graphData The input graph data
+ * @param formattedNodes The formatted nodes
+ * @returns A version of it with links formatted for display
+ */
+function getFormattedLinks(
+  graphData: network.AppGraphData,
+  formattedNodes: network.GraphNode[]
+): network.GraphLink[] {
+  return graphData.links.map(l => {
+    const source = formattedNodes.find(n =>
+      getNodeIdsForLinks([l], 'source').includes(n._id)
+    )
+    if (source === undefined) throw new Error('No source found for link')
+    const target = formattedNodes.find(n =>
+      getNodeIdsForLinks([l], 'target').includes(n._id)
+    )
+    if (target === undefined) throw new Error('No target found for link')
+    return { ...l, source, target }
+  })
 }
 
 /**
@@ -158,7 +231,7 @@ function formatGraphData(
  * @param graphData The input graph data
  * @returns A version of it with nodes formatted for display
  */
-function formatNodes(
+function getFormattedNodes(
   graphData: network.AppGraphData,
   icons: Icon[]
 ): network.GraphNode[] {
