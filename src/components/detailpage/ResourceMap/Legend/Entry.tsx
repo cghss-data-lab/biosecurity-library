@@ -29,6 +29,7 @@ const Entry: FC<LegendEntryProps> = ({ label, value }) => {
         name={value}
         color={theme.colorDarker}
         style={{ height: 30 }}
+        frame={'circle'}
       />
       <div>{label}</div>
     </LegendEntryContainer>

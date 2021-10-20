@@ -6,7 +6,7 @@
  * TODO don't make hovered labels reflow when they're longer than container
  */
 
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import {
   IconsQueryMap,
@@ -37,6 +37,7 @@ export const ResourceMap: React.FC<{
   selectedNodeId?: string
   graphData?: network.AppGraphData
 }> = ({ selectedNodeId, graphData }) => {
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null)
   const {
     iconsQueryMap: { nodes: icons },
   } = useStaticQuery<IconsQueryMap>(graphql`
@@ -62,7 +63,7 @@ export const ResourceMap: React.FC<{
 
   const formattedGraphData: network.AppGraphData | undefined = useMemo(
     () => formatGraphData(graphData, icons, theme),
-    [graphData, icons]
+    [graphData, icons, theme]
   )
 
   if (
@@ -103,7 +104,13 @@ export const ResourceMap: React.FC<{
         </Legend>
         <network.Network
           containerStyle={{ transition: 'opacity .25s ease-in-out' }}
-          linkCurvature={0}
+          // linkCurvature={0}
+          linkDirectionalArrowLength={l => {
+            return (l.source as network.GraphNode)._id === hoveredNode ||
+              (l.target as network.GraphNode)._id === hoveredNode
+              ? 5
+              : 0
+          }}
           warmupTicks={1000}
           zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
           interactionSettings={{
@@ -114,6 +121,7 @@ export const ResourceMap: React.FC<{
           onNodeClick={onNodeClick}
           selectedNode={selectedNodeId}
           initGraphData={formattedGraphData}
+          {...{ hoveredNode, setHoveredNode }}
         />
       </Container>
     </section>
@@ -269,6 +277,7 @@ function getFormattedNodes(
       icon.data.SVG.localFiles[0].childSvg.svgString,
       n._color
     )
+
     return {
       ...n,
       _show: true,
