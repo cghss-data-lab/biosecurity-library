@@ -1,7 +1,6 @@
 import path from 'path'
 import { GatsbyNode } from 'gatsby'
-import { urlString } from './src/airtable-cms/utilities'
-import { PageContext } from './src/templates/Detail'
+import { getDetailURL, PageContext } from './src/templates/Detail'
 import {
   getResourceMapData,
   getFullResourceMapData,
@@ -75,10 +74,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         fullResourceMapData
       )
       actions.createPage({
-        path:
-          'resource/' +
-          urlString(data.Resource_type) +
-          urlString(data.Short_name),
+        path: getDetailURL(data),
         component: detailPageTemplate,
         context: { data: { ...data, resourceMapData } },
       })

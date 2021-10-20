@@ -5,10 +5,10 @@ import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 
 import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
-import { urlString } from '../../../airtable-cms/utilities'
 import { commaSeparatedList } from '../../../utilities/grammar'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import ResourceContainer from './ResourceContainer'
+import { getDetailURL } from '../../../templates/Detail'
 
 // const ResourceContainer = styled.section<{ expanded: boolean }>`
 //   background: ${({ theme }) => theme.colorVeryLightGray};
@@ -84,15 +84,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
           )}
         </ThumbnailContainer>
       )}
-      <Title
-        to={
-          '/resource/' +
-          urlString(data.Resource_type) +
-          urlString(data.Short_name)
-        }
-      >
-        {data.Short_name}
-      </Title>
+      <Title to={getDetailURL(data)}>{data.Short_name}</Title>
       <Author>{data.Authoring_organization}</Author>
       <IconContainer>
         {/* The Topic Area Icons column doesn't exist right now */}

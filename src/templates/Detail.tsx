@@ -13,6 +13,8 @@ import Grid from '../components/detailpage/Grid'
 import Header from '../components/detailpage/Header/Header'
 import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
 import TabSection from '../components/detailpage/TabSection/TabSection'
+import { urlString } from '../airtable-cms/utilities'
+import { Resource } from '../airtableQueryHooks/useExplorePageData'
 
 export interface PageContext {
   data: {
@@ -72,5 +74,18 @@ const Detail: React.FC<{ pageContext: PageContext }> = ({
     </Main>
   </FigmaProvider>
 )
+
+/**
+ * Returns the URL for the detail page of the resource having the given data.
+ * @param data The resource data
+ * @returns The URL
+ */
+export function getDetailURL(
+  data: Resource['data'] | PageContext['data']
+): string {
+  return (
+    '/resource/' + urlString(data.Resource_type) + urlString(data.Short_name)
+  )
+}
 
 export default Detail
