@@ -16,12 +16,15 @@ import * as network from '@mvanmaele/mvanmaele-test.viz.network'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 import { getNodeIdsForLinks } from './helpers/resourceMapHelpers'
+import Legend from './Legend/Legend'
+import Entry from './Legend/Entry'
 type Icon = {
   data: { Name: string; Text: string; SVG: any }
 }
 
 const CONTAINER_SIZE: number = 500
 const Container = styled.div`
+  position: relative;
   width: 100%;
   height: ${CONTAINER_SIZE}px;
 `
@@ -88,6 +91,15 @@ export const ResourceMap: React.FC<{
       <p>{citationDesc}</p>
       <em>Click resource in map to go to page</em>
       <Container>
+        <Legend>
+          {icons
+            .filter(icon => {
+              return graphData?.nodes.map(n => n._icon).includes(icon.data.Name)
+            })
+            .map(icon => (
+              <Entry label={icon.data.Name} value={icon.data.Name} />
+            ))}
+        </Legend>
         <network.Network
           containerStyle={{ transition: 'opacity .25s ease-in-out' }}
           linkCurvature={0}
