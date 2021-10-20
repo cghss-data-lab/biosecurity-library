@@ -14,7 +14,7 @@ import {
 } from '../../../airtable-cms/AirtableCMSIcon'
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { getNodeIdsForLinks } from './helpers/resourceMapHelpers'
 import Legend from './Legend/Legend'
 import Entry from './Legend/Entry'
@@ -58,9 +58,10 @@ export const ResourceMap: React.FC<{
       }
     }
   `)
+  const theme: any = useTheme()
 
   const formattedGraphData: network.AppGraphData | undefined = useMemo(
-    () => formatGraphData(graphData, icons),
+    () => formatGraphData(graphData, icons, theme),
     [graphData, icons]
   )
 
@@ -193,19 +194,24 @@ function getUniqueNodeIdCount(
  * Given input graph data, returns a version of it formatted for display in the
  * project's resource map, i.e., with any applicable Airtable icons
  * @param graphData The input graph data
+ * @param icons Icon SVG data from Airtable
+ * @param theme Theme from Figma
  * @returns The graph data formatted for display in the resource map
  */
 function formatGraphData(
   graphData: network.AppGraphData = { nodes: [], links: [] },
-  icons: Icon[]
+  icons: Icon[],
+  theme: any
 ): network.AppGraphData | undefined {
   const formattedNodes: network.GraphNode[] = getFormattedNodes(
     graphData,
-    icons
+    icons,
+    theme
   )
   const formattedLinks: network.GraphLink[] = getFormattedLinks(
     graphData,
-    formattedNodes
+    formattedNodes,
+    theme
   )
   return {
     nodes: formattedNodes,
@@ -218,11 +224,13 @@ function formatGraphData(
  * a version of the grpah data with those links
  * @param graphData The input graph data
  * @param formattedNodes The formatted nodes
+ * @param theme Theme data from Figma
  * @returns A version of it with links formatted for display
  */
 function getFormattedLinks(
   graphData: network.AppGraphData,
-  formattedNodes: network.GraphNode[]
+  formattedNodes: network.GraphNode[],
+  theme: any
 ): network.GraphLink[] {
   return graphData.links.map(l => {
     const source = formattedNodes.find(n =>
@@ -233,7 +241,7 @@ function getFormattedLinks(
       getNodeIdsForLinks([l], 'target').includes(n._id)
     )
     if (target === undefined) throw new Error('No target found for link')
-    return { ...l, source, target }
+    return { ...l, source, target, _color: theme.colorDarker }
   })
 }
 
@@ -241,11 +249,14 @@ function getFormattedLinks(
  * Formats the graph data's nodes for display in the resource map and returns
  * a version of the grpah data with those nodes
  * @param graphData The input graph data
+ * @param icons Icon data from Airtable
+ * @param theme Theme data from Figma
  * @returns A version of it with nodes formatted for display
  */
 function getFormattedNodes(
   graphData: network.AppGraphData,
-  icons: Icon[]
+  icons: Icon[],
+  theme: any
 ): network.GraphNode[] {
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5
   return graphData.nodes.map(n => {
@@ -263,6 +274,7 @@ function getFormattedNodes(
       _show: true,
       _icon: displayIcon,
       _showLabel: showAllNodeLabels,
+      _color: theme.colorDarker,
     }
   })
 }

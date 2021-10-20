@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import styled, { withTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
 
 const LegendEntryContainer = styled.div`
@@ -17,10 +17,10 @@ const LegendEntryContainer = styled.div`
 interface LegendEntryProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string
   value: string
-  theme: any
 }
 
-const Entry: FC<LegendEntryProps> = ({ label, value, theme }) => {
+const Entry: FC<LegendEntryProps> = ({ label, value }) => {
+  const theme: any = useTheme()
   return (
     <LegendEntryContainer>
       <AirtableCMSIcon
@@ -33,4 +33,4 @@ const Entry: FC<LegendEntryProps> = ({ label, value, theme }) => {
   )
 }
 
-export default withTheme(Entry)
+export default Entry
