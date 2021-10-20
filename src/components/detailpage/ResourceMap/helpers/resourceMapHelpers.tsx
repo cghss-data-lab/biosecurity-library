@@ -15,8 +15,6 @@ import {
   // LinkDirections,
 } from '@mvanmaele/mvanmaele-test.viz.network'
 
-import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
-
 /**
  * Define different directions of links.
  * TODO refactor into viz.network package
