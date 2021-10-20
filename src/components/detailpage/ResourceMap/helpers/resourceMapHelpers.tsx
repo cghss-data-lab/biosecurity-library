@@ -14,6 +14,7 @@ import {
   GraphLink,
   // LinkDirections,
 } from '@mvanmaele/mvanmaele-test.viz.network'
+import * as urls from '../../../../utilities/urls'
 
 /**
  * Define different directions of links.
@@ -140,6 +141,7 @@ export function initResourceMapNode(
   iconField?: DefinedPageDataFields
 ): GraphNode {
   return {
+    url: urls.getDetailURL(data),
     _label: data[nameField].toString(),
     _id: data[idField].toString(),
     _color: '#063968', // TODO dynamically define color from design

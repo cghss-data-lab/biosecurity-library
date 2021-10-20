@@ -5,7 +5,7 @@ import {
   getResourceMapData,
   getFullResourceMapData,
 } from './src/components/detailpage/ResourceMap/helpers/resourceMapHelpers'
-import { AppGraphData } from '@mvanmaele/mvanmaele-test.viz.network'
+import * as urls from './src/utilities/urls'
 
 export const createPages: GatsbyNode['createPages'] = async ({
   actions,
@@ -74,7 +74,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         fullResourceMapData
       )
       actions.createPage({
-        path: getDetailURL(data),
+        path: urls.getDetailURL(data),
         component: detailPageTemplate,
         context: { data: { ...data, resourceMapData } },
       })

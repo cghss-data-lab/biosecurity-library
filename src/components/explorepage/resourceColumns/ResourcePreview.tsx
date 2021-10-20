@@ -8,7 +8,7 @@ import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { commaSeparatedList } from '../../../utilities/grammar'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import ResourceContainer from './ResourceContainer'
-import { getDetailURL } from '../../../templates/Detail'
+import * as urls from '../../../utilities/urls'
 
 // const ResourceContainer = styled.section<{ expanded: boolean }>`
 //   background: ${({ theme }) => theme.colorVeryLightGray};
@@ -84,7 +84,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
           )}
         </ThumbnailContainer>
       )}
-      <Title to={getDetailURL(data)}>{data.Short_name}</Title>
+      <Title to={urls.getDetailURL(data)}>{data.Short_name}</Title>
       <Author>{data.Authoring_organization}</Author>
       <IconContainer>
         {/* The Topic Area Icons column doesn't exist right now */}
