@@ -79,8 +79,14 @@ export const ResourceMap: React.FC<{
   const theme: any = useTheme()
 
   const formattedGraphData: network.AppGraphData | undefined = useMemo(
-    () => formatGraphData(graphData, icons, theme),
-    [graphData, icons, theme]
+    () =>
+      formatGraphData(
+        graphData,
+        icons,
+        theme,
+        graphData?.nodes.find(n => n._id === selectedNode?.Record_ID_INTERNAL)
+      ),
+    [graphData, icons, selectedNode, theme]
   )
 
   const selectedNodeId: string | undefined = selectedNode?.Record_ID_INTERNAL
@@ -131,14 +137,14 @@ export const ResourceMap: React.FC<{
       <em>Click resource in map to go to page</em>
       <ResourceMapContainer>
         <Legend>
-          {/* Link direction legend */}
-          {curvedLinks && <CurvedEdgeEntry nodeColor={theme.colorDarker} />}
+          <h6>Legend</h6>
           {/* Resource type icons legend */}
           {selectedNode !== undefined && (
             <IconEntry
               label={'This resource'}
               value={selectedNode.Resource_type}
-              color={theme.colorGolden}
+              frameColor={theme.colorYellow}
+              frame={'hexagon'}
             />
           )}
           <IconEntries
@@ -146,13 +152,15 @@ export const ResourceMap: React.FC<{
               return graphData?.nodes.map(n => n._icon).includes(icon.data.Name)
             })}
           />
+          {/* Link direction legend */}
+          {curvedLinks && <CurvedEdgeEntry nodeColor={theme.colorDarker} />}
         </Legend>
         <network.SettingsContext.Provider
           value={{
             ...network.defaultSettings,
             nodes: {
               ...network.defaultSettings.nodes,
-              selectedColor: theme.colorGolden,
+              selectedColor: theme.colorDarker,
             },
           }}
         >
@@ -254,17 +262,21 @@ function getUniqueNodeIdCount(
  * @param graphData The input graph data
  * @param icons Icon SVG data from Airtable
  * @param theme Theme from Figma
+ * @param selectedNode Optional: The selected node, if any, which is
+ * styled differently.
  * @returns The graph data formatted for display in the resource map
  */
 function formatGraphData(
   graphData: network.AppGraphData = { nodes: [], links: [] },
   icons: Icon[],
-  theme: any
+  theme: any,
+  selectedNode?: network.GraphNode
 ): network.AppGraphData | undefined {
   const formattedNodes: network.GraphNode[] = getFormattedNodes(
     graphData,
     icons,
-    theme
+    theme,
+    selectedNode
   )
   const formattedLinks: network.GraphLink[] = getFormattedLinks(
     graphData,
@@ -309,12 +321,15 @@ function getFormattedLinks(
  * @param graphData The input graph data
  * @param icons Icon data from Airtable
  * @param theme Theme data from Figma
+ * @param selectedNode Optional: The selected node, if any, which is
+ * styled differently.
  * @returns A version of it with nodes formatted for display
  */
 function getFormattedNodes(
   graphData: network.AppGraphData,
   icons: Icon[],
-  theme: any
+  theme: any,
+  selectedNode: network.GraphNode | undefined
 ): network.GraphNode[] {
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5
   return graphData.nodes.map(n => {
@@ -328,12 +343,21 @@ function getFormattedNodes(
       n._color
     )
 
-    return {
+    const updatedN: network.GraphNode = {
       ...n,
       _show: true,
       _icon: displayIcon,
       _showLabel: showAllNodeLabels,
       _color: theme.colorDarker,
     }
+    if (selectedNode !== undefined && selectedNode._id === n._id)
+      return {
+        ...updatedN,
+        _labelYOffset: 4,
+        _backgroundColor: theme.colorYellow,
+        _backgroundShape: 'hexagon',
+        _backgroundSize: 9,
+      }
+    else return updatedN
   })
 }

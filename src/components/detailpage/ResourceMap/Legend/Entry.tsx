@@ -1,38 +1,54 @@
 import React, { FC } from 'react'
 import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
+import { Hexagon } from './IconEntries'
+import { Frameable } from './legendTypes'
+import WrappedLabel from './WrappedLabel'
 
 const LegendEntryContainer = styled.div`
   display: flex;
   align-items: center;
   line-height: 1.2;
-  > div {
+  > span {
     &:last-child {
       margin-left: 1em;
-      max-width: 200px;
     }
   }
   font-weight: 600;
   font-size: 0.8em;
 `
 
-interface LegendEntryProps extends React.HTMLAttributes<HTMLDivElement> {
+const LegendIconContainer = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+`
+
+type LegendEntryProps = {
   label: string
   value: string
   color?: string
-}
+} & Frameable
 
-const Entry: FC<LegendEntryProps> = ({ label, value, color }) => {
+const Entry: FC<LegendEntryProps> = ({
+  label,
+  value,
+  color,
+  frame,
+  frameColor,
+}) => {
   const theme: any = useTheme()
   return (
     <LegendEntryContainer>
-      <AirtableCMSIcon
-        name={value}
-        color={color === undefined ? theme.colorDarker : color}
-        style={{ height: 30 }}
-        frame={'circle'}
-      />
-      <div>{label}</div>
+      <LegendIconContainer>
+        {frame === 'hexagon' && <Hexagon color={frameColor || 'lightgray'} />}
+        <AirtableCMSIcon
+          name={value}
+          color={color === undefined ? theme.colorDarker : color}
+          style={{ height: 30 }}
+        />
+      </LegendIconContainer>
+      <WrappedLabel>{label}</WrappedLabel>
     </LegendEntryContainer>
   )
 }

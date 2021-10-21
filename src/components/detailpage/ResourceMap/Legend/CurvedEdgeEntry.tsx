@@ -10,13 +10,20 @@ const LinkLegendContainer = styled.div`
   width: 150px;
   height: 100px;
   margin-left: -20px;
+  margin-top: -5px !important;
 `
 
 export const CurvedEdgeEntry = ({ nodeColor }: { nodeColor: string }) => {
   const legendGraphData: AppGraphData = useMemo(() => {
     return {
       nodes: [initNode('Cited', 1), initNode('Citing', 2)].map(n => {
-        return { ...n, _color: nodeColor }
+        return {
+          ...n,
+          _color: nodeColor,
+          _labelColor: 'black',
+          _labelFontWeight: '600',
+          _fontSize: 14.4,
+        }
       }),
       links: [{ source: 2, target: 1, value: 1 }],
     }

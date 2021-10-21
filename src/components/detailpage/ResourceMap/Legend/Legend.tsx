@@ -11,8 +11,13 @@ const LegendContainer = styled.div`
   > div:not(:first-child) {
     margin-top: 1em;
   }
+  padding: 0.5em;
+  background-color: rgba(255, 255, 255, 0.9);
 
-  background-color: rgba(255, 255, 255, 0.8);
+  > h6 {
+    text-transform: uppercase;
+    margin: 0;
+  }
 `
 
 interface LegendProps extends React.HTMLAttributes<HTMLDivElement> {}
