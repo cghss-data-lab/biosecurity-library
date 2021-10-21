@@ -38,6 +38,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
         ))} */}
         {data.Key_topic_area.map(name => (
           <AirtableCMSIcon
+            noEmitError
             key={name}
             name={name}
             color={theme.colorDarkest}
