@@ -24,7 +24,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
               data {
                 Name
               }
-            }[]
+            }
             Target_user_role
             Potential_user_role
             URL_for_resource
