@@ -21,7 +21,11 @@ export interface PageContext {
     Resource_name: string
     Short_name: string
     Resource_type: string
-    Authoring_organization: string
+    Authoring_organization: {
+      data: {
+        Name: string
+      }
+    }[]
     Target_user_role: string[]
     Potential_user_role: string[]
     URL_for_resource: string
