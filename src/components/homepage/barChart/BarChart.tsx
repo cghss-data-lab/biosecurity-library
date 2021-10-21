@@ -11,8 +11,6 @@ const Svg = styled.svg`
 const BarChart: React.FC<{ homePageResources: HomePageResources }> = ({
   homePageResources,
 }) => {
-  console.log(homePageResources)
-
   const dim: any = {
     width: 500,
     height: 300,
@@ -31,6 +29,7 @@ const BarChart: React.FC<{ homePageResources: HomePageResources }> = ({
     <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
       {homePageResources.group.map((bar, index) => (
         <rect
+          key={index}
           x={index * (dim.barWidth + dim.barGap)}
           y={(maxBar - bar.totalCount) * scale}
           width={dim.barWidth}
