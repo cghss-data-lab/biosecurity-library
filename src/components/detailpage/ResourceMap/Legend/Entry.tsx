@@ -19,15 +19,16 @@ const LegendEntryContainer = styled.div`
 interface LegendEntryProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string
   value: string
+  color?: string
 }
 
-const Entry: FC<LegendEntryProps> = ({ label, value }) => {
+const Entry: FC<LegendEntryProps> = ({ label, value, color }) => {
   const theme: any = useTheme()
   return (
     <LegendEntryContainer>
       <AirtableCMSIcon
         name={value}
-        color={theme.colorDarker}
+        color={color === undefined ? theme.colorDarker : color}
         style={{ height: 30 }}
         frame={'circle'}
       />

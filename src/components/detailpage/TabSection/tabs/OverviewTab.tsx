@@ -22,10 +22,7 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => {
         <>
           <h5>RESOURCE MAP</h5>
           <p>
-            <ResourceMap
-              selectedNodeId={data.Record_ID_INTERNAL}
-              graphData={graphData}
-            />
+            <ResourceMap selectedNode={data} graphData={graphData} />
           </p>
         </>
       )}

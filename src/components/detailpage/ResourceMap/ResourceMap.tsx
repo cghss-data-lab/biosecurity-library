@@ -19,13 +19,14 @@ import {
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
 import { getNodeIdsForLinks } from './helpers/resourceMapHelpers'
 import Legend from './Legend/Legend'
-import Entry from './Legend/Entry'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
+import IconEntries, { IconEntry } from './Legend/IconEntries'
+import { PageContext } from '../../../templates/Detail'
 
 /**
  * Icon data from Airtable
  */
-type Icon = {
+export type Icon = {
   data: { Name: string; Text: string; SVG: any }
 }
 
@@ -41,7 +42,7 @@ const ResourceMapContainer = styled.div`
 
 /**
  * Display interactive resource map with provided graph data (nodes and links)
- * @param selectedNodeId Optional: The ID of the selected node, which may be
+ * @param selectedNode Optional: The data of the selected node, which may be
  * styled differently than the others, etc.
  * @param graphData Optional: The nodes and links. No map shown if undefined.
  * @param curvedlinks Optional: True if curved links should be drawn, false if
@@ -49,10 +50,10 @@ const ResourceMapContainer = styled.div`
  * @returns Resource map
  */
 export const ResourceMap: React.FC<{
-  selectedNodeId?: string
+  selectedNode?: PageContext['data']
   graphData?: network.AppGraphData
   curvedLinks?: boolean
-}> = ({ selectedNodeId, graphData, curvedLinks = true }) => {
+}> = ({ selectedNode, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
   const {
     iconsQueryMap: { nodes: icons },
@@ -81,6 +82,8 @@ export const ResourceMap: React.FC<{
     () => formatGraphData(graphData, icons, theme),
     [graphData, icons, theme]
   )
+
+  const selectedNodeId: string | undefined = selectedNode?.Record_ID_INTERNAL
 
   /**
    * Fired when node is clicked to navigate to that node's resource page
@@ -131,30 +134,45 @@ export const ResourceMap: React.FC<{
           {/* Link direction legend */}
           {curvedLinks && <CurvedEdgeEntry nodeColor={theme.colorDarker} />}
           {/* Resource type icons legend */}
-          {icons
-            .filter(icon => {
+          {selectedNode !== undefined && (
+            <IconEntry
+              label={'This resource'}
+              value={selectedNode.Resource_type}
+              color={theme.colorGolden}
+            />
+          )}
+          <IconEntries
+            icons={icons.filter(icon => {
               return graphData?.nodes.map(n => n._icon).includes(icon.data.Name)
-            })
-            .map(icon => (
-              <Entry label={icon.data.Name} value={icon.data.Name} />
-            ))}
+            })}
+          />
         </Legend>
-        <network.Network
-          containerStyle={{ transition: 'opacity .25s ease-in-out' }}
-          linkDirectionalArrowLength={getLinkDirectionalArrowLength}
-          linkCurvature={curvedLinks ? 0.5 : 0}
-          warmupTicks={1000}
-          zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
-          interactionSettings={{
-            enableZoomInteraction: false,
-            enablePanInteraction: false,
-            maxZoom: 5,
+        <network.SettingsContext.Provider
+          value={{
+            ...network.defaultSettings,
+            nodes: {
+              ...network.defaultSettings.nodes,
+              selectedColor: theme.colorGolden,
+            },
           }}
-          onNodeClick={onNodeClick}
-          selectedNode={selectedNodeId}
-          initGraphData={formattedGraphData}
-          {...{ hoveredNode, setHoveredNode }}
-        />
+        >
+          <network.Network
+            containerStyle={{ transition: 'opacity .25s ease-in-out' }}
+            linkDirectionalArrowLength={getLinkDirectionalArrowLength}
+            linkCurvature={curvedLinks ? 0.5 : 0}
+            warmupTicks={1000}
+            zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
+            interactionSettings={{
+              enableZoomInteraction: false,
+              enablePanInteraction: false,
+              maxZoom: 5,
+            }}
+            onNodeClick={onNodeClick}
+            selectedNode={selectedNodeId}
+            initGraphData={formattedGraphData}
+            {...{ hoveredNode, setHoveredNode }}
+          />
+        </network.SettingsContext.Provider>
       </ResourceMapContainer>
     </section>
   )
