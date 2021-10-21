@@ -2,14 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
-import { AirtableCMSData } from '../../airtable-cms/types'
 import AirtableCMSText, { getCMSText } from '../../airtable-cms/AirtableCMSText'
 
 import ButtonLink from '../ui/ButtonLink'
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
 import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
-import { ResourceSearchData } from '../../airtableQueryHooks/useHomePageData'
+import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 import { urlString } from '../../airtable-cms/utilities'
 
@@ -42,10 +41,9 @@ const StyledTypeaheadControl = styled(TypeaheadControl)`
   }
 `
 
-const ResourceSearch: React.FC<{
-  homePageText: AirtableCMSData
-  resourceSearchData: ResourceSearchData
-}> = ({ homePageText, resourceSearchData }) => {
+const ResourceSearch = (): JSX.Element => {
+  const { homePageText, resourceSearchData } = useHomePageData()
+
   const resources = resourceSearchData.nodes.map(r => ({
     key: r.data.Short_name,
     label: r.data.Resource_name,

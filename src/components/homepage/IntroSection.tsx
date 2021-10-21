@@ -2,13 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 // import AirtableCMSIcon from '../../airtable-cms/AirtableCMSIcon'
 import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
-
-import { AirtableCMSData } from '../../airtable-cms/types'
-
-import {
-  HomePageResources,
-  ResourceSearchData,
-} from '../../airtableQueryHooks/useHomePageData'
+import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 import BarChart from './barChart/BarChart'
 import ResourceSearch from './ResourceSearch'
@@ -35,12 +29,9 @@ const Section = styled.section`
   }
 `
 
-const IntroSection: React.FC<{
-  homePageText: AirtableCMSData
-  resourceSearchData: ResourceSearchData
-  homePageResources: HomePageResources
-}> = ({ resourceSearchData, homePageText, homePageResources }) => {
-  // const theme: any = useTheme()
+const IntroSection = (): JSX.Element => {
+  const { homePageText } = useHomePageData()
+
   return (
     <Section>
       <h1>
@@ -49,8 +40,8 @@ const IntroSection: React.FC<{
       <h3>
         <AirtableCMSText name={'First Paragraph'} data={homePageText} />
       </h3>
-      <ResourceSearch {...{ homePageText, resourceSearchData }} />
-      <BarChart {...{ homePageResources }} />
+      <ResourceSearch />
+      <BarChart />
     </Section>
   )
 }

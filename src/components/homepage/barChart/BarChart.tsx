@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import { HomePageResources } from '../../../airtableQueryHooks/useHomePageData'
+import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 
 const Svg = styled.svg`
   margin-top: 30px;
@@ -8,9 +8,8 @@ const Svg = styled.svg`
   overflow: visible;
 `
 
-const BarChart: React.FC<{ homePageResources: HomePageResources }> = ({
-  homePageResources,
-}) => {
+const BarChart = (): JSX.Element => {
+  const { homePageResources } = useHomePageData()
   const dim: any = {
     width: 500,
     height: 300,
