@@ -1,27 +1,36 @@
 /**
  * Resource map showing links between resources that depend on each other.
+ * TODO fix icon flicker
  * TODO allow edge color to be set dynamically
- * TODO legend defining edges and resource types
+ * TODO legend defining edges
  * TODO allow max words in label lines to be controlled
  * TODO don't make hovered labels reflow when they're longer than container
  */
 
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
+import styled, { useTheme } from 'styled-components'
+import { LinkObject } from 'react-force-graph-2d'
 
 import {
   IconsQueryMap,
   replaceFill,
 } from '../../../airtable-cms/AirtableCMSIcon'
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
-import styled, { useTheme } from 'styled-components'
 import { getNodeIdsForLinks } from './helpers/resourceMapHelpers'
 import Legend from './Legend/Legend'
 import Entry from './Legend/Entry'
+
+/**
+ * Icon data from Airtable
+ */
 type Icon = {
   data: { Name: string; Text: string; SVG: any }
 }
 
+/**
+ * Resource map container
+ */
 const CONTAINER_SIZE: number = 500
 const Container = styled.div`
   position: relative;
@@ -31,6 +40,9 @@ const Container = styled.div`
 
 /**
  * Display interactive resource map with provided graph data (nodes and links)
+ * @param selectedNodeId Optional: The ID of the selected node, which may be
+ * styled differently than the others, etc.
+ * @param graphData Optional: The nodes and links. No map shown if undefined.
  * @returns Resource map
  */
 export const ResourceMap: React.FC<{
@@ -66,6 +78,37 @@ export const ResourceMap: React.FC<{
     [graphData, icons, theme]
   )
 
+  /**
+   * Fired when node is clicked to navigate to that node's resource page
+   * @param n The clicked node object
+   */
+  const onNodeClick = useCallback(
+    (n: { url?: string; _id?: string; id?: string | number }): void => {
+      if (n.url !== undefined && n._id !== selectedNodeId) {
+        navigate(n.url)
+      }
+    },
+    [selectedNodeId]
+  )
+  /**
+   * Returns directional arrow length for given link.
+   *
+   * If the link is connected to the hovered node, arrows are shown.
+   *
+   * @param l The link data
+   * @returns The directional arrow length
+   */
+  const getLinkDirectionalArrowLength = useCallback(
+    (l: LinkObject): number => {
+      return (l.source as network.GraphNode)._id === hoveredNode ||
+        (l.target as network.GraphNode)._id === hoveredNode
+        ? 5
+        : 0
+    },
+    [hoveredNode]
+  )
+
+  // return null if no map to show
   if (
     graphData === undefined ||
     graphData.nodes.length === 0 ||
@@ -73,21 +116,8 @@ export const ResourceMap: React.FC<{
   )
     return null
 
-  /**
-   * Fired when node is clicked to navigate to that node's resource page
-   * @param n The clicked node object
-   */
-  const onNodeClick = (n: {
-    url?: string
-    _id?: string
-    id?: string | number
-  }): void => {
-    if (n.url !== undefined && n._id !== selectedNodeId) {
-      navigate(n.url)
-    }
-  }
-
   const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
+
   return (
     <section>
       <p>{citationDesc}</p>
@@ -104,13 +134,7 @@ export const ResourceMap: React.FC<{
         </Legend>
         <network.Network
           containerStyle={{ transition: 'opacity .25s ease-in-out' }}
-          // linkCurvature={0}
-          linkDirectionalArrowLength={l => {
-            return (l.source as network.GraphNode)._id === hoveredNode ||
-              (l.target as network.GraphNode)._id === hoveredNode
-              ? 5
-              : 0
-          }}
+          linkDirectionalArrowLength={getLinkDirectionalArrowLength}
           warmupTicks={1000}
           zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
           interactionSettings={{
