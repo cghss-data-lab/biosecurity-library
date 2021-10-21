@@ -7,7 +7,11 @@ export interface Resource {
     Short_name: string
     Resource_name: string
     Resource_type: string
-    Authoring_organization: string
+    Authoring_organization: {
+      data: {
+        Name: string
+      }
+    }[]
     Key_resource_INTERNAL: true | null
     Key_topic_area: string[]
     Short_description: string
@@ -65,7 +69,7 @@ const useExplorePageData = () => {
       authorizingOrganization: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        distinct(field: data___Authoring_organization)
+        distinct(field: data___Authoring_organization___data___Name)
       }
       groupedResources: allAirtable(
         filter: { table: { eq: "Resource Library" } }
@@ -76,7 +80,11 @@ const useExplorePageData = () => {
               Short_name
               Resource_name
               Resource_type
-              Authoring_organization
+              Authoring_organization {
+                data {
+                  Name
+                }
+              }
               Target_user_role
               Short_description
               Key_topic_area

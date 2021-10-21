@@ -23,7 +23,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
       <h4>
         by{' '}
         <strong>
-          <a href="/">{data.Authoring_organization}</a>
+          <a href="/">{data.Authoring_organization[0].data.Name}</a>
         </strong>
       </h4>
       <p>{data.Short_description}</p>
