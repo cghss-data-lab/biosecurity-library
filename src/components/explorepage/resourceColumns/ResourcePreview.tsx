@@ -106,6 +106,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         ))} */}
         {data.Key_topic_area.map(name => (
           <AirtableCMSIcon
+            noEmitError
             key={name}
             name={name}
             color={theme.colorDarkest}

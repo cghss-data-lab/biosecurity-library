@@ -54,6 +54,7 @@ const Column: React.FC<{
         <IconRow>
           {!expand && <Expand onClick={() => setExpandColumn(name)} />}
           <AirtableCMSIcon
+            noEmitError
             name={resources.fieldValue}
             color={theme.colorGolden}
             style={{ height: 30, gridArea: 'icon' }}

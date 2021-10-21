@@ -85,6 +85,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                   ]?.includes(def.data.Glossary_Name)}
                 >
                   <AirtableCMSIcon
+                    noEmitError
                     name={def.data.Glossary_Name}
                     color={theme.colorBlack}
                     style={{ width: 30, marginRight: 10 }}
