@@ -49,20 +49,6 @@ const IntroSection: React.FC<{
       <h3>
         <AirtableCMSText name={'First Paragraph'} data={homePageText} />
       </h3>
-      {/* icon component examples */}
-      {/* <AirtableCMSIcon
-        name="Risk assessment"
-        color="rgb(255, 150, 0)"
-        hoverColor="#00FF00"
-        style={{ height: '3.125rem', width: 50 }}
-      />
-      <AirtableCMSIcon
-        name="Risk assessment"
-        color={theme.colorDarker}
-        hoverColor={theme.colorLighter}
-      />
-      <AirtableCMSIcon name="Lab research" color={theme.colorDarker} /> */}
-
       <ResourceSearch {...{ homePageText, resourceSearchData }} />
       <BarChart {...{ homePageResources }} />
     </Section>
