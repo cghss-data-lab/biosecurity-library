@@ -20,6 +20,7 @@ import * as network from '@mvanmaele/mvanmaele-test.viz.network'
 import { getNodeIdsForLinks } from './helpers/resourceMapHelpers'
 import Legend from './Legend/Legend'
 import Entry from './Legend/Entry'
+import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 
 /**
  * Icon data from Airtable
@@ -32,7 +33,7 @@ type Icon = {
  * Resource map container
  */
 const CONTAINER_SIZE: number = 500
-const Container = styled.div`
+const ResourceMapContainer = styled.div`
   position: relative;
   width: 100%;
   height: ${CONTAINER_SIZE}px;
@@ -43,12 +44,15 @@ const Container = styled.div`
  * @param selectedNodeId Optional: The ID of the selected node, which may be
  * styled differently than the others, etc.
  * @param graphData Optional: The nodes and links. No map shown if undefined.
+ * @param curvedlinks Optional: True if curved links should be drawn, false if
+ * straight; defaults to true.
  * @returns Resource map
  */
 export const ResourceMap: React.FC<{
   selectedNodeId?: string
   graphData?: network.AppGraphData
-}> = ({ selectedNodeId, graphData }) => {
+  curvedLinks?: boolean
+}> = ({ selectedNodeId, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
   const {
     iconsQueryMap: { nodes: icons },
@@ -122,8 +126,11 @@ export const ResourceMap: React.FC<{
     <section>
       <p>{citationDesc}</p>
       <em>Click resource in map to go to page</em>
-      <Container>
+      <ResourceMapContainer>
         <Legend>
+          {/* Link direction legend */}
+          {curvedLinks && <CurvedEdgeEntry nodeColor={theme.colorDarker} />}
+          {/* Resource type icons legend */}
           {icons
             .filter(icon => {
               return graphData?.nodes.map(n => n._icon).includes(icon.data.Name)
@@ -135,6 +142,7 @@ export const ResourceMap: React.FC<{
         <network.Network
           containerStyle={{ transition: 'opacity .25s ease-in-out' }}
           linkDirectionalArrowLength={getLinkDirectionalArrowLength}
+          linkCurvature={curvedLinks ? 0.5 : 0}
           warmupTicks={1000}
           zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
           interactionSettings={{
@@ -147,7 +155,7 @@ export const ResourceMap: React.FC<{
           initGraphData={formattedGraphData}
           {...{ hoveredNode, setHoveredNode }}
         />
-      </Container>
+      </ResourceMapContainer>
     </section>
   )
 }
