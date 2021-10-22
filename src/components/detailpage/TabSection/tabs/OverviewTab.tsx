@@ -1,9 +1,11 @@
 import React from 'react'
+import * as network from '@mvanmaele/mvanmaele-test.viz.network'
+
 import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
 import ResourceMap from '../../ResourceMap/ResourceMap'
-import * as network from '@mvanmaele/mvanmaele-test.viz.network'
+// import { InfoTip } from '../../../ui/InfoTip'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => {
   const graphData: network.AppGraphData =
