@@ -20,7 +20,7 @@ const tabs: Tab[] = [
   { id: 'users', label: 'Users' },
   { id: 'access', label: 'Access & contact information' },
   { id: 'releases', label: 'Releases and updates' },
-  { id: 'technical', label: 'Technical information' },
+  // { id: 'technical', label: 'Technical information' },
 ]
 
 const TabSection: React.FC<PageContext> = ({ data }) => {
