@@ -23,8 +23,8 @@ const PageButton = styled.button<{ active: boolean }>`
 `
 
 interface CarouselDotsProps {
-  pages: React.ReactElement[]
   activeIndex: number
+  pages: ReturnType<typeof React.Children.toArray>
   onClick: (e: React.MouseEvent, index: number) => void
 }
 

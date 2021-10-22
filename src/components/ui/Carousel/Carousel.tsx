@@ -13,11 +13,11 @@ interface CarouselProps {
 }
 
 const Carousel = ({ children, className }: CarouselProps): JSX.Element => {
-  const pages = React.Children.toArray(children) as React.ReactElement[]
-
-  console.log(pages)
+  const pages = React.Children.toArray(children)
 
   const [activeIndex, setActiveIndex] = useState(0)
+
+  console.log(pages)
 
   return (
     <Section className={className}>
