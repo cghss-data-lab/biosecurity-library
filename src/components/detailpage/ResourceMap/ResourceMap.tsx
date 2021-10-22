@@ -144,7 +144,7 @@ export const ResourceMap: React.FC<{
   const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5
   const hideTipForLabeledNodes = (n: any) => {
-    if (showAllNodeLabels) return undefined
+    if (showAllNodeLabels) return ''
     const isSelectedNode: boolean =
       selectedNode !== undefined && selectedNode.Record_ID_INTERNAL === n._id
 
@@ -153,7 +153,7 @@ export const ResourceMap: React.FC<{
         <WrappedLabel>{n._label}</WrappedLabel>
       </NodeHoverLabel>
     )
-    return !isSelectedNode ? label : undefined
+    return !isSelectedNode ? label : ''
   }
   return (
     <section>
