@@ -5,6 +5,7 @@ import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 import BarChart from './barChart/BarChart'
+import CarouselSection from './CarouselSection'
 import ResourceSearch from './ResourceSearch'
 
 // import { useTheme } from 'styled-components'
@@ -41,6 +42,7 @@ const IntroSection = (): JSX.Element => {
         <AirtableCMSText name={'First Paragraph'} data={homePageText} />
       </h3>
       <ResourceSearch />
+      <CarouselSection />
       <BarChart />
     </Section>
   )
