@@ -14,6 +14,10 @@ import Header from '../components/detailpage/Header/Header'
 import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
 import TabSection from '../components/detailpage/TabSection/TabSection'
 
+/**
+ * Resource Airtable fields that link to other records
+ */
+export type LinkField = 'Auto_other_resources_cited'
 export interface PageContext {
   data: {
     Record_ID_INTERNAL: string
@@ -39,7 +43,11 @@ export interface PageContext {
     Last_update_date: string
     Update_frequency: string
     Topic_area_icons: string
-    Auto_other_resources_cited: string[]
+    Auto_other_resources_cited: {
+      data: {
+        Record_ID_INTERNAL: string
+      }
+    }[]
     // Topic_area_icons: string
     Files_INTERNAL: {
       localFiles: {

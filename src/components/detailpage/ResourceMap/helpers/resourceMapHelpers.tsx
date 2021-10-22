@@ -7,7 +7,7 @@
  *    getNodeIdsForLinks
  *    LinkDirections
  */
-import { PageContext } from '../../../../templates/Detail'
+import { LinkField, PageContext } from '../../../../templates/Detail'
 import {
   AppGraphData,
   GraphNode,
@@ -58,7 +58,7 @@ class MissingNodeError extends Error {
  */
 export function getFullResourceMapData(
   queryResponse: { data: PageContext['data'] }[],
-  linkFields: (keyof PageContext['data'])[],
+  linkFields: LinkField[],
   nameField: keyof Omit<PageContext['data'], 'resourceMapData'>, // omit undef
   idField: DefinedPageDataFields,
   iconField: DefinedPageDataFields
@@ -86,19 +86,18 @@ export function getFullResourceMapData(
 
     // add one link per connection
     linkFields.forEach(lf => {
-      if (
-        data[lf] !== null &&
-        typeof data[lf] === 'object' &&
-        (data[lf] as string[]).length !== undefined
-      ) {
-        ;(data[lf] as string[]).forEach(rId => {
-          const otherNode: GraphNode | undefined = nodes.find(n => {
-            return n._id === rId
-          })
-          if (otherNode === undefined) throw new MissingNodeError(rId)
-          links.push({ source: node._id, target: otherNode._id, value: 1 })
+      // get unique IDs in link field for record
+      const linkFieldIds: string[] =
+        data[lf] !== null
+          ? [...new Set(data[lf].map(d => d.data.Record_ID_INTERNAL))]
+          : []
+      linkFieldIds.forEach(rId => {
+        const otherNode: GraphNode | undefined = nodes.find(n => {
+          return n._id === rId
         })
-      }
+        if (otherNode === undefined) throw new MissingNodeError(rId)
+        links.push({ source: node._id, target: otherNode._id, value: 1 })
+      })
     })
   })
 
@@ -124,7 +123,6 @@ export function getResourceMapData(
         ` "allResourceMapData" but not found: ${resourceId}.`
     )
 
-  // return { nodes: [], links: [] }
   return getNeighborhood(node, allResourceMapData, 1)
 }
 
