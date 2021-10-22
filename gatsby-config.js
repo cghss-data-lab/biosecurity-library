@@ -92,4 +92,7 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-mdx',
   ],
+  flags: {
+    PARALLEL_QUERY_RUNNING: true,
+  },
 }
