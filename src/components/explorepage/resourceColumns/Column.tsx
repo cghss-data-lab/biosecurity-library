@@ -16,6 +16,7 @@ const ColumnContainer = styled.div<{ expand: boolean }>`
   border-radius: 5px;
 `
 const Header = styled.header`
+  position: sticky;
   color: ${({ theme }) => theme.colorWhite};
   text-align: center;
   padding: 10px;
@@ -67,9 +68,11 @@ const Column: React.FC<{
         </ResourceCount>
       </Header>
       {resources &&
-        resources.nodes.map(({ data }) => (
-          <ResourcePreview key={data.Short_name} {...{ data, expand }} />
-        ))}
+        resources.nodes
+          .sort((a, b) => a.data.Short_name.localeCompare(b.data.Short_name))
+          .map(({ data }) => (
+            <ResourcePreview key={data.Short_name} {...{ data, expand }} />
+          ))}
     </ColumnContainer>
   )
 }
