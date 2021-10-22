@@ -144,7 +144,7 @@ export const ResourceMap: React.FC<{
               label={'This resource'}
               value={selectedNode.Resource_type}
               frameColor={theme.colorYellow}
-              frame={'hexagon'}
+              frameShape={'hexagon'}
             />
           )}
           <IconEntries

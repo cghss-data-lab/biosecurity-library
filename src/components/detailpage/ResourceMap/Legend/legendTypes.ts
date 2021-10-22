@@ -1,10 +1,10 @@
-export type IconFrame = 'hexagon'
+export type IconFrameShape = 'hexagon'
 export type Frameable =
   | {
-      frame?: undefined
+      frameShape?: undefined
       frameColor: never
     }
   | {
-      frame?: IconFrame
+      frameShape?: IconFrameShape
       frameColor?: string
     }
