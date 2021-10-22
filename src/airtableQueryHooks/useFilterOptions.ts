@@ -23,7 +23,7 @@ const useFilterOptions = () => {
       Authoring_organization: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        distinct(field: data___Authoring_organization)
+        distinct(field: data___Authoring_organization___data___Name)
       }
       User_roll_up: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         distinct(field: data___User_roll_up)

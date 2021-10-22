@@ -85,7 +85,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         </ThumbnailContainer>
       )}
       <Title to={urls.getDetailURL(data)}>{data.Short_name}</Title>
-      <Author>{data.Authoring_organization}</Author>
+      <Author>{data.Authoring_organization[0].data.Name}</Author>
       <IconContainer>
         {/* The Topic Area Icons column doesn't exist right now */}
         {/* {JSON.parse(data.Topic_area_icons).map((name: string) => (
@@ -98,6 +98,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         ))} */}
         {data.Key_topic_area.map(name => (
           <AirtableCMSIcon
+            noEmitError
             key={name}
             name={name}
             color={theme.colorDarkest}
