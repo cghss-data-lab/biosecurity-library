@@ -6,7 +6,7 @@ import ImageHeader from '../components/homepage/ImageHeader'
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
 import IntroSection from '../components/homepage/IntroSection'
-import Carousel from '../components/homepage/Carousel/Carousel'
+import Carousel from '../components/ui/Carousel/Carousel'
 
 const IndexPage = (): JSX.Element => (
   <FigmaProvider>
