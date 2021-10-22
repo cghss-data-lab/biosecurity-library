@@ -1,8 +1,8 @@
 /**
  * Resource map showing links between resources that depend on each other.
+ *
  * TODO fix icon flicker
  * TODO allow edge color to be set dynamically
- * TODO legend defining edges
  * TODO allow max words in label lines to be controlled
  * TODO don't make hovered labels reflow when they're longer than container
  */
