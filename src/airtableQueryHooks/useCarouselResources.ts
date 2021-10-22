@@ -28,7 +28,7 @@ const useCaroselData = (): CaroselResourceData => {
         caroselResources: allAirtable(
           filter: {
             table: { eq: "Resource Library" }
-            data: { Key_resource_INTERNAL: { eq: true } }
+            data: { Seminal_resource: { eq: "Yes" } }
           }
         ) {
           nodes {
@@ -38,8 +38,6 @@ const useCaroselData = (): CaroselResourceData => {
               Resource_type
               Short_description
               Key_topic_area
-              Key_resource_INTERNAL
-              User_roll_up
               Authoring_organization {
                 data {
                   Name
