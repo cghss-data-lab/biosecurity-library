@@ -11,6 +11,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
+import { renderToString } from 'react-dom/server'
 
 import {
   IconsQueryMap,
@@ -22,6 +23,7 @@ import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'
 import { PageContext } from '../../../templates/Detail'
+import WrappedLabel from './Legend/WrappedLabel'
 
 /**
  * Icon data from Airtable
@@ -30,14 +32,24 @@ export type Icon = {
   data: { Name: string; Text: string; SVG: any }
 }
 
-/**
- * Resource map container
- */
-const CONTAINER_SIZE: number = 500
 const ResourceMapContainer = styled.div`
+  z-index: 0;
   position: relative;
   width: 100%;
-  height: ${CONTAINER_SIZE}px;
+  height: 500px;
+`
+
+const NodeHoverLabel = styled.div`
+  z-index: 2;
+  font-weight: 600;
+  border: 1px solid ${({ theme }) => theme.colorDarker};
+  border-radius: 5px;
+  color: ${({ theme }) => theme.colorDarker};
+  background-color: #ffffff;
+  margin: -5px;
+  padding: 0 0.25em;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.66;
 `
 
 /**
@@ -130,7 +142,19 @@ export const ResourceMap: React.FC<{
     return null
 
   const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
+  const showAllNodeLabels: boolean = graphData.nodes.length <= 5
+  const hideTipForLabeledNodes = (n: any) => {
+    if (showAllNodeLabels) return undefined
+    const isSelectedNode: boolean =
+      selectedNode !== undefined && selectedNode.Record_ID_INTERNAL === n._id
 
+    const label = renderToString(
+      <NodeHoverLabel {...{ theme }}>
+        <WrappedLabel>{n._label}</WrappedLabel>
+      </NodeHoverLabel>
+    )
+    return !isSelectedNode ? label : undefined
+  }
   return (
     <section>
       <p>{citationDesc}</p>
@@ -165,6 +189,7 @@ export const ResourceMap: React.FC<{
           }}
         >
           <network.Network
+            nodeLabel={hideTipForLabeledNodes}
             containerStyle={{ transition: 'opacity .25s ease-in-out' }}
             linkDirectionalArrowLength={getLinkDirectionalArrowLength}
             linkCurvature={curvedLinks ? 0.5 : 0}
@@ -333,6 +358,8 @@ function getFormattedNodes(
 ): network.GraphNode[] {
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5
   return graphData.nodes.map(n => {
+    const isSelectedNode: boolean =
+      selectedNode !== undefined && selectedNode._id === n._id
     const iconName: string = n._icon !== '' ? n._icon : ''
     const icon: Icon | undefined = icons.find(
       icon => icon.data.Name === iconName
@@ -350,7 +377,7 @@ function getFormattedNodes(
       _showLabel: showAllNodeLabels,
       _color: theme.colorDarker,
     }
-    if (selectedNode !== undefined && selectedNode._id === n._id)
+    if (isSelectedNode)
       return {
         ...updatedN,
         _labelYOffset: 4,
