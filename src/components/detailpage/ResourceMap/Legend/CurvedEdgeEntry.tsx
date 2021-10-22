@@ -3,7 +3,7 @@
  */
 import React, { useMemo } from 'react'
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { AppGraphData, initNode } from '@mvanmaele/mvanmaele-test.viz.network'
 const LinkLegendContainer = styled.div`
   position: relative;
@@ -14,20 +14,23 @@ const LinkLegendContainer = styled.div`
 `
 
 export const CurvedEdgeEntry = ({ nodeColor }: { nodeColor: string }) => {
+  const theme: any = useTheme()
   const legendGraphData: AppGraphData = useMemo(() => {
     return {
       nodes: [initNode('Cited', 1), initNode('Citing', 2)].map(n => {
         return {
           ...n,
           _color: nodeColor,
-          _labelColor: 'black',
+          _labelColor: theme.colorBlack,
           _labelFontWeight: '600',
+          _labelYOffset: 0,
           _fontSize: 14.4,
         }
       }),
       links: [{ source: 2, target: 1, value: 1 }],
     }
-  }, [nodeColor])
+  }, [theme, nodeColor])
+
   return (
     <LinkLegendContainer>
       <network.Network
