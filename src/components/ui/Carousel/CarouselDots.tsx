@@ -24,21 +24,21 @@ const PageButton = styled.button<{ active: boolean }>`
 
 interface CarouselDotsProps {
   pages: React.ReactElement[]
-  active: number
-  setActive: React.Dispatch<React.SetStateAction<number>>
+  activeIndex: number
+  onClick: (e: React.MouseEvent, index: number) => void
 }
 
 const CarouselDots = ({
   pages,
-  active,
-  setActive,
+  activeIndex,
+  onClick,
 }: CarouselDotsProps): JSX.Element => (
   <ButtonContainer>
     {pages.map((_, index) => (
       <PageButton
         key={index}
-        active={index === active}
-        onClick={() => setActive(index)}
+        active={index === activeIndex}
+        onClick={e => onClick(e, index)}
       />
     ))}
   </ButtonContainer>

@@ -17,12 +17,15 @@ const Carousel = ({ children, className }: CarouselProps): JSX.Element => {
 
   console.log(pages)
 
-  const [active, setActive] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   return (
     <Section className={className}>
-      <CarouselDots {...{ pages, active, setActive }} />
-      {pages[active]}
+      <CarouselDots
+        onClick={(_, index) => setActiveIndex(index)}
+        {...{ pages, activeIndex }}
+      />
+      {pages[activeIndex]}
     </Section>
   )
 }
