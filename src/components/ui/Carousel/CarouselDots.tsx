@@ -5,6 +5,7 @@ const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-bottom: 15px;
 `
 const PageButton = styled.button<{ active: boolean }>`
   border: none;

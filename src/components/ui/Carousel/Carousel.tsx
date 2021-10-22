@@ -17,7 +17,7 @@ const Carousel = ({ children, className }: CarouselProps): JSX.Element => {
 
   const [activeIndex, setActiveIndex] = useState(0)
 
-  console.log(pages)
+  // console.log(pages)
 
   return (
     <Section className={className}>
