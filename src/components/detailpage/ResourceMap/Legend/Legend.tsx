@@ -1,6 +1,13 @@
+/**
+ * Resource map legend
+ */
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
+/**
+ * Legend container floats to left of resource map graphic.
+ */
+// TODO responsiveness: move beneath graphic on narrow screens.
 const LegendContainer = styled.div`
   z-index: 1;
   position: absolute;
