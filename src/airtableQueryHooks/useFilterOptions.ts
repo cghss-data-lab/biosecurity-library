@@ -15,6 +15,9 @@ const useFilterOptions = () => {
       ) {
         distinct(field: data___Target_user_role)
       }
+      User_roll_up: allAirtable(filter: { table: { eq: "Resource Library" } }) {
+        distinct(field: data___User_roll_up)
+      }
       Key_topic_area: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
@@ -24,9 +27,6 @@ const useFilterOptions = () => {
         filter: { table: { eq: "Resource Library" } }
       ) {
         distinct(field: data___Authoring_organization___data___Name)
-      }
-      User_roll_up: allAirtable(filter: { table: { eq: "Resource Library" } }) {
-        distinct(field: data___User_roll_up)
       }
     }
   `)
