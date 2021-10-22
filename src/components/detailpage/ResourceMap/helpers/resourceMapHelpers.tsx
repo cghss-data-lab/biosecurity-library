@@ -142,6 +142,7 @@ export function initResourceMapNode(
   return {
     url: urls.getDetailURL(data),
     _label: data[nameField].toString(),
+    _labelFontWeight: '600',
     _id: data[idField].toString(),
     _color: '#063968', // TODO dynamically define color from design
     _shape: 'circle',
