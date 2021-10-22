@@ -1,3 +1,9 @@
+/**
+ * Resource map legend entry based on an Airtable icon, possible w/ a frame
+ */
+
+// TODO add docs
+
 import React, { FC } from 'react'
 import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
@@ -30,7 +36,7 @@ type LegendEntryProps = {
   color?: string
 } & Frameable
 
-const Entry: FC<LegendEntryProps> = ({
+const AirtableIconEntry: FC<LegendEntryProps> = ({
   label,
   value,
   color,
@@ -41,16 +47,26 @@ const Entry: FC<LegendEntryProps> = ({
   return (
     <LegendEntryContainer>
       <LegendIconContainer>
-        {frame === 'hexagon' && <Hexagon color={frameColor || 'lightgray'} />}
-        <AirtableCMSIcon
-          name={value}
-          color={color === undefined ? theme.colorDarker : color}
-          style={{ height: 30 }}
-        />
+        {frame === 'hexagon' && (
+          <Hexagon color={frameColor || 'lightgray'}>
+            <AirtableCMSIcon
+              name={value}
+              color={color === undefined ? theme.colorDarker : color}
+              style={{ height: 30 }}
+            />
+          </Hexagon>
+        )}
+        {frame === undefined && (
+          <AirtableCMSIcon
+            name={value}
+            color={color === undefined ? theme.colorDarker : color}
+            style={{ height: 30 }}
+          />
+        )}
       </LegendIconContainer>
       <WrappedLabel>{label}</WrappedLabel>
     </LegendEntryContainer>
   )
 }
 
-export default Entry
+export default AirtableIconEntry
