@@ -93,12 +93,28 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
 // disabling source maps in prod build... I just don't see any benefit to it.
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
+  stage,
+  loaders,
   getConfig,
   actions,
 }) => {
   if (getConfig().mode === 'production') {
+    // disabling source maps in prod build... I just don't see any benefit to it.
     actions.setWebpackConfig({
       devtool: false,
+    })
+  }
+  if (stage === 'build-html' || stage === 'develop-html') {
+    // disabling webpack evaluation of react-force-graph-2d during SSR
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /force-graph/,
+            use: loaders.null(),
+          },
+        ],
+      },
     })
   }
 }
