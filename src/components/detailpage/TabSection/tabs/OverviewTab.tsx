@@ -5,7 +5,7 @@ import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
 import ResourceMap from '../../ResourceMap/ResourceMap'
-// import { InfoTip } from '../../../ui/InfoTip'
+import { InfoTip } from '../../../ui/InfoTip'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => {
   const graphData: network.AppGraphData =
@@ -23,6 +23,7 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => {
       {graphData && graphData.links.length > 0 && (
         <>
           <h5>RESOURCE MAP</h5>
+          <InfoTip />
           <p>
             <ResourceMap selectedNode={data} graphData={graphData} />
           </p>
