@@ -9,6 +9,8 @@ const TabContentContainer = styled.section`
   > h5 {
     margin-top: 30px;
     margin-bottom: 5px;
+    display: flex;
+    align-items: center;
   }
 
   > p {
