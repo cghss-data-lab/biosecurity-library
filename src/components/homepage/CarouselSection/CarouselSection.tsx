@@ -1,9 +1,9 @@
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled from 'styled-components'
-import useCaroselData from '../../airtableQueryHooks/useCarouselResources'
+import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
 
-import Carousel from '../ui/Carousel/Carousel'
+import Carousel from '../../ui/Carousel/Carousel'
 
 const StyledCarousel = styled(Carousel)`
   margin-top: 30px;

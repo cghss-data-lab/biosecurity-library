@@ -5,7 +5,7 @@ import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 import BarChart from './barChart/BarChart'
-import CarouselSection from './CarouselSection'
+import CarouselSection from './CarouselSection/CarouselSection'
 import ResourceSearch from './ResourceSearch'
 
 // import { useTheme } from 'styled-components'
