@@ -22,7 +22,12 @@ interface InfoTipProps {
 /**
  * Info tooltip displaying the string or React element provided on hover using
  * an Airtable CMS icon named "Info"
- * @param props InfoTipProps
+ *
+ * Note: If using `InfoTip` on same page as `ResourceMap` component, refreshing
+ * the page may cause unexpected `ResourceMap` sizing in develop mode, but this
+ * issue has not yet occurred in builds.
+ *
+ * @param props `InfoTipProps`
  * @returns Info tooltip
  */
 export const InfoTip: FC<InfoTipProps> = ({ content }) => {
