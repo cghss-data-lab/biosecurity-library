@@ -91,7 +91,6 @@ export const createPages: GatsbyNode['createPages'] = async ({
   )
 }
 
-// disabling source maps in prod build... I just don't see any benefit to it.
 export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   stage,
   loaders,
