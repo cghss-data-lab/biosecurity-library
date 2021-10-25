@@ -35,19 +35,19 @@ const CarouselSection = (): JSX.Element => {
 
   return (
     <StyledCarousel>
-      {carouselResources.nodes.map(resource => (
+      {carouselResources.nodes.map(({ data: resource }) => (
         <Card>
-          {resource.data.Thumbnail_INTERNAL && (
+          {resource.Thumbnail_INTERNAL && (
             <GatsbyImage
-              image={getImage(resource.data.Thumbnail_INTERNAL.localFiles[0])!}
-              alt={resource.data.Short_name + 'thumbnail image'}
+              image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
+              alt={resource.Short_name + 'thumbnail image'}
               style={{ width: 100, height: 129, flexShrink: 0, flexGrow: 0 }}
             />
           )}
           <TextContent>
-            <Title>{resource.data.Key_topic_area}</Title>
-            <Title>{resource.data.Resource_name}</Title>
-            <p>{resource.data.Short_description}</p>
+            <Title>{resource.Key_topic_area}</Title>
+            <Title>{resource.Resource_name}</Title>
+            <p>{resource.Short_description}</p>
           </TextContent>
         </Card>
       ))}
