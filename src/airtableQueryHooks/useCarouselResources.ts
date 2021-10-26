@@ -46,7 +46,7 @@ const useCaroselData = (): CaroselResourceData => {
               Thumbnail_INTERNAL {
                 localFiles {
                   childImageSharp {
-                    gatsbyImageData(width: 100, placeholder: BLURRED)
+                    gatsbyImageData(width: 200, placeholder: BLURRED)
                   }
                 }
               }

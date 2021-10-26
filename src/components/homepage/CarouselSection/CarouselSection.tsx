@@ -37,13 +37,15 @@ const CarouselSection = (): JSX.Element => {
     <StyledCarousel>
       {carouselResources.nodes.map(({ data: resource }) => (
         <Card>
-          {resource.Thumbnail_INTERNAL && (
-            <GatsbyImage
-              image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
-              alt={resource.Short_name + 'thumbnail image'}
-              style={{ width: 100, height: 129, flexShrink: 0, flexGrow: 0 }}
-            />
-          )}
+          <div>
+            {resource.Thumbnail_INTERNAL && (
+              <GatsbyImage
+                image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
+                alt={resource.Short_name + 'thumbnail image'}
+                style={{ width: 200 }}
+              />
+            )}
+          </div>
           <TextContent>
             <Title>{resource.Key_topic_area}</Title>
             <Title>{resource.Resource_name}</Title>
