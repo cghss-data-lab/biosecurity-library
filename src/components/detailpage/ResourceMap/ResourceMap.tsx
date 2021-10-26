@@ -7,7 +7,7 @@
  * TODO don't make hovered labels reflow when they're longer than container
  */
 
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
@@ -32,10 +32,13 @@ export type Icon = {
   data: { Name: string; Text: string; SVG: any }
 }
 
+const ResourceMapSection = styled.section`
+  display: flex;
+`
 const ResourceMapContainer = styled.div`
   z-index: 0;
   position: relative;
-  width: 100%;
+  width: 575px;
   height: 500px;
 `
 
@@ -51,6 +54,39 @@ const NodeHoverLabel = styled.div`
   font-family: 'Open Sans', sans-serif;
   line-height: 1.66;
 `
+/**
+ * Returns the minimum horizontal distance in pixels of the current canvas
+ * pixels to the left edge of the canvas element.
+ *
+ * @param c The HTML canvas element
+ * @returns The number of pixels away from the left edge of the canvas of the
+ * non-transparent pixels.
+ */
+function getCanvasPixelsXMin(c: HTMLCanvasElement): number {
+  console.log('getCanvasPixelsXMin')
+
+  const canvasWidth: number = c?.width || 0
+  const canvasHeight: number = c?.height || 0
+  const width: number = c?.getBoundingClientRect().width
+  // if (width === 0) return 0
+  let xMin: number = Infinity
+  const ctx = c.getContext('2d')
+  if (ctx === null) return 0
+
+  for (let i = 0; i < canvasHeight; i++) {
+    const rowData = ctx.getImageData(0, i, canvasWidth, 1)
+    const arr: Uint8ClampedArray = rowData.data
+    for (let j = 0; j < canvasWidth * 4; j += 4) {
+      if (arr[j] !== 0 || arr[j + 1] !== 0 || arr[j + 2] !== 0) {
+        if (j / 4 < xMin) {
+          xMin = j / 4
+        }
+      }
+    }
+  }
+  const scaleFactor: number = width / canvasWidth
+  return scaleFactor * xMin
+}
 
 /**
  * Display interactive resource map with provided graph data (nodes and links)
@@ -67,6 +103,9 @@ export const ResourceMap: React.FC<{
   curvedLinks?: boolean
 }> = ({ selectedNode, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
+  const [mapLeftMargin, setMapLeftMargin] = useState<number>(0)
+  const [positioned, setPositioned] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
   const {
     iconsQueryMap: { nodes: icons },
   } = useStaticQuery<IconsQueryMap>(graphql`
@@ -89,7 +128,6 @@ export const ResourceMap: React.FC<{
     }
   `)
   const theme: any = useTheme()
-
   const formattedGraphData: network.AppGraphData | undefined = useMemo(
     () =>
       formatGraphData(
@@ -100,6 +138,14 @@ export const ResourceMap: React.FC<{
       ),
     [graphData, icons, selectedNode, theme]
   )
+  // useEffect(() => {
+  //   if (ref.current !== null) {
+  //     const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
+  //     if (c !== null) {
+  //       setMapLeftMargin(getCanvasPixelsXMin(c))
+  //     }
+  //   }
+  // }, [ref, formattedGraphData])
 
   const selectedNodeId: string | undefined = selectedNode?.Record_ID_INTERNAL
 
@@ -155,11 +201,12 @@ export const ResourceMap: React.FC<{
     )
     return !isSelectedNode ? label : ''
   }
+
   return (
     <section>
       <p>{citationDesc}</p>
       <em>Click resource in map to go to page</em>
-      <ResourceMapContainer>
+      <ResourceMapSection>
         <Legend>
           <h6>Legend</h6>
           {/* Resource type icons legend */}
@@ -179,34 +226,53 @@ export const ResourceMap: React.FC<{
           {/* Link direction legend */}
           {curvedLinks && <CurvedEdgeEntry nodeColor={theme.colorDarker} />}
         </Legend>
-        <network.SettingsContext.Provider
-          value={{
-            ...network.defaultSettings,
-            nodes: {
-              ...network.defaultSettings.nodes,
-              selectedColor: theme.colorDarker,
-            },
-          }}
+        <ResourceMapContainer
+          style={{ marginLeft: mapLeftMargin }}
+          {...{ ref }}
         >
-          <network.Network
-            nodeLabel={hideTipForLabeledNodes}
-            containerStyle={{ transition: 'opacity .25s ease-in-out' }}
-            linkDirectionalArrowLength={getLinkDirectionalArrowLength}
-            linkCurvature={curvedLinks ? 0.5 : 0}
-            warmupTicks={1000}
-            zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
-            interactionSettings={{
-              enableZoomInteraction: false,
-              enablePanInteraction: false,
-              maxZoom: 5,
+          <network.SettingsContext.Provider
+            value={{
+              ...network.defaultSettings,
+              nodes: {
+                ...network.defaultSettings.nodes,
+                selectedColor: theme.colorDarker,
+              },
             }}
-            onNodeClick={onNodeClick}
-            selectedNode={selectedNodeId}
-            initGraphData={formattedGraphData}
-            {...{ hoveredNode, setHoveredNode }}
-          />
-        </network.SettingsContext.Provider>
-      </ResourceMapContainer>
+          >
+            <network.Network
+              enableNodeDrag={false}
+              onRenderFramePost={() => {
+                if (ref.current !== null && !positioned) {
+                  const c: HTMLCanvasElement | null =
+                    ref.current.querySelector('canvas')
+                  if (c !== null) {
+                    const xMin: number = getCanvasPixelsXMin(c)
+                    if (xMin !== Infinity) {
+                      setPositioned(true)
+                      setMapLeftMargin(-1 * xMin + 100)
+                    }
+                  }
+                }
+              }}
+              nodeLabel={hideTipForLabeledNodes}
+              containerStyle={{ transition: 'opacity .25s ease-in-out' }}
+              linkDirectionalArrowLength={getLinkDirectionalArrowLength}
+              linkCurvature={curvedLinks ? 0.5 : 0}
+              warmupTicks={1000}
+              zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
+              interactionSettings={{
+                enableZoomInteraction: false,
+                enablePanInteraction: false,
+                maxZoom: 5,
+              }}
+              onNodeClick={onNodeClick}
+              selectedNode={selectedNodeId}
+              initGraphData={formattedGraphData}
+              {...{ hoveredNode, setHoveredNode }}
+            />
+          </network.SettingsContext.Provider>
+        </ResourceMapContainer>
+      </ResourceMapSection>
     </section>
   )
 }
