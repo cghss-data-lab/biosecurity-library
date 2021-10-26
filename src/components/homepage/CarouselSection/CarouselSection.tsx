@@ -1,6 +1,7 @@
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
+import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
 
 import Carousel from '../../ui/Carousel/Carousel'
@@ -13,25 +14,38 @@ const Card = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.colorLightest};
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding: 40px 90px;
   display: flex;
 `
 const TextContent = styled.div`
   margin-left: 15px;
 `
-const Title = styled.div`
+const ResourceType = styled.div`
+  display: flex;
+  align-items: center;
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
   color: ${({ theme }) => theme.colorDarkest};
+  margin-bottom: 24px;
+`
+
+const Title = styled.div`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 33px;
+  color: ${({ theme }) => theme.colorDarkest};
 `
 
 const CarouselSection = (): JSX.Element => {
   const carouselResources = useCaroselData()
 
-  // console.log(carouselResources)
+  const theme: any = useTheme()
 
   return (
     <StyledCarousel>
@@ -47,7 +61,14 @@ const CarouselSection = (): JSX.Element => {
             )}
           </div>
           <TextContent>
-            <Title>{resource.Key_topic_area}</Title>
+            <ResourceType>
+              <AirtableCMSIcon
+                name={resource.Resource_type}
+                color={theme.colorDarkest}
+                style={{ width: 24, height: 24, marginRight: 8 }}
+              />
+              {resource.Resource_type}
+            </ResourceType>
             <Title>{resource.Resource_name}</Title>
             <p>{resource.Short_description}</p>
           </TextContent>
