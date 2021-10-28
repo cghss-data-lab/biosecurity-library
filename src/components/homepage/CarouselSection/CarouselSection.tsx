@@ -6,6 +6,10 @@ import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
 
 import Carousel from '../../ui/Carousel/Carousel'
 
+const H2 = styled.h2`
+  text-align: center;
+  margin-top: 80px !important;
+`
 const StyledCarousel = styled(Carousel)`
   margin-top: 30px;
 `
@@ -16,6 +20,7 @@ const Card = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding: 40px 90px;
   display: flex;
+  min-height: 575px;
 `
 const TextContent = styled.div`
   margin-left: 15px;
@@ -62,44 +67,47 @@ const CarouselSection = (): JSX.Element => {
   const theme: any = useTheme()
 
   return (
-    <StyledCarousel>
-      {carouselResources.nodes.map(({ data: resource }) => (
-        <Card>
-          <div>
-            {resource.Thumbnail_INTERNAL && (
-              <GatsbyImage
-                image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
-                alt={resource.Short_name + 'thumbnail image'}
-                style={{ width: 200 }}
-              />
-            )}
-          </div>
-          <TextContent>
-            <ResourceType>
-              <AirtableCMSIcon
-                name={resource.Resource_type}
-                color={theme.colorDarkest}
-                style={{ width: 24, height: 24, marginRight: 8 }}
-              />
-              {resource.Resource_type}
-            </ResourceType>
-            <Title>{resource.Resource_name}</Title>
-            <ShortName>{resource.Short_name}</ShortName>
-            <Author>{resource.Authoring_organization[0].data.Name}</Author>
-            <Description>{resource.Short_description}</Description>
-            <KeyTopicArea>
-              {resource.Key_topic_area.map(topic => (
-                <AirtableCMSIcon
-                  noEmitError
-                  name={topic}
-                  color={theme.colorDarkest}
+    <>
+      <H2>Explore key biosafety resources</H2>
+      <StyledCarousel>
+        {carouselResources.nodes.map(({ data: resource }) => (
+          <Card>
+            <div>
+              {resource.Thumbnail_INTERNAL && (
+                <GatsbyImage
+                  image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
+                  alt={resource.Short_name + 'thumbnail image'}
+                  style={{ width: 200 }}
                 />
-              ))}
-            </KeyTopicArea>
-          </TextContent>
-        </Card>
-      ))}
-    </StyledCarousel>
+              )}
+            </div>
+            <TextContent>
+              <ResourceType>
+                <AirtableCMSIcon
+                  name={resource.Resource_type}
+                  color={theme.colorDarkest}
+                  style={{ width: 24, height: 24, marginRight: 8 }}
+                />
+                {resource.Resource_type}
+              </ResourceType>
+              <Title>{resource.Resource_name}</Title>
+              <ShortName>{resource.Short_name}</ShortName>
+              <Author>{resource.Authoring_organization[0].data.Name}</Author>
+              <Description>{resource.Short_description}</Description>
+              <KeyTopicArea>
+                {resource.Key_topic_area.map(topic => (
+                  <AirtableCMSIcon
+                    noEmitError
+                    name={topic}
+                    color={theme.colorDarkest}
+                  />
+                ))}
+              </KeyTopicArea>
+            </TextContent>
+          </Card>
+        ))}
+      </StyledCarousel>
+    </>
   )
 }
 
