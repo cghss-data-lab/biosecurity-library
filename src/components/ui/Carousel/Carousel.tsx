@@ -17,22 +17,28 @@ const Page = styled.div`
   transition: 0ms;
   transform: translate(0);
 `
-const Next = styled.div`
-  position: absolute;
-  top: 0;
-  left: calc(100% + 15px);
-  width: 100%;
-`
-const Active = styled.div`
-  position: relative;
-  width: 100%;
-`
-const Prev = styled.div`
-  position: absolute;
-  top: 0;
-  right: calc(100% + 15px);
-  width: 100%;
-`
+// these styles are objects, instead of styled components,
+// so that the divs they're applied to don't re-mount all
+// the children each render cycle, which is inefficient
+// and can cause a flicker when child components trigger
+// effects.
+const tempPageStyle: React.CSSProperties = {
+  position: 'absolute',
+  top: 0,
+  width: '100%',
+}
+const nextStyle: React.CSSProperties = {
+  ...tempPageStyle,
+  left: 'calc(100% + 15px)',
+}
+const prevStyle: React.CSSProperties = {
+  ...tempPageStyle,
+  right: 'calc(100% + 15px)',
+}
+const activeStyle: React.CSSProperties = {
+  position: 'relative',
+  width: '100%',
+}
 
 interface CarouselProps {
   /**
@@ -74,7 +80,7 @@ export interface CarouselState {
 const Carousel = ({
   children,
   className,
-  transition = 250,
+  transition = 2000,
   buttonColor = '#316DA4',
   disabledButtonColor = '#EAEBED',
   dotColor = buttonColor,
@@ -108,18 +114,20 @@ const Carousel = ({
             transition: `${translate !== '0' ? transition + 'ms' : '0ms'}`,
           }}
         >
-          <Prev
+          <div
             key={state.prevIndex}
             style={{
+              ...prevStyle,
               opacity: state.prevIndex !== undefined ? '1' : '0',
               transition: `${transition}ms`,
             }}
           >
             {state.prevIndex !== undefined && pages[state.prevIndex]}
-          </Prev>
-          <Active
+          </div>
+          <div
             key={state.activeIndex}
             style={{
+              ...activeStyle,
               opacity:
                 state.prevIndex !== undefined || state.nextIndex !== undefined
                   ? '0'
@@ -128,16 +136,17 @@ const Carousel = ({
             }}
           >
             {pages[state.activeIndex]}
-          </Active>
-          <Next
+          </div>
+          <div
             key={state.nextIndex}
             style={{
+              ...nextStyle,
               opacity: state.nextIndex !== undefined ? '1' : '0',
               transition: `${transition}ms`,
             }}
           >
             {state.nextIndex !== undefined && pages[state.nextIndex]}
-          </Next>
+          </div>
         </Page>
         <PrevButton
           color={buttonColor}
