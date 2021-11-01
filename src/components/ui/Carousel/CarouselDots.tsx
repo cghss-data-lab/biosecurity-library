@@ -7,12 +7,16 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
   margin-bottom: 15px;
 `
-const PageButton = styled.button<{ active: boolean }>`
+const PageButton = styled.button<{
+  active: boolean
+  dotColor: string
+  inactiveDotColor: string
+}>`
   border: none;
   background: none;
   width: 15px;
   height: 15px;
-  background-color: ${({ theme }) => theme.colorLightGray};
+  background-color: ${({ inactiveDotColor }) => inactiveDotColor};
   border-radius: 50%;
   margin-right: 25px;
 
@@ -20,10 +24,10 @@ const PageButton = styled.button<{ active: boolean }>`
     margin-right: 0;
   }
 
-  ${({ active, theme }) =>
+  ${({ active, dotColor }) =>
     active &&
     `
-    background-color: ${theme.colorDarkest}
+    background-color: ${dotColor}
   `}
 `
 
@@ -31,12 +35,16 @@ interface CarouselDotsProps {
   activeIndex: number
   pages: ReturnType<typeof React.Children.toArray>
   onClick: (e: React.MouseEvent, index: number) => void
+  dotColor: string
+  inactiveDotColor: string
 }
 
 const CarouselDots = ({
   pages,
   activeIndex,
   onClick,
+  dotColor,
+  inactiveDotColor,
 }: CarouselDotsProps): JSX.Element => (
   <ButtonContainer>
     {pages.map((_, index) => (
@@ -44,6 +52,7 @@ const CarouselDots = ({
         key={index}
         active={index === activeIndex}
         onClick={e => onClick(e, index)}
+        {...{ dotColor, inactiveDotColor }}
       />
     ))}
   </ButtonContainer>
