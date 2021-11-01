@@ -88,13 +88,14 @@ const Carousel = ({
   return (
     <Section className={className}>
       <CarouselDots
+        activeIndex={state.activeIndex}
         onClick={(_, index) => {
           if (index === state.activeIndex) return
           if (index < state.activeIndex)
             setState(prev => ({ ...prev, prevIndex: index }))
           else setState(prev => ({ ...prev, nextIndex: index }))
         }}
-        {...{ pages, activeIndex: state.activeIndex }}
+        {...{ pages, dotColor, inactiveDotColor }}
       />
       <Page
         style={{
