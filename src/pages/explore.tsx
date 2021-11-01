@@ -19,6 +19,7 @@ import ActiveFilters from '../components/explorepage/FilterBar/ActiveFilters'
 import useExplorePageData, {
   ResourceGroup,
 } from '../airtableQueryHooks/useExplorePageData'
+import ImageHeader from '../components/layout/ImageHeader'
 
 const BannerImage = styled(AirtableCMSImage)`
   width: calc(100% - 10px);
@@ -70,7 +71,7 @@ const ExplorePage: React.FC<PageProps> = () => {
   return (
     <FigmaProvider>
       <NavBar />
-      <BannerImage name={'Banner Image'} data={explorePageText} />
+      <ImageHeader cmsData={explorePageText} />
       <Main>
         <Header>
           <h1>
