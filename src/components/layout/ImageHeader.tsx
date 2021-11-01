@@ -7,6 +7,8 @@ import { AirtableCMSData } from '../../airtable-cms/types'
 const ImageSection = styled.section`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 5px;
+  padding: 5px;
   width: 100%;
   overflow: hidden;
 `
