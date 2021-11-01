@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import AirtableCMSImage from '../../airtable-cms/AirtableCMSImage'
-import useHomePageData from '../../airtableQueryHooks/useHomePageData'
+import { AirtableCMSData } from '../../airtable-cms/types'
 
 const ImageSection = styled.section`
   display: grid;
@@ -16,15 +16,16 @@ const StyledImage = styled(AirtableCMSImage)`
   width: 100%;
 `
 
-const ImageHeader = (): JSX.Element => {
-  const { homePageText } = useHomePageData()
-  return (
-    <ImageSection>
-      <StyledImage name={'Left Image'} data={homePageText} />
-      <StyledImage name={'Center Image'} data={homePageText} />
-      <StyledImage name={'Right Image'} data={homePageText} />
-    </ImageSection>
-  )
-}
+const ImageHeader = ({
+  cmsData,
+}: {
+  cmsData: AirtableCMSData
+}): JSX.Element => (
+  <ImageSection>
+    <StyledImage name={'Left image'} data={cmsData} />
+    <StyledImage name={'Center image'} data={cmsData} />
+    <StyledImage name={'Right image'} data={cmsData} />
+  </ImageSection>
+)
 
 export default ImageHeader
