@@ -18,11 +18,12 @@ const SearchControls = styled.div`
   max-width: 900px;
   margin: 0 auto;
 `
-
+const SearchBoxContainer = styled.div`
+  margin-left: 40px;
+  flex-grow: 1;
+`
 const StyledTypeaheadControl = styled(TypeaheadControl)`
   margin-top: 0 !important;
-  margin-left: 15px;
-  flex-grow: 1;
 
   > input {
     height: unset;
@@ -42,6 +43,12 @@ const StyledTypeaheadControl = styled(TypeaheadControl)`
     right: 18px;
   }
 `
+const Examples = styled.p`
+  padding-top: 15px;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  color: ${({ theme }) => theme.colorDarkGray} !important;
+`
 
 const ResourceSearch = (): JSX.Element => {
   const { homePageText, resourceSearchData } = useHomePageData()
@@ -59,24 +66,28 @@ const ResourceSearch = (): JSX.Element => {
       <ButtonLink to="/explore">
         <AirtableCMSText name={'Button Text'} data={homePageText} />
       </ButtonLink>
-      <StyledTypeaheadControl
-        className={''}
-        placeholder={getCMSText(homePageText, 'Search Placeholder') ?? ''}
-        items={resources}
-        values={[]}
-        onAdd={resource => {
-          if (resource)
-            navigate(
-              `/resource/` +
-                urlString(resource.Resource_Type) +
-                urlString(resource.key)
-            )
-        }}
-        onRemove={() => {}}
-        RenderItem={({ item: { label } }) => (
-          <TypeaheadResult>{label}</TypeaheadResult>
-        )}
-      />
+      <SearchBoxContainer>
+        <StyledTypeaheadControl
+          placeholder={getCMSText(homePageText, 'Search Placeholder') ?? ''}
+          items={resources}
+          values={[]}
+          onAdd={resource => {
+            if (resource)
+              navigate(
+                `/resource/` +
+                  urlString(resource.Resource_Type) +
+                  urlString(resource.key)
+              )
+          }}
+          onRemove={() => {}}
+          RenderItem={({ item: { label } }) => (
+            <TypeaheadResult>{label}</TypeaheadResult>
+          )}
+        />
+        <Examples>
+          <AirtableCMSText name="Search Examples" data={homePageText} />
+        </Examples>
+      </SearchBoxContainer>
     </SearchControls>
   )
 }
