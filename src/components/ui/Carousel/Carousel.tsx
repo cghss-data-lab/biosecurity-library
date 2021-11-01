@@ -69,6 +69,10 @@ const Carousel = ({
   children,
   className,
   transition = 250,
+  buttonColor = '#316DA4',
+  disabledButtonColor = '#EAEBED',
+  dotColor = buttonColor,
+  inactiveDotColor = disabledButtonColor,
 }: CarouselProps): JSX.Element => {
   const pages = React.Children.toArray(children)
   const [state, setState] = useState<CarouselState>({ activeIndex: 0 })
