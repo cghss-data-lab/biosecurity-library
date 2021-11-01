@@ -21,7 +21,8 @@ const Card = styled.div`
   padding: 40px 90px;
   display: flex;
   /* min-height: 575px; */
-  min-height: 500px;
+  /* min-height: 500px; */
+  min-height: 385px;
 `
 const TextContent = styled.div`
   margin-left: 15px;
