@@ -59,7 +59,7 @@ interface CarouselProps {
   className?: string
 }
 
-interface CarouselState {
+export interface CarouselState {
   nextIndex?: number | undefined
   activeIndex: number
   prevIndex?: number | undefined
