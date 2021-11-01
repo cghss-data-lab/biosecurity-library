@@ -16,6 +16,10 @@ const PageButton = styled.button<{ active: boolean }>`
   border-radius: 50%;
   margin-right: 25px;
 
+  &:last-of-type {
+    margin-right: 0;
+  }
+
   ${({ active, theme }) =>
     active &&
     `
