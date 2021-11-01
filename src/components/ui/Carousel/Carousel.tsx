@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import CarouselDots from './CarouselDots'
+import useCarouselTimers from './useCarouselTimers'
+import { PrevButton, NextButton } from './buttons'
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+  padding: 0 35px;
+`
+const CarouselMain = styled.div`
+  position: relative;
 `
 const Page = styled.div`
   position: relative;
@@ -83,8 +89,6 @@ const Carousel = ({
   if (state.prevIndex !== undefined) translate = 'calc(100% + 15px)'
   if (state.nextIndex !== undefined) translate = 'calc(-100% - 15px)'
 
-  console.log(translate)
-
   return (
     <Section className={className}>
       <CarouselDots
@@ -97,43 +101,61 @@ const Carousel = ({
         }}
         {...{ pages, dotColor, inactiveDotColor }}
       />
-      <Page
-        style={{
-          transform: `translate(${translate})`,
-          transition: `${translate !== '0' ? transition + 'ms' : '0ms'}`,
-        }}
-      >
-        <Prev
-          key={state.prevIndex}
+      <CarouselMain>
+        <Page
           style={{
-            opacity: state.prevIndex !== undefined ? '1' : '0',
-            transition: `${transition}ms`,
-          }}
-        >
-          {state.prevIndex !== undefined && pages[state.prevIndex]}
-        </Prev>
-        <Active
-          key={state.activeIndex}
-          style={{
-            opacity:
-              state.prevIndex !== undefined || state.nextIndex !== undefined
-                ? '0'
-                : '1',
+            transform: `translate(${translate})`,
             transition: `${translate !== '0' ? transition + 'ms' : '0ms'}`,
           }}
         >
-          {pages[state.activeIndex]}
-        </Active>
-        <Next
-          key={state.nextIndex}
-          style={{
-            opacity: state.nextIndex !== undefined ? '1' : '0',
-            transition: `${transition}ms`,
-          }}
-        >
-          {state.nextIndex !== undefined && pages[state.nextIndex]}
-        </Next>
-      </Page>
+          <Prev
+            key={state.prevIndex}
+            style={{
+              opacity: state.prevIndex !== undefined ? '1' : '0',
+              transition: `${transition}ms`,
+            }}
+          >
+            {state.prevIndex !== undefined && pages[state.prevIndex]}
+          </Prev>
+          <Active
+            key={state.activeIndex}
+            style={{
+              opacity:
+                state.prevIndex !== undefined || state.nextIndex !== undefined
+                  ? '0'
+                  : '1',
+              transition: `${translate !== '0' ? transition + 'ms' : '0ms'}`,
+            }}
+          >
+            {pages[state.activeIndex]}
+          </Active>
+          <Next
+            key={state.nextIndex}
+            style={{
+              opacity: state.nextIndex !== undefined ? '1' : '0',
+              transition: `${transition}ms`,
+            }}
+          >
+            {state.nextIndex !== undefined && pages[state.nextIndex]}
+          </Next>
+        </Page>
+        <PrevButton
+          color={buttonColor}
+          disabledColor={disabledButtonColor}
+          disabled={state.activeIndex === 0}
+          onClick={() =>
+            setState(prev => ({ ...prev, prevIndex: prev.activeIndex - 1 }))
+          }
+        />
+        <NextButton
+          color={buttonColor}
+          disabledColor={disabledButtonColor}
+          disabled={state.activeIndex === pages.length - 1}
+          onClick={() =>
+            setState(prev => ({ ...prev, nextIndex: prev.activeIndex + 1 }))
+          }
+        />
+      </CarouselMain>
     </Section>
   )
 }
