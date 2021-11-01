@@ -29,9 +29,34 @@ const Prev = styled.div`
 `
 
 interface CarouselProps {
+  /**
+   * The children will become the pages of the carousel
+   */
   children: React.ReactNode
-  className?: string
+  /**
+   * Animation duration
+   */
   transition?: number
+  /**
+   * Color for the next and previous buttons
+   */
+  buttonColor?: string
+  /**
+   * color for the disabled next and previous buttons
+   */
+  disabledButtonColor?: string
+  /**
+   * Color for the active dots
+   */
+  dotColor?: string
+  /**
+   * Color for the inactive dots
+   */
+  inactiveDotColor?: string
+  /**
+   * Classname for styled components support
+   */
+  className?: string
 }
 
 interface CarouselState {
