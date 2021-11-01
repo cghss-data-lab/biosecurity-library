@@ -20,7 +20,8 @@ const Card = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding: 40px 90px;
   display: flex;
-  min-height: 575px;
+  /* min-height: 575px; */
+  min-height: 500px;
 `
 const TextContent = styled.div`
   margin-left: 15px;
@@ -93,7 +94,11 @@ const CarouselSection = (): JSX.Element => {
               <Title>{resource.Resource_name}</Title>
               <ShortName>{resource.Short_name}</ShortName>
               <Author>{resource.Authoring_organization[0].data.Name}</Author>
-              <Description>{resource.Short_description}</Description>
+              <Description>
+                {resource.Short_description.split(' ').slice(0, 25).join(' ')}
+                ...
+                <em> read more</em>
+              </Description>
               <KeyTopicArea>
                 {resource.Key_topic_area.map(topic => (
                   <AirtableCMSIcon
