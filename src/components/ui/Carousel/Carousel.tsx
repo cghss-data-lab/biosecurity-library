@@ -80,7 +80,7 @@ export interface CarouselState {
 const Carousel = ({
   children,
   className,
-  transition = 2000,
+  transition = 250,
   buttonColor = '#316DA4',
   disabledButtonColor = '#EAEBED',
   dotColor = buttonColor,
