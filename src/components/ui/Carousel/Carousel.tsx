@@ -48,32 +48,7 @@ const Carousel = ({
   const pages = React.Children.toArray(children)
   const [state, setState] = useState<CarouselState>({ activeIndex: 0 })
 
-  useEffect(() => {
-    if (state.nextIndex !== undefined) {
-      setTimeout(
-        () =>
-          setState(prev => ({
-            ...prev,
-            activeIndex: prev.nextIndex ?? 0,
-            nextIndex: undefined,
-          })),
-        transition
-      )
-    }
-    if (state.prevIndex !== undefined) {
-      setTimeout(
-        () =>
-          setState(prev => ({
-            ...prev,
-            activeIndex: prev.prevIndex ?? 0,
-            prevIndex: undefined,
-          })),
-        transition
-      )
-    }
-  }, [transition, state.prevIndex, state.nextIndex])
-
-  console.log({ state })
+  useCarouselTimers(transition, state, setState)
 
   let translate = '0'
   if (state.prevIndex !== undefined) translate = 'calc(100% + 15px)'
