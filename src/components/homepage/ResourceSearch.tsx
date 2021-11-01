@@ -15,6 +15,8 @@ import { urlString } from '../../airtable-cms/utilities'
 const SearchControls = styled.div`
   display: flex;
   align-items: baseline;
+  max-width: 900px;
+  margin: 0 auto;
 `
 
 const StyledTypeaheadControl = styled(TypeaheadControl)`

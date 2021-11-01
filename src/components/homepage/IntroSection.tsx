@@ -5,6 +5,12 @@ import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 const Section = styled.section`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+
   h1 {
     text-align: center;
     margin-bottom: 0px;
