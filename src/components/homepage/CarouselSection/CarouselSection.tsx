@@ -2,6 +2,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import { urlString } from '../../../airtable-cms/utilities'
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
 
 import Carousel from '../../ui/Carousel/Carousel'
@@ -64,6 +65,27 @@ const KeyTopicArea = styled.div`
   display: flex;
 `
 
+const getResourceUrl = (Resource_type: string, Short_name: string) =>
+  'resource/' + urlString(Resource_type) + urlString(Short_name)
+
+const truncateDescription = (
+  Short_description: string,
+  Resource_type: string,
+  Short_name: string
+) =>
+  Short_description.split(' ').length > 28 ? (
+    <>
+      {Short_description.split(' ').slice(0, 26).join(' ')}
+      ...
+      <em>
+        {' '}
+        <a href={getResourceUrl(Resource_type, Short_name)}>read more</a>
+      </em>
+    </>
+  ) : (
+    <>desc</>
+  )
+
 const CarouselSection = (): JSX.Element => {
   const carouselResources = useCaroselData()
   const theme: any = useTheme()
@@ -96,9 +118,11 @@ const CarouselSection = (): JSX.Element => {
               <ShortName>{resource.Short_name}</ShortName>
               <Author>{resource.Authoring_organization[0].data.Name}</Author>
               <Description>
-                {resource.Short_description.split(' ').slice(0, 25).join(' ')}
-                ...
-                <em> read more</em>
+                {truncateDescription(
+                  resource.Short_description,
+                  resource.Resource_type,
+                  resource.Short_name
+                )}
               </Description>
               <KeyTopicArea>
                 {resource.Key_topic_area.map(topic => (
