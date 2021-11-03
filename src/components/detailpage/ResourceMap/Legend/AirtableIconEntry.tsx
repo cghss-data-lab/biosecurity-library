@@ -16,7 +16,7 @@ const LegendEntryContainer = styled.div`
       margin-left: 1em;
     }
   }
-  font-weight: 600;
+  /* font-weight: 600; */
   font-size: 0.8em;
 `
 
