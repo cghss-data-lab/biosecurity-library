@@ -42,6 +42,7 @@ const FilterControl: React.FC<FilterControlProps> = ({
       <TypeaheadControl
         multiselect
         className={''}
+        ariaLabel={name.replace(/_/g, ' ') + ' filter search'}
         placeholder={`${selectedOptionKeys?.length ?? 0} of ${options.length}`}
         items={getItems(remainingOptionKeys)}
         values={getItems(selectedOptionKeys ?? [])}

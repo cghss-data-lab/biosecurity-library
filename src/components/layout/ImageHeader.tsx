@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { AirtableCMSData } from '../../airtable-cms/types'
 import AirtableCMSImage from '../../airtable-cms/AirtableCMSImage'
+import { AirtableCMSData } from '../../airtable-cms/types'
 
 const ImageSection = styled.section`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 5px;
+  padding: 5px;
   width: 100%;
   overflow: hidden;
 `
@@ -16,13 +18,15 @@ const StyledImage = styled(AirtableCMSImage)`
   width: 100%;
 `
 
-const ImageHeader: React.FC<{ homePageText: AirtableCMSData }> = ({
-  homePageText,
-}) => (
+const ImageHeader = ({
+  cmsData,
+}: {
+  cmsData: AirtableCMSData
+}): JSX.Element => (
   <ImageSection>
-    <StyledImage name={'Left Image'} data={homePageText} />
-    <StyledImage name={'Center Image'} data={homePageText} />
-    <StyledImage name={'Right Image'} data={homePageText} />
+    <StyledImage name={'Left image'} data={cmsData} />
+    <StyledImage name={'Center image'} data={cmsData} />
+    <StyledImage name={'Right image'} data={cmsData} />
   </ImageSection>
 )
 

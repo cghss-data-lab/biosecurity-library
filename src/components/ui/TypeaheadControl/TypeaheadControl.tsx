@@ -31,6 +31,7 @@ interface TypeaheadControlProps {
   searchKeys?: Fuse.FuseOptionKey[]
   className?: string
   disabled?: boolean
+  ariaLabel?: string
 }
 
 const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
@@ -44,6 +45,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   searchKeys = ['key', 'label'],
   className,
   disabled = false,
+  ariaLabel,
 }) => {
   const theme: any = useTheme()
   const [searchString, setSearchString] = useState('')
@@ -112,6 +114,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
         value={searchString}
         onChange={e => setSearchString(e.target.value)}
         placeholder={placeholder}
+        aria-label={ariaLabel}
       />
       <SearchIcon searchString={searchString} />
 

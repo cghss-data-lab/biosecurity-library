@@ -7,7 +7,6 @@ import FigmaProvider from '../figma/FigmaProvider'
 import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
 import { Filters } from '../components/explorepage/exploreReducer'
 
-import AirtableCMSImage from '../airtable-cms/AirtableCMSImage'
 import AirtableCMSText from '../airtable-cms/AirtableCMSText'
 
 import NavBar from '../components/layout/NavBar/NavBar'
@@ -19,11 +18,8 @@ import ActiveFilters from '../components/explorepage/FilterBar/ActiveFilters'
 import useExplorePageData, {
   ResourceGroup,
 } from '../airtableQueryHooks/useExplorePageData'
+import ImageHeader from '../components/layout/ImageHeader'
 
-const BannerImage = styled(AirtableCMSImage)`
-  width: calc(100% - 10px);
-  margin: 5px;
-`
 const Header = styled.header`
   text-align: center;
 `
@@ -70,7 +66,7 @@ const ExplorePage: React.FC<PageProps> = () => {
   return (
     <FigmaProvider>
       <NavBar />
-      <BannerImage name={'Banner Image'} data={explorePageText} />
+      <ImageHeader cmsData={explorePageText} />
       <Main>
         <Header>
           <h1>

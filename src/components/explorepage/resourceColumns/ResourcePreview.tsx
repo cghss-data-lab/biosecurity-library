@@ -32,8 +32,8 @@ import * as urls from '../../../utilities/urls'
 const Title = styled(Link)`
   grid-area: title;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  color: ${({ theme }) => theme.colorBlack} !important;
-  font-weight: bold;
+  color: ${({ theme }) => theme.colorDarker} !important;
+  font-weight: bold !important;
   font-size: 20px !important;
 `
 const Author = styled.div`

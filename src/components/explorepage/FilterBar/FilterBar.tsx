@@ -55,11 +55,11 @@ interface FilterBarProps extends FilterProps {
   definitions: Definition[]
 }
 
-const FilterBar: React.FC<FilterBarProps> = ({
+const FilterBar = ({
   definitions,
   exploreState,
   setExploreState,
-}) => {
+}: FilterBarProps): JSX.Element => {
   const theme: any = useTheme()
   return (
     <>
