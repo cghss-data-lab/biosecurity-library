@@ -39,12 +39,12 @@ const ResourceType = styled.div`
   color: ${({ theme }) => theme.colorDarkest};
   margin-bottom: 24px;
 `
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 33px;
-  color: ${({ theme }) => theme.colorDarkest};
-  margin-bottom: 10px;
+const Title = styled.a`
+  font-weight: bold !important;
+  font-size: 24px !important;
+  line-height: 33px !important;
+  color: ${({ theme }) => theme.colorDarkest} !important;
+  margin-bottom: 10px !important;
 `
 const ShortName = styled.div`
   font-weight: 600;
@@ -83,7 +83,7 @@ const truncateDescription = (
       </em>
     </>
   ) : (
-    <>desc</>
+    <>{Short_description}</>
   )
 
 const CarouselSection = (): JSX.Element => {
@@ -114,7 +114,14 @@ const CarouselSection = (): JSX.Element => {
                 />
                 {resource.Resource_type}
               </ResourceType>
-              <Title>{resource.Resource_name}</Title>
+              <Title
+                href={getResourceUrl(
+                  resource.Resource_type,
+                  resource.Short_name
+                )}
+              >
+                {resource.Resource_name}
+              </Title>
               <ShortName>{resource.Short_name}</ShortName>
               <Author>{resource.Authoring_organization[0].data.Name}</Author>
               <Description>
