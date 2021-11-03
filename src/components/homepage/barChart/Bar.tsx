@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
-import { useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import AirtableCMSPlotIcon from '../../../airtable-cms/AirtableCMSPlotIcon'
 
 import { DimObj } from './BarChart'
+
+const Label = styled.text`
+  font-size: 5px;
+  transform: rotate(-45deg);
+  text-anchor: end;
+`
 
 interface BarProps {
   index: number
@@ -19,16 +25,23 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
 
   const [hover, setHover] = useState(false)
 
+  const startX = index * (dim.barWidth + dim.barGap)
+  const startY = (dim.maxBar - bar.totalCount) * dim.scale
+  const height = dim.scale * bar.totalCount
+  const endY = startY + height
+  const midX = startX + 0.5 * dim.barWidth
+  const midY = startY + 0.5 * height
+
   return (
     <>
       <rect
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         key={index}
-        x={index * (dim.barWidth + dim.barGap)}
-        y={(dim.maxBar - bar.totalCount) * dim.scale}
+        x={startX}
+        y={startY}
         width={dim.barWidth}
-        height={dim.scale * bar.totalCount}
+        height={height}
         fill={hover ? theme.colorGolden : theme.colorDarkest}
         stroke={theme.colorDarkest}
       />
@@ -37,14 +50,21 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
         style={{ pointerEvents: 'none' }}
         name={bar.fieldValue}
         color={hover ? theme.colorDarkest : theme.colorGolden}
-        x={index * (dim.barWidth + dim.barGap) + 0.5 * dim.barWidth}
-        y={
-          (dim.maxBar - bar.totalCount) * dim.scale +
-          0.5 * (dim.scale * bar.totalCount)
-        }
-        width={10}
-        height={10}
+        x={midX}
+        y={midY}
+        width={dim.iconSize}
+        height={dim.iconSize}
       />
+      <g
+        style={{ transform: `translate(${midX}px, ${endY + dim.labelPad}px)` }}
+      >
+        <Label
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          {bar.fieldValue}
+        </Label>
+      </g>
     </>
   )
 }

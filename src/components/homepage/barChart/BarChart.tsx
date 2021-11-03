@@ -11,7 +11,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10vw;
+  margin-bottom: 20em;
 `
 const Instruction = styled.div`
   font-style: italic;
@@ -41,6 +41,8 @@ const BarChart = (): JSX.Element => {
     width: 500,
     height: 150,
     barGap: 10,
+    iconSize: 10,
+    labelPad: 5,
   }
 
   const barCount = homePageResources.group.length
