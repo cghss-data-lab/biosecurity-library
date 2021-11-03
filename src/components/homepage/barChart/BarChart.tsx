@@ -26,10 +26,16 @@ const Svg = styled.svg`
   overflow: visible;
 `
 
+interface DimObj {
+  width: number
+  height: number
+  [key: string]: number
+}
+
 const BarChart = (): JSX.Element => {
   const { homePageResources, homePageText } = useHomePageData()
 
-  const dim: any = {
+  const dim: DimObj = {
     width: 500,
     height: 150,
     barGap: 10,
