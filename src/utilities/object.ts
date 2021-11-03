@@ -9,8 +9,8 @@ export function sortByCustom<T>(f: (inst: T) => any): (a: T, b: T) => number {
   return (a: T, b: T): number => {
     const valA: any = f(a)
     const valB: any = f(b)
-    if (valA > valB) return -1
-    else if (valA < valB) return 1
+    if (valA > valB) return 1
+    else if (valA < valB) return -1
     else return 0
   }
 }
