@@ -28,6 +28,10 @@ const replaceFill = (svg: string, color: string) => {
 const SVGContainer = styled.div`
   // make the SVG responsive so it takes the size of the parent;
   // stop it from sending mouseout events to the parent
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   & > svg {
     width: 100%;
     height: 100%;
