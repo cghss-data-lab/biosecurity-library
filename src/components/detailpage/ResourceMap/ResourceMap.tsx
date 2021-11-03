@@ -7,7 +7,7 @@
  * TODO don't make hovered labels reflow when they're longer than container
  */
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
@@ -63,16 +63,13 @@ const NodeHoverLabel = styled.div`
  * non-transparent pixels.
  */
 function getCanvasPixelsXMin(c: HTMLCanvasElement): number {
-  console.log('getCanvasPixelsXMin')
-
-  const canvasWidth: number = c?.width || 0
-  const canvasHeight: number = c?.height || 0
   const width: number = c?.getBoundingClientRect().width
-  // if (width === 0) return 0
+  const canvasWidth: number = c?.width || 0
+  if (canvasWidth === 0 || width === 0) return Infinity
+  const canvasHeight: number = c?.height || 0
   let xMin: number = Infinity
   const ctx = c.getContext('2d')
-  if (ctx === null) return 0
-
+  if (ctx === null) return Infinity
   for (let i = 0; i < canvasHeight; i++) {
     const rowData = ctx.getImageData(0, i, canvasWidth, 1)
     const arr: Uint8ClampedArray = rowData.data
@@ -138,7 +135,7 @@ export const ResourceMap: React.FC<{
       ),
     [graphData, icons, selectedNode, theme]
   )
-  // useEffect(() => {
+  // useLayoutEffect(() => {
   //   if (ref.current !== null) {
   //     const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
   //     if (c !== null) {
@@ -178,6 +175,24 @@ export const ResourceMap: React.FC<{
     },
     [hoveredNode]
   )
+
+  const updateCanvasLeftMargin = useCallback(() => {
+    if (ref.current !== null && !positioned) {
+      const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
+      if (c !== null) {
+        const xMin: number = getCanvasPixelsXMin(c)
+        if (xMin !== Infinity) {
+          const newLeftMargin: number = -1 * xMin + 100
+          if (newLeftMargin === mapLeftMargin) setPositioned(true)
+          setMapLeftMargin(newLeftMargin)
+        }
+      }
+    }
+  }, [mapLeftMargin, positioned])
+
+  // useLayoutEffect(() => {
+  //   updateCanvasLeftMargin()
+  // }, [ref, updateCanvasLeftMargin])
 
   // return null if no map to show
   if (
@@ -241,19 +256,7 @@ export const ResourceMap: React.FC<{
           >
             <network.Network
               enableNodeDrag={false}
-              onRenderFramePost={() => {
-                if (ref.current !== null && !positioned) {
-                  const c: HTMLCanvasElement | null =
-                    ref.current.querySelector('canvas')
-                  if (c !== null) {
-                    const xMin: number = getCanvasPixelsXMin(c)
-                    if (xMin !== Infinity) {
-                      setPositioned(true)
-                      setMapLeftMargin(-1 * xMin + 100)
-                    }
-                  }
-                }
-              }}
+              onRenderFramePost={updateCanvasLeftMargin}
               nodeLabel={hideTipForLabeledNodes}
               containerStyle={{ transition: 'opacity .25s ease-in-out' }}
               linkDirectionalArrowLength={getLinkDirectionalArrowLength}
