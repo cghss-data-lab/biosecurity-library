@@ -7,3 +7,4 @@ public
 # bit
 .bitmap
 workspace.jsonc
+pnpm-lock.yaml
