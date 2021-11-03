@@ -1,8 +1,10 @@
 import React from 'react'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
+
 import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
-import AirtableCMSPlotIcon from '../../../airtable-cms/AirtableCMSPlotIcon'
+
+import Bar from './Bar'
 
 const Section = styled.section`
   padding: 0 35px;
@@ -26,7 +28,7 @@ const Svg = styled.svg`
   overflow: visible;
 `
 
-interface DimObj {
+export interface DimObj {
   width: number
   height: number
   [key: string]: number
@@ -42,12 +44,9 @@ const BarChart = (): JSX.Element => {
   }
 
   const barCount = homePageResources.group.length
-  const maxBar = Math.max(...homePageResources.group.map(bar => bar.totalCount))
-  const scale = dim.height / maxBar
 
+  dim.maxBar = Math.max(...homePageResources.group.map(bar => bar.totalCount))
   dim.barWidth = (dim.width - dim.barGap * barCount) / barCount
-
-  const theme: any = useTheme()
 
   const sortedBars = homePageResources.group.sort(
     (a, b) => b.totalCount - a.totalCount
@@ -63,28 +62,7 @@ const BarChart = (): JSX.Element => {
       </Instruction>
       <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
         {sortedBars.map((bar, index) => (
-          <>
-            <rect
-              key={index}
-              x={index * (dim.barWidth + dim.barGap)}
-              y={(maxBar - bar.totalCount) * scale}
-              width={dim.barWidth}
-              height={scale * bar.totalCount}
-              fill={theme.colorDarkest}
-            />
-            <AirtableCMSPlotIcon
-              noEmitError
-              name={bar.fieldValue}
-              color={theme.colorGolden}
-              x={index * (dim.barWidth + dim.barGap) + 0.5 * dim.barWidth}
-              y={
-                (maxBar - bar.totalCount) * scale +
-                0.5 * (scale * bar.totalCount)
-              }
-              width={10}
-              height={10}
-            />
-          </>
+          <Bar {...{ index, bar, dim }} />
         ))}
       </Svg>
     </Section>
