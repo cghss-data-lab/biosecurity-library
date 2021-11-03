@@ -1,8 +1,5 @@
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
-import {
-  getResourceMapData,
-  getFullResourceMapData,
-} from './resourceMapHelpers'
+import { getResourceMapData, getFullResourceMapData } from './packageMethods'
 import { MOCK_GRAPH_DATA, MOCK_RESOURCE_DATA } from '../ResourceMap.spec'
 
 describe('getFullResourceMapData', () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import ResourceMap from './ResourceMap'
-import { PageContext } from '../../../templates/Detail'
+import { PageContext } from '../../../../templates/Detail'
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
 
 export const MOCK_RESOURCE_DATA: PageContext['data'] = {
@@ -12,7 +12,7 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Resource_name: 'Test',
   Short_name: 'Test',
   Resource_type: 'Test',
-  Authoring_organization: 'Test',
+  Authoring_organization: [{ data: { Name: 'Test' } }],
   Target_user_role: ['Test'],
   Potential_user_role: ['Test'],
   URL_for_resource: 'Test',
@@ -30,7 +30,7 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Thumbnail_INTERNAL: {
     localFiles: [],
   },
-  Auto_other_resources_cited: ['recTest'],
+  Auto_other_resources_cited: [{ data: { Record_ID_INTERNAL: 'recTest' } }],
 }
 
 /**

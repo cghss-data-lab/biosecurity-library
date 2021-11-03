@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react'
 import styled, { useTheme } from 'styled-components'
-import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
+import AirtableCMSIcon from '../../../../../airtable-cms/AirtableCMSIcon'
 import { IconFrame } from './IconFrame/IconFrame'
 import { Frameable } from './legendTypes'
 import WrappedLabel from './WrappedLabel'

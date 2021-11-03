@@ -1,13 +1,8 @@
 /**
- * Helper functions for preparing resource map data.
- *
- * Note: The following methods and types should be refactored into viz.network:
- *    getNeighborhood
- *    getLinksForNodesWithIds
- *    getNodeIdsForLinks
- *    LinkDirections
+ * Helper functions for preparing resource map data that should eventually be
+ * refactored into the viz.network package on bit.dev.
  */
-import { LinkField, PageContext } from '../../../../templates/Detail'
+import { LinkField, PageContext } from '../../../../../templates/Detail'
 import {
   AppGraphData,
   GraphNode,
@@ -15,11 +10,10 @@ import {
   // LinkDirections,
 } from '@mvanmaele/mvanmaele-test.viz.network'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
-import * as urls from '../../../../utilities/urls'
+import * as urls from '../../../../../utilities/urls'
 
 /**
  * Define different directions of links.
- * TODO refactor into viz.network package
  */
 export enum LinkDirections {
   source,
@@ -61,7 +55,7 @@ export function getFullResourceMapData(
   linkFields: LinkField[],
   nameField: keyof Omit<PageContext['data'], 'resourceMapData'>, // omit undef
   idField: DefinedPageDataFields,
-  iconField: DefinedPageDataFields
+  iconField?: DefinedPageDataFields
 ): AppGraphData {
   const nodes: GraphNode[] = []
   const links: GraphLink[] = []
@@ -131,6 +125,7 @@ export function getResourceMapData(
  * @param data The query response datum on which to base the node
  * @param nameField The datum field that should be used as the node's name
  * @param idField The datum field that should be used as the node's unique ID
+ * @param def The datum field that should be used as the node's unique ID
  * @returns The initialized node
  */
 export function initResourceMapNode(
@@ -140,27 +135,21 @@ export function initResourceMapNode(
   iconField?: DefinedPageDataFields
 ): HyperlinkedNode {
   return {
+    _id: data[idField].toString(),
     url: urls.getDetailURL(data),
     _label: data[nameField].toString(),
-    _labelFontWeight: '600',
-    _id: data[idField].toString(),
-    _color: '#063968', // TODO dynamically define color from design
-    _shape: 'circle',
-    _nodeType: 'default',
-    _show: true,
-    _fontSize: 16,
     _icon: iconField !== undefined ? data[iconField].toString() : '',
-    _showLabel: true,
-    _labelPos: 'bottom',
-    _size: 1,
   }
 }
 
 /**
  * Returns the node's neighbors to the specified degree, including all links
+ *
  * @param node The node
- * @param allowedNeighborDepth The maximum degree of neighbor to include,
- * defaults to 1
+ *
+ * @param allowedNeighborDepth
+ * The maximum degree of neighbor to include, defaults to 1
+ *
  * @returns The graph data for the node's neighborhood
  */
 function getNeighborhood(
@@ -226,9 +215,6 @@ function getNeighborhood(
   }
   shownLinks.forEach(l => (l.color = undefined))
 
-  // const ignoreNodeType: boolean =
-  //   tableConfig === undefined || tableConfig.nodeTypes.length === 0
-
   let shownNodes: GraphNode[] = graphData.nodes
   graphData.nodes.forEach(n => {
     n._show = checkedNodesIds.includes(n._id)
@@ -237,35 +223,19 @@ function getNeighborhood(
     return n._show
   })
 
-  // if (!ignoreNodeType)
-  //   tableConfig?.nodeTypes.forEach(nt => {
-  //     if (!nt.config.hideUnselected) return
-  //     graphData.nodes.forEach(n => {
-  //       if (n._nodeType !== nt.name) return
-  //       n._show = checkedNodesIds.includes(n._id)
-  //     })
-  //     shownNodes = graphData.nodes.filter(n => {
-  //       return n._nodeType !== nt.name || n._show
-  //     })
-  //   })
-  // else {
-  //   graphData.nodes.forEach(n => {
-  //     n._show = checkedNodesIds.includes(n._id)
-  //   })
-  //   shownNodes = graphData.nodes.filter(n => {
-  //     return n._show
-  //   })
-  // }
-
   return { nodes: shownNodes, links: shownLinks }
 }
 
 /**
  * Returns the graph links that have a source and target with one of the
  * provided node IDs
+ *
  * @param ids The node ID(s)
- * @param linkDir The direction(s) for which the link must have an ID match.
+ *
+ * @param linkDir
+ * The direction(s) for which the link must have an ID match.
  * Defaults to either.
+ *
  * @returns The links
  */
 function getLinksForNodesWithIds(
@@ -292,8 +262,11 @@ function getLinksForNodesWithIds(
 /**
  * Given a list of graph links, returns the node IDs for all sources and
  * targets of those links as a unique list.
+ *
  * @param links The links
+ *
  * @param sides Optional: Whether to return IDs for source, targ, or both
+ *
  * @returns The list of IDs
  */
 export function getNodeIdsForLinks(

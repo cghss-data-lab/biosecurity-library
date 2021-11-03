@@ -5,7 +5,7 @@ import React from 'react'
 import { Icon } from '../ResourceMap'
 import AirtableIconEntry from './AirtableIconEntry'
 import { Frameable } from './legendTypes'
-import * as object from '../../../../utilities/object'
+import * as object from '../../../../../utilities/object'
 
 interface IconEntriesProps {
   /**

@@ -2116,10 +2116,10 @@
   resolved "https://registry.yarnpkg.com/@microsoft/fetch-event-source/-/fetch-event-source-2.0.1.tgz#9ceecc94b49fbaa15666e38ae8587f64acce007d"
   integrity sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA==
 
-"@mvanmaele/mvanmaele-test.viz.network@0.0.15":
-  version "0.0.15"
-  resolved "https://node.bit.dev/@mvanmaele/mvanmaele-test.viz.network/-/@mvanmaele-mvanmaele-test.viz.network-0.0.15.tgz#dc217682be8a97ab0444547ea18937792c39df86"
-  integrity sha1-3CF2gr6Kl6sERFR+oYk3eSw534Y=
+"@mvanmaele/mvanmaele-test.viz.network@0.0.16":
+  version "0.0.16"
+  resolved "https://node.bit.dev/@mvanmaele/mvanmaele-test.viz.network/-/@mvanmaele-mvanmaele-test.viz.network-0.0.16.tgz#4ade68caf8364c304d5b7330f8708367d881b39b"
+  integrity sha1-St5oyvg2TDBNW3Mw+HCDZ9iBs5s=
   dependencies:
     airtable "^0.11.1"
     core-js "^3.0.0"

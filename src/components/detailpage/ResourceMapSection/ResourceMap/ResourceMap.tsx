@@ -1,5 +1,5 @@
 /**
- * Resource map showing links between resources that depend on each other.
+ * Resource map showing links between resources related to each other.
  *
  * TODO fix icon flicker
  * TODO allow edge color to be set dynamically
@@ -15,14 +15,15 @@ import { renderToString } from 'react-dom/server'
 import {
   IconsQueryMap,
   replaceFill,
-} from '../../../airtable-cms/AirtableCMSIcon'
+} from '../../../../airtable-cms/AirtableCMSIcon'
 import * as network from '@mvanmaele/mvanmaele-test.viz.network'
-import { getNodeIdsForLinks } from './helpers/resourceMapHelpers'
+import { getNodeIdsForLinks } from './helpers/packageMethods'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'
-import { PageContext } from '../../../templates/Detail'
+import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
+import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
 
 /**
  * Icon data from Airtable
@@ -31,10 +32,10 @@ export type Icon = {
   data: { Name: string; Text: string; SVG: any }
 }
 
-const ResourceMapSection = styled.section`
+const Section = styled.section`
   display: flex;
 `
-const ResourceMapContainer = styled.div`
+const MapContainer = styled.div`
   z-index: 0;
   position: relative;
   width: 100%;
@@ -53,44 +54,21 @@ const NodeHoverLabelBox = styled.div`
   font-family: 'Open Sans', sans-serif;
   line-height: 1.33em;
 `
-/**
- * Returns the minimum horizontal distance in pixels of the current canvas
- * pixels to the left edge of the canvas element.
- *
- * @param c The HTML canvas element
- * @returns The number of pixels away from the left edge of the canvas of the
- * non-transparent pixels.
- */
-function getCanvasPixelsXMin(c: HTMLCanvasElement): number {
-  const width: number = c?.getBoundingClientRect().width
-  const canvasWidth: number = c?.width || 0
-  if (canvasWidth === 0 || width === 0) return Infinity
-  const canvasHeight: number = c?.height || 0
-  let xMin: number = Infinity
-  const ctx = c.getContext('2d')
-  if (ctx === null) return Infinity
-  for (let i = 0; i < canvasHeight; i++) {
-    const rowData = ctx.getImageData(0, i, canvasWidth, 1)
-    const arr: Uint8ClampedArray = rowData.data
-    for (let j = 0; j < canvasWidth * 4; j += 4) {
-      if (arr[j] !== 0 || arr[j + 1] !== 0 || arr[j + 2] !== 0) {
-        if (j / 4 < xMin) {
-          xMin = j / 4
-        }
-      }
-    }
-  }
-  const scaleFactor: number = width / canvasWidth
-  return scaleFactor * xMin
-}
 
 /**
  * Display interactive resource map with provided graph data (nodes and links)
- * @param selectedNode Optional: The data of the selected node, which may be
+ *
+ * @param selectedNode
+ * Optional: The data of the selected node, which may be
  * styled differently than the others, etc.
- * @param graphData Optional: The nodes and links. No map shown if undefined.
- * @param curvedlinks Optional: True if curved links should be drawn, false if
+ *
+ * @param graphData
+ * Optional: The nodes and links. No map shown if undefined.
+ *
+ * @param curvedlinks
+ * Optional: True if curved links should be drawn, false if
  * straight; defaults to true.
+ *
  * @returns Resource map
  */
 export const ResourceMap: React.FC<{
@@ -136,14 +114,6 @@ export const ResourceMap: React.FC<{
     [graphData, icons, theme]
     // [graphData, icons, selectedNode, theme]
   )
-  // useLayoutEffect(() => {
-  //   if (ref.current !== null) {
-  //     const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
-  //     if (c !== null) {
-  //       setMapLeftMargin(getCanvasPixelsXMin(c))
-  //     }
-  //   }
-  // }, [ref, formattedGraphData])
 
   const selectedNodeId: string | undefined = selectedNode?.Record_ID_INTERNAL
 
@@ -209,10 +179,6 @@ export const ResourceMap: React.FC<{
     [selectedNode, showAllNodeLabels, theme]
   )
 
-  // useLayoutEffect(() => {
-  //   updateCanvasLeftMargin()
-  // }, [ref, updateCanvasLeftMargin])
-
   // return null if no map to show
   if (
     graphData === undefined ||
@@ -227,7 +193,7 @@ export const ResourceMap: React.FC<{
     <section>
       <p>{citationDesc}</p>
       <em>Click resource in map to go to page</em>
-      <ResourceMapSection>
+      <Section>
         <Legend>
           <h6>Legend</h6>
           {/* Resource type icons legend */}
@@ -247,10 +213,7 @@ export const ResourceMap: React.FC<{
           {/* Link direction legend */}
           {curvedLinks && <CurvedEdgeEntry nodeColor={theme.colorDarker} />}
         </Legend>
-        <ResourceMapContainer
-          style={{ marginLeft: mapLeftMargin }}
-          {...{ ref }}
-        >
+        <MapContainer style={{ marginLeft: mapLeftMargin }} {...{ ref }}>
           <network.SettingsContext.Provider
             value={{
               ...network.defaultSettings,
@@ -283,8 +246,8 @@ export const ResourceMap: React.FC<{
               }}
             />
           </network.SettingsContext.Provider>
-        </ResourceMapContainer>
-      </ResourceMapSection>
+        </MapContainer>
+      </Section>
     </section>
   )
 }
@@ -336,9 +299,13 @@ function getCitationString(cites: number, citedBy: number) {
  * has in the graph data.
  *
  * @param graphData The nodes and links
+ *
  * @param field The field (target or source) for which to count unique node IDs
- * @param selectedNodeId The node whose incoming and outgoing connections are
+ *
+ * @param selectedNodeId
+ * The ID of the node whose incoming and outgoing connections are
  * to be counted
+ *
  * @returns The count
  */
 function getUniqueNodeIdCount(
@@ -362,11 +329,17 @@ function getUniqueNodeIdCount(
 /**
  * Given input graph data, returns a version of it formatted for display in the
  * project's resource map, i.e., with any applicable Airtable icons
+ *
  * @param graphData The input graph data
+ *
  * @param icons Icon SVG data from Airtable
+ *
  * @param theme Theme from Figma
- * @param selectedNode Optional: The selected node, if any, which is
+ *
+ * @param selectedNode
+ * Optional: The selected node, if any, which is
  * styled differently.
+ *
  * @returns The graph data formatted for display in the resource map
  */
 function formatGraphData(
@@ -395,9 +368,13 @@ function formatGraphData(
 /**
  * Formats the graph data's links for display in the resource map and returns
  * a version of the grpah data with those links
+ *
  * @param graphData The input graph data
+ *
  * @param formattedNodes The formatted nodes
+ *
  * @param theme Theme data from Figma
+ *
  * @returns A version of it with links formatted for display
  */
 function getFormattedLinks(
@@ -421,11 +398,17 @@ function getFormattedLinks(
 /**
  * Formats the graph data's nodes for display in the resource map and returns
  * a version of the grpah data with those nodes
+ *
  * @param graphData The input graph data
+ *
  * @param icons Icon data from Airtable
+ *
  * @param theme Theme data from Figma
- * @param selectedNode Optional: The selected node, if any, which is
+ *
+ * @param selectedNode
+ * Optional: The selected node, if any, which is
  * styled differently.
+ *
  * @returns A version of it with nodes formatted for display
  */
 function getFormattedNodes(
@@ -436,16 +419,18 @@ function getFormattedNodes(
 ): network.GraphNode[] {
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5
   return graphData.nodes.map(n => {
+    // const n: GraphNode  = initResourceMapNode(selectedNodeData)
     const isSelectedNode: boolean =
       selectedNode !== undefined && selectedNode._id === n._id
-    const iconName: string = n._icon !== '' ? n._icon : ''
+    const iconName: string =
+      n._icon !== '' && n._icon !== undefined ? n._icon : ''
     const icon: Icon | undefined = icons.find(
       icon => icon.data.Name === iconName
     )
     if (icon === undefined) return n
     const displayIcon = replaceFill(
       icon.data.SVG.localFiles[0].childSvg.svgString,
-      n._color
+      n._color || theme.colorDarker
     )
 
     const updatedN: network.GraphNode = {
@@ -456,13 +441,18 @@ function getFormattedNodes(
       _color: theme.colorDarker,
       _labelColor: undefined,
       _labelFont: undefined,
-      // _labelColor: theme.colorDarker,
-      // _labelFont: `'Open Sans', sans-serif`,
+      _labelYOffset: 1,
+      _labelFontWeight: '600',
+      _shape: 'circle',
+      _nodeType: 'default',
+      _fontSize: 16,
+      _labelPos: 'bottom',
+      _size: 1,
     }
     if (isSelectedNode)
       return {
         ...updatedN,
-        _labelYOffset: 4,
+        _labelYOffset: 5,
         _backgroundColor: theme.colorYellow,
         _backgroundShape: 'hexagon',
         _backgroundSize: 9,

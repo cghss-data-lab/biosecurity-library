@@ -4,8 +4,8 @@ import { PageContext } from './src/templates/Detail'
 import {
   getResourceMapData,
   getFullResourceMapData,
-} from './src/components/detailpage/ResourceMap/helpers/resourceMapHelpers'
-import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMap/helpers/resourceMapTypes'
+} from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/packageMethods'
+import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/resourceMapTypes'
 import * as urls from './src/utilities/urls'
 
 export const createPages: GatsbyNode['createPages'] = async ({
