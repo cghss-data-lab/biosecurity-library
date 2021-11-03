@@ -90,7 +90,7 @@ export function getFullResourceMapData(
           return n._id === rId
         })
         if (otherNode === undefined) throw new MissingNodeError(rId)
-        links.push({ source: node._id, target: otherNode._id, value: 1 })
+        links.push({ source: node._id, target: otherNode._id })
       })
     })
   })
@@ -213,14 +213,21 @@ function getNeighborhood(
     primaryNodesIds = secondaryNodesIds
     neighborLevel += 1
   }
-  shownLinks.forEach(l => (l.color = undefined))
+  shownLinks.forEach(l => {
+    delete l.color
+  })
 
   let shownNodes: GraphNode[] = graphData.nodes
   graphData.nodes.forEach(n => {
     n._show = checkedNodesIds.includes(n._id)
   })
   shownNodes = graphData.nodes.filter(n => {
-    return n._show
+    if (n._show === true) {
+      delete n._show
+      return true
+    }
+    delete n._show
+    return false
   })
 
   return { nodes: shownNodes, links: shownLinks }

@@ -391,7 +391,7 @@ function getFormattedLinks(
       getNodeIdsForLinks([l], 'target').includes(n._id)
     )
     if (target === undefined) throw new Error('No target found for link')
-    return { ...l, source, target, _color: theme.colorDarker }
+    return { ...l, source, target, _color: theme.colorDarker, value: 1 }
   })
 }
 
