@@ -30,6 +30,7 @@ const StyledCarousel = styled(Carousel)`
   margin-top: 30px;
 `
 const Card = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) => theme.colorLightest};
@@ -39,6 +40,13 @@ const Card = styled.div`
   /* min-height: 575px; */
   /* min-height: 500px; */
   min-height: 385px;
+`
+const KeyResourceFlag = styled(AirtableCMSIcon)`
+  position: absolute;
+  top: -5px;
+  left: 15px;
+  height: 60px;
+  width: 60px;
 `
 const TextContent = styled.div`
   margin-left: 15px;
@@ -120,6 +128,7 @@ const CarouselSection = (): JSX.Element => {
       <StyledCarousel>
         {carouselResources.nodes.map(({ data: resource }) => (
           <Card>
+            <KeyResourceFlag name="Key resource" color={theme.colorOrange} />
             <div>
               {resource.Thumbnail_INTERNAL && (
                 <GatsbyImage
