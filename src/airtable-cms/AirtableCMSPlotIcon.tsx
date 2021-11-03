@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import AirtableCMSIcon from './AirtableCMSIcon'
 
 const IconHolder = styled.foreignObject`
   overflow: visible;
