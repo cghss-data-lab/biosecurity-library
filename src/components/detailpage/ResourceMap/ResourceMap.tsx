@@ -38,7 +38,7 @@ const ResourceMapSection = styled.section`
 const ResourceMapContainer = styled.div`
   z-index: 0;
   position: relative;
-  width: 575px;
+  width: 100%;
   height: 500px;
 `
 
