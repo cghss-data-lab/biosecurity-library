@@ -190,6 +190,24 @@ export const ResourceMap: React.FC<{
     }
   }, [mapLeftMargin, positioned])
 
+  const showAllNodeLabels: boolean =
+    graphData !== undefined && graphData.nodes.length <= 5
+  const hideTipForLabeledNodes = useCallback(
+    (n: any) => {
+      if (showAllNodeLabels) return ''
+      const isSelectedNode: boolean =
+        selectedNode !== undefined && selectedNode.Record_ID_INTERNAL === n._id
+
+      const label = renderToString(
+        <NodeHoverLabel {...{ theme }}>
+          <WrappedLabel>{n._label}</WrappedLabel>
+        </NodeHoverLabel>
+      )
+      return !isSelectedNode ? label : ''
+    },
+    [selectedNode, showAllNodeLabels, theme]
+  )
+
   // useLayoutEffect(() => {
   //   updateCanvasLeftMargin()
   // }, [ref, updateCanvasLeftMargin])
@@ -203,19 +221,6 @@ export const ResourceMap: React.FC<{
     return null
 
   const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
-  const showAllNodeLabels: boolean = graphData.nodes.length <= 5
-  const hideTipForLabeledNodes = (n: any) => {
-    if (showAllNodeLabels) return ''
-    const isSelectedNode: boolean =
-      selectedNode !== undefined && selectedNode.Record_ID_INTERNAL === n._id
-
-    const label = renderToString(
-      <NodeHoverLabel {...{ theme }}>
-        <WrappedLabel>{n._label}</WrappedLabel>
-      </NodeHoverLabel>
-    )
-    return !isSelectedNode ? label : ''
-  }
 
   return (
     <section>
@@ -269,7 +274,7 @@ export const ResourceMap: React.FC<{
                 maxZoom: 5,
               }}
               onNodeClick={onNodeClick}
-              selectedNode={selectedNodeId}
+              // selectedNode={selectedNodeId}
               initGraphData={formattedGraphData}
               {...{ hoveredNode, setHoveredNode }}
             />
@@ -443,8 +448,12 @@ function getFormattedNodes(
       ...n,
       _show: true,
       _icon: displayIcon,
-      _showLabel: showAllNodeLabels,
+      _showLabel: showAllNodeLabels || isSelectedNode,
       _color: theme.colorDarker,
+      _labelColor: undefined,
+      _labelFont: undefined,
+      // _labelColor: theme.colorDarker,
+      // _labelFont: `'Open Sans', sans-serif`,
     }
     if (isSelectedNode)
       return {
