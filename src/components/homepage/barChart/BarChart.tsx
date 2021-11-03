@@ -47,6 +47,7 @@ const BarChart = (): JSX.Element => {
 
   dim.maxBar = Math.max(...homePageResources.group.map(bar => bar.totalCount))
   dim.barWidth = (dim.width - dim.barGap * barCount) / barCount
+  dim.scale = dim.height / dim.maxBar
 
   const sortedBars = homePageResources.group.sort(
     (a, b) => b.totalCount - a.totalCount
