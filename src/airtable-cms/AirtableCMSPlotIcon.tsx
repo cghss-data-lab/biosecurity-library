@@ -9,7 +9,7 @@ const IconHolder = styled.foreignObject`
   justify-content: center;
 `
 
-interface SVGIconProps {
+interface SVGIconProps extends React.SVGAttributes<SVGForeignObjectElement> {
   /** X position of the center of the icon */
   x: number
   /** Y position of the center of the icon */
@@ -37,15 +37,14 @@ const AirtableCMSPlotIcon = ({
   color,
   hoverColor,
   noEmitError,
-}: SVGIconProps): JSX.Element => {
-  return (
-    <IconHolder x={x - width / 2} y={y - height / 2} {...{ width, height }}>
-      <AirtableCMSIcon
-        style={{ width, height }}
-        {...{ name, color, hoverColor, noEmitError }}
-      />
-    </IconHolder>
-  )
-}
+  ...props
+}: SVGIconProps): JSX.Element => (
+  <IconHolder {...props} x={x - width / 2} y={y - height / 2}>
+    <AirtableCMSIcon
+      style={{ width, height }}
+      {...{ name, color, hoverColor, noEmitError }}
+    />
+  </IconHolder>
+)
 
 export default AirtableCMSPlotIcon
