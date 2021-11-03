@@ -4,7 +4,6 @@
  * TODO fix icon flicker
  * TODO allow edge color to be set dynamically
  * TODO allow max words in label lines to be controlled
- * TODO don't make hovered labels reflow when they're longer than container
  */
 
 import React, { useCallback, useMemo, useRef, useState } from 'react'
