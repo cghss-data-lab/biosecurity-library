@@ -133,7 +133,9 @@ export const ResourceMap: React.FC<{
         theme,
         graphData?.nodes.find(n => n._id === selectedNode?.Record_ID_INTERNAL)
       ),
-    [graphData, icons, selectedNode, theme]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [graphData, icons, theme]
+    // [graphData, icons, selectedNode, theme]
   )
   // useLayoutEffect(() => {
   //   if (ref.current !== null) {
