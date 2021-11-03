@@ -5,8 +5,24 @@ import React from 'react'
 import { Icon } from '../ResourceMap'
 import AirtableIconEntry from './AirtableIconEntry'
 import { Frameable } from './legendTypes'
+import * as object from '../../../../utilities/object'
 
-export const IconEntries = ({ icons }: { icons: Icon[] }) => {
+interface IconEntriesProps {
+  /**
+   * List of icon definitions.
+   */
+  icons: Icon[]
+  /**
+   * Optional: Sort icons by name, A-Z? Defaults to true.
+   */
+  sorted?: boolean
+}
+
+export const IconEntries = (props: IconEntriesProps) => {
+  const icons: Icon[] =
+    props.sorted !== false
+      ? props.icons.sort(object.sortByCustom<Icon>(inst => inst.data.Name))
+      : props.icons
   return (
     <>
       {icons.map(icon => (
