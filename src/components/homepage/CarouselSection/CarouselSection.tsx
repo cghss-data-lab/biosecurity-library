@@ -2,14 +2,29 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
 import { urlString } from '../../../airtable-cms/utilities'
+
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
+import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 
 import Carousel from '../../ui/Carousel/Carousel'
 
 const H2 = styled.h2`
   text-align: center;
   margin-top: 80px !important;
+`
+const KeyResourceLegend = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: ${({ theme }) => theme.colorBlack};
 `
 const StyledCarousel = styled(Carousel)`
   margin-top: 30px;
@@ -88,11 +103,20 @@ const truncateDescription = (
 
 const CarouselSection = (): JSX.Element => {
   const carouselResources = useCaroselData()
+  const { homePageText } = useHomePageData()
   const theme: any = useTheme()
 
   return (
     <>
       <H2>Explore key biosafety resources</H2>
+      <KeyResourceLegend>
+        <AirtableCMSIcon
+          name="Key resource"
+          color={theme.colorOrange}
+          style={{ width: 24, height: 24, marginRight: 5 }}
+        />
+        <AirtableCMSText name="Key resource explanation" data={homePageText} />
+      </KeyResourceLegend>
       <StyledCarousel>
         {carouselResources.nodes.map(({ data: resource }) => (
           <Card>
