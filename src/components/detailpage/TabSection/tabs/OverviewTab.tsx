@@ -7,6 +7,11 @@ import ResourceMap from '../../ResourceMap/ResourceMap'
 import { InfoTip } from '../../../ui/InfoTip'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => {
+  const showResourceMap: boolean =
+    data.resourceMapData !== undefined &&
+    data.resourceMapData.links.length > 0 &&
+    data.resourceMapData.links.length > 0 &&
+    data.resourceMapData.nodes.length > 0
   return (
     <TabContentContainer>
       <h5>SUMMARY</h5>
@@ -15,7 +20,7 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => {
       <p>{data.Resource_type}</p>
       <h5>CATEGORIES</h5>
       <p>{commaSeparatedList(data.Key_topic_area)}</p>
-      {typeof window !== 'undefined' && data.resourceMapData !== undefined && (
+      {typeof window !== 'undefined' && showResourceMap && (
         <>
           {/* TODO move info tip content into CMS */}
           <h5>
