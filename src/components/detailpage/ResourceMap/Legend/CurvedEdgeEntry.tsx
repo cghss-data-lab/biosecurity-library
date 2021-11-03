@@ -22,7 +22,7 @@ export const CurvedEdgeEntry = ({ nodeColor }: { nodeColor: string }) => {
           ...n,
           _color: nodeColor,
           _labelColor: theme.colorBlack,
-          // _labelFontWeight: '600',
+          _labelFontWeight: 'normal',
           _labelYOffset: 0,
           _fontSize: 14.4,
         }
