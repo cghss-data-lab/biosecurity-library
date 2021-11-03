@@ -3,3 +3,7 @@ node_modules/
 public
 *.swp
 .vscode
+
+# bit
+.bitmap
+workspace.jsonc
