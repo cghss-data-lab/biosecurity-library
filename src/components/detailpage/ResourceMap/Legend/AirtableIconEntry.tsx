@@ -18,6 +18,7 @@ const LegendEntryContainer = styled.div`
   }
   /* font-weight: 600; */
   font-size: 0.8em;
+  white-space: nowrap;
 `
 
 const LegendIconContainer = styled.div`
@@ -50,7 +51,7 @@ const AirtableIconEntry: FC<LegendEntryProps> = ({
           <AirtableCMSIcon
             name={value}
             color={color === undefined ? theme.colorDarker : color}
-            style={{ height: 30 }}
+            style={{ width: 30 }}
           />
         </IconFrame>
       </LegendIconContainer>
