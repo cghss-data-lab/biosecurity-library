@@ -276,9 +276,12 @@ export const ResourceMap: React.FC<{
                 maxZoom: 5,
               }}
               onNodeClick={onNodeClick}
-              // selectedNode={selectedNodeId}
               initGraphData={formattedGraphData}
-              {...{ hoveredNode, setHoveredNode }}
+              {...{
+                hoveredNode,
+                setHoveredNode,
+                selectedNode: selectedNode?.Record_ID_INTERNAL,
+              }}
             />
           </network.SettingsContext.Provider>
         </ResourceMapContainer>
