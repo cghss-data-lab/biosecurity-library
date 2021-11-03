@@ -10,7 +10,7 @@ import WrappedLabel from './WrappedLabel'
 const LegendEntryContainer = styled.div`
   display: flex;
   align-items: center;
-  line-height: 1.2;
+  line-height: 1.33;
   > span {
     &:last-child {
       margin-left: 1em;

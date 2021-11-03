@@ -42,7 +42,7 @@ const ResourceMapContainer = styled.div`
   height: 500px;
 `
 
-const NodeHoverLabel = styled.div`
+const NodeHoverLabelBox = styled.div`
   z-index: 2;
   font-weight: 600;
   border: 1px solid ${({ theme }) => theme.colorDarker};
@@ -50,9 +50,9 @@ const NodeHoverLabel = styled.div`
   color: ${({ theme }) => theme.colorDarker};
   background-color: #ffffff;
   margin: -5px;
-  padding: 0 0.25em;
+  padding: 0.25em 0.5em;
   font-family: 'Open Sans', sans-serif;
-  line-height: 1.66;
+  line-height: 1.33em;
 `
 /**
  * Returns the minimum horizontal distance in pixels of the current canvas
@@ -201,9 +201,9 @@ export const ResourceMap: React.FC<{
         selectedNode !== undefined && selectedNode.Record_ID_INTERNAL === n._id
 
       const label = renderToString(
-        <NodeHoverLabel {...{ theme }}>
+        <NodeHoverLabelBox {...{ theme }}>
           <WrappedLabel>{n._label}</WrappedLabel>
-        </NodeHoverLabel>
+        </NodeHoverLabelBox>
       )
       return !isSelectedNode ? label : ''
     },
