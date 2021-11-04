@@ -20,7 +20,7 @@ jobs:
 
       - run:
           name: Gatsby build
-          command: gatsby build;
+          command: yarn build;
 
       - run:
           name: AWS S3 Sync
