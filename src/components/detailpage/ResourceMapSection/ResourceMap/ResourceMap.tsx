@@ -12,11 +12,9 @@ import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import {
-  IconsQueryMap,
-  replaceFill,
-} from '../../../../airtable-cms/AirtableCMSIcon'
-import * as network from '@mvanmaele/mvanmaele-test.viz.network'
+import { IconsQueryMap, replaceFill } from '@test/airtable-cms/AirtableCMSIcon'
+import * as network from '../../../../packages/viz/network'
+// import * as network from '@network'
 import { getNodeIdsForLinks } from './helpers/packageMethods'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'

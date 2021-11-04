@@ -8,7 +8,7 @@ import {
   GraphNode,
   GraphLink,
   // LinkDirections,
-} from '@mvanmaele/mvanmaele-test.viz.network'
+} from '@network'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
 

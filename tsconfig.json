@@ -16,8 +16,10 @@
       {
         "name": "typescript-styled-plugin"
       }
-    ]
+    ],
+    "paths": { "@network/*": ["./src/packages/viz/network/*"] }
   },
+
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "public", ".cache"]
 }
