@@ -1,5 +1,6 @@
 import { useStaticQuery, graphql } from 'gatsby'
 import { ImageDataLike } from 'gatsby-plugin-image'
+
 import { AirtableCMSData } from '../airtable-cms/types'
 
 export interface Resource {

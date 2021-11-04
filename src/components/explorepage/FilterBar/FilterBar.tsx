@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { useTheme } from 'styled-components'
 
 import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css' // optional
+import 'tippy.js/dist/tippy.css'
 
 import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { ExploreState } from '../../../pages/explore'
