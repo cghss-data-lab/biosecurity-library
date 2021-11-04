@@ -32,23 +32,13 @@ export interface ResourceGroup {
   totalCount?: number
 }
 
-export interface Definition {
-  data: {
-    Column: string[]
-    Definition: string
-    Glossary_Name: string
-  }
-}
-
 const useExplorePageData = () => {
   const {
     explorePageText,
     groupedResources: { group: groupedResources },
-    definitions: { nodes: definitions },
   }: {
     explorePageText: AirtableCMSData
     groupedResources: { group: ResourceGroup[] }
-    definitions: { nodes: Definition[] }
   } = useStaticQuery(graphql`
     query exploreQuery {
       explorePageText: allAirtable(filter: { table: { eq: "Explore Page" } }) {
@@ -103,19 +93,10 @@ const useExplorePageData = () => {
           fieldValue
         }
       }
-      definitions: allAirtable(filter: { table: { eq: "Glossary" } }) {
-        nodes {
-          data {
-            Glossary_Name
-            Definition
-            Column
-          }
-        }
-      }
     }
   `)
 
-  return { explorePageText, groupedResources, definitions }
+  return { explorePageText, groupedResources }
 }
 
 export default useExplorePageData

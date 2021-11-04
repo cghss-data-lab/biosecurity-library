@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css' // optional
 
-import { Definition } from '../../../airtableQueryHooks/useExplorePageData'
+import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { ExploreState } from '../../../pages/explore'
 
 import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
@@ -51,16 +51,12 @@ export interface FilterProps {
   setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
 }
 
-interface FilterBarProps extends FilterProps {
-  definitions: Definition[]
-}
-
 const FilterBar = ({
-  definitions,
   exploreState,
   setExploreState,
-}: FilterBarProps): JSX.Element => {
+}: FilterProps): JSX.Element => {
   const theme: any = useTheme()
+  const definitions = useDefinitions()
   return (
     <>
       <DefinitionsContainer>

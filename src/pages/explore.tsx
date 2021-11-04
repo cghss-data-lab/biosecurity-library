@@ -31,8 +31,7 @@ export interface ExploreState {
 }
 
 const ExplorePage: React.FC<PageProps> = () => {
-  const { explorePageText, groupedResources, definitions } =
-    useExplorePageData()
+  const { explorePageText, groupedResources } = useExplorePageData()
 
   const [exploreState, setExploreState] = useState<ExploreState>(
     typeof window !== 'undefined'
@@ -75,7 +74,6 @@ const ExplorePage: React.FC<PageProps> = () => {
         </Header>
         <FilterBar
           {...{
-            definitions,
             exploreState,
             setExploreState,
           }}

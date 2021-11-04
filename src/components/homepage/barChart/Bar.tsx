@@ -32,6 +32,8 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
   const midX = startX + 0.5 * dim.barWidth
   const midY = startY + 0.5 * height
 
+  // const definitions = useDefinit
+
   return (
     <>
       <rect
