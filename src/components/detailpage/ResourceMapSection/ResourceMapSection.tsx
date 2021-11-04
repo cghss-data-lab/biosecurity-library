@@ -7,6 +7,10 @@ interface ResourceMapSectionProps {
   data: PageContext['data']
 }
 export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
+  const showMap: boolean =
+    data.resourceMapData !== undefined &&
+    data.resourceMapData.links.length > 0 &&
+    data.resourceMapData.nodes.length > 1
   return (
     <>
       <h5>
@@ -21,9 +25,17 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
           }
         />
       </h5>
-      <p>
-        <ResourceMap selectedNode={data} graphData={data.resourceMapData} />
-      </p>
+      {showMap && (
+        <p>
+          <ResourceMap selectedNode={data} graphData={data.resourceMapData} />
+        </p>
+      )}
+      {!showMap && (
+        <p>
+          This resource is not currently known to cite or be cited by any other
+          resources in the library.
+        </p>
+      )}
     </>
   )
 }

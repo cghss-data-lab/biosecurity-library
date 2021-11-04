@@ -180,12 +180,14 @@ export const ResourceMap: React.FC<{
   )
 
   // return null if no map to show
-  if (
-    graphData === undefined ||
-    graphData.nodes.length === 0 ||
-    graphData.links.length === 0
-  )
-    return null
+  if (graphData === undefined) return <div>Wow</div>
+  // // return null if no map to show
+  // if (
+  //   graphData === undefined ||
+  //   graphData.nodes.length === 0 ||
+  //   graphData.links.length === 0
+  // )
+  //   return null
 
   const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
 

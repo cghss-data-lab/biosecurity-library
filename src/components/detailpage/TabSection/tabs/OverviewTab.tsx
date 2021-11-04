@@ -6,12 +6,6 @@ import { commaSeparatedList } from '../../../../utilities/grammar'
 import ResourceMapSection from '../../ResourceMapSection/ResourceMapSection'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => {
-  const showResourceMap: boolean =
-    data.resourceMapData !== undefined &&
-    data.resourceMapData.links.length > 0 &&
-    data.resourceMapData.links.length > 0 &&
-    data.resourceMapData.nodes.length > 0
-
   return (
     <TabContentContainer>
       <h5>SUMMARY</h5>
@@ -20,9 +14,7 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => {
       <p>{data.Resource_type}</p>
       <h5>CATEGORIES</h5>
       <p>{commaSeparatedList(data.Key_topic_area)}</p>
-      {typeof window !== 'undefined' && showResourceMap && (
-        <ResourceMapSection {...{ data }} />
-      )}
+      {typeof window !== 'undefined' && <ResourceMapSection {...{ data }} />}
     </TabContentContainer>
   )
 }
