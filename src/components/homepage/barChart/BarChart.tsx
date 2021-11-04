@@ -19,7 +19,7 @@ const Instruction = styled.div`
   font-size: 16px;
   line-height: 22px;
   color: ${({ theme }) => theme.colorBlack};
-  font-family: 'Open Sans' Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   margin-top: 18px;
 `
 const Svg = styled.svg`
