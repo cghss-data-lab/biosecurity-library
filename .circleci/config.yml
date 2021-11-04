@@ -1,100 +1,184 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@0.1.13
+  aws-cli: circleci/aws-cli@2.0.3
 
 jobs:
-  deploy-prod:
+  deploy-dev:
     working_directory: ~/repo
 
     docker:
-      - image: cimg/node:14.4
+      - image: cimg/node:lts
 
     steps:
       - checkout
-
-      - run:
-          name: Installing Deployment Dependencies
-          working_directory: /
-          command: |
-            sudo apt-get -y -qq update
-            sudo apt-get -y install python3-pip python3-dev g++ build-essential
-            pip3 install --upgrade pip
-            sudo apt-get remove python-pip
-            pip3 install --upgrade setuptools pytz
-            pip3 install awsebcli==3.10.0
-            pip3 install boto3
-
       - aws-cli/install
-      - aws-cli/configure
 
       - run:
-          name: Build
-          command: rm yarn.lock; yarn install --network-timeout 1000000
+          name: Yarn Install
+          command: yarn install --network-timeout 1000000
 
       - run:
-          name: Deploy
-          command: yarn run deploy
+          name: Gatsby build
+          command: gatsby build;
 
       - run:
-          name: Create Invalidation
-          command: |
-            aws cloudfront create-invalidation \
-              --distribution-id E1AFIMCMLQ96KB \
-              --paths "/*"
+          name: AWS S3 Sync
+          command: aws s3 sync public/ s3://dev-biosecurity --delete
 
+      # - run:
+      #     name: Run cloudfront invalidation
+      #     command: |
+      #       aws cloudfront create-invalidation \
+      #       --distribution-id E1K4CMH3A58OPJ \
+      #       --paths "/*"
 
-  deploy-test:
-    working_directory: ~/repo
+  # deploy-review:
+  #   working_directory: ~/repo
 
-    docker:
-      - image: cimg/node:14.4
+  #   docker:
+  #     - image: cimg/node:lts
 
-    steps:
-      - checkout
+  #   steps:
+  #     - checkout
 
-      - run:
-          name: Installing Deployment Dependencies
-          working_directory: /
-          command: |
-            sudo apt-get -y -qq update
-            sudo apt-get -y install python3-pip python3-dev g++ build-essential
-            pip3 install --upgrade pip
-            sudo apt-get remove python-pip
-            pip3 install --upgrade setuptools pytz
-            pip3 install awsebcli==3.10.0
-            pip3 install boto3
+  #     - run:
+  #         name: Installing deployment dependencies
+  #         working_directory: /
+  #         command: |
+  #           sudo apt-get -y -qq update
+  #           sudo apt-get -y install python3-pip python3-dev g++ build-essential
+  #           pip3 install --upgrade pip
+  #           sudo apt-get remove python-pip
+  #           pip3 install --upgrade setuptools pytz
+  #           pip3 install awsebcli==3.10.0
+  #           pip3 install boto3
+  #     - aws-cli/install
+  #     - run:
+  #         name: Yarn install
+  #         command: yarn install --network-timeout 1000000
 
-      - aws-cli/install
-      - aws-cli/configure
+  #     - run:
+  #         name: Gatsby build
+  #         command: yarn build;
 
-      - run:
-          name: Build
-          command: rm yarn.lock; yarn install --network-timeout 1000000
+  #     - run:
+  #         name: Deploy to s3
+  #         command: aws s3 sync public/ s3://review-adlib --delete --acl public-read
 
-      - run:
-          name: Deploy
-          command: yarn run deploy-test
+  #     - run:
+  #         name: Run cloudfront invalidation
+  #         command: |
+  #           aws cloudfront create-invalidation \
+  #           --distribution-id EYV31A1NRBVSC \
+  #           --paths "/*"
+  # deploy-staging:
+  #   working_directory: ~/repo
 
-      - run:
-          name: Create Invalidation
-          command: |
-            aws cloudfront create-invalidation \
-              --distribution-id E1BA40SS45JOPH \
-              --paths "/*"
+  #   docker:
+  #     - image: cimg/node:lts
 
+  #   steps:
+  #     - checkout
 
+  #     - run:
+  #         name: Installing deployment dependencies
+  #         working_directory: /
+  #         command: |
+  #           sudo apt-get -y -qq update
+  #           sudo apt-get -y install python3-pip python3-dev g++ build-essential
+  #           pip3 install --upgrade pip
+  #           sudo apt-get remove python-pip
+  #           pip3 install --upgrade setuptools pytz
+  #           pip3 install awsebcli==3.10.0
+  #           pip3 install boto3
+  #     - aws-cli/install
+  #     - run:
+  #         name: Yarn install
+  #         command: yarn install --network-timeout 1000000
+
+  #     - run:
+  #         name: Gatsby build
+  #         command: yarn build;
+
+  #     - run:
+  #         name: Deploy to s3
+  #         command: aws s3 sync public/ s3://staging-adlib --delete --acl public-read
+
+  #     - run:
+  #         name: Run cloudfront invalidation
+  #         command: |
+  #           aws cloudfront create-invalidation \
+  #           --distribution-id E3H6LXQ118K44W \
+  #           --paths "/*"
+  # deploy-prod:
+  #   working_directory: ~/repo
+
+  #   docker:
+  #     - image: cimg/node:lts
+
+  #   steps:
+  #     - checkout
+
+  #     - run:
+  #         name: Installing deployment dependencies
+  #         working_directory: /
+  #         command: |
+  #           sudo apt-get -y -qq update
+  #           sudo apt-get -y install python3-pip python3-dev g++ build-essential
+  #           pip3 install --upgrade pip
+  #           sudo apt-get remove python-pip
+  #           pip3 install --upgrade setuptools pytz
+  #           pip3 install awsebcli==3.10.0
+  #           pip3 install boto3
+  #     - aws-cli/install
+  #     - run:
+  #         name: Yarn install
+  #         command: yarn install --network-timeout 1000000
+
+  #     - run:
+  #         name: Gatsby build
+  #         command: yarn build;
+
+  #     - run:
+  #         name: Deploy to s3
+  #         command: aws s3 sync public/ s3://prod-adlib --delete --acl public-read
+
+  #     - run:
+  #         name: Run cloudfront invalidation
+  #         command: |
+  #           aws cloudfront create-invalidation \
+  #           --distribution-id E42023Y13KQQQ \
+  #           --paths "/*"
 workflows:
   version: 2
   build:
     jobs:
-      - deploy-prod:
+      - deploy-dev:
           filters:
             branches:
               only:
-                - master
-      - deploy-test:
-          filters:
-            branches:
-              only:
-                - dev
+                - circleci
+          context:
+            - AWS Credentials
+      # - deploy-review:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - review
+      #     context:
+      #       - AWS Credentials
+      # - deploy-staging:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - staging
+      #     context:
+      #       - AWS Credentials
+      # - deploy-prod:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - prod
+      #     context:
+      #       - AWS Credentials
