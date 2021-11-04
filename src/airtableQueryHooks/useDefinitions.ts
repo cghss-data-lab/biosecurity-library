@@ -2,9 +2,9 @@ import { useStaticQuery, graphql } from 'gatsby'
 
 export interface Definition {
   data: {
+    Name: string
     Column: string[]
     Definition: string
-    Glossary_Name: string
   }
 }
 
@@ -16,9 +16,9 @@ const useDefinitions = () => {
       definitions: allAirtable(filter: { table: { eq: "Glossary" } }) {
         nodes {
           data {
-            Glossary_Name
-            Definition
+            Name
             Column
+            Definition
           }
         }
       }

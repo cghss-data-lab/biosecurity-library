@@ -57,6 +57,7 @@ const FilterBar = ({
 }: FilterProps): JSX.Element => {
   const theme: any = useTheme()
   const definitions = useDefinitions()
+
   return (
     <>
       <DefinitionsContainer>
@@ -68,25 +69,25 @@ const FilterBar = ({
               )
             )
             .map(def => (
-              <Tippy key={def.data.Glossary_Name} content={def.data.Definition}>
+              <Tippy key={def.data.Name} content={def.data.Definition}>
                 <DefinitionButton
                   onClick={() => {
                     toggleFilter(
-                      { [exploreState.defs!]: [def.data.Glossary_Name] },
+                      { [exploreState.defs!]: [def.data.Name] },
                       setExploreState
                     )
                   }}
                   active={exploreState.filters?.[
                     exploreState.defs! as keyof typeof exploreState.filters
-                  ]?.includes(def.data.Glossary_Name)}
+                  ]?.includes(def.data.Name)}
                 >
                   <AirtableCMSIcon
                     noEmitError
-                    name={def.data.Glossary_Name}
+                    name={def.data.Name}
                     color={theme.colorBlack}
                     style={{ width: 30, marginRight: 10 }}
                   />
-                  {def.data.Glossary_Name}
+                  {def.data.Name}
                 </DefinitionButton>
               </Tippy>
             ))}
