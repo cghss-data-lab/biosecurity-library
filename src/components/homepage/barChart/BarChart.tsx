@@ -1,14 +1,17 @@
 import React from 'react'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
+
 import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
+
+import Bar from './Bar'
 
 const Section = styled.section`
   padding: 0 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10vw;
+  margin-bottom: 20em;
 `
 const Instruction = styled.div`
   font-style: italic;
@@ -16,7 +19,7 @@ const Instruction = styled.div`
   font-size: 16px;
   line-height: 22px;
   color: ${({ theme }) => theme.colorBlack};
-  font-family: 'Open Sans' Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   margin-top: 18px;
 `
 const Svg = styled.svg`
@@ -25,22 +28,28 @@ const Svg = styled.svg`
   overflow: visible;
 `
 
+export interface DimObj {
+  width: number
+  height: number
+  [key: string]: number
+}
+
 const BarChart = (): JSX.Element => {
   const { homePageResources, homePageText } = useHomePageData()
 
-  const dim: any = {
+  const dim: DimObj = {
     width: 500,
     height: 150,
     barGap: 10,
+    iconSize: 10,
+    labelPad: 5,
   }
 
   const barCount = homePageResources.group.length
-  const maxBar = Math.max(...homePageResources.group.map(bar => bar.totalCount))
-  const scale = dim.height / maxBar
 
+  dim.maxBar = Math.max(...homePageResources.group.map(bar => bar.totalCount))
   dim.barWidth = (dim.width - dim.barGap * barCount) / barCount
-
-  const theme: any = useTheme()
+  dim.scale = dim.height / dim.maxBar
 
   const sortedBars = homePageResources.group.sort(
     (a, b) => b.totalCount - a.totalCount
@@ -56,14 +65,7 @@ const BarChart = (): JSX.Element => {
       </Instruction>
       <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
         {sortedBars.map((bar, index) => (
-          <rect
-            key={index}
-            x={index * (dim.barWidth + dim.barGap)}
-            y={(maxBar - bar.totalCount) * scale}
-            width={dim.barWidth}
-            height={scale * bar.totalCount}
-            fill={theme.colorDarkest}
-          />
+          <Bar {...{ index, bar, dim }} />
         ))}
       </Svg>
     </Section>

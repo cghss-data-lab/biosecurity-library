@@ -26,6 +26,11 @@ module.exports = {
           },
           {
             baseId: `app708Ctx0rz1c1n7`,
+            tableName: `Glossary`,
+            tableView: `CMS view`,
+          },
+          {
+            baseId: `app708Ctx0rz1c1n7`,
             tableName: `Resource Library`,
             tableView: `CMS view`,
             tableLinks: [
@@ -36,11 +41,6 @@ module.exports = {
               Thumbnail_INTERNAL: `fileNode`,
               Files_INTERNAL: `fileNode`,
             },
-          },
-          {
-            baseId: `appmL0p5H21CiY7tL`,
-            tableName: `Glossary`,
-            tableView: `CMS`,
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
@@ -92,7 +92,4 @@ module.exports = {
     'gatsby-plugin-sass',
     'gatsby-plugin-mdx',
   ],
-  flags: {
-    PARALLEL_QUERY_RUNNING: true,
-  },
 }
