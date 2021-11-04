@@ -1,1 +1,4 @@
-/Users/mikevanmaele/Documents/GitHub/biosecurity-library/src/packages/viz/network/network.composition.tsx
+import React from "react";
+import { Network, GraphNode, demoGraphData } from "./network";
+
+export const BasicNetwork = () => <Network initGraphData={demoGraphData} />;

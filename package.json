@@ -68,7 +68,6 @@
     "whatwg-fetch": "^3.6.2"
   },
   "_moduleAliases": {
-    "@network": "./src/packages/viz/network/dist/index",
-    "@test": "./src"
+    "@network": "./src/packages/viz/network"
   }
 }

@@ -2,9 +2,9 @@
  * Simple legend defining the direction of curved edges in `<ResourceMap />`
  */
 import React, { useMemo } from 'react'
-import * as network from '@mvanmaele/mvanmaele-test.viz.network'
+import * as network from '@network/index'
 import styled, { useTheme } from 'styled-components'
-import { AppGraphData, initNode } from '@mvanmaele/mvanmaele-test.viz.network'
+import { AppGraphData, initNode } from '@network/index'
 const LinkLegendContainer = styled.div`
   position: relative;
   width: 150px;

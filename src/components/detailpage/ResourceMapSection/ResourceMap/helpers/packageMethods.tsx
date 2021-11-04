@@ -8,7 +8,7 @@ import {
   GraphNode,
   GraphLink,
   // LinkDirections,
-} from '@network'
+} from '@network/index'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
 

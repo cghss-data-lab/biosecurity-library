@@ -102,11 +102,7 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '@network': path.resolve(
-          __dirname,
-          'src/packages/viz/network/dist/index'
-        ),
-        '@test': path.resolve(__dirname, 'src'),
+        '@network': path.resolve(__dirname, 'src/packages/viz/network'),
       },
     },
   })

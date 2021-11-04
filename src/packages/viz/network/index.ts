@@ -1,1 +1,2 @@
-/Users/mikevanmaele/Documents/GitHub/biosecurity-library/src/packages/viz/network/index.ts
+export { Network } from "./network";
+export * from "./network";

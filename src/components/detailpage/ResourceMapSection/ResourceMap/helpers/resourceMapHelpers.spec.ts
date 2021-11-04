@@ -1,4 +1,4 @@
-import * as network from '@mvanmaele/mvanmaele-test.viz.network'
+import * as network from '@network/index'
 import { getResourceMapData, getFullResourceMapData } from './packageMethods'
 import { MOCK_GRAPH_DATA, MOCK_RESOURCE_DATA } from '../ResourceMap.spec'
 

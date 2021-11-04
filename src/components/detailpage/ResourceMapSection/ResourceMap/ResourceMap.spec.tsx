@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import ResourceMap from './ResourceMap'
 import { PageContext } from '../../../../templates/Detail'
-import * as network from '@mvanmaele/mvanmaele-test.viz.network'
+import * as network from '@network/index'
 
 export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Record_ID_INTERNAL: 'recTest',

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ImageDataLike } from 'gatsby-plugin-image'
-import * as network from '@mvanmaele/mvanmaele-test.viz.network'
+import * as network from '@network/index'
 
 // layout components
 import Main from '../components/layout/Main'

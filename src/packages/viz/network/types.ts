@@ -1,1 +1,6 @@
-/Users/mikevanmaele/Documents/GitHub/biosecurity-library/src/packages/viz/network/types.ts
+import { Dispatch, SetStateAction } from "react";
+
+/**
+ * React useState hook setter
+ */
+export type SetState<T> = Dispatch<SetStateAction<T>>;
