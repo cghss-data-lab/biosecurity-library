@@ -37,22 +37,22 @@ module.exports = {
               `Auto_other_resources_cited`,
               `Authoring_organization`,
             ],
-            // mapping: {
-            //   Thumbnail_INTERNAL: `fileNode`,
-            //   Files_INTERNAL: `fileNode`,
-            // },
+            mapping: {
+              Thumbnail_INTERNAL: `fileNode`,
+              Files_INTERNAL: `fileNode`,
+            },
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
             tableName: `Landing Page`,
             tableView: `CMS`,
-            // mapping: { Image: `fileNode` },
+            mapping: { Image: `fileNode` },
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
             tableName: `Explore Page`,
             tableView: `CMS`,
-            // mapping: { Image: `fileNode` },
+            mapping: { Image: `fileNode` },
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
