@@ -161,6 +161,7 @@ workflows:
                 - circleci
           context:
             - AWS Credentials
+            - Airtable Credentials
       # - deploy-review:
       #     filters:
       #       branches:
