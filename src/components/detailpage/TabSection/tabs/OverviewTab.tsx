@@ -16,7 +16,7 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => {
       <h5>CATEGORIES</h5>
       <p>{commaSeparatedList(data.Key_topic_area)}</p>
       {typeof window !== 'undefined' && <ResourceMapSection {...{ data }} />}
-      <ResourceSetSection sets={[]} />
+      <ResourceSetSection sets={data.Resource_sets} />
     </TabContentContainer>
   )
 }

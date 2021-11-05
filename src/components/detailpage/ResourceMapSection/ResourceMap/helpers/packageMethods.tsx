@@ -24,7 +24,7 @@ export enum LinkDirections {
 
 type DefinedPageDataFields = keyof Omit<
   PageContext['data'],
-  'resourceMapData' | 'Edition' | 'Auto_other_resources_cited'
+  'resourceMapData' | 'Edition' | 'Auto_other_resources_cited' | 'Resource_sets'
 >
 
 /**
