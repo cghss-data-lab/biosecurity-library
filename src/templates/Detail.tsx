@@ -58,6 +58,20 @@ export interface PageContext {
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }
+    Resource_sets: {
+      data: {
+        Resource_set_name: string
+        Unique_ID: number
+        Description: string | null
+        Resources_in_set: {
+          data: {
+            Resource_name: string
+            Short_name: string
+            Resource_type: string
+          }
+        }[]
+      }
+    }[]
 
     // Below: Additional data elements not directly sourced from Airtable.
 
