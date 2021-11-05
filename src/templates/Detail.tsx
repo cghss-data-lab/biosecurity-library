@@ -18,6 +18,21 @@ import TabSection from '../components/detailpage/TabSection/TabSection'
  * Resource Airtable fields that link to other records
  */
 export type LinkField = 'Auto_other_resources_cited'
+export type ResourceSetProps = {
+  data: {
+    Resource_set_name: string
+    Unique_ID: number
+    Description: string | null
+    Resources_in_set: {
+      data: {
+        Record_ID_INTERNAL: string
+        Resource_name: string
+        Short_name: string
+        Resource_type: string
+      }
+    }[]
+  }
+}
 export interface PageContext {
   data: {
     Record_ID_INTERNAL: string
@@ -38,16 +53,18 @@ export interface PageContext {
     Access_information: string
     Access_limitations: string
     Resource_language: string[]
-    Edition: string
+    Edition: string | null
     First_release_date: string
     Last_update_date: string
     Update_frequency: string
-    Topic_area_icons: string
-    Auto_other_resources_cited: {
-      data: {
-        Record_ID_INTERNAL: string
-      }
-    }[]
+    // Topic_area_icons: string
+    Auto_other_resources_cited:
+      | {
+          data: {
+            Record_ID_INTERNAL: string
+          }
+        }[]
+      | null
     // Topic_area_icons: string
     Files_INTERNAL: {
       localFiles: {
@@ -58,20 +75,7 @@ export interface PageContext {
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }
-    Resource_sets: {
-      data: {
-        Resource_set_name: string
-        Unique_ID: number
-        Description: string | null
-        Resources_in_set: {
-          data: {
-            Resource_name: string
-            Short_name: string
-            Resource_type: string
-          }
-        }[]
-      }
-    }[]
+    Resource_sets: ResourceSetProps[] | null
 
     // Below: Additional data elements not directly sourced from Airtable.
 

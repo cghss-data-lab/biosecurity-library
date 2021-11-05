@@ -101,9 +101,6 @@ export const createPages: GatsbyNode['createPages'] = async ({
     'Resource_type'
   )
 
-  console.log('Debug')
-  console.log(resultResourceSets)
-
   result.data.resources.nodes.forEach(
     ({ data }: { data: PageContext['data'] }) => {
       const resourceMapData: HyperlinkedGraphData = getResourceMapData(
