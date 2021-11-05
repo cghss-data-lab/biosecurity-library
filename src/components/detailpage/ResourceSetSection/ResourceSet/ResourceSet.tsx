@@ -11,6 +11,7 @@ const ResourceSetContainer = styled.div`
   h6 {
     margin: 1em 0 0 0;
     font-size: 18px;
+    font-weight: 600;
   }
   font-family: 'Open Sans', sans-serif;
 `
