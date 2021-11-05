@@ -47,13 +47,13 @@ const useExplorePageData = () => {
           data {
             Name
             Text
-            Image {
-              localFiles {
-                childImageSharp {
-                  gatsbyImageData(height: 200, placeholder: TRACED_SVG)
-                }
-              }
-            }
+            # Image {
+            #   localFiles {
+            #     childImageSharp {
+            #       gatsbyImageData(height: 200, placeholder: TRACED_SVG)
+            #     }
+            #   }
+            # }
           }
         }
       }
@@ -82,13 +82,13 @@ const useExplorePageData = () => {
               Key_resource_INTERNAL
               User_roll_up
               # Topic_area_icons
-              Thumbnail_INTERNAL {
-                localFiles {
-                  childImageSharp {
-                    gatsbyImageData(width: 100, placeholder: BLURRED)
-                  }
-                }
-              }
+              # Thumbnail_INTERNAL {
+              #   localFiles {
+              #     childImageSharp {
+              #       gatsbyImageData(width: 100, placeholder: BLURRED)
+              #     }
+              #   }
+              # }
             }
           }
           fieldValue

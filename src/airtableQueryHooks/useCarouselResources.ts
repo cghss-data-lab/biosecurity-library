@@ -43,13 +43,13 @@ const useCaroselData = (): CaroselResourceData => {
                   Name
                 }
               }
-              Thumbnail_INTERNAL {
-                localFiles {
-                  childImageSharp {
-                    gatsbyImageData(width: 200, placeholder: BLURRED)
-                  }
-                }
-              }
+              # Thumbnail_INTERNAL {
+              #   localFiles {
+              #     childImageSharp {
+              #       gatsbyImageData(width: 200, placeholder: BLURRED)
+              #     }
+              #   }
+              # }
             }
           }
         }
