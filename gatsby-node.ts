@@ -47,19 +47,19 @@ export const createPages: GatsbyNode['createPages'] = async ({
                 Record_ID_INTERNAL
               }
             }
-            # Files_INTERNAL {
-            #   localFiles {
-            #     publicURL
-            #     name
-            #   }
-            # }
-            # Thumbnail_INTERNAL {
-            #   localFiles {
-            #     childImageSharp {
-            #       gatsbyImageData(width: 200, placeholder: BLURRED)
-            #     }
-            #   }
-            # }
+            Files_INTERNAL {
+              localFiles {
+                publicURL
+                name
+              }
+            }
+            Thumbnail_INTERNAL {
+              localFiles {
+                childImageSharp {
+                  gatsbyImageData(width: 200, placeholder: BLURRED)
+                }
+              }
+            }
           }
         }
       }

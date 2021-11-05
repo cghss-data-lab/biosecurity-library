@@ -37,13 +37,13 @@ const useHomePageData = () => {
           data {
             Name
             Text
-            # Image {
-            #   localFiles {
-            #     childImageSharp {
-            #       gatsbyImageData(height: 200, placeholder: TRACED_SVG)
-            #     }
-            #   }
-            # }
+            Image {
+              localFiles {
+                childImageSharp {
+                  gatsbyImageData(height: 200, placeholder: TRACED_SVG)
+                }
+              }
+            }
           }
         }
       }
