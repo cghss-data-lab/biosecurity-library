@@ -10,7 +10,7 @@ jobs:
     docker:
       - image: cimg/node:lts
 
-    resource_class: large
+    resource_class: xlarge
     steps:
       - checkout
       - aws-cli/install
