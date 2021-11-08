@@ -22,6 +22,14 @@ jobs:
       - checkout
       - aws-cli/install
 
+      - run:
+          name: Adding bit.dev to NPM Registry
+          command: |
+            echo "always-auth=true" >> ~/.npmrc;
+            echo "@talus-analytics:registry=https://node.bit.dev" >> ~/.npmrc;
+            echo "@teambit:registry=https://node.bit.dev" >> ~/.npmrc;
+            echo "//node.bit.dev/:_authToken={$BIT_TOKEN}" >> ~/.npmrc;
+
       - restore_cache:
           keys:
             - yarn-deps-{{ checksum "yarn.lock" }}
@@ -67,6 +75,7 @@ workflows:
           context:
             - AWS Credentials
             - Airtable Credentials
+            - Bit Credentials
       - deploy:
           bucket: 's3://review-biosecurity'
           distribution: 'E1C3POE3SNNT13'
@@ -77,6 +86,7 @@ workflows:
           context:
             - AWS Credentials
             - Airtable Credentials
+            - Bit Credentials
       - deploy:
           bucket: 's3://staging-biosecurity'
           distribution: 'E2Y1HDO9J5FPR9'
@@ -87,6 +97,7 @@ workflows:
           context:
             - AWS Credentials
             - Airtable Credentials
+            - Bit Credentials
       - deploy:
           bucket: 's3://prod-biosecurity'
           distribution: 'E225RTJBB12HS1'
@@ -97,3 +108,4 @@ workflows:
           context:
             - AWS Credentials
             - Airtable Credentials
+            - Bit Credentials
