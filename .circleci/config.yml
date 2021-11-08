@@ -87,7 +87,7 @@ workflows:
           context:
             - AWS Credentials
             - Airtable Credentials
-      - prod:
+      - deploy:
           bucket: 's3://prod-biosecurity'
           distribution: 'E225RTJBB12HS1'
           filters:
