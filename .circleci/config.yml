@@ -44,7 +44,7 @@ jobs:
           command: yarn build;
 
       - run:
-          name: AWS S3 Sync
+          name: AWS S3 Sync to <<parameters.bucket>>
           command: aws s3 sync public/ <<parameters.bucket>> --delete
 
       - run:
