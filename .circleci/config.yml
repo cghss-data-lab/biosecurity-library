@@ -15,6 +15,8 @@ jobs:
     parameters:
       bucket:
         type: string
+      distribution:
+        type: string
 
     steps:
       - checkout
@@ -44,12 +46,12 @@ jobs:
             - '.cache'
             - 'public'
 
-      # - run:
-      #     name: Run cloudfront invalidation
-      #     command: |
-      #       aws cloudfront create-invalidation \
-      #       --distribution-id E1K4CMH3A58OPJ \
-      #       --paths "/*"
+      - run:
+          name: Run cloudfront invalidation
+          command: |
+            aws cloudfront create-invalidation \
+            --distribution-id <<parameters.distribution>> \
+            --paths "/*"
 
 workflows:
   version: 2
@@ -57,31 +59,41 @@ workflows:
     jobs:
       - deploy:
           bucket: 's3://dev-biosecurity'
+          distribution: 'E31RJZOJBZKNK7'
           filters:
             branches:
               only:
-                - circleci
+                - dev
           context:
             - AWS Credentials
             - Airtable Credentials
-      # - deploy-review:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - review
-      #     context:
-      #       - AWS Credentials
-      # - deploy-staging:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - staging
-      #     context:
-      #       - AWS Credentials
-      # - deploy-prod:
-      #     filters:
-      #       branches:
-      #         only:
-      #           - prod
-      #     context:
-      #       - AWS Credentials
+      - deploy:
+          bucket: 's3://review-biosecurity'
+          distribution: 'E1C3POE3SNNT13'
+          filters:
+            branches:
+              only:
+                - review
+          context:
+            - AWS Credentials
+            - Airtable Credentials
+      - deploy:
+          bucket: 's3://staging-biosecurity'
+          distribution: 'E2Y1HDO9J5FPR9'
+          filters:
+            branches:
+              only:
+                - staging
+          context:
+            - AWS Credentials
+            - Airtable Credentials
+      - prod:
+          bucket: 's3://prod-biosecurity'
+          distribution: 'E225RTJBB12HS1'
+          filters:
+            branches:
+              only:
+                - prod
+          context:
+            - AWS Credentials
+            - Airtable Credentials
