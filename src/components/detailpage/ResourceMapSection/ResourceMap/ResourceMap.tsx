@@ -16,7 +16,7 @@ import {
   IconsQueryMap,
   replaceFill,
 } from '../../../../airtable-cms/AirtableCMSIcon'
-import * as network from '@network/index'
+import * as network from '@talus-analytics/viz.charts.network'
 import { getNodeIdsForLinks } from './helpers/packageMethods'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
@@ -80,9 +80,7 @@ export const ResourceMap: React.FC<{
   const [mapLeftMargin, setMapLeftMargin] = useState<number>(0)
   const [positioned, setPositioned] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const {
-    iconsQueryMap: { nodes: icons },
-  } = useStaticQuery<IconsQueryMap>(graphql`
+  const iconsQueryMapRes = useStaticQuery<IconsQueryMap>(graphql`
     query iconsQueryMap {
       iconsQueryMap: allAirtable(filter: { table: { eq: "Icons" } }) {
         nodes {
@@ -101,6 +99,8 @@ export const ResourceMap: React.FC<{
       }
     }
   `)
+  const icons = iconsQueryMapRes?.iconsQueryMap.nodes || []
+
   const theme: any = useTheme()
   const formattedGraphData: network.AppGraphData | undefined = useMemo(
     () =>
@@ -213,9 +213,15 @@ export const ResourceMap: React.FC<{
             })}
           />
           {/* Link direction legend */}
-          {curvedLinks && <CurvedEdgeEntry nodeColor={theme.colorDarker} />}
+          {curvedLinks && (
+            <CurvedEdgeEntry nodeColor={theme?.colorDarker || 'skyblue'} />
+          )}
         </Legend>
-        <MapContainer style={{ marginLeft: mapLeftMargin }} {...{ ref }}>
+        <MapContainer
+          data-network
+          style={{ marginLeft: mapLeftMargin }}
+          {...{ ref }}
+        >
           <network.SettingsContext.Provider
             value={{
               ...network.defaultSettings,
@@ -347,7 +353,7 @@ function getUniqueNodeIdCount(
 function formatGraphData(
   graphData: network.AppGraphData = { nodes: [], links: [] },
   icons: Icon[],
-  theme: any,
+  theme: any = {},
   selectedNode?: network.GraphNode
 ): network.AppGraphData | undefined {
   const formattedNodes: network.GraphNode[] = getFormattedNodes(
@@ -382,7 +388,7 @@ function formatGraphData(
 function getFormattedLinks(
   graphData: network.AppGraphData,
   formattedNodes: network.GraphNode[],
-  theme: any
+  theme: any = {}
 ): network.GraphLink[] {
   return graphData.links.map(l => {
     const source = formattedNodes.find(n =>
@@ -416,7 +422,7 @@ function getFormattedLinks(
 function getFormattedNodes(
   graphData: network.AppGraphData,
   icons: Icon[],
-  theme: any,
+  theme: any = {},
   selectedNode: network.GraphNode | undefined
 ): network.GraphNode[] {
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5

@@ -8,7 +8,7 @@ import {
   GraphNode,
   GraphLink,
   // LinkDirections,
-} from '@network/index'
+} from '@talus-analytics/viz.charts.network'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
 

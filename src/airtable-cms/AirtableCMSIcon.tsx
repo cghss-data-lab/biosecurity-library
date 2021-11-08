@@ -82,7 +82,7 @@ export interface IconsQueryMap {
   }
 }
 
-interface IconInterface {
+export interface IconInterface {
   name: string
   color: string
   className?: string

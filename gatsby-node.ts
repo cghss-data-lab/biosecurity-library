@@ -1,5 +1,4 @@
 import path from 'path'
-import 'module-alias/register'
 import { GatsbyNode } from 'gatsby'
 import { PageContext } from './src/templates/Detail'
 import {
@@ -132,14 +131,6 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   getConfig,
   actions,
 }) => {
-  // set up paths
-  actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        '@network': path.resolve(__dirname, 'src/packages/viz/network'),
-      },
-    },
-  })
   if (getConfig().mode === 'production') {
     // disabling source maps in prod build... I just don't see any benefit to it.
     actions.setWebpackConfig({

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ImageDataLike } from 'gatsby-plugin-image'
-import * as network from '@network/index'
+import * as network from '@talus-analytics/viz.charts.network'
 
 // layout components
 import Main from '../components/layout/Main'

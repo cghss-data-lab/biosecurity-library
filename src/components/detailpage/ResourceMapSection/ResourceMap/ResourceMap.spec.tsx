@@ -2,8 +2,23 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import ResourceMap from './ResourceMap'
 import { PageContext } from '../../../../templates/Detail'
-import * as network from '@network/index'
+import * as network from '@talus-analytics/viz.charts.network'
+import FigmaProvider from '../../../../figma/FigmaProvider'
+import ResourceMapSection from '../ResourceMapSection'
 
+// mock Airtable icons
+jest.mock('../../../../airtable-cms/AirtableCMSIcon', () => {
+  return {
+    __esModule: true,
+    default: () => {
+      return <p></p>
+    },
+  }
+})
+
+/**
+ * Mock data for individual resource
+ */
 export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Record_ID_INTERNAL: 'recTest',
   Short_description: 'Test',
@@ -20,10 +35,11 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Access_limitations: 'Test',
   Resource_language: ['Test'],
   Edition: 'Test',
+  Resource_sets: [],
   First_release_date: 'Test',
   Last_update_date: 'Test',
   Update_frequency: 'Test',
-  Topic_area_icons: 'Test',
+  // Topic_area_icons: 'Test',
   Files_INTERNAL: {
     localFiles: [{ publicURL: 'Test', name: 'Test' }],
   },
@@ -43,10 +59,16 @@ export const MOCK_GRAPH_DATA: network.AppGraphData = {
 }
 
 describe('ResourceMap', () => {
-  // is it hidden when it should be?
   it('should not render if there are no links to show', () => {
     const { container: containerNoLinks } = render(
-      <ResourceMap graphData={{ nodes: MOCK_GRAPH_DATA.nodes, links: [] }} />
+      <FigmaProvider>
+        <ResourceMapSection
+          data={{
+            ...MOCK_RESOURCE_DATA,
+            resourceMapData: undefined,
+          }}
+        />
+      </FigmaProvider>
     )
     const canvases: NodeListOf<HTMLCanvasElement> =
       containerNoLinks.querySelectorAll('canvas')
@@ -54,16 +76,17 @@ describe('ResourceMap', () => {
   })
 
   // otherwise: if rendered:
-  it('should render with one canvas element', () => {
-    const { container } = render(<ResourceMap graphData={MOCK_GRAPH_DATA} />)
-    const canvases: NodeListOf<HTMLCanvasElement> =
-      container.querySelectorAll('canvas')
+  it('should render with one main canvas element', () => {
+    const { container } = render(
+      <FigmaProvider>
+        <ResourceMap graphData={MOCK_GRAPH_DATA} />
+      </FigmaProvider>
+    )
+    const canvases: NodeListOf<HTMLCanvasElement> = container.querySelectorAll(
+      '[data-network] canvas'
+    )
     expect(canvases.length).toEqual(1)
   })
-
-  // it('should display instruction text', () => {
-  //   expect(false).toStrictEqual(true) // TODO implement
-  // })
 })
 
 /**
