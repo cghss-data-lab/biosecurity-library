@@ -8,12 +8,7 @@ commands:
     parameters:
       bucket:
         type: string
-    working_directory: ~/repo
 
-    docker:
-      - image: cimg/node:lts
-
-    resource_class: xlarge
     steps:
       - checkout
       - aws-cli/install
@@ -39,8 +34,13 @@ commands:
 
 jobs:
   deploy-dev:
-    - deploy:
-      bucket: 's3://dev-biosecurity'
+    working_directory: ~/repo
+    docker:
+      - image: cimg/node:lts
+    resource_class: xlarge
+    steps:
+      - deploy:
+        bucket: 's3://dev-biosecurity'
 
 workflows:
   version: 2
