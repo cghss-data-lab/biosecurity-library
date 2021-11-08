@@ -1,4 +1,4 @@
-import * as network from '@network/index'
+import * as network from '@talus-analytics/viz.charts.network'
 import { getResourceMapData, getFullResourceMapData } from './packageMethods'
 import { MOCK_GRAPH_DATA, MOCK_RESOURCE_DATA } from '../ResourceMap.spec'
 
@@ -8,7 +8,7 @@ describe('getFullResourceMapData', () => {
       [{ data: MOCK_RESOURCE_DATA }],
       ['Auto_other_resources_cited'],
       'Resource_name',
-      'Resource_name'
+      'Record_ID_INTERNAL'
     )
     expect(
       fullResourceMapData.nodes.length === MOCK_GRAPH_DATA.nodes.length

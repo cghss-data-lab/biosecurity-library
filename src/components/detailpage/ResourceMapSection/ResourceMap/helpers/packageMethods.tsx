@@ -8,7 +8,7 @@ import {
   GraphNode,
   GraphLink,
   // LinkDirections,
-} from '@network/index'
+} from '@talus-analytics/viz.charts.network'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
 
@@ -22,7 +22,10 @@ export enum LinkDirections {
   either,
 }
 
-type DefinedPageDataFields = keyof Omit<PageContext['data'], 'resourceMapData'>
+type DefinedPageDataFields = keyof Omit<
+  PageContext['data'],
+  'resourceMapData' | 'Edition' | 'Auto_other_resources_cited' | 'Resource_sets'
+>
 
 /**
  * Thrown when a node with the defined ID is expected to exist but not found
@@ -53,7 +56,7 @@ class MissingNodeError extends Error {
 export function getFullResourceMapData(
   queryResponse: { data: PageContext['data'] }[],
   linkFields: LinkField[],
-  nameField: keyof Omit<PageContext['data'], 'resourceMapData'>, // omit undef
+  nameField: DefinedPageDataFields, // omit undef
   idField: DefinedPageDataFields,
   iconField?: DefinedPageDataFields
 ): AppGraphData {
@@ -80,10 +83,12 @@ export function getFullResourceMapData(
 
     // add one link per connection
     linkFields.forEach(lf => {
+      const value = data[lf]
+      if (value === null) return
       // get unique IDs in link field for record
       const linkFieldIds: string[] =
         data[lf] !== null
-          ? [...new Set(data[lf].map(d => d.data.Record_ID_INTERNAL))]
+          ? [...new Set(value.map(d => d.data.Record_ID_INTERNAL))]
           : []
       linkFieldIds.forEach(rId => {
         const otherNode: GraphNode | undefined = nodes.find(n => {
@@ -130,7 +135,7 @@ export function getResourceMapData(
  */
 export function initResourceMapNode(
   data: PageContext['data'],
-  nameField: keyof Omit<PageContext['data'], 'resourceMapData'>, // omit undef
+  nameField: DefinedPageDataFields, // omit undef
   idField: DefinedPageDataFields,
   iconField?: DefinedPageDataFields
 ): HyperlinkedNode {

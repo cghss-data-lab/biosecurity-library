@@ -1,5 +1,4 @@
 import path from 'path'
-import 'module-alias/register'
 import { GatsbyNode } from 'gatsby'
 import { PageContext } from './src/templates/Detail'
 import {
@@ -66,6 +65,30 @@ export const createPages: GatsbyNode['createPages'] = async ({
     }
   `)
 
+  const resultResourceSets: any = await graphql(`
+    {
+      resourceSets: allAirtable(
+        filter: { table: { eq: "Lookup: Resource sets" } }
+      ) {
+        nodes {
+          data {
+            Resource_set_name
+            Unique_ID
+            Description
+            Resources_in_set {
+              data {
+                Resource_name
+                Short_name
+                Record_ID_INTERNAL
+                Resource_type
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
   // removed:
   // Topic_Area_Icons
 
@@ -83,6 +106,16 @@ export const createPages: GatsbyNode['createPages'] = async ({
         data.Record_ID_INTERNAL,
         fullResourceMapData
       )
+      data.Resource_sets = resultResourceSets.data.resourceSets.nodes.filter(
+        (d: {
+          data: {
+            Resources_in_set: { data: { Record_ID_INTERNAL: string } }[]
+          }
+        }) =>
+          d.data.Resources_in_set.some(
+            dd => dd.data.Record_ID_INTERNAL === data.Record_ID_INTERNAL
+          )
+      )
       actions.createPage({
         path: urls.getDetailURL(data),
         component: detailPageTemplate,
@@ -98,14 +131,6 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({
   getConfig,
   actions,
 }) => {
-  // set up paths
-  actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        '@network': path.resolve(__dirname, 'src/packages/viz/network'),
-      },
-    },
-  })
   if (getConfig().mode === 'production') {
     // disabling source maps in prod build... I just don't see any benefit to it.
     actions.setWebpackConfig({
