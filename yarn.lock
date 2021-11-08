@@ -2225,15 +2225,15 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@talus-analytics/viz.charts.network@^0.0.1":
-  version "0.0.1"
-  resolved "https://node.bit.dev/@talus-analytics/viz.charts.network/-/@talus-analytics-viz.charts.network-0.0.1.tgz#e8e470ee9d1318b2789bdceea9dca4450bb5b743"
-  integrity sha1-6ORw7p0TGLJ4m9zuqdykRQu1t0M=
+"@talus-analytics/viz.charts.network@^0.0.2":
+  version "0.0.2"
+  resolved "https://node.bit.dev/@talus-analytics/viz.charts.network/-/@talus-analytics-viz.charts.network-0.0.2.tgz#5d21865e89ddf8fba7a7bb2601137138f393abb4"
+  integrity sha1-XSGGXond+Punp7smARNxOPOTq7Q=
   dependencies:
-    airtable "0.11.1"
+    airtable "^0.11.1"
     core-js "^3.0.0"
-    csvtojson "2.0.10"
-    react-force-graph-2d "1.23.8"
+    csvtojson "^2.0.10"
+    react-force-graph-2d "^1.23.8"
 
 "@testing-library/dom@^8.0.0":
   version "8.9.1"
@@ -3043,7 +3043,7 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-airtable@0.11.1, airtable@^0.11.1:
+airtable@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/airtable/-/airtable-0.11.1.tgz#2fda51da04f5e4be7092351ea7be3cfdcf308347"
   integrity sha512-33zBuUDhLl+FWWAFxFjS1a+vJr/b+UK//EV943nuiimChWph6YykQjYPmu/GucQ30g7mgaqq+98uPD4rfDHOgg==
@@ -4955,7 +4955,7 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.9.tgz#6410af31b26bd0520933d02cbc64fce9ce3fbf0b"
   integrity sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw==
 
-csvtojson@2.0.10, csvtojson@^2.0.10:
+csvtojson@^2.0.10:
   version "2.0.10"
   resolved "https://registry.yarnpkg.com/csvtojson/-/csvtojson-2.0.10.tgz#11e7242cc630da54efce7958a45f443210357574"
   integrity sha512-lUWFxGKyhraKCW8Qghz6Z0f2l/PqB1W3AO0HKJzGIQ5JRSlR651ekJDiGJbBT4sRNNv5ddnSGVEnsxP9XRCVpQ==
@@ -12201,7 +12201,7 @@ react-fast-compare@^3.1.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-force-graph-2d@1.23.8, react-force-graph-2d@^1.23.8:
+react-force-graph-2d@^1.23.8:
   version "1.23.8"
   resolved "https://registry.yarnpkg.com/react-force-graph-2d/-/react-force-graph-2d-1.23.8.tgz#28a6e0d4221f1338f8af896eedd06b73fd23a6f8"
   integrity sha512-ON0vYxZY1PNoEi5RqGtyl5nmUlln6tbTcWdoLbRd9AEC3wCsaDjOQymF77U6DLRuqhqrjaC0SbjH+rAn9np8Lg==
