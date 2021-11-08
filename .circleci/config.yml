@@ -39,19 +39,19 @@ jobs:
           name: AWS S3 Sync
           command: aws s3 sync public/ <<parameters.bucket>> --delete
 
-      - save_cache:
-          key: yarn-deps-{{ checksum "yarn.lock" }}
-          paths:
-            - 'node_modules'
-            - '.cache'
-            - 'public'
-
       - run:
           name: Run cloudfront invalidation
           command: |
             aws cloudfront create-invalidation \
             --distribution-id <<parameters.distribution>> \
             --paths "/*"
+
+      - save_cache:
+          key: yarn-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - 'node_modules'
+            - '.cache'
+            - 'public'
 
 workflows:
   version: 2
