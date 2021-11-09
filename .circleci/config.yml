@@ -10,7 +10,7 @@ workflows:
           filters:
             branches:
               only:
-                - circleci
+                - dev
           context:
             - AWS Credentials
             - Airtable Credentials
