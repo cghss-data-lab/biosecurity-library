@@ -1,22 +1,45 @@
 import React, { FC } from 'react'
 import { Link } from 'gatsby'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { ResourceSetProps } from '../../../../templates/Detail'
 import * as object from '../../../../utilities/object'
 import * as urls from '../../../../utilities/urls'
+import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
+import Tippy from '@tippyjs/react'
 
 const ResourceSetContainer = styled.div`
   display: flex;
   flex-flow: column;
   h6 {
-    margin: 1em 0 0 0;
+    margin: 2em 0 0 0;
     font-size: 18px;
     font-weight: 600;
   }
   font-family: 'Open Sans', sans-serif;
 `
 
+const ResourceList = styled.ul`
+  list-style: none;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+`
+const ResourceListItem = styled.li``
+const ResourceLink = styled(Link)`
+  display: flex;
+  align-items: flex-start;
+  svg {
+    width: unset;
+  }
+  span {
+    font-size: 1rem;
+    line-height: 30px;
+  }
+`
+
 export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
+  const theme: any = useTheme()
   return (
     <ResourceSetContainer>
       {/* Set name */}
@@ -28,17 +51,26 @@ export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
       )}
 
       {/* Resources in set */}
-      <ul>
+      <ResourceList>
         {props.data.Resources_in_set.sort(
           object.sortByCustom<typeof props.data.Resources_in_set[0]>(
             inst => inst.data.Resource_name
           )
         ).map(d => (
-          <li data-member key={d.data.Record_ID_INTERNAL}>
-            <Link to={urls.getDetailURL(d.data)}>{d.data.Resource_name}</Link>
-          </li>
+          <ResourceListItem data-member key={d.data.Record_ID_INTERNAL}>
+            <Tippy content={d.data.Resource_name} followCursor>
+              <ResourceLink to={urls.getDetailURL(d.data)}>
+                <AirtableCMSIcon
+                  name={d.data.Resource_type}
+                  color={theme.colorDarker}
+                  style={{ height: 30, marginRight: '.5em' }}
+                />
+                <span>{d.data.Short_name}</span>
+              </ResourceLink>
+            </Tippy>
+          </ResourceListItem>
         ))}
-      </ul>
+      </ResourceList>
     </ResourceSetContainer>
   )
 }
