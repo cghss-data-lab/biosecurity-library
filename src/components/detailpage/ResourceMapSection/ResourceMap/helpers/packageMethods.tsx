@@ -5,11 +5,10 @@
 import { LinkField, PageContext } from '../../../../../templates/Detail'
 import {
   AppGraphData,
-  GraphNode,
   GraphLink,
+  GraphNode,
   getNeighborhood,
-  // LinkDirections,
-} from '@talus-analytics/viz.charts.network'
+} from '@talus-analytics/viz.charts.network/dist/helpers'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
 
