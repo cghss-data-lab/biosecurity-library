@@ -17,7 +17,12 @@ import {
   replaceFill,
 } from '../../../../airtable-cms/AirtableCMSIcon'
 import * as network from '@talus-analytics/viz.charts.network'
-import { getNodeIdsForLinks } from './helpers/packageMethods'
+import {
+  AppGraphData,
+  getNodeIdsForLinks,
+  GraphLink,
+  GraphNode,
+} from '@talus-analytics/viz.charts.network/dist/helpers'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'
@@ -73,7 +78,7 @@ const NodeHoverLabelBox = styled.div`
  */
 export const ResourceMap: React.FC<{
   selectedNode?: PageContext['data']
-  graphData?: network.AppGraphData
+  graphData?: AppGraphData
   curvedLinks?: boolean
 }> = ({ selectedNode, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
@@ -102,7 +107,7 @@ export const ResourceMap: React.FC<{
   const icons = iconsQueryMapRes?.iconsQueryMap.nodes || []
 
   const theme: any = useTheme()
-  const formattedGraphData: network.AppGraphData | undefined = useMemo(
+  const formattedGraphData: AppGraphData | undefined = useMemo(
     () =>
       formatGraphData(
         graphData,
@@ -139,8 +144,8 @@ export const ResourceMap: React.FC<{
    */
   const getLinkDirectionalArrowLength = useCallback(
     (l: LinkObject): number => {
-      return (l.source as network.GraphNode)._id === hoveredNode ||
-        (l.target as network.GraphNode)._id === hoveredNode
+      return (l.source as GraphNode)._id === hoveredNode ||
+        (l.target as GraphNode)._id === hoveredNode
         ? 5
         : 0
     },
@@ -270,7 +275,7 @@ export default ResourceMap
  */
 function getCitationCountText(
   resId: string | undefined,
-  graphData: network.AppGraphData
+  graphData: AppGraphData
 ): string {
   if (resId === undefined) return ''
   const cites: number = getUniqueNodeIdCount(graphData, 'target', resId)
@@ -317,7 +322,7 @@ function getCitationString(cites: number, citedBy: number) {
  * @returns The count
  */
 function getUniqueNodeIdCount(
-  graphData: network.AppGraphData,
+  graphData: AppGraphData,
   field: 'target' | 'source',
   selectedNodeId: string | undefined
 ): number {
@@ -351,18 +356,18 @@ function getUniqueNodeIdCount(
  * @returns The graph data formatted for display in the resource map
  */
 function formatGraphData(
-  graphData: network.AppGraphData = { nodes: [], links: [] },
+  graphData: AppGraphData = { nodes: [], links: [] },
   icons: Icon[],
   theme: any = {},
-  selectedNode?: network.GraphNode
-): network.AppGraphData | undefined {
-  const formattedNodes: network.GraphNode[] = getFormattedNodes(
+  selectedNode?: GraphNode
+): AppGraphData | undefined {
+  const formattedNodes: GraphNode[] = getFormattedNodes(
     graphData,
     icons,
     theme,
     selectedNode
   )
-  const formattedLinks: network.GraphLink[] = getFormattedLinks(
+  const formattedLinks: GraphLink[] = getFormattedLinks(
     graphData,
     formattedNodes,
     theme
@@ -386,10 +391,10 @@ function formatGraphData(
  * @returns A version of it with links formatted for display
  */
 function getFormattedLinks(
-  graphData: network.AppGraphData,
-  formattedNodes: network.GraphNode[],
+  graphData: AppGraphData,
+  formattedNodes: GraphNode[],
   theme: any = {}
-): network.GraphLink[] {
+): GraphLink[] {
   return graphData.links.map(l => {
     const source = formattedNodes.find(n =>
       getNodeIdsForLinks([l], 'source').includes(n._id)
@@ -420,11 +425,11 @@ function getFormattedLinks(
  * @returns A version of it with nodes formatted for display
  */
 function getFormattedNodes(
-  graphData: network.AppGraphData,
+  graphData: AppGraphData,
   icons: Icon[],
   theme: any = {},
-  selectedNode: network.GraphNode | undefined
-): network.GraphNode[] {
+  selectedNode: GraphNode | undefined
+): GraphNode[] {
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5
   return graphData.nodes.map(n => {
     // const n: GraphNode  = initResourceMapNode(selectedNodeData)
@@ -441,7 +446,7 @@ function getFormattedNodes(
       n._color || theme.colorDarker
     )
 
-    const updatedN: network.GraphNode = {
+    const updatedN: GraphNode = {
       ...n,
       _show: true,
       _icon: displayIcon,

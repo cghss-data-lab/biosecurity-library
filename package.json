@@ -18,7 +18,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@talus-analytics/viz.charts.network": "^0.0.1",
+    "@talus-analytics/viz.charts.network": "^0.0.8",
     "@tippyjs/react": "^4.2.5",
     "@types/qs": "^6.9.7",
     "babel-eslint": "^10.1.0",
