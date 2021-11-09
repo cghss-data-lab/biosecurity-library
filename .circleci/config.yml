@@ -1,5 +1,54 @@
 version: 2.1
 
+workflows:
+  version: 2
+  build:
+    jobs:
+      - deploy:
+          bucket: 's3://dev-biosecurity'
+          distribution: 'E31RJZOJBZKNK7'
+          filters:
+            branches:
+              only:
+                - dev
+          context:
+            - AWS Credentials
+            - Airtable Credentials
+            - Bit Credentials
+      - deploy:
+          bucket: 's3://review-biosecurity'
+          distribution: 'E1C3POE3SNNT13'
+          filters:
+            branches:
+              only:
+                - review
+          context:
+            - AWS Credentials
+            - Airtable Credentials
+            - Bit Credentials
+      - deploy:
+          bucket: 's3://staging-biosecurity'
+          distribution: 'E2Y1HDO9J5FPR9'
+          filters:
+            branches:
+              only:
+                - staging
+          context:
+            - AWS Credentials
+            - Airtable Credentials
+            - Bit Credentials
+      - deploy:
+          bucket: 's3://prod-biosecurity'
+          distribution: 'E225RTJBB12HS1'
+          filters:
+            branches:
+              only:
+                - prod
+          context:
+            - AWS Credentials
+            - Airtable Credentials
+            - Bit Credentials
+
 orbs:
   aws-cli: circleci/aws-cli@2.0.3
 
@@ -22,6 +71,14 @@ jobs:
       - checkout
       - aws-cli/install
 
+      - run:
+          name: Adding bit.dev to NPM Registry
+          command: |
+            echo "always-auth=true" >> ~/.npmrc;
+            echo "@talus-analytics:registry=https://node.bit.dev" >> ~/.npmrc;
+            echo "@teambit:registry=https://node.bit.dev" >> ~/.npmrc;
+            echo "//node.bit.dev/:_authToken={$BIT_TOKEN}" >> ~/.npmrc;
+
       - restore_cache:
           keys:
             - yarn-deps-{{ checksum "yarn.lock" }}
@@ -36,15 +93,8 @@ jobs:
           command: yarn build;
 
       - run:
-          name: AWS S3 Sync
+          name: AWS S3 Sync to <<parameters.bucket>>
           command: aws s3 sync public/ <<parameters.bucket>> --delete
-
-      - save_cache:
-          key: yarn-deps-{{ checksum "yarn.lock" }}
-          paths:
-            - 'node_modules'
-            - '.cache'
-            - 'public'
 
       - run:
           name: Run cloudfront invalidation
@@ -53,47 +103,9 @@ jobs:
             --distribution-id <<parameters.distribution>> \
             --paths "/*"
 
-workflows:
-  version: 2
-  build:
-    jobs:
-      - deploy:
-          bucket: 's3://dev-biosecurity'
-          distribution: 'E31RJZOJBZKNK7'
-          filters:
-            branches:
-              only:
-                - dev
-          context:
-            - AWS Credentials
-            - Airtable Credentials
-      - deploy:
-          bucket: 's3://review-biosecurity'
-          distribution: 'E1C3POE3SNNT13'
-          filters:
-            branches:
-              only:
-                - review
-          context:
-            - AWS Credentials
-            - Airtable Credentials
-      - deploy:
-          bucket: 's3://staging-biosecurity'
-          distribution: 'E2Y1HDO9J5FPR9'
-          filters:
-            branches:
-              only:
-                - staging
-          context:
-            - AWS Credentials
-            - Airtable Credentials
-      - deploy:
-          bucket: 's3://prod-biosecurity'
-          distribution: 'E225RTJBB12HS1'
-          filters:
-            branches:
-              only:
-                - prod
-          context:
-            - AWS Credentials
-            - Airtable Credentials
+      - save_cache:
+          key: yarn-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - 'node_modules'
+            - '.cache'
+            - 'public'
