@@ -3,7 +3,6 @@ import FigmaProvider from '../figma/FigmaProvider'
 
 import ImageHeader from '../components/layout/ImageHeader'
 import NavBar from '../components/layout/NavBar/NavBar'
-import Main from '../components/layout/Main'
 import IntroSection from '../components/homepage/IntroSection'
 import useHomePageData from '../airtableQueryHooks/useHomePageData'
 import ResourceSearch from '../components/homepage/ResourceSearch'
@@ -16,12 +15,10 @@ const IndexPage = (): JSX.Element => {
     <FigmaProvider>
       <NavBar />
       <ImageHeader cmsData={homePageText} />
-      {/*<Main>*/}
       <IntroSection />
       <ResourceSearch />
       <CarouselSection />
       <BarChart />
-      {/*</Main>*/}
     </FigmaProvider>
   )
 }
