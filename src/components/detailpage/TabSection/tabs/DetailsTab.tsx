@@ -4,7 +4,7 @@ import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
 
-const DetailsTag: React.FC<PageContext> = ({ data }) => {
+const DetailsTab = ({ data }: PageContext): JSX.Element => {
   return (
     <TabContentContainer>
       <h5>RESOURCE TYPE</h5>
@@ -20,7 +20,7 @@ const DetailsTag: React.FC<PageContext> = ({ data }) => {
         <a href={data.URL_for_resource}>{data.URL_for_resource}</a>
       </p>
       <h5>ACCESS INFORMATION</h5>
-      <p>{data.Access_information}</p>
+      <p>{data.Access_method}</p>
       <h5>ACCESS LIMITATIONS</h5>
       <p>{data.Access_limitations}</p>
       <h5>{data.Resource_language.length > 1 ? 'LANGUAGES' : 'LANGUAGE'}</h5>
@@ -41,4 +41,4 @@ const DetailsTag: React.FC<PageContext> = ({ data }) => {
   )
 }
 
-export default DetailsTag
+export default DetailsTab
