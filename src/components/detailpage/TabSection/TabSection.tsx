@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import TabButtons from './TabButtons'
 
@@ -20,15 +20,21 @@ const tabs: Tab[] = [
   { id: 'users', label: 'Users' },
   { id: 'access', label: 'Access & contact information' },
   { id: 'releases', label: 'Releases and updates' },
-  { id: 'related', label: 'Related resources' },
   // { id: 'technical', label: 'Technical information' },
 ]
 
 const TabSection: React.FC<PageContext> = ({ data }) => {
   const [activeTab, setActiveTab] = useState(tabs[0])
+
   return (
     <>
-      <TabButtons {...{ tabs, activeTab, setActiveTab }} />
+      <TabButtons
+        {...{
+          tabs: useMemo(() => getTabs(data), [data]),
+          activeTab,
+          setActiveTab,
+        }}
+      />
       {activeTab.id === 'overview' && <OverviewTab {...{ data }} />}
       {activeTab.id === 'users' && <UsersTab {...{ data }} />}
       {activeTab.id === 'access' && <AccessTab {...{ data }} />}
@@ -39,3 +45,17 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
 }
 
 export default TabSection
+
+/**
+ * Returns data defining the tabs to show in the tab section based on what data
+ * are available
+ * @param data The resource data
+ * @returns The tabs to show
+ */
+const getTabs = (data: PageContext['data']): Tab[] => {
+  const showRelated: boolean =
+    data.Resource_sets !== null && data.Resource_sets.length > 0
+  if (showRelated)
+    return tabs.concat({ id: 'related', label: 'Related resources' })
+  else return tabs
+}

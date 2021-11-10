@@ -32,6 +32,7 @@ export type ResourceSetProps = {
       }
     }[]
   }
+  nameField?: keyof ResourceSetProps['data']['Resources_in_set'][0]['data']
 }
 export interface PageContext {
   data: {
