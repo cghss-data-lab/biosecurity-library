@@ -17,17 +17,17 @@ export const replaceFill = (dom: HTMLElement, color: string) => {
   // so that it will support server-side-rendering.
   // const svgElement = svgDom.querySelector('svg')!
   const children = dom.childNodes
-
-  for (let child of children) {
-    // note this is the node-html-parser implementation
-    // of the HTMLElement class, not a native HTMLElement
-    if (child instanceof HTMLElement) {
-      // recursive call handles nested SVG structures like groups
-      if (child.childNodes) replaceFill(child, color)
-      if (child.hasAttribute('fill')) child.setAttribute('fill', color)
-      if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
+  if (children)
+    for (let child of children) {
+      // note this is the node-html-parser implementation
+      // of the HTMLElement class, not a native HTMLElement
+      if (child instanceof HTMLElement) {
+        // recursive call handles nested SVG structures like groups
+        if (child.childNodes) replaceFill(child, color)
+        if (child.hasAttribute('fill')) child.setAttribute('fill', color)
+        if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
+      }
     }
-  }
   return dom
 }
 
