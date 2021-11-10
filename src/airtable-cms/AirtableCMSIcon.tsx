@@ -12,22 +12,22 @@ export const getIconSvg = () => {
 // replace the fill and stroke colors on all child
 // elements of the SVG; but only if those elements
 // already have a fill or stroke set.
-export const replaceFill = (svg: string, color: string) => {
+export const replaceFill = (dom: HTMLElement, color: string) => {
   // this uses node-html-parser instead of native DOM
   // so that it will support server-side-rendering.
-  const svgDom = parse(svg)
-  const svgElement = svgDom.querySelector('svg')!
-  const children = svgElement.childNodes
+  // const svgElement = svgDom.querySelector('svg')!
+  const children = dom.childNodes
 
   for (let child of children) {
     // note this is the node-html-parser implementation
     // of the HTMLElement class, not a native HTMLElement
     if (child instanceof HTMLElement) {
+      if (child.childNodes) replaceFill(child, color)
       if (child.hasAttribute('fill')) child.setAttribute('fill', color)
       if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
     }
   }
-  return svgDom.toString()
+  return dom
 }
 
 const SVGContainer = styled.div`
@@ -135,10 +135,11 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
     )
   }
 
+  const svgDom = parse(icon.data.SVG.localFiles[0].childSvg.svgString)
   const displayIcon = replaceFill(
-    icon.data.SVG.localFiles[0].childSvg.svgString,
+    svgDom,
     hover && hoverColor ? hoverColor : color
-  )
+  ).toString()
 
   // only add mouseEnter and mouseLeave events
   // if there is a hover color specified
@@ -148,6 +149,8 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
       onMouseEnter: () => setHover(true),
       onMouseLeave: () => setHover(false),
     }
+
+  if (name === 'Dual Use') console.log(displayIcon)
 
   return (
     <SVGContainer
