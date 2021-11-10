@@ -40,8 +40,6 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
     def => def.data.Name.trim() === bar.fieldValue.trim()
   )?.data.Definition
 
-  console.log(definitions)
-
   return (
     <>
       <Tippy content={definition} visible={hover}>

@@ -10,7 +10,7 @@ import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
-import { urlString } from '../../airtable-cms/utilities'
+import { getDetailURL } from '../../utilities/urls'
 
 const SearchControls = styled.div`
   display: flex;
@@ -74,9 +74,10 @@ const ResourceSearch = (): JSX.Element => {
           onAdd={resource => {
             if (resource)
               navigate(
-                `/resource/` +
-                  urlString(resource.Resource_Type) +
-                  urlString(resource.key)
+                getDetailURL({
+                  Resource_type: resource.Resource_Type,
+                  Short_name: resource.key,
+                })
               )
           }}
           onRemove={() => {}}
