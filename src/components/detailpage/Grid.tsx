@@ -8,6 +8,7 @@ const Grid = styled.div`
     'thumbnail header'
     'tabs content';
   margin-bottom: 10vw;
+  margin-top: 15px;
 `
 
 export default Grid
