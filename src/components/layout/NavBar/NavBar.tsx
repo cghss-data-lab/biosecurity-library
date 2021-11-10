@@ -33,18 +33,21 @@ const HomeLink = styled(NavLink)`
 `
 
 const NavBar: React.FC = () => (
-  <Nav>
-    <Container>
-      <HomeLink activeStyle={{}} to="/">
-        Biosecurity Library
-      </HomeLink>
-      <LinkList>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/explore/">Explore</NavLink>
-        <NavLink to="/about/">About</NavLink>
-      </LinkList>
-    </Container>
-  </Nav>
+  <>
+    <Nav>
+      <Container>
+        <HomeLink activeStyle={{}} to="/">
+          Biosecurity Library
+        </HomeLink>
+        <LinkList>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/explore/">Explore</NavLink>
+          <NavLink to="/about/">About</NavLink>
+        </LinkList>
+      </Container>
+    </Nav>
+    <div style={{ height: 64 }} />
+  </>
 )
 
 export default NavBar
