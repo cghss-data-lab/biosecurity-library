@@ -34,7 +34,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             Target_user_role
             Potential_user_role
             URL_for_resource
-            Access_information
+            Access_method
             Access_limitations
             Resource_language
             Edition

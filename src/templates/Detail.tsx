@@ -51,7 +51,7 @@ export interface PageContext {
     Target_user_role: string[]
     Potential_user_role: string[]
     URL_for_resource: string
-    Access_information: string
+    Access_method: string
     Access_limitations: string
     Resource_language: string[]
     Edition: string | null
