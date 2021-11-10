@@ -9,7 +9,7 @@ import OverviewTab from './tabs/OverviewTab'
 import RelatedTab from './tabs/RelatedTab'
 
 import { PageContext } from '../../../templates/Detail'
-import DetailsTag from './tabs/DetailsTab'
+import DetailsTab from './tabs/DetailsTab'
 import styled from 'styled-components'
 
 export type Tab = {
@@ -50,7 +50,7 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
       </Container>
       <Container style={{ gridArea: 'content' }}>
         {activeTab.id === 'overview' && <OverviewTab {...{ data }} />}
-        {activeTab.id === 'details' && <DetailsTag {...{ data }} />}
+        {activeTab.id === 'details' && <DetailsTab {...{ data }} />}
         {/*{activeTab.id === 'users' && <UsersTab {...{ data }} />}*/}
         {/*{activeTab.id === 'access' && <AccessTab {...{ data }} />}*/}
         {/*{activeTab.id === 'releases' && <ReleasesTab {...{ data }} />}*/}
