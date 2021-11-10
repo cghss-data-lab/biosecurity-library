@@ -16,12 +16,12 @@ const IndexPage = (): JSX.Element => {
     <FigmaProvider>
       <NavBar />
       <ImageHeader cmsData={homePageText} />
-      <Main>
-        <IntroSection />
-        <ResourceSearch />
-        <CarouselSection />
-        <BarChart />
-      </Main>
+      {/*<Main>*/}
+      <IntroSection />
+      <ResourceSearch />
+      <CarouselSection />
+      <BarChart />
+      {/*</Main>*/}
     </FigmaProvider>
   )
 }
