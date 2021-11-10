@@ -8,6 +8,10 @@ import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { commaSeparatedList } from '../../../utilities/grammar'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import ResourceContainer from './ResourceContainer'
+
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+
 import * as urls from '../../../utilities/urls'
 
 // const ResourceContainer = styled.section<{ expanded: boolean }>`
@@ -47,8 +51,8 @@ const IconContainer = styled.div`
   grid-area: icons;
   display: flex;
   align-items: flex-start;
-
   gap: 8px;
+  margin-top: 8px;
 `
 const Users = styled.div`
   grid-area: users;
@@ -87,12 +91,15 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       <Author>{data.Authoring_organization[0].data.Name}</Author>
       <IconContainer>
         {data.Key_topic_area.map(name => (
-          <AirtableCMSIcon
-            key={name}
-            name={name}
-            color={theme.colorDarkest}
-            style={{ width: 30 }}
-          />
+          <Tippy content={name} key={name}>
+            <div>
+              <AirtableCMSIcon
+                name={name}
+                color={theme.colorDarkest}
+                style={{ width: 30 }}
+              />
+            </div>
+          </Tippy>
         ))}
       </IconContainer>
       {expand && (
