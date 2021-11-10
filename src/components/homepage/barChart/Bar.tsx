@@ -12,6 +12,7 @@ const Label = styled.text`
   font-size: 5px;
   transform: rotate(-45deg);
   text-anchor: end;
+  fill: white;
 `
 
 interface BarProps {
@@ -51,21 +52,23 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
           y={startY}
           width={dim.barWidth}
           height={height}
-          fill={hover ? theme.colorGolden : theme.colorDarkest}
-          stroke={theme.colorDarkest}
+          fill={hover ? theme.colorGolden : theme.colorWhite}
+          stroke={'#173057'}
         />
       </Tippy>
       <AirtableCMSPlotIcon
         style={{ pointerEvents: 'none' }}
         name={bar.fieldValue}
-        color={hover ? theme.colorDarkest : theme.colorGolden}
+        color={theme.colorDarkest}
         x={midX}
         y={midY}
         width={dim.iconSize}
         height={dim.iconSize}
       />
       <g
-        style={{ transform: `translate(${midX}px, ${endY + dim.labelPad}px)` }}
+        style={{
+          transform: `translate(${midX}px, ${endY + dim.labelPad}px)`,
+        }}
       >
         <Label
           onMouseEnter={() => setHover(true)}
