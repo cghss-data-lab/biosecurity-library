@@ -85,9 +85,9 @@ const ResourceSearch = (): JSX.Element => {
             <TypeaheadResult>{label}</TypeaheadResult>
           )}
         />
-        <Examples>
+        {/*<Examples>
           <AirtableCMSText name="Search Examples" data={homePageText} />
-        </Examples>
+        </Examples>*/}
       </SearchBoxContainer>
     </SearchControls>
   )
