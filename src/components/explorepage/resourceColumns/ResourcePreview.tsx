@@ -59,7 +59,6 @@ const Summary = styled.div`
 const ThumbnailContainer = styled.div`
   grid-area: image;
   width: 100px;
-  /* height: 100px; */
   padding-right: 15px;
 `
 const Thumbnail = styled(GatsbyImage)`
@@ -87,18 +86,8 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       <Title to={urls.getDetailURL(data)}>{data.Short_name}</Title>
       <Author>{data.Authoring_organization[0].data.Name}</Author>
       <IconContainer>
-        {/* The Topic Area Icons column doesn't exist right now */}
-        {/* {JSON.parse(data.Topic_area_icons).map((name: string) => (
-          <AirtableCMSIcon
-            key={name}
-            name={name}
-            color={theme.colorDarkest}
-            style={{ width: 30 }}
-          />
-        ))} */}
         {data.Key_topic_area.map(name => (
           <AirtableCMSIcon
-            noEmitError
             key={name}
             name={name}
             color={theme.colorDarkest}
