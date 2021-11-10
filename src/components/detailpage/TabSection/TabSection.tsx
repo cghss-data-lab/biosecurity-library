@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 
 import TabButtons from './TabButtons'
 
@@ -22,16 +22,19 @@ const Container = styled.div`
   width: 100%;
 `
 
-const tabs: Tab[] = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'details', label: 'Resource details' },
-  // { id: 'users', label: 'Users' },
-  // { id: 'access', label: 'Access & contact information' },
-  // { id: 'releases', label: 'Releases and updates' },
-  // { id: 'technical', label: 'Technical information' },
-]
-
 const TabSection: React.FC<PageContext> = ({ data }) => {
+  const tabs: Tab[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'details', label: 'Resource details' },
+    ...(data.Resource_sets !== null && data.Resource_sets.length > 0
+      ? [{ id: 'related', label: 'Related resources' }]
+      : []),
+    // { id: 'users', label: 'Users' },
+    // { id: 'access', label: 'Access & contact information' },
+    // { id: 'releases', label: 'Releases and updates' },
+    // { id: 'technical', label: 'Technical information' },
+  ]
+
   const [activeTab, setActiveTab] = useState(tabs[0])
 
   return (
@@ -39,7 +42,7 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
       <Container style={{ gridArea: 'tabs' }}>
         <TabButtons
           {...{
-            tabs: useMemo(() => getTabs(data), [data]),
+            tabs,
             activeTab,
             setActiveTab,
           }}
@@ -58,17 +61,3 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
 }
 
 export default TabSection
-
-/**
- * Returns data defining the tabs to show in the tab section based on what data
- * are available
- * @param data The resource data
- * @returns The tabs to show
- */
-const getTabs = (data: PageContext['data']): Tab[] => {
-  const showRelated: boolean =
-    data.Resource_sets !== null && data.Resource_sets.length > 0
-  if (showRelated)
-    return tabs.concat({ id: 'related', label: 'Related resources' })
-  else return tabs
-}
