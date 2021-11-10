@@ -55,7 +55,6 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
         />
       </Tippy>
       <AirtableCMSPlotIcon
-        noEmitError
         style={{ pointerEvents: 'none' }}
         name={bar.fieldValue}
         color={hover ? theme.colorDarkest : theme.colorGolden}
