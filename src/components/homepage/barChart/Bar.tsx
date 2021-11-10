@@ -36,8 +36,11 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
   const midY = startY + 0.5 * height
 
   const definitions = useDefinitions()
-  const definition = definitions.find(def => def.data.Name === bar.fieldValue)
-    ?.data.Definition
+  const definition = definitions.find(
+    def => def.data.Name.trim() === bar.fieldValue.trim()
+  )?.data.Definition
+
+  console.log(definitions)
 
   return (
     <>
