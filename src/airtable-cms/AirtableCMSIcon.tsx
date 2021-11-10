@@ -151,8 +151,6 @@ const AirtableCMSIcon: React.FC<IconInterface> = ({
       onMouseLeave: () => setHover(false),
     }
 
-  if (name === 'Dual Use') console.log(displayIcon)
-
   return (
     <SVGContainer
       role="img"
