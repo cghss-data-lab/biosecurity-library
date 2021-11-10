@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
 import TabButtons from './TabButtons'
 
 import OverviewTab from './tabs/OverviewTab'
+import DetailsTab from './tabs/DetailsTab'
+import RelatedTab from './tabs/RelatedTab'
+import DocumentTab from './tabs/DocumentTab'
 // import UsersTab from './tabs/UsersTab'
 // import AccessTab from './tabs/AccessTab'
 // import ReleasesTab from './tabs/ReleasesTab'
-import RelatedTab from './tabs/RelatedTab'
 
 import { PageContext } from '../../../templates/Detail'
-import DetailsTab from './tabs/DetailsTab'
-import styled from 'styled-components'
 
 export type Tab = {
   id: string
@@ -29,6 +30,9 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
     ...(data.Resource_sets !== null && data.Resource_sets.length > 0
       ? [{ id: 'related', label: 'Related resources' }]
       : []),
+    ...(data.Files_INTERNAL
+      ? [{ id: 'document', label: 'Document preview' }]
+      : []),
     // { id: 'users', label: 'Users' },
     // { id: 'access', label: 'Access & contact information' },
     // { id: 'releases', label: 'Releases and updates' },
@@ -40,21 +44,17 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
   return (
     <>
       <Container style={{ gridArea: 'tabs' }}>
-        <TabButtons
-          {...{
-            tabs,
-            activeTab,
-            setActiveTab,
-          }}
-        />
+        <TabButtons {...{ tabs, activeTab, setActiveTab }} />
       </Container>
       <Container style={{ gridArea: 'content' }}>
         {activeTab.id === 'overview' && <OverviewTab {...{ data }} />}
         {activeTab.id === 'details' && <DetailsTab {...{ data }} />}
+        {activeTab.id === 'related' && <RelatedTab {...{ data }} />}
+        {activeTab.id === 'document' && <DocumentTab {...{ data }} />}
+
         {/*{activeTab.id === 'users' && <UsersTab {...{ data }} />}*/}
         {/*{activeTab.id === 'access' && <AccessTab {...{ data }} />}*/}
         {/*{activeTab.id === 'releases' && <ReleasesTab {...{ data }} />}*/}
-        {activeTab.id === 'related' && <RelatedTab {...{ data }} />}
       </Container>
     </>
   )
