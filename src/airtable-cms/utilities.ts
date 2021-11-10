@@ -1,11 +1,5 @@
 export const urlString = (string: string) =>
-  encodeURIComponent(
-    string
-      .toLowerCase()
-      .trim()
-      .replace(/ /g, '-')
-      .replace(/[!'’/()*]/g, '')
-  ) + '/'
+  string.toLowerCase().trim().replace(/ /g, '-') + '/'
 
 // This should match the transformation that
 // gatsby-source-airtable is applying to column
