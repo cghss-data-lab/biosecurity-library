@@ -3,7 +3,12 @@ import styled from 'styled-components'
 import NavLink from './NavLink'
 
 const Nav = styled.nav`
-  background-color: ${({ theme }) => theme.colorDarkest};
+  // background-color: ${({ theme }) => theme.colorBlack};
+  background-color: #05213a;
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+  box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.24);
 `
 const Container = styled.div`
   margin: 0 auto;

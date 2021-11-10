@@ -4,14 +4,15 @@ import styled from 'styled-components'
 
 const StyledLink = styled(Link)`
   color: white !important;
-  padding: 30px;
+  padding: 20px;
   text-decoration: none;
   transition: 500ms ease;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colorVeryDarkGray};
+    // background-color: ${({ theme }) => theme.colorVeryDarkGray};
     transition: 150ms ease;
     text-decoration: none !important;
+    color: ${({ theme }) => theme.colorGolden} !important;
   }
 `
 const defaultActiveStyle = {
