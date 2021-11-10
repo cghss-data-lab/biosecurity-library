@@ -39,11 +39,7 @@ module.exports = {
             baseId: `app708Ctx0rz1c1n7`,
             tableName: `Resource Library`,
             tableView: `CMS view`,
-            tableLinks: [
-              `Resource_sets`,
-              `Auto_other_resources_cited`,
-              `Authoring_organization`,
-            ],
+            tableLinks: [`Authoring_organization`],
             mapping: {
               Thumbnail_INTERNAL: `fileNode`,
               Files_INTERNAL: `fileNode`,
