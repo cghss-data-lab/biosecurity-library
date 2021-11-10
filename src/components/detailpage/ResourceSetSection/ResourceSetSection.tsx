@@ -25,7 +25,11 @@ export const ResourceSetSection: FC<ResourceSetSectionProps> = ({
           {numValidSets > 1 ? 's' : ''} below.
         </p>
         {validSets.map(s => (
-          <ResourceSet key={s.data.Unique_ID} data={s.data} />
+          <ResourceSet
+            key={s.data.Unique_ID}
+            data={s.data}
+            nameField={'Short_name'}
+          />
         ))}
       </>
     )

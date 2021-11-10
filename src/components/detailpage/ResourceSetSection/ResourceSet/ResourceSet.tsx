@@ -40,6 +40,7 @@ const ResourceLink = styled(Link)`
 
 export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
   const theme: any = useTheme()
+  const nameField = props.nameField || 'Resource_name'
   return (
     <ResourceSetContainer>
       {/* Set name */}
@@ -65,7 +66,7 @@ export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
                   color={theme.colorDarker}
                   style={{ height: 30, marginRight: '.5em' }}
                 />
-                <span>{d.data.Short_name}</span>
+                <span>{d.data[nameField]}</span>
               </ResourceLink>
             </Tippy>
           </ResourceListItem>
