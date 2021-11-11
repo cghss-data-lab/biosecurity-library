@@ -8,6 +8,11 @@ const ThumbnailContainer = styled.div`
   padding: 30px 15px 15px 0;
 `
 
+const ThumbnailShadow = styled(GatsbyImage)`
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+`
+
 interface ThumbnailProps {
   data: {
     Thumbnail_INTERNAL: {
@@ -29,9 +34,12 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
     return (
       <ThumbnailContainer>
         {thumbnail && (
-          <GatsbyImage
+          <ThumbnailShadow
             image={thumbnail}
             alt={data.Short_name + 'thumbnail image'}
+            style={{
+              boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.24)',
+            }}
           />
         )}
         {data.Files_INTERNAL && (

@@ -452,6 +452,7 @@ function getFormattedNodes(
       _icon: displayIcon,
       _showLabel: showAllNodeLabels || isSelectedNode,
       _color: theme.colorDarker,
+      _backgroundColor: theme.colorVeryLightGray,
       _labelColor: undefined,
       _labelFont: undefined,
       _labelYOffset: 1,

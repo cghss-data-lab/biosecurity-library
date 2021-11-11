@@ -6,6 +6,7 @@ import * as object from '../../../../utilities/object'
 import * as urls from '../../../../utilities/urls'
 import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
 import Tippy from '@tippyjs/react'
+import { followCursor } from 'tippy.js'
 
 const ResourceSetContainer = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ const ResourceListItem = styled.li``
 const ResourceLink = styled(Link)`
   display: flex;
   align-items: flex-start;
+  width: max-content;
   svg {
     width: unset;
   }
@@ -59,7 +61,12 @@ export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
           )
         ).map(d => (
           <ResourceListItem data-member key={d.data.Record_ID_INTERNAL}>
-            <Tippy content={d.data.Resource_name} followCursor>
+            <Tippy
+              followCursor
+              delay={[500, 0]}
+              content={d.data.Resource_name}
+              plugins={[followCursor]}
+            >
               <ResourceLink to={urls.getDetailURL(d.data)}>
                 <AirtableCMSIcon
                   name={d.data.Resource_type}
