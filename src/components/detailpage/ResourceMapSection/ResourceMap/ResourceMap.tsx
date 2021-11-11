@@ -16,7 +16,8 @@ import {
   IconsQueryMap,
   replaceFill,
 } from '../../../../airtable-cms/AirtableCMSIcon'
-import * as network from '@talus-analytics/viz.charts.network'
+import * as network from '../../../../bit/viz/charts/network'
+// import * as network from '@talus-analytics/viz.charts.network'
 import {
   AppGraphData,
   getNodeIdsForLinks,
