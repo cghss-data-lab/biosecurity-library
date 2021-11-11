@@ -4,7 +4,7 @@
  * @returns The string with first char. uppercase
  */
 export function capitalize(s: string): string {
-  return s.charAt(0).toUpperCase() + s.substring(1);
+  return s.charAt(0).toUpperCase() + s.substring(1)
 }
 
 /**
@@ -15,8 +15,8 @@ export function capitalize(s: string): string {
 export const sortObjectsBy = (field: string) => {
   return (a: any, b: any): number => {
     if (a[field] > b[field]) {
-      return 1;
-    } else if (a[field] < b[field]) return -1;
-    else return 0;
-  };
-};
+      return 1
+    } else if (a[field] < b[field]) return -1
+    else return 0
+  }
+}

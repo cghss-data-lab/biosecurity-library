@@ -1,58 +1,57 @@
 export interface AirtableMetaProps {
   // the API key
-  apiKey: string;
+  apiKey: string
 }
 
-export const AIRTABLE_META_API_ROOT: string =
-  "https://api.airtable.com/v0/meta";
+export const AIRTABLE_META_API_ROOT: string = 'https://api.airtable.com/v0/meta'
 
 export interface HttpResponse<T> extends Response {
-  parsedBody?: T;
+  parsedBody?: T
 }
 
 export interface AirtableMetaTables {
-  tables: AirtableMetaTable[];
+  tables: AirtableMetaTable[]
 }
 export interface AirtableMetaBases {
-  bases: AirtableMetaBase[];
+  bases: AirtableMetaBase[]
 }
 
 export interface AirtableMetaTable {
-  id: string;
-  name: string;
-  primaryFieldId: string;
-  fields: AirtableMetaTableField[];
-  views: AirtableMetaView[];
+  id: string
+  name: string
+  primaryFieldId: string
+  fields: AirtableMetaTableField[]
+  views: AirtableMetaView[]
 }
 
 interface AirtableMetaView {
-  id: string;
-  name: string;
-  type: AirtableMetaViewType;
+  id: string
+  name: string
+  type: AirtableMetaViewType
 }
 export interface AirtableMetaBase {
-  id: string;
-  name: string;
-  permissionLevel: AirtableMetaBasePermissionLevel;
+  id: string
+  name: string
+  permissionLevel: AirtableMetaBasePermissionLevel
 }
 
 interface AirtableMetaTableField {
-  id: string;
-  name: string;
-  type: AirtableFieldType;
+  id: string
+  name: string
+  type: AirtableFieldType
   options?: {
-    linkedTableId?: string;
-    isReversed?: boolean;
-    prefersSingleRecordLink?: boolean;
-    choices?: AirtableFieldOptionChoice[];
-  };
+    linkedTableId?: string
+    isReversed?: boolean
+    prefersSingleRecordLink?: boolean
+    choices?: AirtableFieldOptionChoice[]
+  }
 }
 
-type AirtableFieldType = "singleLineText";
+type AirtableFieldType = 'singleLineText'
 type AirtableFieldOptionChoice = {
-  id: string;
-  name: string;
-  color: string;
-};
-type AirtableMetaBasePermissionLevel = "create" | "read";
-type AirtableMetaViewType = "grid" | "form" | "calendar" | "gallery" | "kanban";
+  id: string
+  name: string
+  color: string
+}
+type AirtableMetaBasePermissionLevel = 'create' | 'read'
+type AirtableMetaViewType = 'grid' | 'form' | 'calendar' | 'gallery' | 'kanban'

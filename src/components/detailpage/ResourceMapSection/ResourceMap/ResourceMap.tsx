@@ -238,6 +238,7 @@ export const ResourceMap: React.FC<{
             }}
           >
             <network.Network
+              key={selectedNode?.Record_ID_INTERNAL}
               enableNodeDrag={false}
               onRenderFramePost={updateCanvasLeftMargin}
               nodeLabel={hideTipForLabeledNodes}

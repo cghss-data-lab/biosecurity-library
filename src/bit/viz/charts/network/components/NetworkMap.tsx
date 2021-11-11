@@ -2,32 +2,32 @@
  * Display a network map.
  */
 
-import React, { FC } from "react";
-import { AppGraphData } from "../helpers";
-import { Project } from "../classes/Project";
-import { SetState } from "../types";
-import styled from "styled-components";
-import { defaultTheme } from "../networkThemes";
-import { InteractionSettings, Network2D, Network2DProps } from "../core";
-import { ForceGraphProps } from "react-force-graph-2d";
+import React, { FC } from 'react'
+import { AppGraphData } from '../helpers'
+import { Project } from '../classes/Project'
+import { SetState } from '../types'
+import styled from 'styled-components'
+import { defaultTheme } from '../networkThemes'
+import { InteractionSettings, Network2D, Network2DProps } from '../core'
+import { ForceGraphProps } from 'react-force-graph-2d'
 
 const MapWindow = styled.div`
   height: 100%;
   width: 100%;
-`;
+`
 type NetworkMapProps = {
-  activeProj: Project;
-  graphData: AppGraphData;
-  is3D: boolean;
-  hoveredNode: string | null;
-  setHoveredNode: SetState<string | null>;
-  selectedNode: string | null;
-  setSelectedNode: SetState<string | null>;
-  interactionSettings: InteractionSettings;
-  theme?: Record<string, any>;
+  activeProj: Project
+  graphData: AppGraphData
+  is3D: boolean
+  hoveredNode: string | null
+  setHoveredNode: SetState<string | null>
+  selectedNode: string | null
+  setSelectedNode: SetState<string | null>
+  interactionSettings: InteractionSettings
+  theme?: Record<string, any>
 } & ForceGraphProps &
-  Pick<Network2DProps, "zoomToFitSettings"> &
-  Pick<Network2DProps, "containerStyle">;
+  Pick<Network2DProps, 'zoomToFitSettings'> &
+  Pick<Network2DProps, 'containerStyle'>
 export const NetworkMap: FC<NetworkMapProps> = ({
   activeProj,
   graphData,
@@ -44,7 +44,7 @@ export const NetworkMap: FC<NetworkMapProps> = ({
     activeProj === undefined ||
     (graphData !== undefined && graphData.nodes.length === 0)
   )
-    return <div />;
+    return <div />
   else
     return (
       <MapWindow>
@@ -63,5 +63,5 @@ export const NetworkMap: FC<NetworkMapProps> = ({
           {...props}
         />
       </MapWindow>
-    );
-};
+    )
+}

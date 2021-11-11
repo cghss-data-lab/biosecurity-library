@@ -1,32 +1,32 @@
-import React from "react";
-import { LabelPosOptions, NodeConfig, NodeShape } from "../helpers";
-import { Themes } from "../internal";
+import React from 'react'
+import { LabelPosOptions, NodeConfig, NodeShape } from '../helpers'
+import { Themes } from '../internal'
 
 export interface Settings {
-  theme: Themes;
+  theme: Themes
   nodes: {
-    showNodeLabels: boolean;
-    selectedColor: string;
-    allowedNeighborDepth: 1 | 2 | 3;
-    fontSize: number;
-    labelPos: LabelPosOptions;
-  };
+    showNodeLabels: boolean
+    selectedColor: string
+    allowedNeighborDepth: 1 | 2 | 3
+    fontSize: number
+    labelPos: LabelPosOptions
+  }
   edges: {
-    showEdges: boolean;
-    edgeWidth: number;
-  };
+    showEdges: boolean
+    edgeWidth: number
+  }
   network: {
-    paused: boolean;
-  };
+    paused: boolean
+  }
 }
 export const defaultSettings: Settings = {
-  theme: "light",
+  theme: 'light',
   nodes: {
     showNodeLabels: true,
-    selectedColor: "#F6D356",
+    selectedColor: '#F6D356',
     allowedNeighborDepth: 1,
     fontSize: 9.5,
-    labelPos: "bottom",
+    labelPos: 'bottom',
   },
   edges: {
     showEdges: true,
@@ -35,13 +35,13 @@ export const defaultSettings: Settings = {
   network: {
     paused: false,
   },
-};
+}
 
 export const defaultNodeDef: NodeConfig = {
-  idFieldName: "id",
-  labelByField: "label",
-  colorByField: "color",
-  iconByField: "icon",
+  idFieldName: 'id',
+  labelByField: 'label',
+  colorByField: 'color',
+  iconByField: 'icon',
   shape: NodeShape.circle,
   hideUnlinked: false,
   hideUnselected: true,
@@ -49,6 +49,6 @@ export const defaultNodeDef: NodeConfig = {
   labelPos: defaultSettings.nodes.labelPos,
   fontSize: defaultSettings.nodes.fontSize,
   size: 1,
-};
+}
 
-export const SettingsContext = React.createContext<Settings>(defaultSettings);
+export const SettingsContext = React.createContext<Settings>(defaultSettings)
