@@ -12,10 +12,7 @@ import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import {
-  IconsQueryMap,
-  replaceFill,
-} from '../../../../airtable-cms/AirtableCMSIcon'
+import { replaceFill } from '../../../../airtable-cms/AirtableCMSIcon/AirtableCMSIcon'
 import * as network from '@talus-analytics/viz.charts.network'
 import {
   AppGraphData,
@@ -35,6 +32,24 @@ import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
  */
 export type Icon = {
   data: { Name: string; Text: string; SVG: any }
+}
+
+export interface IconsQueryMap {
+  iconsQueryMap: {
+    nodes: {
+      data: {
+        Name: string
+        Text: string
+        SVG: {
+          localFiles: {
+            childSvg: {
+              svgString: string
+            }
+          }[]
+        }
+      }
+    }[]
+  }
 }
 
 const Section = styled.section`

@@ -65,23 +65,6 @@ export interface IconsQuery {
     }[]
   }
 }
-export interface IconsQueryMap {
-  iconsQueryMap: {
-    nodes: {
-      data: {
-        Name: string
-        Text: string
-        SVG: {
-          localFiles: {
-            childSvg: {
-              svgString: string
-            }
-          }[]
-        }
-      }
-    }[]
-  }
-}
 
 interface AirtableCMSIconProps {
   /** Name of the icon in the icons tab */
