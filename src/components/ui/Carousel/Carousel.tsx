@@ -40,6 +40,12 @@ const activeStyle: React.CSSProperties = {
   width: '100%',
 }
 
+export interface CarouselState {
+  nextIndex?: number | undefined
+  activeIndex: number
+  prevIndex?: number | undefined
+}
+
 interface CarouselProps {
   /**
    * The children will become the pages of the carousel
@@ -69,12 +75,6 @@ interface CarouselProps {
    * Classname for styled components support
    */
   className?: string
-}
-
-export interface CarouselState {
-  nextIndex?: number | undefined
-  activeIndex: number
-  prevIndex?: number | undefined
 }
 
 const Carousel = ({
