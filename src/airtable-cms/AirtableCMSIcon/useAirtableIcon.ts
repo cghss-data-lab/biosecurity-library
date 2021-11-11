@@ -1,6 +1,6 @@
 import replaceFill from './replaceFill'
 
-import useAllAirtableIcons, { Icon } from './useAirtableIcons'
+import useAllAirtableIcons, { Icon } from './useAllAirtableIcons'
 
 function useAirtableIcon(
   name: string,
