@@ -2,7 +2,7 @@
 import React, { FC, ReactElement } from 'react'
 import Tippy from '@tippyjs/react'
 import AirtableCMSIcon from '../../airtable-cms/AirtableCMSIcon'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 // import 'tippy.js/dist/tippy.css' // optional
 
 const Wrapper = styled.div`
@@ -31,14 +31,14 @@ interface InfoTipProps {
  * @returns Info tooltip
  */
 export const InfoTip: FC<InfoTipProps> = ({ content }) => {
-  // const theme: any = useTheme()
+  const theme: any = useTheme()
   return (
     <Tippy {...{ content }}>
       {/* Wrapper needed for icon hover to register, and alignment */}
       <Wrapper>
         <AirtableCMSIcon
           name={'Info'}
-          color={'transparent'}
+          color={theme.colorDarker}
           style={{ height: 10 }}
         />
       </Wrapper>
