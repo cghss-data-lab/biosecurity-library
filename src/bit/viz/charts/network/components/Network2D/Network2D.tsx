@@ -125,6 +125,7 @@ export const Network2D: FC<Network2DProps> = ({
         const initDelayMsec: number = initialized ? 0 : initDelayMsecTmp
         if (initDelayMsec > 0) setContainerOpacity(1)
         setTimeout(() => {
+          if (networkRef.current === null) return
           const durationMsec: number =
             props.zoomToFitSettings?.durationMsec !== undefined
               ? props.zoomToFitSettings?.durationMsec
@@ -140,8 +141,7 @@ export const Network2D: FC<Network2DProps> = ({
     } else {
       if (!initialized) setInitialized(true)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [size])
+  }, [cooldownSec, initialized, props.zoomToFitSettings, size])
 
   useEffect(() => {
     if (initialized && containerOpacity !== 1) setContainerOpacity(1)
@@ -155,14 +155,16 @@ export const Network2D: FC<Network2DProps> = ({
       if (typeof window !== undefined)
         window.removeEventListener('resize', resizeHandler)
     }
-  }, [])
+  }, [resizeHandler])
 
   // shape rendering parameters
   // TODO types
-  const params: any = {
-    nodeColor: (n: any) =>
-      n !== undefined && n._color !== undefined ? n._color : '#0D2449',
-  }
+  const params: any = useMemo(() => {
+    return {
+      nodeColor: (n: any) =>
+        n !== undefined && n._color !== undefined ? n._color : '#0D2449',
+    }
+  }, [])
 
   // update network map if settings are changed
   const settings: Settings = useContext(SettingsContext)
