@@ -83,23 +83,32 @@ export interface IconsQueryMap {
   }
 }
 
-export interface IconInterface {
+interface AirtableCMSIconProps {
+  /** Name of the icon in the icons tab */
   name: string
+  /** color of the icon; note icons only accept one color */
   color: string
+  /** className which will be applied to the svg container */
   className?: string
+  /** color to change the icon to when hovered */
   hoverColor?: string
+  /** CSS styles to apply to the svg container */
   style?: React.CSSProperties
+  /**
+   * Suppress missing icon error message;
+   * component will return a fragment instead
+   */
   noEmitError?: boolean
 }
 
-const AirtableCMSIcon: React.FC<IconInterface> = ({
+const AirtableCMSIcon = ({
   name,
   color,
   className,
   hoverColor,
   style,
   noEmitError = false,
-}) => {
+}: AirtableCMSIconProps) => {
   const {
     iconsQuery: { nodes: icons },
   } = useStaticQuery<IconsQuery>(graphql`
