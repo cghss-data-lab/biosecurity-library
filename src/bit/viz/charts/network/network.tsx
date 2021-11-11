@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Project, defaultSettings, demoGraphData } from "./internal/internal";
-import { NetworkMap, NetworkProps } from "./core";
-import { AppGraphData } from "./helpers";
+import React, { useEffect, useState } from 'react'
+import { Project, defaultSettings, demoGraphData } from './internal/internal'
+import { NetworkMap, NetworkProps } from './core'
+import { AppGraphData } from './helpers'
 
 export function Network({
   initGraphData = demoGraphData,
@@ -20,32 +20,32 @@ export function Network({
   },
   ...props
 }: NetworkProps) {
-  const [settings] = useState({ ...defaultSettings, ...customSettings });
-  const [graphData, setGraphData] = useState<AppGraphData>(initGraphData);
-  const [_is3D] = useState<boolean>(is3D);
+  const [settings] = useState({ ...defaultSettings, ...customSettings })
+  const [graphData, setGraphData] = useState<AppGraphData>(initGraphData)
+  const [_is3D] = useState<boolean>(is3D)
   const [_hoveredNode, _setHoveredNode] = useState<string | null>(
     hoveredNode !== undefined ? hoveredNode : null
-  );
+  )
   const [_selectedNode, _setSelectedNode] = useState<string | null>(
     selectedNode !== undefined ? selectedNode : null
-  );
+  )
 
   // create dummy project for visual interface
   const dummyProj: Project = new Project(
-    (newGraphData) => {
-      setGraphData(newGraphData);
+    newGraphData => {
+      setGraphData(newGraphData)
     },
-    "New project",
+    'New project',
     settings
-  );
+  )
 
   useEffect(() => {
     // bind internal graph data state function call
     if (activeProj !== undefined)
-      activeProj.onGraphDataChange = (newGraphData) => {
-        setGraphData(newGraphData);
-      };
-  }, [activeProj]);
+      activeProj.onGraphDataChange = newGraphData => {
+        setGraphData(newGraphData)
+      }
+  }, [activeProj])
 
   return (
     <NetworkMap
@@ -64,7 +64,7 @@ export function Network({
         interactionSettings,
       }}
     />
-  );
+  )
 }
 
-export default Network;
+export default Network

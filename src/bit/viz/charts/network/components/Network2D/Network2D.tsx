@@ -25,7 +25,6 @@ import { Project } from "../../classes/Project";
 import { sortObjectsBy } from "../../utils";
 import { defaultTheme } from "../../networkThemes";
 import { InteractionSettings } from "../../core";
-console.log("Imported Network2D.tsx");
 
 const NetworkContainer = styled.div`
   transition: opacity
@@ -38,7 +37,6 @@ const NetworkContainer = styled.div`
   height: 100%;
   width: 100%;
 `;
-
 export interface Network2DProps extends ForceGraphProps {
   show: boolean;
   activeProj: Project;
@@ -202,29 +200,39 @@ export const Network2D: FC<Network2DProps> = ({
    * Sets the hovered node equal to the provided node's ID.
    * @param n Node information
    */
-  const highlightHoveredNode = (n: any) => {
-    if (n !== null) setHoveredNode(n._id);
-    else setHoveredNode(null);
-  };
+  const highlightHoveredNode = useCallback(
+    (n: any) => {
+      if (n !== null) setHoveredNode(n._id);
+      else setHoveredNode(null);
+    },
+    [setHoveredNode]
+  );
 
   /**
    * Sets the clicked node equal to the provided node's ID.
    * @param n Node information
    */
-  const selectClickedNode = (n: any) => {
-    if (n !== null && n._id !== selectedNode) setSelectedNode(n._id);
-    else setSelectedNode(null);
-  };
-  const getLinkColor = (linkInfo: any) => {
-    const hoveredNodeIsPrimary: boolean =
-      linkInfo.source._id === hoveredNode ||
-      linkInfo.target._id === hoveredNode;
-    if (hoveredNode !== null && !hoveredNodeIsPrimary) return "#C9C9C920";
-    if (linkInfo.color !== undefined) return linkInfo.color;
-    if (!settings.edges.showEdges) {
-      return "#00000000";
-    } else return "#C9C9C9";
-  };
+  const selectClickedNode = useCallback(
+    (n: any) => {
+      if (n !== null && n._id !== selectedNode) setSelectedNode(n._id);
+      else setSelectedNode(null);
+    },
+    [selectedNode, setSelectedNode]
+  );
+
+  const getLinkColor = useCallback(
+    (linkInfo: any) => {
+      const hoveredNodeIsPrimary: boolean =
+        linkInfo.source._id === hoveredNode ||
+        linkInfo.target._id === hoveredNode;
+      if (hoveredNode !== null && !hoveredNodeIsPrimary) return "#C9C9C920";
+      if (linkInfo.color !== undefined) return linkInfo.color;
+      if (!settings.edges.showEdges) {
+        return "#00000000";
+      } else return "#C9C9C9";
+    },
+    [hoveredNode, settings.edges.showEdges]
+  );
 
   const getHoveredNodePrimaryLinkNodes = useCallback(() => {
     const primaryLinks: any[] = graphData.links.filter((linkInfo) => {
@@ -259,36 +267,45 @@ export const Network2D: FC<Network2DProps> = ({
    * @param ctx The canvas context
    * @param globalScale The global scale
    */
-  const addNodeLabels: CanvasFunction = (ctx, globalScale): void => {
-    graphData.nodes.forEach((node) => {
-      const isSelectedNode: boolean = selectedNode === node._id;
-      if (node._showLabel || node._shape === "tri" || isSelectedNode) {
-        const text = node._label || "Node";
-        const fontSize =
-          (node._fontSize || settings.nodes.fontSize) / globalScale;
-        if (node._labelFont !== undefined) {
-          ctx.font = node._labelFont;
-        } else if (node._labelFontWeight !== undefined) {
-          ctx.font = `${node._labelFontWeight} ${fontSize}px 'Open Sans'`;
-        } else ctx.font = `${fontSize}px 'Open Sans'`;
-        ctx.textAlign = "center";
-        const nodeLabelPos: LabelPosOptions =
-          node._labelPos || settings.nodes.labelPos;
-        ctx.textBaseline = nodeLabelPos === "center" ? "middle" : "top";
-        ctx.fillStyle = node._labelColor || theme.colors.text;
+  const addNodeLabels: CanvasFunction = useCallback(
+    (ctx, globalScale): void => {
+      graphData.nodes.forEach((node) => {
+        const isSelectedNode: boolean = selectedNode === node._id;
+        if (node._showLabel || node._shape === "tri" || isSelectedNode) {
+          const text = node._label || "Node";
+          const fontSize =
+            (node._fontSize || settings.nodes.fontSize) / globalScale;
+          if (node._labelFont !== undefined) {
+            ctx.font = node._labelFont;
+          } else if (node._labelFontWeight !== undefined) {
+            ctx.font = `${node._labelFontWeight} ${fontSize}px 'Open Sans'`;
+          } else ctx.font = `${fontSize}px 'Open Sans'`;
+          ctx.textAlign = "center";
+          const nodeLabelPos: LabelPosOptions =
+            node._labelPos || settings.nodes.labelPos;
+          ctx.textBaseline = nodeLabelPos === "center" ? "middle" : "top";
+          ctx.fillStyle = node._labelColor || theme.colors.text;
 
-        // add half of icon height including global scale to text y pos
-        const iconHeight: number = 5; // DEBUG
-        const scaledIconHeight: number = iconHeight * 1;
-        const gap: number = 1;
-        const textYOffset: number =
-          nodeLabelPos === "center" ? 0 : scaledIconHeight + gap;
-        const textY: number =
-          (node.y || 0) + textYOffset + (node._labelYOffset || 0);
-        drawTextLabel(ctx, text, node, textY, fontSize, nodeLabelPos);
-      }
-    });
-  };
+          // add half of icon height including global scale to text y pos
+          const iconHeight: number = 5; // DEBUG
+          const scaledIconHeight: number = iconHeight * 1;
+          const gap: number = 1;
+          const textYOffset: number =
+            nodeLabelPos === "center" ? 0 : scaledIconHeight + gap;
+          const textY: number =
+            (node.y || 0) + textYOffset + (node._labelYOffset || 0);
+          drawTextLabel(ctx, text, node, textY, fontSize, nodeLabelPos);
+        }
+      });
+    },
+    [
+      graphData.nodes,
+      selectedNode,
+      settings.nodes.fontSize,
+      settings.nodes.labelPos,
+      theme.colors.text,
+    ]
+  );
 
   // JSX
   return (
@@ -339,8 +356,6 @@ export const Network2D: FC<Network2DProps> = ({
               settings
             );
 
-          // TODO modularize image icons
-          if (node._icon !== undefined) node._icon = node._icon.trim();
           const usingImg: boolean =
             node._icon !== undefined && node._icon.startsWith("<svg");
 
@@ -379,6 +394,7 @@ export const Network2D: FC<Network2DProps> = ({
 
           if (usingImg) {
             const img = new Image();
+            // img.src = DEBUG_IMG_SRC
             img.src =
               "data:image/svg+xml;charset=utf-8," +
               encodeURIComponent(
@@ -386,7 +402,7 @@ export const Network2D: FC<Network2DProps> = ({
               );
 
             ctx.save();
-            ctx.globalAlpha = notHoveredNode ? 0.2 : 1;
+            ctx.globalAlpha = notHoveredNode ? 0.2 : 1.0;
             const ICON_SCALE_FACTOR: number = 0.4;
             const iconWidth = img.width * ICON_SCALE_FACTOR;
             const iconHeight = img.height * ICON_SCALE_FACTOR;
