@@ -43,12 +43,12 @@ const StyledTypeaheadControl = styled(TypeaheadControl)`
     right: 18px;
   }
 `
-const Examples = styled.p`
-  padding-top: 15px;
-  font-size: 16px !important;
-  line-height: 22px !important;
-  color: ${({ theme }) => theme.colorDarkGray} !important;
-`
+// const Examples = styled.p`
+//   padding-top: 15px;
+//   font-size: 16px !important;
+//   line-height: 22px !important;
+//   color: ${({ theme }) => theme.colorDarkGray} !important;
+// `
 
 const ResourceSearch = (): JSX.Element => {
   const { homePageText, resourceSearchData } = useHomePageData()
@@ -85,9 +85,9 @@ const ResourceSearch = (): JSX.Element => {
             <TypeaheadResult>{label}</TypeaheadResult>
           )}
         />
-        <Examples>
+        {/*<Examples>
           <AirtableCMSText name="Search Examples" data={homePageText} />
-        </Examples>
+        </Examples>*/}
       </SearchBoxContainer>
     </SearchControls>
   )

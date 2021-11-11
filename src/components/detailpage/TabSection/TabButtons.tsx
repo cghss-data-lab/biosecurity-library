@@ -8,30 +8,36 @@ const ButtonColumn = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-top: none;
+  // border-top: 8px solid ${({ theme }) => theme.colorDarkest};
 `
 const Button = styled.button<{ active: boolean }>`
   background: none;
   border: none;
-  border-top: 1px solid ${({ theme }) => theme.colorMedGray};
-  border-left: 1px solid ${({ theme }) => theme.colorMedGray};
+  border-bottom: 1px solid ${({ theme }) => theme.colorDarkest};
+  border-left: 1px solid ${({ theme }) => theme.colorDarkest};
   padding: 17px 20px;
   text-align: left;
   color: ${({ theme }) => theme.colorDarkest};
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  transition: 150ms;
 
   &:last-of-type {
-    border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
+    // border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
   }
 
   &:hover {
-    background: ${({ theme }) => theme.colorVeryLightGray};
-    ${({ active, theme }) => active && `background: ${theme.colorLightest};`}
+    background: ${({ theme }) => theme.colorDarker};
+    ${({ active, theme }) => active && `background: ${theme.colorDarker};`}
+    color: white;
   }
 
   ${({ active, theme }) =>
     active &&
-    `background: ${theme.colorLightest}; 
-    font-weight: 600;`}
+    `background: ${theme.colorDarker}; 
+    font-weight: 600;
+    color: white;
+    `}
 `
 
 interface TabButtonsProps {

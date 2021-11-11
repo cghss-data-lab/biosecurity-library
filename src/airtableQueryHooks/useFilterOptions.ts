@@ -10,6 +10,11 @@ type FilterOptions = {
 const useFilterOptions = () => {
   const filterOptions: FilterOptions = useStaticQuery(graphql`
     query filterOptionsQuery {
+      Key_topic_area: allAirtable(
+        filter: { table: { eq: "Resource Library" } }
+      ) {
+        distinct(field: data___Key_topic_area)
+      }
       Target_user_role: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
@@ -17,11 +22,6 @@ const useFilterOptions = () => {
       }
       User_roll_up: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         distinct(field: data___User_roll_up)
-      }
-      Key_topic_area: allAirtable(
-        filter: { table: { eq: "Resource Library" } }
-      ) {
-        distinct(field: data___Key_topic_area)
       }
       Authoring_organization: allAirtable(
         filter: { table: { eq: "Resource Library" } }

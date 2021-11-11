@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { PageProps } from 'gatsby'
 import qs from 'qs'
 
 import FigmaProvider from '../figma/FigmaProvider'
@@ -30,7 +29,7 @@ export interface ExploreState {
   filters?: Filters
 }
 
-const ExplorePage: React.FC<PageProps> = () => {
+const ExplorePage = (): JSX.Element => {
   const { explorePageText, groupedResources } = useExplorePageData()
 
   const [exploreState, setExploreState] = useState<ExploreState>(
