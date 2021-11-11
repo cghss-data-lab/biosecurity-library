@@ -30,6 +30,7 @@ const ResourceListItem = styled.li``
 const ResourceLink = styled(Link)`
   display: flex;
   align-items: flex-start;
+  width: max-content;
   svg {
     width: unset;
   }
