@@ -91,18 +91,18 @@ export const Network2D: FC<Network2DProps> = ({
    */
   const [initialized, setInitialized] = useState<boolean>(false)
 
-  // This function updates the state thus re-render components
-  const resizeHandler = () => {
+  const networkRef = useRef<any>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // This function updates the state to re-render components
+  const resizeHandler = useCallback(() => {
     if (containerRef.current !== null) {
       setSize({
         width: containerRef.current.clientWidth,
         height: containerRef.current.clientHeight,
       })
     }
-  }
-
-  const networkRef = useRef<any>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  }, [containerRef])
 
   // get container size
   useEffect(() => {
@@ -306,6 +306,125 @@ export const Network2D: FC<Network2DProps> = ({
     ]
   )
 
+  const getNodeCanvasObject = useCallback(
+    (
+      node: any,
+      ctx: CanvasRenderingContext2D
+      // globalScale: number
+    ) => {
+      const color: string = params.nodeColor(node)
+
+      const notHoveredNode =
+        hoveredNode !== null &&
+        hoveredNode !== node._id &&
+        !getHoveredNodePrimaryLinkNodes().includes(node._id)
+
+      const isSelectedNode: boolean = selectedNode === node._id
+      const [currentNodeColor, currentNodeColorNoAlpha]: [string, string] =
+        getCurrentNodeColor(
+          { hovered: !notHoveredNode, selected: isSelectedNode },
+          color,
+          settings
+        )
+
+      const usingImg: boolean =
+        node._icon !== undefined && node._icon.startsWith('<svg')
+
+      // add white circle frame to icons
+      if (usingImg) {
+        ctx.fillStyle = node._backgroundColor || '#ffffff'
+        switch (node._backgroundShape) {
+          case 'hexagon':
+            asHexagon(
+              {
+                ...node,
+                _size:
+                  node._size *
+                  (node._backgroundSize !== undefined
+                    ? node._backgroundSize
+                    : 1),
+              },
+              ctx
+            )
+            break
+          default:
+            asCircle(
+              {
+                ...node,
+                _size:
+                  node._size *
+                  (node._backgroundSize !== undefined
+                    ? node._backgroundSize
+                    : 1),
+              },
+              ctx
+            )
+        }
+      }
+      ctx.fillStyle = currentNodeColor
+
+      if (usingImg) {
+        const img = new Image()
+        // img.src = DEBUG_IMG_SRC
+        img.src =
+          'data:image/svg+xml;charset=utf-8,' +
+          encodeURIComponent(replaceFill(node._icon, currentNodeColorNoAlpha))
+
+        ctx.save()
+        ctx.globalAlpha = notHoveredNode ? 0.2 : 1.0
+        const ICON_SCALE_FACTOR: number = 0.4
+        const iconWidth = img.width * ICON_SCALE_FACTOR
+        const iconHeight = img.height * ICON_SCALE_FACTOR
+        ctx.drawImage(
+          img,
+          node.x - iconWidth / 2, // paste to...
+          node.y - iconHeight / 2,
+          iconWidth,
+          iconHeight
+        )
+        ctx.restore()
+      }
+
+      if (!usingImg) {
+        if (node._shape === 'square') asRect(node, color, ctx)
+        else if (node._shape === 'tri') asTriangle(node, color, ctx)
+        else asCircle(node, ctx)
+      }
+    },
+    [
+      getHoveredNodePrimaryLinkNodes,
+      hoveredNode,
+      params,
+      selectedNode,
+      settings,
+    ]
+  )
+
+  const onRenderFramePre = useCallback(
+    (ctx: CanvasRenderingContext2D, globalScale: number): void => {
+      if (props.onRenderFramePre !== undefined)
+        props.onRenderFramePre(ctx, globalScale)
+      setGlobalScaleState(globalScale)
+    },
+    [props]
+  )
+  const onRenderFramePost = useCallback(
+    (ctx: CanvasRenderingContext2D, globalScale: number): void => {
+      if (props.onRenderFramePost !== undefined)
+        props.onRenderFramePost(ctx, globalScale)
+      addNodeLabels(ctx, globalScale)
+    },
+    [addNodeLabels, props]
+  )
+  const getLinkWidth = useCallback(
+    (a: any) => {
+      return settings.edges.edgeWidth * a.value * globalScaleState
+    },
+    [globalScaleState, settings.edges.edgeWidth]
+  )
+  const onNodeDrag = useCallback(() => {
+    unanchorNodes(graphData)
+  }, [graphData])
   // JSX
   return (
     <NetworkContainer
@@ -318,9 +437,7 @@ export const Network2D: FC<Network2DProps> = ({
         width={size.width}
         height={size.height !== 0 ? size.height : undefined}
         cooldownTime={cooldownSec * 1000}
-        onNodeDrag={() => {
-          unanchorNodes(graphData)
-        }}
+        onNodeDrag={onNodeDrag}
         nodeVisibility={(n: GraphNode) => {
           return n._show
         }}
@@ -328,112 +445,15 @@ export const Network2D: FC<Network2DProps> = ({
         linkCurvature={0.5}
         linkCurveRotation={0}
         linkColor={getLinkColor}
-        linkWidth={(a: any) => {
-          return settings.edges.edgeWidth * a.value * globalScaleState
-        }}
+        linkWidth={getLinkWidth}
         nodeLabel={'_label'}
         nodeId={'_id'}
         onNodeHover={highlightHoveredNode}
         onNodeRightClick={selectClickedNode}
-        nodeCanvasObject={(
-          node: any,
-          ctx: CanvasRenderingContext2D
-          // globalScale: number
-        ) => {
-          const color: string = params.nodeColor(node)
-
-          const notHoveredNode =
-            hoveredNode !== null &&
-            hoveredNode !== node._id &&
-            !getHoveredNodePrimaryLinkNodes().includes(node._id)
-
-          const isSelectedNode: boolean = selectedNode === node._id
-          const [currentNodeColor, currentNodeColorNoAlpha]: [
-            string,
-            string
-          ] = getCurrentNodeColor(
-            { hovered: !notHoveredNode, selected: isSelectedNode },
-            color,
-            settings
-          )
-
-          const usingImg: boolean =
-            node._icon !== undefined && node._icon.startsWith('<svg')
-
-          // add white circle frame to icons
-          if (usingImg) {
-            ctx.fillStyle = node._backgroundColor || '#ffffff'
-            switch (node._backgroundShape) {
-              case 'hexagon':
-                asHexagon(
-                  {
-                    ...node,
-                    _size:
-                      node._size *
-                      (node._backgroundSize !== undefined
-                        ? node._backgroundSize
-                        : 1),
-                  },
-                  ctx
-                )
-                break
-              default:
-                asCircle(
-                  {
-                    ...node,
-                    _size:
-                      node._size *
-                      (node._backgroundSize !== undefined
-                        ? node._backgroundSize
-                        : 1),
-                  },
-                  ctx
-                )
-            }
-          }
-          ctx.fillStyle = currentNodeColor
-
-          if (usingImg) {
-            const img = new Image()
-            // img.src = DEBUG_IMG_SRC
-            img.src =
-              'data:image/svg+xml;charset=utf-8,' +
-              encodeURIComponent(
-                replaceFill(node._icon, currentNodeColorNoAlpha)
-              )
-
-            ctx.save()
-            ctx.globalAlpha = notHoveredNode ? 0.2 : 1.0
-            const ICON_SCALE_FACTOR: number = 0.4
-            const iconWidth = img.width * ICON_SCALE_FACTOR
-            const iconHeight = img.height * ICON_SCALE_FACTOR
-            ctx.drawImage(
-              img,
-              node.x - iconWidth / 2, // paste to...
-              node.y - iconHeight / 2,
-              iconWidth,
-              iconHeight
-            )
-            ctx.restore()
-          }
-
-          if (!usingImg) {
-            if (node._shape === 'square') asRect(node, color, ctx)
-            else if (node._shape === 'tri') asTriangle(node, color, ctx)
-            else asCircle(node, ctx)
-          }
-        }}
+        nodeCanvasObject={getNodeCanvasObject}
         {...props}
-        onRenderFramePre={(ctx, globalScale) => {
-          if (props.onRenderFramePre !== undefined)
-            props.onRenderFramePre(ctx, globalScale)
-          setGlobalScaleState(globalScale)
-        }}
-        onRenderFramePost={(ctx, globalScale) => {
-          if (props.onRenderFramePost !== undefined)
-            props.onRenderFramePost(ctx, globalScale)
-          addNodeLabels(ctx, globalScale)
-        }}
+        onRenderFramePre={onRenderFramePre}
+        onRenderFramePost={onRenderFramePost}
         {...{
           graphData: useMemo(() => {
             return {
