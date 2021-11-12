@@ -1,7 +1,7 @@
 // TODO make into a bit component
 import React, { FC, ReactElement } from 'react'
 import Tippy from '@tippyjs/react'
-import AirtableCMSIcon from '../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../airtable-cms/CMSIcon/CMSIcon'
 import styled, { useTheme } from 'styled-components'
 // import 'tippy.js/dist/tippy.css' // optional
 
@@ -36,7 +36,7 @@ export const InfoTip: FC<InfoTipProps> = ({ content }) => {
     <Tippy {...{ content }}>
       {/* Wrapper needed for icon hover to register, and alignment */}
       <Wrapper>
-        <AirtableCMSIcon
+        <CMSIcon
           name={'Info'}
           color={theme.colorDarker}
           style={{ height: 10 }}

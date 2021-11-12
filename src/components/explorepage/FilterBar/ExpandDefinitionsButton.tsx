@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
 
 import { ExploreState } from '../../../pages/explore'
 
@@ -44,13 +44,13 @@ const ExpandDefinitionsButton: React.FC<ButtonProps> = ({
       }
     >
       {exploreState.defs === name ? (
-        <AirtableCMSIcon
+        <CMSIcon
           name={'Collapse topic'}
           color={theme.colorBlack}
           style={{ width: 20, height: 20 }}
         />
       ) : (
-        <AirtableCMSIcon
+        <CMSIcon
           name={'Expand topic'}
           color={theme.colorBlack}
           style={{ width: 20, height: 20 }}

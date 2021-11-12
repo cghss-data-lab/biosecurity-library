@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
 
 const ExpandButton = styled.button`
   grid-area: expand;
@@ -26,7 +26,7 @@ export const Expand: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   const theme: any = useTheme()
   return (
     <ExpandButton onClick={onClick}>
-      <AirtableCMSIcon
+      <CMSIcon
         name="Expand column"
         color={theme.colorWhite}
         hoverColor={theme.colorGolden}
@@ -47,7 +47,7 @@ export const Return: React.FC<{ onClick: () => void }> = ({ onClick }) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <AirtableCMSIcon
+      <CMSIcon
         name="Return"
         color={hover ? theme.colorGolden : theme.colorWhite}
         style={{ marginTop: 2 }}

@@ -1,43 +1,42 @@
+// this is the AirtableCMSIcon component, but with
+// the query result from airtable substituted in.
+// This is essentially what happens when Gatsby
+// runs the query and returns the static result.
+
+// This component is very outdated and should not
+// be used for anything except the bit playground.
+
 import React, { useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import { HTMLElement, parse } from 'node-html-parser'
 
-// TODO
-export const getIconSvg = () => {
-  throw new Error('Not implemented')
-}
+import demoQueryResult from './demoQueryResult'
 
 // replace the fill and stroke colors on all child
 // elements of the SVG; but only if those elements
 // already have a fill or stroke set.
-export const replaceFill = (dom: HTMLElement, color: string) => {
+const replaceFill = (svg: string, color: string) => {
   // this uses node-html-parser instead of native DOM
   // so that it will support server-side-rendering.
-  // const svgElement = svgDom.querySelector('svg')!
-  const children = dom.childNodes
-  if (children)
-    for (let child of children) {
-      // note this is the node-html-parser implementation
-      // of the HTMLElement class, not a native HTMLElement
-      if (child instanceof HTMLElement) {
-        // recursive call handles nested SVG structures like groups
-        if (child.childNodes) replaceFill(child, color)
-        if (child.hasAttribute('fill')) child.setAttribute('fill', color)
-        if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
-      }
+  const svgDom = parse(svg)
+  const svgElement = svgDom.querySelector('svg')!
+  const children = svgElement.childNodes
+
+  for (let child of children) {
+    // note this is the node-html-parser implementation
+    // of the HTMLElement class, not a native HTMLElement
+    if (child instanceof HTMLElement) {
+      if (child.hasAttribute('fill')) child.setAttribute('fill', color)
+      if (child.hasAttribute('stroke')) child.setAttribute('stroke', color)
     }
-  return dom
+  }
+  return svgDom.toString()
 }
 
 const SVGContainer = styled.div`
   // make the SVG responsive so it takes the size of the parent;
   // stop it from sending mouseout events to the parent
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   & > svg {
     width: 100%;
     height: 100%;
@@ -48,7 +47,7 @@ const SVGContainer = styled.div`
 // This query and interface lives here because it assumes the
 // CMS airtable base has this table already, because the table
 // will be part of the template.
-export interface IconsQuery {
+interface IconsQuery {
   iconsQuery: {
     nodes: {
       data: {
@@ -66,7 +65,7 @@ export interface IconsQuery {
   }
 }
 
-interface AirtableCMSIconProps {
+interface AirtableCMSImageProps {
   /** Name of the icon in the icons tab */
   name: string
   /** color of the icon; note icons only accept one color */
@@ -91,28 +90,10 @@ const AirtableCMSIcon = ({
   hoverColor,
   style,
   noEmitError = false,
-}: AirtableCMSIconProps) => {
+}: AirtableCMSImageProps): JSX.Element => {
   const {
     iconsQuery: { nodes: icons },
-  } = useStaticQuery<IconsQuery>(graphql`
-    query iconsQuery {
-      iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
-        nodes {
-          data {
-            Name
-            Text
-            SVG {
-              localFiles {
-                childSvg {
-                  svgString
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
+  } = demoQueryResult as IconsQuery
 
   const icon = icons.find(({ data }) => data.Name === name)
   const [hover, setHover] = useState(false)
@@ -128,11 +109,10 @@ const AirtableCMSIcon = ({
     )
   }
 
-  const svgDom = parse(icon.data.SVG.localFiles[0].childSvg.svgString)
   const displayIcon = replaceFill(
-    svgDom,
+    icon.data.SVG.localFiles[0].childSvg.svgString,
     hover && hoverColor ? hoverColor : color
-  ).toString()
+  )
 
   // only add mouseEnter and mouseLeave events
   // if there is a hover color specified

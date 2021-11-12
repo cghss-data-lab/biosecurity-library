@@ -11,7 +11,7 @@ import {
   SelectedItem,
 } from './DisplayComponents'
 
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
 import { useTheme } from 'styled-components'
 
 export interface Item {
@@ -124,7 +124,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
             {values.map((item: Item) => (
               <SelectedItem onClick={() => onRemove(item)}>
                 {item.label}
-                <AirtableCMSIcon
+                <CMSIcon
                   name="Remove"
                   color={theme.colorBlack}
                   style={{ flexShrink: 0 }}

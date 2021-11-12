@@ -1,0 +1,59 @@
+---
+displayName: Airtable CMS Icon
+description: Component for accessing and theming SVG icons stored in Airtable
+labels: ['airtable', 'typescript', 'ui']
+---
+
+import AirtableCMSIcon from './BIT_PLAYGROUND_ONLY/DEMO_AirtableCMSIcon'
+
+# Setup
+
+This component requires an airtable configured with two columns, `Name` and `SVG`.
+
+The `talus-gatsby-transformer-svg` plugin must be installed and enabled in `gatsby-config.js`.
+
+The `gatsby-source-airtable` plugin must be configured with the Icons table:
+
+```js
+// gatsby-config.js
+module.exports = {
+  plugins: [
+    {
+      resolve: `gatsby-source-airtable`,
+      options: {
+        tables: [
+          {
+            baseId: `appXXXXXXXXXXXXXX`,
+            tableName: `Icons`,
+            view: `CMS View`,
+            mapping: { SVG: `fileNode` },
+          },
+        ],
+      },
+    },
+  ],
+}
+```
+
+The `mapping: {SVG: 'fileNode'}` call tells `gatsby-plugin-airtable` to download the
+attachment as a file; from there `talus-gatsby-transformer-svg` will automatically
+recognize the node and make the SVG file contents available to the `<AirtableCMSIcon/>`
+component.
+
+# Example usage:
+
+This is using a pre-saved query result; the same as when Gatsby runs the query and
+transforms the result into a static `.json` file.
+
+**Available icons are "Syringe" and "Learn more"**
+
+```js live
+// prettier-ignore
+() => (
+  <AirtableCMSIcon
+    name="Syringe"
+    color="#282e40"
+    style={{ height: 100, padding: 30 }}
+  />
+)
+```

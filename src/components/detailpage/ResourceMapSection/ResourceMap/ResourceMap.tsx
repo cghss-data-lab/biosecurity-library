@@ -12,7 +12,7 @@ import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import { replaceFill } from '../../../../airtable-cms/AirtableCMSIcon/AirtableCMSIcon'
+import { replaceFill } from '../../../../airtable-cms/CMSIcon'
 import * as network from '../../../../bit/viz/charts/network'
 // import * as network from '@talus-analytics/viz.charts.network'
 import {
@@ -27,6 +27,7 @@ import IconEntries, { IconEntry } from './Legend/IconEntries'
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
 import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
+import parse from 'node-html-parser'
 
 /**
  * Icon data from Airtable
@@ -459,14 +460,14 @@ function getFormattedNodes(
     )
     if (icon === undefined) return n
     const displayIcon = replaceFill(
-      icon.data.SVG.localFiles[0].childSvg.svgString,
+      parse(icon.data.SVG.localFiles[0].childSvg.svgString),
       n._color || theme.colorDarker
     )
 
     const updatedN: GraphNode = {
       ...n,
       _show: true,
-      _icon: displayIcon,
+      _icon: displayIcon.toString(),
       _showLabel: showAllNodeLabels || isSelectedNode,
       _color: theme.colorDarker,
       _backgroundColor: theme.colorVeryLightGray,

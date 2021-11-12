@@ -9,6 +9,12 @@
  */
 
 {
+    "airtable/cms-icon": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.tsx",
+        "rootDir": "src/airtable-cms/CMSIcon"
+    },
     "carousel": {
         "scope": "talus-analytics.library",
         "version": "0.0.1",
