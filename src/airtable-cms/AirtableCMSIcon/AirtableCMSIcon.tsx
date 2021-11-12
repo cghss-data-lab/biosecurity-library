@@ -43,6 +43,7 @@ const AirtableCMSIcon = ({
   hoverColor,
   noEmitError = false,
 }: AirtableCMSIconProps): JSX.Element => {
+  console.time('AirtableIcon')
   const [hover, setHover] = useState(false)
 
   const icon = useAirtableIcon(
@@ -62,6 +63,7 @@ const AirtableCMSIcon = ({
       onMouseLeave: () => setHover(false),
     }
 
+  console.time('AirtableIcon')
   return (
     <SVGContainer
       role="img"

@@ -1,6 +1,10 @@
+import useIconsQuery from './useIconsQuery'
 import replaceFill from './replaceFill'
 
-import useAllAirtableIcons, { Icon } from './useAllAirtableIcons'
+interface Icon {
+  svg: string
+  text: string
+}
 
 function useAirtableIcon(
   name: string,
@@ -18,8 +22,8 @@ function useAirtableIcon(
   color: string,
   noEmitError?: true | false | boolean | undefined
 ) {
-  const icons = useAllAirtableIcons()
-  const icon = icons.find(icon => icon.name === name)
+  const icons = useIconsQuery()
+  const icon = icons.find(icon => icon.data.Name === name)
 
   if (!icon) {
     if (noEmitError === true) return undefined
@@ -32,9 +36,12 @@ function useAirtableIcon(
     )
   }
 
-  const svgString = replaceFill(icon.svg, color).toString()
+  const svgString = replaceFill(
+    icon.data.SVG.localFiles[0].childSvg.svgString,
+    color
+  )
 
-  return { text: icon.text, svg: svgString }
+  return { text: icon.data.Text, svg: svgString }
 }
 
 export default useAirtableIcon
