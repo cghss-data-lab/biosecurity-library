@@ -57,7 +57,7 @@ export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
       <ResourceList>
         {props.data.Resources_in_set.sort(
           object.sortByCustom<typeof props.data.Resources_in_set[0]>(
-            inst => inst.data.Resource_name
+            inst => inst.data[nameField]
           )
         ).map(d => (
           <ResourceListItem data-member key={d.data.Record_ID_INTERNAL}>
