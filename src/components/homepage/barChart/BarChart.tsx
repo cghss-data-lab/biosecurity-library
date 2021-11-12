@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
+import AirtableCMSText from '../../../airtable-cms/CMSText/CMSText'
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 import Main from '../../layout/Main'
 

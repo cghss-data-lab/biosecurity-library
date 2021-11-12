@@ -6,7 +6,7 @@ import FigmaProvider from '../figma/FigmaProvider'
 import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
 import { Filters } from '../components/explorepage/exploreReducer'
 
-import AirtableCMSText from '../airtable-cms/AirtableCMSText'
+import AirtableCMSText from '../airtable-cms/CMSText/CMSText'
 
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'

@@ -2,7 +2,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
-import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
+import AirtableCMSText from '../../../airtable-cms/CMSText/CMSText'
 import { urlString } from '../../../airtable-cms/utilities'
 
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
