@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import useAirtableIcon from './useCMSIcon'
+import useCMSIcon from './useCMSIcon'
 
 const SVGContainer = styled.div`
   // make the SVG responsive so it takes the size of the parent;
@@ -45,7 +45,7 @@ const CMSIcon = ({
 }: CMSIconProps): JSX.Element => {
   const [hover, setHover] = useState(false)
 
-  const icon = useAirtableIcon(
+  const icon = useCMSIcon(
     name,
     hover && hoverColor ? hoverColor : color,
     noEmitError

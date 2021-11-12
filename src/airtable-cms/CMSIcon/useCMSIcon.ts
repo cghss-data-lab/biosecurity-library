@@ -1,4 +1,4 @@
-import useIconsQuery from './useCMSIconsQuery'
+import useCMSIconsQuery from './useCMSIconsQuery'
 import replaceFill from './replaceFill'
 
 interface Icon {
@@ -22,7 +22,7 @@ function useCMSIcon(
   color: string,
   noEmitError?: true | false | boolean | undefined
 ) {
-  const icons = useIconsQuery()
+  const icons = useCMSIconsQuery()
   const icon = icons.find(icon => icon.data.Name === name)
 
   if (!icon) {

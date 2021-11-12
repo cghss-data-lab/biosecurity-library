@@ -1,7 +1,7 @@
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
 import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
 import { urlString } from '../../../airtable-cms/utilities'
 
@@ -9,7 +9,7 @@ import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 import Main from '../../layout/Main'
 
-import Carousel from '../../ui/Carousel'
+import Carousel from '../../ui/Carousel/Carousel'
 
 const H2 = styled.h2`
   text-align: center;
@@ -49,7 +49,7 @@ const Card = styled.div`
   min-height: 385px;
   border-radius: 3px;
 `
-const KeyResourceFlag = styled(AirtableCMSIcon)`
+const KeyResourceFlag = styled(CMSIcon)`
   position: absolute;
   top: -10px;
   left: 15px;
@@ -128,7 +128,7 @@ const CarouselSection = (): JSX.Element => {
         <AirtableCMSText name="Second header" data={homePageText} />
       </H2>
       <KeyResourceLegend>
-        <AirtableCMSIcon
+        <CMSIcon
           name="Key resource"
           color={theme.colorDarkest}
           style={{ width: 24, height: 24, marginRight: 5 }}
@@ -164,7 +164,7 @@ const CarouselSection = (): JSX.Element => {
               </div>
               <TextContent>
                 <ResourceType>
-                  <AirtableCMSIcon
+                  <CMSIcon
                     name={resource.Resource_type}
                     color={theme.colorDarkest}
                     style={{ width: 24, height: 24, marginRight: 8 }}
@@ -190,7 +190,7 @@ const CarouselSection = (): JSX.Element => {
                 </Description>
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
-                    <AirtableCMSIcon
+                    <CMSIcon
                       noEmitError
                       name={topic}
                       color={theme.colorDarkest}

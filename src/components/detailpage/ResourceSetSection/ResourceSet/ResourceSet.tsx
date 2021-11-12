@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import { ResourceSetProps } from '../../../../templates/Detail'
 import * as object from '../../../../utilities/object'
 import * as urls from '../../../../utilities/urls'
-import AirtableCMSIcon from '../../../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../../../airtable-cms/CMSIcon/CMSIcon'
 import Tippy from '@tippyjs/react'
 import { followCursor } from 'tippy.js'
 
@@ -68,7 +68,7 @@ export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
               plugins={[followCursor]}
             >
               <ResourceLink to={urls.getDetailURL(d.data)}>
-                <AirtableCMSIcon
+                <CMSIcon
                   name={d.data.Resource_type}
                   color={theme.colorDarker}
                   style={{ height: 30, marginRight: '.5em' }}
