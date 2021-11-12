@@ -11,25 +11,25 @@
 {
     "airtable/cms-icon": {
         "scope": "talus-analytics.library",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSIcon"
     },
     "airtable/cms-text": {
-        "scope": "",
-        "version": "",
+        "scope": "talus-analytics.library",
+        "version": "0.0.1",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSText"
     },
     "airtable/cms-types": {
         "scope": "talus-analytics.library",
-        "version": "0.0.1",
-        "mainFile": "index.d.ts",
+        "version": "0.0.3",
+        "mainFile": "index.ts",
         "rootDir": "src/airtable-cms/CMSTypes"
     },
     "carousel": {
         "scope": "talus-analytics.library",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Carousel"
     },
