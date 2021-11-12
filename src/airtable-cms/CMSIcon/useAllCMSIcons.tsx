@@ -1,8 +1,8 @@
 import { parse } from 'node-html-parser'
 import { useMemo } from 'react'
-import useIconsQuery from './useIconsQuery'
+import useIconsQuery from './useCMSIconsQuery'
 
-const useAllAirtableIcons = () => {
+const useAllCMSIcons = () => {
   const nodes = useIconsQuery()
   const icons = useMemo(() => {
     return nodes.map(node => ({
@@ -15,4 +15,4 @@ const useAllAirtableIcons = () => {
   return icons
 }
 
-export default useAllAirtableIcons
+export default useAllCMSIcons

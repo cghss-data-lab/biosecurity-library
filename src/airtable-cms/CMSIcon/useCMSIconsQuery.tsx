@@ -21,7 +21,7 @@ export interface IconsQuery {
   }
 }
 
-const useIconsQuery = () => {
+const useCMSIconsQuery = () => {
   const {
     iconsQuery: { nodes },
   } = useStaticQuery<IconsQuery>(graphql`
@@ -47,4 +47,4 @@ const useIconsQuery = () => {
   return nodes
 }
 
-export default useIconsQuery
+export default useCMSIconsQuery

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import useAirtableIcon from './useAirtableIcon'
+import useAirtableIcon from './useCMSIcon'
 
 const SVGContainer = styled.div`
   // make the SVG responsive so it takes the size of the parent;
@@ -17,7 +17,7 @@ const SVGContainer = styled.div`
   }
 `
 
-interface AirtableCMSIconProps {
+interface CMSIconProps {
   /** Name of the icon in the icons tab */
   name: string
   /** color of the icon; note icons only accept one color */
@@ -35,14 +35,14 @@ interface AirtableCMSIconProps {
   noEmitError?: boolean
 }
 
-const AirtableCMSIcon = ({
+const CMSIcon = ({
   name,
   color,
   style,
   className,
   hoverColor,
   noEmitError = false,
-}: AirtableCMSIconProps): JSX.Element => {
+}: CMSIconProps): JSX.Element => {
   const [hover, setHover] = useState(false)
 
   const icon = useAirtableIcon(
@@ -74,4 +74,4 @@ const AirtableCMSIcon = ({
   )
 }
 
-export default AirtableCMSIcon
+export default CMSIcon

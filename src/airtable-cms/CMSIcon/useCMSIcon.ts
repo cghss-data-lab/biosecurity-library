@@ -1,4 +1,4 @@
-import useIconsQuery from './useIconsQuery'
+import useIconsQuery from './useCMSIconsQuery'
 import replaceFill from './replaceFill'
 
 interface Icon {
@@ -6,18 +6,18 @@ interface Icon {
   text: string
 }
 
-function useAirtableIcon(
+function useCMSIcon(
   name: string,
   color: string,
   noEmitError: true
 ): Icon | undefined
-function useAirtableIcon(
+function useCMSIcon(
   name: string,
   color: string,
   noEmitError: boolean
 ): Icon | undefined
-function useAirtableIcon(name: string, color: string, noEmitError?: false): Icon
-function useAirtableIcon(
+function useCMSIcon(name: string, color: string, noEmitError?: false): Icon
+function useCMSIcon(
   name: string,
   color: string,
   noEmitError?: true | false | boolean | undefined
@@ -44,4 +44,4 @@ function useAirtableIcon(
   return { text: icon.data.Text, svg: svgString }
 }
 
-export default useAirtableIcon
+export default useCMSIcon
