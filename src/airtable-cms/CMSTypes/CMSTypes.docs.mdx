@@ -1,0 +1,25 @@
+---
+displayName: Airtable CMS Types
+description: Type declarations for Airtable CMS Components
+labels: ['airtable', 'typescript', 'types']
+---
+
+# Types package for airtable CMS components.
+
+```js
+interface AirtableCMSData {
+  nodes: [
+    {
+      data: {
+        Name: string
+        Text: string
+        Image: {
+          localFiles: ImageDataLike[]
+        }
+      }
+    }
+  ]
+}
+```
+
+CMS components should share type declarations where possible, this package serves as a way to synchronize those type declarations.
