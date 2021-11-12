@@ -1,0 +1,43 @@
+---
+displayName: Airtable CMS Text
+description: Component for finding text blocks in AirtableCMSData
+labels: ['airtable', 'typescript', 'ui']
+---
+
+# Setup
+
+This componet requires an Airtable table configured with `Name` and `Text` columns, and a CMS query in a custom hook which should look something like this (at a minimum!)
+
+### Example CMS query hook
+
+This hook should go in the cms queries directory
+
+```js
+const useCMSData = () => {
+  const { cmsData }: { cmsData: AirtableCMSData } = useStaticQuery(graphql`
+    query cmsDataQuery {
+      cmsData: allAirtable(filter: { table: { eq: "homePage" } }) {
+        nodes {
+          data {
+            Name
+            Text
+          }
+        }
+      }
+    }
+  }`)
+
+  return cmsData
+}
+```
+
+### Example usage
+
+```js
+const SomeComponent = () => {
+  // cms data should come from custom hooks
+  const cmsData = useCMSData()
+
+  return <CMSText name={'Button Text'} data={cmsData} />
+}
+```
