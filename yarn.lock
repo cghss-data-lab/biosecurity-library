@@ -2078,10 +2078,10 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
-"@talus-analytics/viz.charts.network@^0.0.8":
-  version "0.0.8"
-  resolved "https://node.bit.dev/@talus-analytics/viz.charts.network/-/@talus-analytics-viz.charts.network-0.0.8.tgz#604c32730a5cc5fc285a0955cd2e0febc14e5fb9"
-  integrity sha1-YEwycwpcxfwoWglVzS4P68FOX7k=
+"@talus-analytics/viz.charts.network@^0.0.9":
+  version "0.0.9"
+  resolved "https://node.bit.dev/@talus-analytics/viz.charts.network/-/@talus-analytics-viz.charts.network-0.0.9.tgz#68cef7870ef879fe52dee32afae5efe607a48123"
+  integrity sha1-aM73hw74ef5S3uMq+uXv5gekgSM=
   dependencies:
     airtable "0.11.1"
     core-js "^3.0.0"
