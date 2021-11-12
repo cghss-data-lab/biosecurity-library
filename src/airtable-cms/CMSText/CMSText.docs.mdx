@@ -4,13 +4,15 @@ description: Component for finding text blocks in AirtableCMSData
 labels: ['airtable', 'typescript', 'ui']
 ---
 
-# Setup
+This component and helper function makes it easy to retrieve text content from airtable content queries.
 
-This componet requires an Airtable table configured with `Name` and `Text` columns, and a CMS query in a custom hook which should look something like this (at a minimum!)
+# Usage
+
+This component requires an Airtable table configured with `Name` and `Text` columns, and a CMS query in a custom hook which should look something like this (at a minimum—content queries may also include images).
 
 ### Example CMS query hook
 
-This hook should go in the cms queries directory
+This custom hook should go in the cms query hooks directory:
 
 ```js
 const useCMSData = () => {
@@ -41,3 +43,13 @@ const SomeComponent = () => {
   return <CMSText name={'Button Text'} data={cmsData} />
 }
 ```
+
+# Exported utilities
+
+```js
+function getCMSText( data: AirtableCMSData, name: string, noEmitError?: false): string
+function getCMSText( data: AirtableCMSData, name: string, noEmitError: true): string | undefined
+function getCMSText( data: AirtableCMSData, name: string, noEmitError: boolean): string | undefined
+```
+
+This helper function takes the name and `AirtableCMSData` object and returns the requested text as a string.

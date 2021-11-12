@@ -15,6 +15,12 @@
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSIcon"
     },
+    "airtable/cms-text": {
+        "scope": "",
+        "version": "",
+        "mainFile": "index.tsx",
+        "rootDir": "src/airtable-cms/CMSText"
+    },
     "airtable/cms-types": {
         "scope": "talus-analytics.library",
         "version": "0.0.1",
