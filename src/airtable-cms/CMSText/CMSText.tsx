@@ -13,10 +13,26 @@ export const getCMSText = (data: AirtableCMSData, name: string) => {
   )
 }
 
-const CMSText: React.FC<{
+interface CMSTextProps {
+  /**
+   * name of the text section in the table
+   */
   name: string
+  /**
+   * result from the standard-format airtable
+   * CMS query; may include both text and images.
+   */
   data: AirtableCMSData
-}> = ({ data, name }) => {
+  /**
+   * Suppress error handling; this will return
+   * an empty fragment instead of throwing an
+   * error if the requested text is missing
+   * or empty.
+   */
+  noEmitError?: boolean
+}
+
+const CMSText = ({ data, name }: CMSTextProps): JSX.Element => {
   const text = getCMSText(data, name)
   return <>{text}</>
 }
