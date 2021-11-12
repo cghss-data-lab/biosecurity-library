@@ -104,3 +104,23 @@ function replaceFill(svg: HTMLElement, color: string): HTMLElement
 This function handles parsing SVG graphics and re-coloring them. It will change any `fill` and `stroke` attribute in the SVG to the specified color, supporting any color format supported by the SVG specification. Recoloring itself is recursive, so this function will traverse the node structure and recolor elements even if they are inside groups or other containing elements.
 
 There is a short-circuit optimization for use with `useAllCMSIcons()` where this function will not re-parse the SVG if it is already passed in as an `HTMLElement`, and in that case it will return an `HTMLElement`.
+
+## Raw Data Hook: `useCMSIconsQuery()`
+
+```js
+type useCMSIconsQuery = () => {
+  data: {
+    Name: string,
+    Text: string,
+    SVG: {
+      localFiles: {
+        childSvg: {
+          svgString: string,
+        },
+      }[],
+    },
+  },
+}[]
+```
+
+This gives access to the raw icons query response, only for use in use-cases where the other methods will not work—this export is provided mostly for future-proofing.

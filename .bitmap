@@ -10,8 +10,8 @@
 
 {
     "airtable/cms-icon": {
-        "scope": "",
-        "version": "",
+        "scope": "talus-analytics.library",
+        "version": "0.0.4",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSIcon"
     },
