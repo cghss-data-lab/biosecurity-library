@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import { getImage } from 'gatsby-plugin-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { AirtableCMSData } from './types'
@@ -8,9 +8,9 @@ import { AirtableCMSData } from './types'
 export const getCMSImage = (data: AirtableCMSData, name: string) => {
   const image = data.nodes.find(i => i.data.Name === name)
   if (image) {
-    const sources: IGatsbyImageData | undefined = getImage(
-      image.data.Image.localFiles[0]
-    )
+    const sources = getImage(image.data.Image.localFiles[0])
+
+    // const url = image.data.Image.publicUrl
 
     const alt: string | undefined = image?.data.Text
 
