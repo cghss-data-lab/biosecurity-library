@@ -21,8 +21,13 @@ interface CMSTextProps {
   noEmitError?: boolean
 }
 
-const CMSText = ({ data, name }: CMSTextProps): JSX.Element => {
-  const text = getCMSText(data, name)
+const CMSText = ({
+  data,
+  name,
+  noEmitError = false,
+}: CMSTextProps): JSX.Element => {
+  const text = getCMSText(data, name, noEmitError)
+  if (!text) return <></>
   return <>{text}</>
 }
 
