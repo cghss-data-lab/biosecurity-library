@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import AirtableCMSImage from '../../airtable-cms/AirtableCMSImage'
-import { AirtableCMSData } from '../../airtable-cms/types'
+import { AirtableCMSData } from '../../airtable-cms/CMSTypes'
 
 const ImageSection = styled.section`
   display: grid;

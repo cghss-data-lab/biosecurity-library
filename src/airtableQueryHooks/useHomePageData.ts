@@ -1,5 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { AirtableCMSData } from '../airtable-cms/types'
+import { AirtableCMSData } from '../airtable-cms/CMSTypes'
 
 export interface ResourceSearchData {
   nodes: [

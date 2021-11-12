@@ -2,7 +2,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
-import AirtableCMSText from '../../../airtable-cms/CMSText/CMSText'
+import CMSText from '../../../airtable-cms/CMSText/CMSText'
 import { urlString } from '../../../airtable-cms/utilities'
 
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
@@ -125,7 +125,7 @@ const CarouselSection = (): JSX.Element => {
   return (
     <CarouselBackground>
       <H2>
-        <AirtableCMSText name="Second header" data={homePageText} />
+        <CMSText name="Second header" data={homePageText} />
       </H2>
       <KeyResourceLegend>
         <CMSIcon
@@ -133,7 +133,7 @@ const CarouselSection = (): JSX.Element => {
           color={theme.colorDarkest}
           style={{ width: 24, height: 24, marginRight: 5 }}
         />
-        <AirtableCMSText name="Key resource explanation" data={homePageText} />
+        <CMSText name="Key resource explanation" data={homePageText} />
       </KeyResourceLegend>
       <Main>
         <StyledCarousel

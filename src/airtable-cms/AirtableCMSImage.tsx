@@ -3,7 +3,7 @@ import React from 'react'
 import { getImage } from 'gatsby-plugin-image'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import { AirtableCMSData } from './types'
+import { AirtableCMSData } from './CMSTypes'
 
 export const getCMSImage = (data: AirtableCMSData, name: string) => {
   const image = data.nodes.find(i => i.data.Name === name)

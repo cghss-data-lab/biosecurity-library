@@ -1,5 +1,5 @@
 import React from 'react'
-import { AirtableCMSData } from '../types'
+import { AirtableCMSData } from '../CMSTypes'
 
 export const getCMSText = (data: AirtableCMSData, name: string) => {
   const text = data.nodes.find(n => n.data.Name === name)?.data.Text
