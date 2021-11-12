@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import AirtableCMSImage from '../../airtable-cms/AirtableCMSImage'
+import CMSImage from '../../airtable-cms/CMSImage/CMSImage'
 import { AirtableCMSData } from '../../airtable-cms/CMSTypes'
 
 const ImageSection = styled.section`
@@ -12,7 +12,7 @@ const ImageSection = styled.section`
   width: 100%;
   overflow: hidden;
 `
-const StyledImage = styled(AirtableCMSImage)`
+const StyledImage = styled(CMSImage)`
   object-fit: cover;
   height: 100%;
   width: 100%;

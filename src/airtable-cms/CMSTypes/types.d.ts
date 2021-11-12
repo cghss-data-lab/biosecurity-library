@@ -1,4 +1,8 @@
-import { ImageDataLike } from 'gatsby-plugin-image'
+import {
+  FileNode,
+  IGatsbyImageDataParent,
+} from 'gatsby-plugin-image/dist/src/components/hooks'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export interface AirtableCMSData {
   nodes: [
@@ -7,7 +11,8 @@ export interface AirtableCMSData {
         Name: string
         Text: string
         Image: {
-          localFiles: ImageDataLike[]
+          localFiles: FileNode[] &
+            { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
         }
       }
     }
