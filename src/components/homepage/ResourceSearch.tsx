@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
-import CMSText, { getCMSText } from '../../airtable-cms/CMSText/CMSText'
+import CMSText, { getCMSText } from '../../airtable-cms/CMSText'
 
 import ButtonLink from '../ui/ButtonLink'
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'

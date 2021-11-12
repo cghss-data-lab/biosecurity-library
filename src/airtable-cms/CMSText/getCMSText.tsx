@@ -1,4 +1,4 @@
-import { AirtableCMSData } from '../CMSTypes'
+import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
 
 // helper function for finding text in an AirtableCMSData
 // object, and returning that as a string, with error

@@ -1,17 +1,6 @@
 import React from 'react'
-import { AirtableCMSData } from '../CMSTypes'
-
-export const getCMSText = (data: AirtableCMSData, name: string) => {
-  const text = data.nodes.find(n => n.data.Name === name)?.data.Text
-  if (text) return text
-  throw new Error(
-    `Text section ${name} not found in ` +
-      `the Airtable data specified. Does that ` +
-      `query include the right tables, and ` +
-      `does one of those tables include a ` +
-      `section called ${name}?`
-  )
-}
+import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
+import getCMSText from './getCMSText'
 
 interface CMSTextProps {
   /**
