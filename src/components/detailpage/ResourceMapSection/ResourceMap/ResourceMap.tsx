@@ -13,8 +13,8 @@ import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
 import { replaceFill } from '../../../../airtable-cms/CMSIcon'
-import * as network from '../../../../bit/viz/charts/network'
-// import * as network from '@talus-analytics/viz.charts.network'
+import * as network from '@talus-analytics/viz.charts.network'
+// import * as network from '../../../../bit/viz/charts/network'
 import {
   AppGraphData,
   getNodeIdsForLinks,
