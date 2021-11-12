@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react'
 import styled, { useTheme } from 'styled-components'
-import AirtableCMSIcon from '../../../../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../../../../airtable-cms/CMSIcon/CMSIcon'
 import { IconFrame } from './IconFrame/IconFrame'
 import { Frameable } from './legendTypes'
 import WrappedLabel from './WrappedLabel'
@@ -48,7 +48,7 @@ const AirtableIconEntry: FC<LegendEntryProps> = ({
     <LegendEntryContainer>
       <LegendIconContainer>
         <IconFrame shape={frameShape} color={frameColor}>
-          <AirtableCMSIcon
+          <CMSIcon
             name={value}
             color={color === undefined ? theme.colorDarker : color}
             style={{ width: 30 }}

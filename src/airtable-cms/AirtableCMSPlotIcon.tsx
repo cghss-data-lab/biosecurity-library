@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import AirtableCMSIcon from './AirtableCMSIcon'
+import CMSIcon from './CMSIcon/CMSIcon'
 
 const IconHolder = styled.foreignObject`
   overflow: visible;
@@ -40,7 +40,7 @@ const AirtableCMSPlotIcon = ({
   ...props
 }: SVGIconProps): JSX.Element => (
   <IconHolder {...props} x={x - width / 2} y={y - height / 2}>
-    <AirtableCMSIcon
+    <CMSIcon
       style={{ width, height }}
       {...{ name, color, hoverColor, noEmitError }}
     />

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
 
 import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { commaSeparatedList } from '../../../utilities/grammar'
@@ -93,7 +93,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         {data.Key_topic_area.map(name => (
           <Tippy content={name} key={name}>
             <div>
-              <AirtableCMSIcon
+              <CMSIcon
                 name={name}
                 color={theme.colorDarkest}
                 style={{ width: 30 }}

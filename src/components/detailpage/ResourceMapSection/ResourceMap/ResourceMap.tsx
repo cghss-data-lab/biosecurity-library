@@ -12,11 +12,9 @@ import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import {
-  IconsQueryMap,
-  replaceFill,
-} from '../../../../airtable-cms/AirtableCMSIcon'
-import * as network from '@talus-analytics/viz.charts.network'
+import { replaceFill } from '../../../../airtable-cms/CMSIcon'
+import * as network from '../../../../bit/viz/charts/network'
+// import * as network from '@talus-analytics/viz.charts.network'
 import {
   AppGraphData,
   getNodeIdsForLinks,
@@ -29,12 +27,31 @@ import IconEntries, { IconEntry } from './Legend/IconEntries'
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
 import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
+import parse from 'node-html-parser'
 
 /**
  * Icon data from Airtable
  */
 export type Icon = {
   data: { Name: string; Text: string; SVG: any }
+}
+
+export interface IconsQueryMap {
+  iconsQueryMap: {
+    nodes: {
+      data: {
+        Name: string
+        Text: string
+        SVG: {
+          localFiles: {
+            childSvg: {
+              svgString: string
+            }
+          }[]
+        }
+      }
+    }[]
+  }
 }
 
 const Section = styled.section`
@@ -237,6 +254,7 @@ export const ResourceMap: React.FC<{
             }}
           >
             <network.Network
+              key={selectedNode?.Record_ID_INTERNAL}
               enableNodeDrag={false}
               onRenderFramePost={updateCanvasLeftMargin}
               nodeLabel={hideTipForLabeledNodes}
@@ -442,14 +460,14 @@ function getFormattedNodes(
     )
     if (icon === undefined) return n
     const displayIcon = replaceFill(
-      icon.data.SVG.localFiles[0].childSvg.svgString,
+      parse(icon.data.SVG.localFiles[0].childSvg.svgString),
       n._color || theme.colorDarker
     )
 
     const updatedN: GraphNode = {
       ...n,
       _show: true,
-      _icon: displayIcon,
+      _icon: displayIcon.toString(),
       _showLabel: showAllNodeLabels || isSelectedNode,
       _color: theme.colorDarker,
       _backgroundColor: theme.colorVeryLightGray,
