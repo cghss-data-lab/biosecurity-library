@@ -8,6 +8,8 @@ This component finds the specified image in `AirtableCMSData` and displays it us
 
 **NOTE:** the size of the image, as output by the processing pipeline, is set in the graphql query, not the AirtableCMSImage component, because image processing is done at built time in the server. Image quality and placeholder format must be handled in the query, and then display sizing can be done in CSS, though the match should be as close as possible.
 
+All props supported by [gatsby-plugin-image](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-image#using-the-gatsby-image-components) are supported.
+
 # Usage
 
 This component requires an Airtable table configured with `Name`, `Text`, and `Image` columns, and a CMS query in a custom hook which should look something like this.

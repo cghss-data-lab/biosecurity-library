@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import CMSImage from '../../airtable-cms/CMSImage/CMSImage'
+import CMSImage from '../../airtable-cms/CMSImage'
 import { AirtableCMSData } from '../../airtable-cms/CMSTypes'
 
 const ImageSection = styled.section`
