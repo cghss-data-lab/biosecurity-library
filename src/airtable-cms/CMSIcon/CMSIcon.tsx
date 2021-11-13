@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import useCMSIcon from './useCMSIcon'
 
-const SVGContainer = styled.div`
+const Container = styled.div`
   // make the SVG responsive so it takes the size of the parent;
   // stop it from sending mouseout events to the parent
   display: flex;
@@ -17,17 +17,13 @@ const SVGContainer = styled.div`
   }
 `
 
-interface CMSIconProps {
+interface CMSIconProps extends React.ComponentPropsWithRef<'div'> {
   /** Name of the icon in the icons tab */
   name: string
   /** color of the icon; note icons only accept one color */
   color: string
-  /** className which will be applied to the svg container */
-  className?: string
   /** color to change the icon to when hovered */
   hoverColor?: string
-  /** CSS styles to apply to the svg container */
-  style?: React.CSSProperties
   /**
    * Suppress missing icon error message;
    * component will return a fragment instead
@@ -38,10 +34,9 @@ interface CMSIconProps {
 const CMSIcon = ({
   name,
   color,
-  style,
-  className,
   hoverColor,
   noEmitError = false,
+  ...props
 }: CMSIconProps): JSX.Element => {
   const [hover, setHover] = useState(false)
 
@@ -63,11 +58,10 @@ const CMSIcon = ({
     }
 
   return (
-    <SVGContainer
+    <Container
+      {...props}
       role="img"
       aria-label={icon.text}
-      style={style}
-      className={className}
       dangerouslySetInnerHTML={{ __html: icon.svg }}
       {...mouseHandlers}
     />
