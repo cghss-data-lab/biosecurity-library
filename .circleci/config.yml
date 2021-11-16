@@ -1,5 +1,10 @@
 version: 2.1
 
+credentials: &credentials
+  - AWS Credentials
+  - Airtable Credentials
+  - Bit Credentials
+
 workflows:
   version: 2
   build:
@@ -40,11 +45,6 @@ workflows:
             branches:
               only:
                 - prod
-
-credentials: &credentials
-  - AWS Credentials
-  - Airtable Credentials
-  - Bit Credentials
 
 orbs:
   aws-cli: circleci/aws-cli@2.0.3
