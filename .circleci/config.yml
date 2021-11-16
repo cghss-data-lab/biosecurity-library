@@ -12,7 +12,7 @@ workflows:
       - deploy:
           bucket: 's3://dev-biosecurity'
           distribution: 'E31RJZOJBZKNK7'
-          context: credentials
+          context: *credentials
           filters:
             branches:
               only:
@@ -21,7 +21,7 @@ workflows:
       - deploy:
           bucket: 's3://review-biosecurity'
           distribution: 'E1C3POE3SNNT13'
-          context: credentials
+          context: *credentials
           filters:
             branches:
               only:
@@ -30,7 +30,7 @@ workflows:
       - deploy:
           bucket: 's3://staging-biosecurity'
           distribution: 'E2Y1HDO9J5FPR9'
-          context: credentials
+          context: *credentials
           filters:
             branches:
               only:
@@ -39,7 +39,7 @@ workflows:
       - deploy:
           bucket: 's3://prod-biosecurity'
           distribution: 'E225RTJBB12HS1'
-          context: credentials
+          context: *credentials
           filters:
             branches:
               only:
