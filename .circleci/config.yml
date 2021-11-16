@@ -7,47 +7,45 @@ workflows:
       - deploy:
           bucket: 's3://dev-biosecurity'
           distribution: 'E31RJZOJBZKNK7'
+          *credentials
           filters:
             branches:
               only:
                 - dev
-          context:
-            - AWS Credentials
-            - Airtable Credentials
-            - Bit Credentials
+
       - deploy:
           bucket: 's3://review-biosecurity'
           distribution: 'E1C3POE3SNNT13'
+          *credentials
           filters:
             branches:
               only:
                 - review
-          context:
-            - AWS Credentials
-            - Airtable Credentials
-            - Bit Credentials
+
       - deploy:
           bucket: 's3://staging-biosecurity'
           distribution: 'E2Y1HDO9J5FPR9'
+          *credentials
           filters:
             branches:
               only:
                 - staging
-          context:
-            - AWS Credentials
-            - Airtable Credentials
-            - Bit Credentials
+
       - deploy:
           bucket: 's3://prod-biosecurity'
           distribution: 'E225RTJBB12HS1'
+          *credentials
           filters:
             branches:
               only:
                 - prod
-          context:
-            - AWS Credentials
-            - Airtable Credentials
-            - Bit Credentials
+
+
+credentials: &credentials
+  context:
+    - AWS Credentials
+    - Airtable Credentials
+    - Bit Credentials
 
 orbs:
   aws-cli: circleci/aws-cli@2.0.3
