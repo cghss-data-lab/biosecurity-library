@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
-import AirtableCMSText, { getCMSText } from '../../airtable-cms/AirtableCMSText'
+import CMSText, { getCMSText } from '../../airtable-cms/CMSText'
 
 import ButtonLink from '../ui/ButtonLink'
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
@@ -64,7 +64,7 @@ const ResourceSearch = (): JSX.Element => {
   return (
     <SearchControls>
       <ButtonLink to="/explore">
-        <AirtableCMSText name={'Button Text'} data={homePageText} />
+        <CMSText name={'Button Text'} data={homePageText} />
       </ButtonLink>
       <SearchBoxContainer>
         <StyledTypeaheadControl

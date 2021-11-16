@@ -6,7 +6,7 @@ import FigmaProvider from '../figma/FigmaProvider'
 import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
 import { Filters } from '../components/explorepage/exploreReducer'
 
-import AirtableCMSText from '../airtable-cms/AirtableCMSText'
+import CMSText from '../airtable-cms/CMSText/CMSText'
 
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
@@ -68,7 +68,7 @@ const ExplorePage = (): JSX.Element => {
       <Main>
         <Header>
           <h1>
-            <AirtableCMSText name={'First Header'} data={explorePageText} />
+            <CMSText name={'First Header'} data={explorePageText} />
           </h1>
         </Header>
         <FilterBar

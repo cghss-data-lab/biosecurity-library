@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import AirtableCMSText from '../../airtable-cms/AirtableCMSText'
+import CMSText from '../../airtable-cms/CMSText/CMSText'
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 const Section = styled.section`
@@ -30,10 +30,10 @@ const IntroSection = (): JSX.Element => {
   return (
     <Section>
       <h1>
-        <AirtableCMSText name={'First Header'} data={homePageText} />
+        <CMSText name={'First Header'} data={homePageText} />
       </h1>
       <h3>
-        <AirtableCMSText name={'First Paragraph'} data={homePageText} />
+        <CMSText name={'First Paragraph'} data={homePageText} />
       </h3>
     </Section>
   )

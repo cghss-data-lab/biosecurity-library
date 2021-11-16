@@ -4,6 +4,9 @@ import useAllCMSIcons from './useAllCMSIcons'
 import useCMSIcon from './useCMSIcon'
 import useCMSIconsQuery from './useCMSIconsQuery'
 
+import type { CMSIconProps } from './CMSIcon'
+export type { CMSIconProps }
+
 export {
   // general purpose hook
   useCMSIcon,
