@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import CMSImage from '../../airtable-cms/CMSImage'
-import { AirtableCMSData } from '../../airtable-cms/CMSTypes'
+import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
 
 const ImageSection = styled.section`
   display: grid;

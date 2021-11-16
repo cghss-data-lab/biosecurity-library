@@ -9,21 +9,27 @@
  */
 
 {
+    "airtable-cms": {
+        "scope": "talus-analytics.library",
+        "version": "0.0.5",
+        "mainFile": "index.tsx",
+        "rootDir": "src/AirtableCMS"
+    },
     "airtable/cms-icon": {
         "scope": "talus-analytics.library",
-        "version": "0.0.6",
+        "version": "0.0.7",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSIcon"
     },
     "airtable/cms-image": {
         "scope": "talus-analytics.library",
-        "version": "0.0.2",
+        "version": "0.0.4",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSImage"
     },
     "airtable/cms-text": {
         "scope": "talus-analytics.library",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSText"
     },

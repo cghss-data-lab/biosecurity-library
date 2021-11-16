@@ -2,7 +2,7 @@ import React from 'react'
 import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
 import getCMSText from './getCMSText'
 
-interface CMSTextProps {
+export interface CMSTextProps {
   /**
    * name of the text section in the table
    */

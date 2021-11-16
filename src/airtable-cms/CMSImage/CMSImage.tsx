@@ -4,7 +4,7 @@ import { GatsbyImage, GatsbyImageProps } from 'gatsby-plugin-image'
 import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
 import getCMSImage from './getCMSImage'
 
-interface CMSImageProps extends Omit<GatsbyImageProps, 'image' | 'alt'> {
+export interface CMSImageProps extends Omit<GatsbyImageProps, 'image' | 'alt'> {
   /** Name of the image in the AirtableCMSData object */
   name: string
   /** The AirtableCMSData object (from a content query hook) */

@@ -17,7 +17,7 @@ const Container = styled.div`
   }
 `
 
-interface CMSIconProps extends React.ComponentPropsWithRef<'div'> {
+export interface CMSIconProps extends React.ComponentPropsWithRef<'div'> {
   /** Name of the icon in the icons tab */
   name: string
   /** color of the icon; note icons only accept one color */
