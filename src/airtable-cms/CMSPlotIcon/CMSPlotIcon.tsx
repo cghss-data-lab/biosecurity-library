@@ -9,7 +9,7 @@ const IconHolder = styled.foreignObject`
   justify-content: center;
 `
 
-interface CMSPlotIconProps
+export interface CMSPlotIconProps
   extends React.SVGAttributes<SVGForeignObjectElement> {
   /** X position of the center of the icon */
   x: number
