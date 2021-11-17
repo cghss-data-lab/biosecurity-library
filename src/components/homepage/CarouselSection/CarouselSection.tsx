@@ -2,7 +2,7 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
-import CMSText from '../../../airtable-cms/CMSText/CMSText'
+import CMSText from '@talus-analytics/library.airtable.cms-text'
 import { urlString } from '../../../airtable-cms/utilities'
 
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
@@ -141,7 +141,7 @@ const CarouselSection = (): JSX.Element => {
           disabledButtonColor={theme.colorWhite}
         >
           {carouselResources.nodes.map(({ data: resource }) => (
-            <Card>
+            <Card key={resource.Resource_name}>
               <KeyResourceFlag name="Key resource" color={theme.colorGolden} />
               <div
                 style={
@@ -191,6 +191,7 @@ const CarouselSection = (): JSX.Element => {
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
                     <CMSIcon
+                      key={topic}
                       noEmitError
                       name={topic}
                       color={theme.colorDarkest}
