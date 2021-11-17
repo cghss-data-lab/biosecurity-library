@@ -30,7 +30,6 @@ function getCMSImage(
 ) {
   const image = data.nodes.find(i => i.data.Name === name)
   if (image) {
-    console.log(image)
     const sources = getImage(image.data.Image.localFiles[0])
 
     const url =
