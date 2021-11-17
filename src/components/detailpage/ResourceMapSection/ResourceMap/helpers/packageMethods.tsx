@@ -8,6 +8,7 @@ import {
   GraphLink,
   GraphNode,
   getNeighborhood,
+  // @ts-expect-error
 } from '@talus-analytics/viz.charts.network/dist/helpers'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
@@ -114,7 +115,7 @@ export function getResourceMapData(
   allResourceMapData: AppGraphData
 ): HyperlinkedGraphData {
   const node: GraphNode | undefined = allResourceMapData.nodes.find(
-    n => n._id === resourceId
+    (n: any) => n._id === resourceId
   )
   if (node === undefined)
     throw new Error(
