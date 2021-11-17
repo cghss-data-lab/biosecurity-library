@@ -1,6 +1,6 @@
 ---
 displayName: Airtable CMS
-description: Convenience package for importing Airtable CMS with an easy namespace
+description: Airtable-based content management system for Talus sites
 labels: ['airtable', 'typescript', 'ui']
 ---
 
@@ -14,7 +14,7 @@ import CMS from '@talus-analytics/library.airtable-cms'
 
 **Note:** All components, functions, and hooks in the CMS package can optionally accept a boolean `noEmitError` prop or argument which will suppress errors for that call. The react components will silently return a fragment when errors are suppressed, and the functions / hooks will silently return undefined. If `noEmitError` is `false` or omitted, the functions can be expected to return a non-nullish value.
 
-## React Components
+## AirtableCMSData React Components
 
 ### `<CMS.Text />`
 
@@ -25,6 +25,16 @@ import CMS from '@talus-analytics/library.airtable-cms'
 CMS.Text gives easy access to a small block of text from an AirtableCMSData object.
 
 [Airtable CMS Text documentation](https://bit.dev/talus-analytics/library/airtable/cms-text)
+
+### `<CMS.RichText />`
+
+```js
+<CMS.RichText name="Content name" data={cmsData} />
+```
+
+CMS.RichText gives easy access to a block of markdown from an AirtableCMSData object, and renders a `<div/>` containing the content parsed to HTML.
+
+[Airtable CMS Rich Text documentation](https://bit.dev/talus-analytics/library/airtable/cms-rich-text)
 
 ### `<CMS.Image />`
 
@@ -45,6 +55,18 @@ CMS.Image gives easy access to a small block of text from an AirtableCMSData obj
 CMS.Icon pulls icons from the table specified in `gatsby-config.js` directly (it does not need a `data` object or query) and colors them based on the passed colors. It also supports changing the color on hover.
 
 [Airtable CMS Icon documentation and additional methods](https://bit.dev/talus-analytics/library/airtable/cms-icon)
+
+## Other React Components
+
+### `<CMS.RenderRichText />`
+
+```js
+<CMS.RenderRichText markdown={'# string of airtable rich text'} />
+```
+
+This component renders a block of rich text content from a string returned by an airtable query, in situations where the query does not follow the `AirtableCMSData` format. This is primarily useful in Explore and Detail pages.
+
+[Airtable CMS Rich Text documentation](https://bit.dev/talus-analytics/library/airtable/cms-rich-text)
 
 ## Functions
 
@@ -69,6 +91,16 @@ CMS.getImage(data, 'Content name')
 Returns an object: `{sources: IGatsbyImageData, alt: string, url: string}`
 
 [Airtable CMS Image documentation](https://bit.dev/talus-analytics/library/airtable/cms-image)
+
+### `CMS.parseRichText()`
+
+```js
+CMS.parseRichText('# string of airtable rich text')
+```
+
+Returns a string HTML parsed from airtable-sourced markdown from a rich text column.
+
+[Airtable CMS Rich Text documentation](https://bit.dev/talus-analytics/library/airtable/cms-rich-text)
 
 ## Hooks
 
