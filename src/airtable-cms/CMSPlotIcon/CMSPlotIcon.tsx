@@ -29,29 +29,23 @@ export interface CMSPlotIconProps
   noEmitError?: boolean
 }
 
-const CMSPlotIcon = React.forwardRef<HTMLDivElement, CMSPlotIconProps>(
-  (
-    {
-      x,
-      y,
-      height,
-      width,
-      name,
-      color,
-      hoverColor,
-      noEmitError = false,
-      ...props
-    },
-    ref
-  ): JSX.Element => (
-    <IconHolder {...props} x={x - width / 2} y={y - height / 2}>
-      <CMSIcon
-        ref={ref}
-        style={{ width, height }}
-        {...{ name, color, hoverColor, noEmitError }}
-      />
-    </IconHolder>
-  )
+const CMSPlotIcon = ({
+  x,
+  y,
+  height,
+  width,
+  name,
+  color,
+  hoverColor,
+  noEmitError = false,
+  ...props
+}: CMSPlotIconProps): JSX.Element => (
+  <IconHolder {...props} x={x - width / 2} y={y - height / 2}>
+    <CMSIcon
+      style={{ width, height }}
+      {...{ name, color, hoverColor, noEmitError }}
+    />
+  </IconHolder>
 )
 
 export default CMSPlotIcon
