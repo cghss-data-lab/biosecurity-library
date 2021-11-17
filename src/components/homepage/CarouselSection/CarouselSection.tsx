@@ -49,7 +49,7 @@ const Card = styled.div`
   min-height: 385px;
   border-radius: 3px;
 `
-const KeyResourceFlag = styled(CMSIcon)`
+const KeyResourceFlag = styled(CMS.Icon)`
   position: absolute;
   top: -10px;
   left: 15px;
