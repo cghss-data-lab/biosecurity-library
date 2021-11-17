@@ -8,7 +8,6 @@ import {
   GraphLink,
   GraphNode,
   getNeighborhood,
-  // @ts-expect-error
 } from '@talus-analytics/viz.charts.network/dist/helpers'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
