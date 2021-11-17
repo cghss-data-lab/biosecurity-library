@@ -11,7 +11,7 @@
 {
     "airtable-cms": {
         "scope": "talus-analytics.library",
-        "version": "0.0.10",
+        "version": "0.0.11",
         "mainFile": "index.tsx",
         "rootDir": "src/AirtableCMS"
     },
@@ -23,7 +23,7 @@
     },
     "airtable/cms-image": {
         "scope": "talus-analytics.library",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSImage"
     },
@@ -35,19 +35,19 @@
     },
     "airtable/cms-rich-text": {
         "scope": "talus-analytics.library",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSRichText"
     },
     "airtable/cms-text": {
         "scope": "talus-analytics.library",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSText"
     },
     "airtable/cms-types": {
         "scope": "talus-analytics.library",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "mainFile": "index.ts",
         "rootDir": "src/airtable-cms/CMSTypes"
     },

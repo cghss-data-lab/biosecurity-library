@@ -14,7 +14,8 @@ interface AirtableCMSData {
         Name: string
         Text: string
         Image: {
-          localFiles: ImageDataLike[]
+          localFiles: FileNode[] &
+            { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
         }
       }
     }
