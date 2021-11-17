@@ -69,16 +69,19 @@ jobs:
       - aws-cli/install
 
       - run:
+          name: Install bit and link local components
+          command: |
+            yarn global add @teambit/bvm;
+            bvm install;
+            bit link;
+
+      - run:
           name: Adding bit.dev to NPM Registry
           command: |
             echo "always-auth=true" >> ~/.npmrc;
             echo "@talus-analytics:registry=https://node.bit.dev" >> ~/.npmrc;
             echo "@teambit:registry=https://node.bit.dev" >> ~/.npmrc;
             echo "//node.bit.dev/:_authToken={$BIT_TOKEN}" >> ~/.npmrc;
-
-      - run:
-          name: Link Bit components
-          command: bit link
 
       - restore_cache:
           keys:
