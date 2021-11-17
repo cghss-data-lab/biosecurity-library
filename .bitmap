@@ -11,7 +11,7 @@
 {
     "airtable-cms": {
         "scope": "talus-analytics.library",
-        "version": "0.0.9",
+        "version": "0.0.10",
         "mainFile": "index.tsx",
         "rootDir": "src/AirtableCMS"
     },
