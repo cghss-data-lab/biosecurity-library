@@ -69,14 +69,6 @@ jobs:
       - aws-cli/install
 
       - run:
-          name: Install bit and link local components
-          command: |
-            yarn global add @teambit/bvm;
-            bvm install;
-            bit config set user.token ${BIT_TOKEN};
-            bit link;
-
-      - run:
           name: Adding bit.dev to NPM Registry
           command: |
             echo "always-auth=true" >> ~/.npmrc;
@@ -92,6 +84,14 @@ jobs:
       - run:
           name: Yarn Install
           command: yarn install --network-timeout 1000000
+
+      - run:
+          name: Install bit and link local components
+          command: |
+            yarn global add @teambit/bvm;
+            bvm install;
+            bit config set user.token ${BIT_TOKEN};
+            bit link;
 
       - run:
           name: Gatsby build
