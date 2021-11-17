@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 
-import CMSIcon from '../../../airtable-cms/CMSIcon'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { commaSeparatedList } from '../../../utilities/grammar'
@@ -92,7 +92,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       <IconContainer>
         {data.Key_topic_area.map(name => (
           <Tippy content={name} key={name}>
-            <CMSIcon
+            <CMS.Icon
               name={name}
               color={theme.colorDarkest}
               style={{ width: 30 }}

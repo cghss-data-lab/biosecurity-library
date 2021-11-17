@@ -7,7 +7,7 @@ import 'tippy.js/dist/tippy.css'
 import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { ExploreState } from '../../../pages/explore'
 
-import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
+import CMS from '@talus-analytics/library.airtable-cms'
 import { cleanAirtableKey } from '../../../airtable-cms/utilities'
 
 import FilterSection from './FilterSection'
@@ -81,7 +81,7 @@ const FilterBar = ({
                     exploreState.defs! as keyof typeof exploreState.filters
                   ]?.includes(def.data.Name)}
                 >
-                  <CMSIcon
+                  <CMS.Icon
                     noEmitError
                     name={def.data.Name}
                     color={theme.colorBlack}
