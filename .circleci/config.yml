@@ -73,6 +73,7 @@ jobs:
           command: |
             yarn global add @teambit/bvm;
             bvm install;
+            bit config set user.token ${BIT_TOKEN};
             bit link;
 
       - run:
