@@ -26,7 +26,7 @@ export const Expand: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   const theme: any = useTheme()
   return (
     <ExpandButton onClick={onClick}>
-      <CMSIcon
+      <CMS.Icon
         name="Expand column"
         color={theme.colorWhite}
         hoverColor={theme.colorGolden}
