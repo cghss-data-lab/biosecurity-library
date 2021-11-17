@@ -1,8 +1,8 @@
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
-import CMSText from '@talus-analytics/library.airtable.cms-text'
+import CMSIcon from '../../../airtable-cms/CMSIcon'
+import CMSText from '../../../airtable-cms/CMSText'
 import { urlString } from '../../../airtable-cms/utilities'
 
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'

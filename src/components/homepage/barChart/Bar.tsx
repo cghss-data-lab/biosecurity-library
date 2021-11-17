@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import AirtableCMSPlotIcon from '../../../airtable-cms/CMSPlotIcon/AirtableCMSPlotIcon'
 import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { DimObj } from './BarChart'
+
+import CMS from '../../../AirtableCMS'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
@@ -56,7 +57,7 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
           stroke={'#173057'}
         />
       </Tippy>
-      <AirtableCMSPlotIcon
+      <CMS.PlotIcon
         style={{ pointerEvents: 'none' }}
         name={bar.fieldValue}
         color={theme.colorDarkest}
