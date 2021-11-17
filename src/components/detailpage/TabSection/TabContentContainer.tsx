@@ -14,8 +14,9 @@ const TabContentContainer = styled.section`
     align-items: center;
   }
 
-  > p {
+  p {
     margin: 0;
+    padding-bottom: 1em;
 
     > a {
       white-space: pre-wrap;

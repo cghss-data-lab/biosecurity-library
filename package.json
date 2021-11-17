@@ -46,13 +46,16 @@
     "react-dom": "^17.0.2",
     "react-force-graph-2d": "^1.23.8",
     "react-helmet": "^6.1.0",
+    "remark-html": "^15.0.0",
+    "remark-parse": "^10.0.0",
     "sass": "^1.37.5",
     "sass-extract": "^2.1.0",
     "sass-extract-js": "^0.4.0",
     "sass-extract-loader": "^1.1.0",
     "styled-components": "^5.3.0",
     "typescript": "^4.4.4",
-    "typescript-styled-plugin": "^0.18.1"
+    "typescript-styled-plugin": "^0.18.1",
+    "unified": "^10.1.0"
   },
   "devDependencies": {
     "@testing-library/react": "^12.1.2",

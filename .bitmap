@@ -11,31 +11,43 @@
 {
     "airtable-cms": {
         "scope": "talus-analytics.library",
-        "version": "0.0.5",
+        "version": "0.0.11",
         "mainFile": "index.tsx",
         "rootDir": "src/AirtableCMS"
     },
     "airtable/cms-icon": {
         "scope": "talus-analytics.library",
-        "version": "0.0.7",
+        "version": "0.0.8",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSIcon"
     },
     "airtable/cms-image": {
         "scope": "talus-analytics.library",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSImage"
     },
-    "airtable/cms-text": {
+    "airtable/cms-plot-icon": {
+        "scope": "talus-analytics.library",
+        "version": "0.0.2",
+        "mainFile": "index.tsx",
+        "rootDir": "src/airtable-cms/CMSPlotIcon"
+    },
+    "airtable/cms-rich-text": {
         "scope": "talus-analytics.library",
         "version": "0.0.3",
+        "mainFile": "index.tsx",
+        "rootDir": "src/airtable-cms/CMSRichText"
+    },
+    "airtable/cms-text": {
+        "scope": "talus-analytics.library",
+        "version": "0.0.4",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSText"
     },
     "airtable/cms-types": {
         "scope": "talus-analytics.library",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "mainFile": "index.ts",
         "rootDir": "src/airtable-cms/CMSTypes"
     },

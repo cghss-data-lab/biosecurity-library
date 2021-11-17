@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import CMSText from '../../../airtable-cms/CMSText/CMSText'
+import CMSText from '@talus-analytics/library.airtable.cms-text'
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 import Main from '../../layout/Main'
 
@@ -74,7 +74,7 @@ const BarChart = (): JSX.Element => {
         </Instruction>
         <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
           {sortedBars.map((bar, index) => (
-            <Bar {...{ index, bar, dim }} />
+            <Bar key={index} {...{ index, bar, dim }} />
           ))}
         </Svg>
       </Content>
