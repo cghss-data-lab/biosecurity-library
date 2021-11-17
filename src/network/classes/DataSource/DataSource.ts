@@ -157,9 +157,9 @@ export class DataSource {
    * @param field
    */
   async getFieldValues(
-    baseId: string,
-    table: string,
-    field: string
+    _baseId: string,
+    _table: string,
+    _field: string
   ): Promise<string[]> {
     throw new Error('Not implemented')
   }
@@ -167,7 +167,7 @@ export class DataSource {
   /**
    * Get records from the data source, i.e., rows.
    */
-  async getRecords(...args: any[]): Promise<any> {
+  async getRecords(..._args: any[]): Promise<any> {
     throw new Error('Not implemented')
   }
 
@@ -300,11 +300,11 @@ export class DataSource {
    * @param table The metadata for the table
    */
   createValueNodeRecord(
-    name: string,
-    id: string | number,
-    table: TableMeta,
-    nodeType: NodeType,
-    otherFields: Record<string, any> = {}
+    _name: string,
+    _id: string | number,
+    _table: TableMeta,
+    _nodeType: NodeType,
+    _otherFields: Record<string, any> = {}
   ): Record<string, any> {
     throw new Error('Method not implemented.')
   }
@@ -322,9 +322,9 @@ export class DataSource {
    * The new records to be added for the node type
    */
   async initNewNodeType(
-    nodeType: NodeType,
-    newRecords: any[],
-    nodeTypeTableMeta?: TableMeta
+    _nodeType: NodeType,
+    _newRecords: any[],
+    _nodeTypeTableMeta?: TableMeta
   ) {
     throw new Error('Not implemented, subclasses must implement')
   }
@@ -336,11 +336,11 @@ interface FileDataSourceProps extends DataSourceProps {
 }
 
 export class FileDataSource extends DataSource {
-  private filename: string
+  // private filename: string
   protected file: File
-  constructor({ name, filename, file, projects }: FileDataSourceProps) {
+  constructor({ name, file, projects }: FileDataSourceProps) {
     super({ name, projects })
-    this.filename = filename
+    // this.filename = filename
     this.file = file
   }
 }
@@ -367,8 +367,10 @@ abstract class Linkable {
   abstract getLinks(): Promise<GraphLink[]>
 }
 
-export class CsvDataSource extends FileDataSource
-  implements Nodeable, Linkable {
+export class CsvDataSource
+  extends FileDataSource
+  implements Nodeable, Linkable
+{
   nodeList: GraphNode[]
   nodeListCreated: boolean
   linkList: object[]
@@ -409,7 +411,7 @@ export class CsvDataSource extends FileDataSource
     return new Promise<any>(resolve => {
       const fr: FileReader = new FileReader()
 
-      fr.onload = (event: any) => {
+      fr.onload = () => {
         if (fr.result !== null) {
           // convert to JSON
           csv()
@@ -543,9 +545,7 @@ export class AirtableDataSource extends DataSource {
         .join(', ')})`
     }
     // this.records = this.records.filter((r) => r._table.name !== this.table);
-    const newRecords = await base(table)
-      .select(params)
-      .all()
+    const newRecords = await base(table).select(params).all()
     return newRecords
   }
 

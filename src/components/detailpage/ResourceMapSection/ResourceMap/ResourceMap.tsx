@@ -20,7 +20,7 @@ import {
   getNodeIdsForLinks,
   GraphLink,
   GraphNode,
-} from '@talus-analytics/viz.charts.network/dist/helpers'
+} from '@talus-analytics/viz.charts.network/helpers'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'

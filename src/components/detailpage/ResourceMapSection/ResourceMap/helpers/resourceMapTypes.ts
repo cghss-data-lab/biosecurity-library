@@ -4,7 +4,7 @@
 import {
   GraphNode,
   GraphLink,
-} from '@talus-analytics/viz.charts.network/dist/helpers'
+} from '@talus-analytics/viz.charts.network/helpers'
 export type HyperlinkedNode = GraphNode & {
   url?: string
 }
