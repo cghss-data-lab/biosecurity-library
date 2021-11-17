@@ -42,7 +42,7 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
     def => def.data.Name.trim() === bar.fieldValue.trim()
   )?.data.Definition
 
-  const iconPadding = 2
+  const iconPadding = 1
   let iconStyle: React.CSSProperties = { pointerEvents: 'none' }
   let iconStartY = midY
   let iconColor: string = theme.colorDarkest
@@ -63,29 +63,29 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
 
   return (
     <>
+      <rect
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        key={index}
+        x={startX}
+        y={startY}
+        width={dim.barWidth}
+        height={height}
+        fill={hover ? theme.colorGolden : theme.colorWhite}
+        stroke={'#173057'}
+      />
       <Tippy content={definition} visible={hover}>
-        <rect
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          key={index}
-          x={startX}
-          y={startY}
-          width={dim.barWidth}
-          height={height}
-          fill={hover ? theme.colorGolden : theme.colorWhite}
-          stroke={'#173057'}
+        <CMS.PlotIcon
+          style={iconStyle}
+          name={bar.fieldValue}
+          color={iconColor}
+          x={midX}
+          y={iconStartY}
+          width={dim.iconSize}
+          height={dim.iconSize}
+          {...mouseHandlers}
         />
       </Tippy>
-      <CMS.PlotIcon
-        style={iconStyle}
-        name={bar.fieldValue}
-        color={iconColor}
-        x={midX}
-        y={iconStartY}
-        width={dim.iconSize}
-        height={dim.iconSize}
-        {...mouseHandlers}
-      />
       <g
         style={{
           transform: `translate(${midX}px, ${endY + dim.labelPad}px)`,
