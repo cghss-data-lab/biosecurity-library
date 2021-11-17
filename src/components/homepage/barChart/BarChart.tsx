@@ -48,7 +48,7 @@ const BarChart = (): JSX.Element => {
 
   const dim: DimObj = {
     width: 500,
-    height: 100,
+    height: 150,
     barGap: 10,
     iconSize: 10,
     labelPad: 10,

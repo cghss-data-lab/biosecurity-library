@@ -114,7 +114,7 @@ export function getResourceMapData(
   allResourceMapData: AppGraphData
 ): HyperlinkedGraphData {
   const node: GraphNode | undefined = allResourceMapData.nodes.find(
-    n => n._id === resourceId
+    (n: any) => n._id === resourceId
   )
   if (node === undefined)
     throw new Error(

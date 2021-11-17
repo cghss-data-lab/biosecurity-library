@@ -42,30 +42,50 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
     def => def.data.Name.trim() === bar.fieldValue.trim()
   )?.data.Definition
 
+  const iconPadding = 1
+  let iconStyle: React.CSSProperties = { pointerEvents: 'none' }
+  let iconStartY = midY
+  let iconColor: string = theme.colorDarkest
+  // GIFLENS-https://media1.giphy.com/media/5eFHIIUy0SCQgutzID/200.gif
+  let mouseHandlers = {}
+
+  // if the bar is too short, pop the icon above
+  // and detect hover events on it
+  if (height < dim.iconSize + iconPadding) {
+    iconStyle = {}
+    iconStartY = startY - dim.iconSize / 2 - iconPadding
+    iconColor = theme.colorWhite
+    mouseHandlers = {
+      onMouseEnter: () => setHover(true),
+      onMouseLeave: () => setHover(false),
+    }
+  }
+
   return (
     <>
+      <rect
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        key={index}
+        x={startX}
+        y={startY}
+        width={dim.barWidth}
+        height={height}
+        fill={hover ? theme.colorGolden : theme.colorWhite}
+        stroke={'#173057'}
+      />
       <Tippy content={definition} visible={hover}>
-        <rect
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-          key={index}
-          x={startX}
-          y={startY}
-          width={dim.barWidth}
-          height={height}
-          fill={hover ? theme.colorGolden : theme.colorWhite}
-          stroke={'#173057'}
+        <CMS.PlotIcon
+          style={iconStyle}
+          name={bar.fieldValue}
+          color={iconColor}
+          x={midX}
+          y={iconStartY}
+          width={dim.iconSize}
+          height={dim.iconSize}
+          {...mouseHandlers}
         />
       </Tippy>
-      <CMS.PlotIcon
-        style={{ pointerEvents: 'none' }}
-        name={bar.fieldValue}
-        color={theme.colorDarkest}
-        x={midX}
-        y={midY}
-        width={dim.iconSize}
-        height={dim.iconSize}
-      />
       <g
         style={{
           transform: `translate(${midX}px, ${endY + dim.labelPad}px)`,
