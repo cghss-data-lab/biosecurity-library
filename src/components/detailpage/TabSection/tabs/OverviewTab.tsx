@@ -4,14 +4,14 @@ import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 // import { commaSeparatedList } from '../../../../utilities/grammar'
 import ResourceMapSection from '../../ResourceMapSection/ResourceMapSection'
-import RenderCMSRichText from '../../../../airtable-cms/CMSRichText/RenderCMSRichText'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => {
   return (
     <TabContentContainer>
       {typeof window !== 'undefined' && <ResourceMapSection {...{ data }} />}
       <h5>SUMMARY</h5>
-      <RenderCMSRichText markdown={data.Long_description} />
+      <CMS.RenderRichText markdown={data.Long_description} />
       {/*<h5>RESOURCE TYPE</h5>
       <p>{data.Resource_type}</p>
       <h5>CATEGORIES</h5>

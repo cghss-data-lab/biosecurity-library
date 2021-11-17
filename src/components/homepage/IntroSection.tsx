@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import CMSText from '../../airtable-cms/CMSText/CMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 const Section = styled.section`
@@ -30,10 +30,10 @@ const IntroSection = (): JSX.Element => {
   return (
     <Section>
       <h1>
-        <CMSText name={'First Header'} data={homePageText} />
+        <CMS.Text name={'First Header'} data={homePageText} />
       </h1>
       <h3>
-        <CMSText name={'First Paragraph'} data={homePageText} />
+        <CMS.Text name={'First Paragraph'} data={homePageText} />
       </h3>
     </Section>
   )

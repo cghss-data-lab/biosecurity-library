@@ -11,7 +11,7 @@ import {
   SelectedItem,
 } from './DisplayComponents'
 
-import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
+import CMS from '@talus-analytics/library.airtable-cms'
 import { useTheme } from 'styled-components'
 
 export interface Item {
@@ -75,6 +75,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   let blurTimeout: ReturnType<typeof setTimeout>
   const onBlurHandler = () => {
     // set it to close next tick
+    // @ts-expect-error
     blurTimeout = setTimeout(() => {
       setShowResults(false)
       if (!values) setSearchString('')
@@ -124,7 +125,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
             {values.map((item: Item) => (
               <SelectedItem onClick={() => onRemove(item)}>
                 {item.label}
-                <CMSIcon
+                <CMS.Icon
                   name="Remove"
                   color={theme.colorBlack}
                   style={{ flexShrink: 0 }}

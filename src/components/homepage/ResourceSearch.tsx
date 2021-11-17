@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
-import CMSText, { getCMSText } from '../../airtable-cms/CMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import ButtonLink from '../ui/ButtonLink'
 import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
@@ -64,11 +64,11 @@ const ResourceSearch = (): JSX.Element => {
   return (
     <SearchControls>
       <ButtonLink to="/explore">
-        <CMSText name={'Button Text'} data={homePageText} />
+        <CMS.Text name={'Button Text'} data={homePageText} />
       </ButtonLink>
       <SearchBoxContainer>
         <StyledTypeaheadControl
-          placeholder={getCMSText(homePageText, 'Search Placeholder') ?? ''}
+          placeholder={CMS.getText(homePageText, 'Search Placeholder') ?? ''}
           items={resources}
           values={[]}
           onAdd={resource => {

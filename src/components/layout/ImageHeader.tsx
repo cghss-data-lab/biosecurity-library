@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import CMSImage from '../../airtable-cms/CMSImage'
+import CMS from '@talus-analytics/library.airtable-cms'
 import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
 
 const ImageSection = styled.section`
@@ -12,7 +12,7 @@ const ImageSection = styled.section`
   width: 100%;
   overflow: hidden;
 `
-const StyledImage = styled(CMSImage)`
+const StyledImage = styled(CMS.Image)`
   object-fit: cover;
   height: 100%;
   width: 100%;

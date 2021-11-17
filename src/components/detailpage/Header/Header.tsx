@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
+
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import { PageContext } from '../../../templates/Detail'
 
@@ -25,7 +26,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
       <p>{data.Short_description}</p>
       <IconContainer>
         {data.Key_topic_area.map(name => (
-          <CMSIcon
+          <CMS.Icon
             noEmitError
             key={name}
             name={name}
