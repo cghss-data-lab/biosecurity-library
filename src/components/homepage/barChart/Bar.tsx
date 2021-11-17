@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import AirtableCMSPlotIcon from '../../../airtable-cms/AirtableCMSPlotIcon'
+import AirtableCMSPlotIcon from '../../../airtable-cms/CMSPlotIcon/AirtableCMSPlotIcon'
 import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { DimObj } from './BarChart'
 
