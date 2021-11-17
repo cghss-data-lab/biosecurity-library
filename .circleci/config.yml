@@ -76,6 +76,10 @@ jobs:
             echo "@teambit:registry=https://node.bit.dev" >> ~/.npmrc;
             echo "//node.bit.dev/:_authToken={$BIT_TOKEN}" >> ~/.npmrc;
 
+      - run:
+          name: Link Bit components
+          command: bit link
+
       - restore_cache:
           keys:
             - yarn-deps-{{ checksum "yarn.lock" }}
