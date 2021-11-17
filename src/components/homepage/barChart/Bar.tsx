@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import AirtableCMSPlotIcon from '../../../airtable-cms/CMSPlotIcon/AirtableCMSPlotIcon'
 import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { DimObj } from './BarChart'
+
+import CMS from '../../../AirtableCMS'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
@@ -41,6 +42,25 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
     def => def.data.Name.trim() === bar.fieldValue.trim()
   )?.data.Definition
 
+  const iconPadding = 2
+  let iconStyle: React.CSSProperties = { pointerEvents: 'none' }
+  let iconStartY = midY
+  let iconColor: string = theme.colorDarkest
+  // GIFLENS-https://media1.giphy.com/media/5eFHIIUy0SCQgutzID/200.gif
+  let mouseHandlers = {}
+
+  // if the bar is too short, pop the icon above
+  // and detect hover events on it
+  if (height < dim.iconSize + iconPadding) {
+    iconStyle = {}
+    iconStartY = startY - dim.iconSize / 2 - iconPadding
+    iconColor = theme.colorWhite
+    mouseHandlers = {
+      onMouseEnter: () => setHover(true),
+      onMouseLeave: () => setHover(false),
+    }
+  }
+
   return (
     <>
       <Tippy content={definition} visible={hover}>
@@ -56,14 +76,15 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
           stroke={'#173057'}
         />
       </Tippy>
-      <AirtableCMSPlotIcon
-        style={{ pointerEvents: 'none' }}
+      <CMS.PlotIcon
+        style={iconStyle}
         name={bar.fieldValue}
-        color={theme.colorDarkest}
+        color={iconColor}
         x={midX}
-        y={midY}
+        y={iconStartY}
         width={dim.iconSize}
         height={dim.iconSize}
+        {...mouseHandlers}
       />
       <g
         style={{
