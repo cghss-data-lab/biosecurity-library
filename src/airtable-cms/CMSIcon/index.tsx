@@ -2,10 +2,12 @@ import CMSIcon from './CMSIcon'
 import replaceFill from './replaceFill'
 import useAllCMSIcons from './useAllCMSIcons'
 import useCMSIcon from './useCMSIcon'
-import useCMSIconsQuery from './useCMSIconsQuery'
+import CMSIconProvider from './CMSIconContext'
 
 import type { CMSIconProps } from './CMSIcon'
-export type { CMSIconProps }
+import type { IconsQuery } from './CMSIconContext'
+
+export type { CMSIconProps, IconsQuery }
 
 export {
   // general purpose hook
@@ -14,8 +16,8 @@ export {
   useAllCMSIcons,
   // utility function
   replaceFill,
-  // acccess the raw airtable CMS query
-  useCMSIconsQuery,
+  // icon context provider
+  CMSIconProvider,
 }
 
 export default CMSIcon

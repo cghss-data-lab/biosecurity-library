@@ -1,5 +1,8 @@
-import useCMSIconsQuery from './useCMSIconsQuery'
+import { useContext } from 'react'
+
 import replaceFill from './replaceFill'
+
+import { IconsContext } from './CMSIconContext'
 
 interface Icon {
   svg: string
@@ -22,7 +25,20 @@ function useCMSIcon(
   color: string,
   noEmitError?: true | false | boolean | undefined
 ) {
-  const icons = useCMSIconsQuery()
+  const iconsQuery = useContext(IconsContext)
+  if (!iconsQuery) return undefined
+  const icons = iconsQuery.iconsQuery.nodes
+
+  if (icons.length === 0) {
+    if (noEmitError) return undefined
+    throw new Error(
+      `No icons found in icons context. Does a parent ` +
+        `component include the <CMSIconsProvider /> ` +
+        `component and is that component passed a non-empty ` +
+        `result from useCMSIconsQuery() query hook? `
+    )
+  }
+
   const icon = icons.find(icon => icon.data.Name === name)
 
   if (!icon) {

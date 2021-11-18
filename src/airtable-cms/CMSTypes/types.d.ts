@@ -5,16 +5,14 @@ import {
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export interface AirtableCMSData {
-  nodes: [
-    {
-      data: {
-        Name: string
-        Text: string
-        Image: {
-          localFiles: FileNode[] &
-            { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
-        }
+  nodes: {
+    data: {
+      Name: string
+      Text: string
+      Image: {
+        localFiles: FileNode[] &
+          { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
       }
     }
-  ]
+  }[]
 }
