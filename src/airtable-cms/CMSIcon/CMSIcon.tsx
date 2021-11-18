@@ -17,7 +17,7 @@ const Container = styled.div`
   }
 `
 
-export interface CMSIconProps extends React.ComponentProps<'div'> {
+export interface CMSIconProps extends React.ComponentPropsWithRef<'div'> {
   /** Name of the icon in the icons tab */
   name: string
   /** color of the icon; note icons only accept one color */
@@ -31,41 +31,41 @@ export interface CMSIconProps extends React.ComponentProps<'div'> {
   noEmitError?: boolean
 }
 
-const CMSIcon = ({
-  name,
-  color,
-  hoverColor,
-  noEmitError = false,
-  ...props
-}: CMSIconProps): JSX.Element => {
-  const [hover, setHover] = useState(false)
+const CMSIcon = React.forwardRef<HTMLDivElement, CMSIconProps>(
+  (
+    { name, color, hoverColor, noEmitError = false, ...props },
+    ref
+  ): JSX.Element => {
+    const [hover, setHover] = useState(false)
 
-  const icon = useCMSIcon(
-    name,
-    hover && hoverColor ? hoverColor : color,
-    noEmitError
-  )
+    const icon = useCMSIcon(
+      name,
+      hover && hoverColor ? hoverColor : color,
+      noEmitError
+    )
 
-  if (!icon) return <></>
+    if (!icon) return <></>
 
-  // only add mouseEnter and mouseLeave events
-  // if there is a hover color specified
-  let mouseHandlers = {}
-  if (hoverColor)
-    mouseHandlers = {
-      onMouseEnter: () => setHover(true),
-      onMouseLeave: () => setHover(false),
-    }
+    // only add mouseEnter and mouseLeave events
+    // if there is a hover color specified
+    let mouseHandlers = {}
+    if (hoverColor)
+      mouseHandlers = {
+        onMouseEnter: () => setHover(true),
+        onMouseLeave: () => setHover(false),
+      }
 
-  return (
-    <Container
-      {...props}
-      role="img"
-      aria-label={icon.text}
-      dangerouslySetInnerHTML={{ __html: icon.svg }}
-      {...mouseHandlers}
-    />
-  )
-}
+    return (
+      <Container
+        {...props}
+        ref={ref}
+        role="img"
+        aria-label={icon.text}
+        dangerouslySetInnerHTML={{ __html: icon.svg }}
+        {...mouseHandlers}
+      />
+    )
+  }
+)
 
 export default CMSIcon
