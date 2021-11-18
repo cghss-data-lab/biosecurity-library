@@ -8,18 +8,16 @@ labels: ['airtable', 'typescript', 'types']
 
 ```js
 interface AirtableCMSData {
-  nodes: [
-    {
-      data: {
-        Name: string
-        Text: string
-        Image: {
-          localFiles: FileNode[] &
-            { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
-        }
+  nodes: {
+    data: {
+      Name: string
+      Text: string
+      Image: {
+        localFiles: FileNode[] &
+          { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
       }
     }
-  ]
+  }[]
 }
 ```
 
