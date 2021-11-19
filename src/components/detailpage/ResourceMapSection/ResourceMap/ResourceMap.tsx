@@ -15,11 +15,15 @@ import { renderToString } from 'react-dom/server'
 import { replaceFill } from '../../../../airtable-cms/CMSIcon'
 import * as network from '@talus-analytics/viz.charts.network'
 import {
+  SettingsContext,
+  defaultSettings,
+} from '@talus-analytics/viz.charts.network-tools'
+import {
   AppGraphData,
   getNodeIdsForLinks,
   GraphLink,
   GraphNode,
-} from '@talus-analytics/viz.charts.network/helpers'
+} from '@talus-analytics/viz.charts.network-tools'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'
@@ -243,11 +247,11 @@ export const ResourceMap: React.FC<{
           style={{ marginLeft: mapLeftMargin }}
           {...{ ref }}
         >
-          <network.SettingsContext.Provider
+          <SettingsContext.Provider
             value={{
-              ...network.defaultSettings,
+              ...defaultSettings,
               nodes: {
-                ...network.defaultSettings.nodes,
+                ...defaultSettings.nodes,
                 selectedColor: theme.colorDarker,
               },
             }}
@@ -275,7 +279,7 @@ export const ResourceMap: React.FC<{
                 selectedNode: selectedNode?.Record_ID_INTERNAL,
               }}
             />
-          </network.SettingsContext.Provider>
+          </SettingsContext.Provider>
         </MapContainer>
       </Section>
     </section>
