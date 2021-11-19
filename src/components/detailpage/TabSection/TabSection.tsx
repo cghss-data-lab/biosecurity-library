@@ -24,15 +24,37 @@ const Container = styled.div`
 `
 
 const TabSection: React.FC<PageContext> = ({ data }) => {
+  const tabs: Tab[] = [
+    { id: 'overview', label: 'Overview' },
+    { id: 'details', label: 'Resource details' },
+    ...(data.Resource_sets !== null && data.Resource_sets.length > 0
+      ? [{ id: 'related', label: 'Related resources' }]
+      : []),
+    ...(data.Files_INTERNAL
+      ? [{ id: 'document', label: 'Document preview' }]
+      : []),
+    // { id: 'users', label: 'Users' },
+    // { id: 'access', label: 'Access & contact information' },
+    // { id: 'releases', label: 'Releases and updates' },
+    // { id: 'technical', label: 'Technical information' },
+  ]
+
+  const [activeTab, setActiveTab] = useState(tabs[0])
+
   return (
     <>
-      <Container style={{ gridArea: 'tabs' }}>download</Container>
+      <Container style={{ gridArea: 'tabs' }}>
+        <TabButtons {...{ tabs, activeTab, setActiveTab }} />
+      </Container>
       <Container style={{ gridArea: 'content' }}>
-        <iframe
-          title="document preview"
-          src={data.Files_INTERNAL.localFiles[0].publicURL}
-          style={{ height: '80vh', width: '100%' }}
-        />
+        {activeTab.id === 'overview' && <OverviewTab {...{ data }} />}
+        {activeTab.id === 'details' && <DetailsTab {...{ data }} />}
+        {activeTab.id === 'related' && <RelatedTab {...{ data }} />}
+        {activeTab.id === 'document' && <DocumentTab {...{ data }} />}
+
+        {/*{activeTab.id === 'users' && <UsersTab {...{ data }} />}*/}
+        {/*{activeTab.id === 'access' && <AccessTab {...{ data }} />}*/}
+        {/*{activeTab.id === 'releases' && <ReleasesTab {...{ data }} />}*/}
       </Container>
     </>
   )

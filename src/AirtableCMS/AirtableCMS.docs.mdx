@@ -80,16 +80,46 @@ This component renders a block of rich text content from a string returned by an
 
 [Airtable CMS Rich Text documentation](https://bit.dev/talus-analytics/library/airtable/cms-rich-text)
 
-## `<CMS.IconProvider />`
+### `<CMS.IconProvider />`
 
 ```js
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const icons = useCMSIconsQuery()
-  return <CMSIconProvider data={icons}>{children}</CMSIconProvider>
+  return <CMS.IconProvider data={icons}>{children}</CMS.IconProvider>
 }
 ```
 
 Icons provider takes the result from the `useCMSIconsQuery()` hook and makes the raw icons from airtable available to all CMS icon functionality; this should go in a layout component at the top level of the component tree.
+
+### `<CMS.SEO />`
+
+```js
+<CMS.SEO
+  title={getCMSText(data, 'Page title')}
+  description={getCMSText(data, 'Page description')}
+  imageUrl={getCMSImage(data, 'SEO image').url}
+/>
+```
+
+An SEO component that will inject `<title>` and `<meta>` tags for things like page
+titles, descriptions, social sharing images, etc.
+
+[Airtable CMS SEO documentation](https://bit.dev/talus-analytics/library/airtable/cms-seo)
+
+### `<CMS.SiteMetadataProvider />`
+
+```js
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  const siteMetadata = useSiteMetadata()
+  return (
+    <CMS.SiteMetadataProvider data={siteMetadata}>
+      {children}
+    </CMS.SiteMetadataProvider>
+  )
+}
+```
+
+Site metadata provider takes the result from the `useSiteMetadata()` hook content from `Site metadata` airtable available to all pages (to be accessed by the `<SEO />` component). This should go in a layout or "providers" component at the top level of the component tree.
 
 ## Functions
 
@@ -215,11 +245,39 @@ An example Icons table [can be found here.](https://airtable.com/apptYPkeoCz0lSn
 
 ## SEO
 
-_Coming soon_
+### SEO airtable column names and types
+
+| Name             | Text      | Image      |
+| ---------------- | --------- | ---------- |
+| Single line text | Long text | Attachment |
+
+An example SEO "Site metadata" table [can be found here.](https://airtable.com/apptYPkeoCz0lSn19/tblUsbDYPB6cfdvJu/viwOmspPfVIJoqiXX?blocks=hide)
+
+### SEO gatsby configuration
+
+> gatsby-config.js
+>
+> ```js
+> plugins: [
+>  // ... other plugins
+>  options: {
+>    //... other options
+>    tables: [
+>      // ... other tables
+>      {
+>        baseId: `appmXXXXXXXXXXXXX`,
+>        tableName: `Site metadata`,
+>        mapping: { Image: `fileNode` },
+>        tableView: `CMS view`,
+>      },
+>    ]
+>  },
+> ]
+> ```
 
 # Content queries
 
-Some components, such as SEO and Icons, handle their own queries. However, for content tables, quieries will need to be added using hooks which live in the `src/cmsHooks/` directory. These hooks return the `data` object which should be passed to content components such as `<CMS.Text/>` and `<CMS.Image/>`. This pattern with Name, Text, and Image is a standardized pattern for content airtables and content components, but can also be used as a good example and jumping off point for creating queries for Explore pages.
+For content tables, queries will need to be added using hooks which live in the `src/cmsHooks/` directory. These hooks return the `data` object which should be passed to content components such as `<CMS.Text/>` and `<CMS.Image/>`. This pattern with Name, Text, and Image is a standardized pattern for content airtables and content components, but can also be used as a good example and jumping off point for creating queries for Explore pages.
 
 > src/cmsHooks/useHomePageData.ts
 >
@@ -254,16 +312,18 @@ Some components, such as SEO and Icons, handle their own queries. However, for c
 > export default useHomepageData
 > ```
 
+## Icons query
+
 The icons component requires a context provider to access the result from the `useCMSIconsQuery()` hook. This hook should live in the `src/cmsHooks/` directory.
 
-> src/cmsHooks/useHomePageData.ts
+> src/cmsHooks/useIconsQuery.ts
 >
 > ```ts
 > import { useStaticQuery, graphql } from 'gatsby'
-> import { IconsQuery } from '@talus-analytics/library.airtable.cms-icon'
+> import { IconsQueryDataType } from '@talus-analytics/library.>airtable-cms'
 >
-> const useCMSIconsQuery = () => {
->   const iconsQuery = useStaticQuery<IconsQuery>(graphql`
+> const useIconsQuery = () => {
+>   const iconsQuery = useStaticQuery<IconsQueryDataType>(graphql`
 >     query iconsQuery {
 >       iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
 >         nodes {
@@ -289,7 +349,7 @@ The icons component requires a context provider to access the result from the `u
 > export default useCMSIconsQuery
 > ```
 
-The result from this query must be passed to the `<CMSIconProvider />` context provider in the Layout component:
+The result from this query must be passed to the `<CMS.IconProvider />` context provider in the Layout component:
 
 ```js
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -298,17 +358,76 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 }
 ```
 
-# CMS home page example
+## Site metadata query
 
-> pages/home.tsx
+The SEO component requires a context provider to access the result from the `useSiteMetadata()` hook. This hook should live in the `src/cmsHooks/` directory.
+
+> src/cmsHooks/useSiteMetadataQuery.ts
+>
+> ```ts
+> import { useStaticQuery, graphql } from 'gatsby'
+> import { AirtableCMSData } from '@talus-analytics/library.airtable-cms'
+>
+> const useSiteMetadataQuery = () => {
+>   const { siteMetadata }: { siteMetadata: AirtableCMSData } =
+>     useStaticQuery(graphql`
+>       query siteMetadataQuery {
+>         siteMetadata: allAirtable(
+>           filter: { table: { eq: "Site metadata" } }
+>         ) {
+>           nodes {
+>             data {
+>               Name
+>               Text
+>               Image {
+>                 localFiles {
+>                   childImageSharp {
+>                     gatsbyImageData(height: 500, placeholder: BLURRED)
+>                   }
+>                 }
+>               }
+>             }
+>           }
+>         }
+>       }
+>     `)
+>
+>   return siteMetadata
+> }
+>
+> export default useSiteMetadataQuery
+> ```
+
+The result from this query must be passed to the `<CMS.SiteMetadataProvider />` context provider in the Providers component:
+
+```js
+const Providers = ({ children }: { children: React.ReactNode }) => {
+  const siteMetadata = useSiteMetadata()
+  return (
+    <CMS.SiteMetadataProvider data={siteMetadata}>
+      {children}
+    </CMS.SiteMetadataProvider>
+  )
+}
+```
+
+# Airtable-CMS full example
+
+> pages/example.tsx
 >
 > ```ts
 > import React from 'react'
 > import styled, { useTheme } from 'styled-components'
+>
+> // import general-purpose CMS library
 > import CMS from '@talus-analytics/library.airtable-cms'
 >
+> // these imports should go in <Providers/> component
+> import useIconsQuery from '../cmsHooks/useIconsQuery'
+> import useSiteMetadataQuery from '../cmsHooks/useSiteMetadataQuery'
+>
+> // import the page data query hook for this page
 > import useHomepageData from '../cmsHooks/useHomepageData'
-> import useCMSIconsQuery from '../cmsHooks/useCMSIconsQuery'
 >
 > // display components should use styled-components
 > const Section = styled.section`
@@ -317,22 +436,29 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 > `
 >
 > const HomePage = () => {
->   // icons hook should go in a layout component
+>   // icons and metadata hook should
+>   // go in the Provider component
 >   const icons = useCMSIconsQuery()
+>   const siteMetadata = useSiteMetadataQuery()
+>
 >   // colors should pull from styled theme
 >   const theme: any = useTheme()
->   // cms data should come from hook
+>
+>   // cms data for this page should come from hook
 >   const homepageData = useHomepageData()
 >
 >   return (
->     // IconProvider should go in a
->     // site-wide layout component
+>     // IconProvider and SiteMetadataProvider should go in a
+>     // site-wide "providers" component
 >     <CMS.IconProvider data={icons}>
->       <Section>
->         <CMS.Image name="First image" data={homepageData} />
->         <CMS.Text name="Main paragraph" data={homepageData} />
->         <CMS.Icon name="Warning icon" color={theme.exampleColor} />
->       </Section>
+>       <CMS.SiteMetadataProvider data={siteMetadata}>
+>         <CMS.SEO title={CMS.getText(data, 'Page title')} />
+>         <Section>
+>           <CMS.Image name="First image" data={homepageData} />
+>           <CMS.Text name="Main paragraph" data={homepageData} />
+>           <CMS.Icon name="Warning icon" color={theme.exampleColor} />
+>         </Section>
+>       </CMS.SiteMetadataProvider>
 >     </CMS.IconProvider>
 >   )
 > }

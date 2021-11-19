@@ -5,6 +5,7 @@ import CMSText, {
 import CMSIcon, {
   useCMSIcon,
   CMSIconProps,
+  IconsQueryData,
   CMSIconProvider,
   CMSIconProviderProps,
 } from '@talus-analytics/library.airtable.cms-icon'
@@ -19,6 +20,12 @@ import CMSRichText, {
 import CMSPlotIcon, {
   CMSPlotIconProps,
 } from '@talus-analytics/library.airtable.cms-plot-icon'
+import SEO, {
+  SEOProps,
+  SiteMetadataContext,
+  SiteMetadataProvider,
+  SiteMetadataProviderProps,
+} from '@talus-analytics/library.airtable.cms-seo'
 
 // AirtableCMSData type declaration
 import type { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
@@ -30,8 +37,11 @@ export type {
   CMSTextProps,
   CMSIconProps,
   CMSImageProps,
+  IconsQueryData,
   CMSPlotIconProps,
   CMSIconProviderProps,
+  SiteMetadataProviderProps,
+  SEOProps,
 }
 
 const CMS = {
@@ -41,6 +51,7 @@ const CMS = {
   RichText: CMSRichText,
   Icon: CMSIcon,
   PlotIcon: CMSPlotIcon,
+  SEO,
   // non-AirtableCMSData components
   RenderRichText: RenderCMSRichText,
   // getters
@@ -48,10 +59,12 @@ const CMS = {
   getText: getCMSText,
   // hooks
   useIcon: useCMSIcon,
-  // utiliries
+  // utilities
   parseRichText: parseCMSRichText,
   // contexts
   IconProvider: CMSIconProvider,
+  SiteMetadataProvider,
+  SiteMetadataContext,
 }
 
 export default CMS

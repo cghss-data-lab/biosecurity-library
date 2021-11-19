@@ -82,36 +82,6 @@ export class Project {
     this.update({ reheat: true })
   }
 
-  private getNodeDataFromJson(
-    json: any,
-    def: NodeConfig = defaultNodeDef
-  ): any[] {
-    const newNodes: any[] = json['nodes'] !== undefined ? json['nodes'] : json
-    return newNodes.map(row => {
-      const id = row[def.idFieldName]
-
-      // TODO dynamically
-      const uniqueIdField: string = 'id'
-      const internalId: string = this.internalIdCounter.toString()
-      this.internalIdCounter++
-      this.nodeIdMap[id] = internalId
-      return {
-        ...row,
-
-        // unique node id
-        _id: row[uniqueIdField] || internalId,
-
-        // assume color hex is defined in color field
-        _color: row[def.colorByField || 'color'],
-
-        _shape: row[def.shapeByField || 'shape'],
-
-        // label
-        name: row[def.labelByField || 'label'],
-      }
-    })
-  }
-
   private parseMultiLinks(rawLinks: any): any[] {
     return rawLinks.links !== undefined ? rawLinks.links : rawLinks // TODO fix
   }
@@ -208,7 +178,7 @@ export class Project {
       if (f.name.endsWith('.csv')) {
         const newSource: DataSource = await this.addCsvDataSourceFromFile(f)
         newSources.push(newSource)
-        numProcessed++
+        numProcessed = numProcessed + 1
       } else {
         throw new Error('Only CSV files supported at this time.')
       }

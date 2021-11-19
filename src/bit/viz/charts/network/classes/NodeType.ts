@@ -53,7 +53,7 @@ export class NodeType {
   /**
    * Set shape nodes of this type should be rendered as.
    */
-  setShape(shape: NodeShape): void {
+  setShape(_shape: NodeShape): void {
     throw new Error('Not implemented')
   }
 
