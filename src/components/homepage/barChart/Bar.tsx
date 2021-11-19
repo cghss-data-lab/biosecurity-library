@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { DimObj } from './BarChart'
 
-import CMS from '../../../AirtableCMS'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'

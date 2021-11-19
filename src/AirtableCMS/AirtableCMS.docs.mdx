@@ -80,6 +80,17 @@ This component renders a block of rich text content from a string returned by an
 
 [Airtable CMS Rich Text documentation](https://bit.dev/talus-analytics/library/airtable/cms-rich-text)
 
+## `<CMS.IconProvider />`
+
+```js
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const icons = useCMSIconsQuery()
+  return <CMSIconProvider data={icons}>{children}</CMSIconProvider>
+}
+```
+
+Icons provider takes the result from the `useCMSIconsQuery()` hook and makes the raw icons from airtable available to all CMS icon functionality; this should go in a layout component at the top level of the component tree.
+
 ## Functions
 
 These functions are useful when you need to access content from the CMS, but want to do something with it before displaying it in a page. This could be anything from changing capitalization rules in some text, to pulling a model parameter out of airtable.
@@ -243,6 +254,50 @@ Some components, such as SEO and Icons, handle their own queries. However, for c
 > export default useHomepageData
 > ```
 
+The icons component requires a context provider to access the result from the `useCMSIconsQuery()` hook. This hook should live in the `src/cmsHooks/` directory.
+
+> src/cmsHooks/useHomePageData.ts
+>
+> ```ts
+> import { useStaticQuery, graphql } from 'gatsby'
+> import { IconsQuery } from '@talus-analytics/library.airtable.cms-icon'
+>
+> const useCMSIconsQuery = () => {
+>   const iconsQuery = useStaticQuery<IconsQuery>(graphql`
+>     query iconsQuery {
+>       iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
+>         nodes {
+>           data {
+>             Name
+>             Text
+>             SVG {
+>               localFiles {
+>                 childSvg {
+>                   svgString
+>                 }
+>               }
+>             }
+>           }
+>         }
+>       }
+>     }
+>   `)
+>
+>   return iconsQuery
+> }
+>
+> export default useCMSIconsQuery
+> ```
+
+The result from this query must be passed to the `<CMSIconProvider />` context provider in the Layout component:
+
+```js
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const icons = useCMSIconsQuery()
+  return <CMSIconProvider data={icons}>{children}</CMSIconProvider>
+}
+```
+
 # CMS home page example
 
 > pages/home.tsx
@@ -252,7 +307,8 @@ Some components, such as SEO and Icons, handle their own queries. However, for c
 > import styled, { useTheme } from 'styled-components'
 > import CMS from '@talus-analytics/library.airtable-cms'
 >
-> import useHomepageData from '../cmsHooks/useHomepageData.ts'
+> import useHomepageData from '../cmsHooks/useHomepageData'
+> import useCMSIconsQuery from '../cmsHooks/useCMSIconsQuery'
 >
 > // display components should use styled-components
 > const Section = styled.section`
@@ -261,17 +317,23 @@ Some components, such as SEO and Icons, handle their own queries. However, for c
 > `
 >
 > const HomePage = () => {
+>   // icons hook should go in a layout component
+>   const icons = useCMSIconsQuery()
 >   // colors should pull from styled theme
 >   const theme: any = useTheme()
 >   // cms data should come from hook
 >   const homepageData = useHomepageData()
 >
 >   return (
->     <Section>
->       <CMS.Image name="First image" data={homepageData} />
->       <CMS.Text name="Main paragraph" data={homepageData} />
->       <CMS.Icon name="Warning icon" color={theme.exampleColor} />
->     </Section>
+>     // IconProvider should go in a
+>     // site-wide layout component
+>     <CMS.IconProvider data={icons}>
+>       <Section>
+>         <CMS.Image name="First image" data={homepageData} />
+>         <CMS.Text name="Main paragraph" data={homepageData} />
+>         <CMS.Icon name="Warning icon" color={theme.exampleColor} />
+>       </Section>
+>     </CMS.IconProvider>
 >   )
 > }
 >

@@ -20,7 +20,7 @@ export interface IconsQuery {
 
 export const IconsContext = createContext<null | IconsQuery>(null)
 
-interface CMSIconProviderProps {
+export interface CMSIconProviderProps {
   children: React.ReactNode
   data: IconsQuery
 }

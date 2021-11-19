@@ -5,6 +5,8 @@ import CMSText, {
 import CMSIcon, {
   useCMSIcon,
   CMSIconProps,
+  CMSIconProvider,
+  CMSIconProviderProps,
 } from '@talus-analytics/library.airtable.cms-icon'
 import CMSImage, {
   getCMSImage,
@@ -29,6 +31,7 @@ export type {
   CMSIconProps,
   CMSImageProps,
   CMSPlotIconProps,
+  CMSIconProviderProps,
 }
 
 const CMS = {
@@ -47,6 +50,8 @@ const CMS = {
   useIcon: useCMSIcon,
   // utiliries
   parseRichText: parseCMSRichText,
+  // contexts
+  IconProvider: CMSIconProvider,
 }
 
 export default CMS
