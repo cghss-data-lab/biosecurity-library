@@ -3,9 +3,11 @@
  */
 
 import React, { FC } from 'react'
-import { AppGraphData } from '../helpers'
-import { Project } from '../classes/Project'
-import { SetState } from '../types'
+import {
+  AppGraphData,
+  Project,
+  SetState,
+} from '@talus-analytics/viz.charts.network-tools'
 import styled from 'styled-components'
 import { defaultTheme } from '../networkThemes'
 import { InteractionSettings, Network2D, Network2DProps } from '../core'

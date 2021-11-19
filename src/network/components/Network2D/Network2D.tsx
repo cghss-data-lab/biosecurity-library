@@ -12,7 +12,6 @@ import ForceGraph2D, {
   ForceGraphProps,
 } from 'react-force-graph-2d'
 import { asCircle, asHexagon, asRect, asTriangle } from './shapeHelpers'
-import { SettingsContext, Settings } from '../../internal/internal'
 import styled, { withTheme } from 'styled-components'
 import {
   LabelPosOptions,
@@ -20,8 +19,10 @@ import {
   GraphLink,
   GraphNode,
   SetState,
-} from '../../helpers'
-import { Project } from '../../classes/Project'
+  Project,
+  SettingsContext,
+  Settings,
+} from '@talus-analytics/viz.charts.network-tools'
 import { sortObjectsBy } from '../../utils'
 import { defaultTheme } from '../../networkThemes'
 import { InteractionSettings } from '../../core'
@@ -586,6 +587,7 @@ export function replaceFill(svg: string, color: string): string {
   const svgDom = new DOMParser().parseFromString(svg, 'image/svg+xml')
   const svgElement = svgDom.querySelector('svg')!
   const children = svgElement.childNodes
+  // @ts-expect-error
   for (let child of children) {
     // note this is the node-html-parser implementation
     // of the HTMLElement class, not a native HTMLElement
