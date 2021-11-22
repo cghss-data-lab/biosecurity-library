@@ -63,5 +63,11 @@
         "mainFile": "index.ts",
         "rootDir": "src/bit/viz/charts/network"
     },
+    "ui/typeahead": {
+        "scope": "talus-analytics.library",
+        "version": "0.0.1",
+        "mainFile": "index.tsx",
+        "rootDir": "src/components/ui/Typeahead"
+    },
     "$schema-version": "14.9.0"
 }

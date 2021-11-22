@@ -53,6 +53,9 @@
     /**
      * "*" is a special rule which applied on all components in the workspace.
      **/
+    "{ui/**}": {
+      "teambit.react/react": {}
+    },
     "*": {
       /**
        * uncomment to apply the chosen environment on all components.

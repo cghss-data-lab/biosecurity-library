@@ -5,8 +5,8 @@ import { navigate } from 'gatsby'
 import CMS from '@talus-analytics/library.airtable-cms'
 
 import ButtonLink from '../ui/ButtonLink'
-import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
-import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
+import TypeaheadControl from '../ui/Typeahead/Typeahead'
+import TypeaheadResult from '../ui/Typeahead/TypeaheadResult'
 
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
