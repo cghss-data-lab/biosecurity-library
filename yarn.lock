@@ -4097,6 +4097,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"Typeahead-17d501@workspace:src/components/ui/Typeahead":
+  version: 0.0.0-use.local
+  resolution: "Typeahead-17d501@workspace:src/components/ui/Typeahead"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  languageName: unknown
+  linkType: soft
+
 "abab@npm:^2.0.3, abab@npm:^2.0.5":
   version: 2.0.5
   resolution: "abab@npm:2.0.5"
