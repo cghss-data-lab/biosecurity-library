@@ -8,7 +8,7 @@ import NavBar from '../components/layout/NavBar/NavBar'
 import FigmaProvider from '../figma/FigmaProvider'
 
 // page-specific components
-import Breadcrumbs from '../components/detailpage/Breadcrumbs/Breadcrumbs'
+// import Breadcrumbs from '../components/detailpage/Breadcrumbs/Breadcrumbs'
 import Grid from '../components/detailpage/Grid'
 import Header from '../components/detailpage/Header/Header'
 import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
@@ -32,6 +32,7 @@ export type ResourceSetProps = {
       }
     }[]
   }
+  nameField?: keyof ResourceSetProps['data']['Resources_in_set'][0]['data']
 }
 export interface PageContext {
   data: {
@@ -50,7 +51,7 @@ export interface PageContext {
     Target_user_role: string[]
     Potential_user_role: string[]
     URL_for_resource: string
-    Access_information: string
+    Access_method: string
     Access_limitations: string
     Resource_language: string[]
     Edition: string | null
@@ -93,7 +94,7 @@ const Detail: React.FC<{ pageContext: PageContext }> = ({
   <FigmaProvider>
     <NavBar />
     <Main>
-      <Breadcrumbs {...{ data }} />
+      {/*<Breadcrumbs {...{ data }} />*/}
       <Grid>
         <Thumbnail {...{ data }} />
         <Header {...{ data }} />

@@ -20,7 +20,7 @@ const LegendContainer = styled.div`
     margin-top: 1em;
   }
   /* padding: 0.5em; */
-  background-color: rgba(255, 255, 255, 0.9);
+  // background-color: rgba(255, 255, 255, 0.9);
 
   > h6 {
     text-transform: uppercase;

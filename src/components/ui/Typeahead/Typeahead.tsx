@@ -11,8 +11,8 @@ import {
   SelectedItem,
 } from './DisplayComponents'
 
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
-import { useTheme } from 'styled-components'
+import removeSVG from './assets/remove.svg'
+import TypeaheadResult from './TypeaheadResult'
 
 export interface Item {
   key: string
@@ -20,34 +20,85 @@ export interface Item {
   [key: string]: any
 }
 
-interface TypeaheadControlProps {
-  multiselect?: boolean
+interface RenderItemProps {
+  item: Item
+}
+
+export interface TypeaheadProps {
+  /** The array of items that the user should
+   * be able to select from
+   */
   items: Item[]
+  /**
+   * The currently selected items
+   */
   values: Item[]
+  /**
+   * Function called when and item is
+   * selected; the first argument will
+   * be passed the selected item
+   */
   onAdd: (item: Item) => void
+  /**
+   * Function called when and item is removed
+   * from the multiselect, the first argument
+   * will be the removed item.
+   */
   onRemove: (item: Item) => void
-  placeholder: string
-  RenderItem: React.FC<{ item: Item }>
+  /** Toggle multi-select or single-select mode */
+  multiselect?: boolean
+  /**
+   * Placeholder string for the search bar
+   */
+  placeholder?: string
+  /**
+   * React functional component which should be used
+   * to render each item. The props passed to this
+   * component will contain 'item' which is the
+   * item being rendered.
+   */
+  RenderItem?: React.FC<RenderItemProps>
+  /**
+   * The properties of the Item object which should be
+   * considered in the fuzzy search. Properties for search
+   * must have string values.
+   */
   searchKeys?: Fuse.FuseOptionKey[]
+  /**
+   * className; for supporting scss modules and
+   * styled-components.
+   */
   className?: string
+  /**
+   * Toggle disabled state
+   */
   disabled?: boolean
+  /**
+   * object of styles which will be passed
+   * to the container component
+   */
+  style?: React.CSSProperties
   ariaLabel?: string
 }
 
-const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
-  multiselect,
+const Typeahead = ({
+  multiselect = false,
   items,
   values,
   onAdd,
   onRemove,
-  placeholder,
-  RenderItem,
+  placeholder = '',
+  RenderItem = ({ item: { label } }) => (
+    <TypeaheadResult>{label}</TypeaheadResult>
+  ),
   searchKeys = ['key', 'label'],
-  className,
+  className = '',
   disabled = false,
-  ariaLabel,
-}) => {
-  const theme: any = useTheme()
+  style = {},
+  ariaLabel = '',
+}: TypeaheadProps) => {
+  if (!items) throw new Error('Item array in multiselect cannot be undefined')
+
   const [searchString, setSearchString] = useState('')
   const [showResults, setShowResults] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -57,13 +108,14 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
     () => new Fuse(items, { keys: searchKeys }),
     [items, searchKeys]
   )
+
   const results = fuse.search(searchString).map(({ item }) => item)
 
   // accept top result if enter is pressed
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      onAdd(results[0] || items[0])
+      if (results[0] || items[0]) onAdd(results[0] || items[0])
       inputRef.current!.blur()
       setShowResults(false)
       setSearchString('')
@@ -72,7 +124,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
 
   // close results onBlur, but
   // not if a button is clicked
-  let blurTimeout: ReturnType<typeof setTimeout>
+  let blurTimeout: ReturnType<typeof global.setTimeout>
   const onBlurHandler = () => {
     // set it to close next tick
     blurTimeout = setTimeout(() => {
@@ -103,6 +155,7 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
       onBlur={onBlurHandler}
       className={className}
       onSubmit={e => e.preventDefault()}
+      style={style}
     >
       <SearchBar
         disabled={disabled}
@@ -124,10 +177,10 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
             {values.map((item: Item) => (
               <SelectedItem onClick={() => onRemove(item)}>
                 {item.label}
-                <AirtableCMSIcon
-                  name="Remove"
-                  color={theme.colorBlack}
+                <img
+                  src={removeSVG}
                   style={{ flexShrink: 0 }}
+                  alt="Remove item"
                 />
               </SelectedItem>
             ))}
@@ -146,4 +199,4 @@ const TypeaheadControl: React.FC<TypeaheadControlProps> = ({
   )
 }
 
-export default TypeaheadControl
+export default Typeahead

@@ -1,18 +1,22 @@
+// this is the AirtableCMSIcon component, but with
+// the query result from airtable substituted in.
+// This is essentially what happens when Gatsby
+// runs the query and returns the static result.
+
+// This component is very outdated and should not
+// be used for anything except the bit playground.
+
 import React, { useState } from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import { HTMLElement, parse } from 'node-html-parser'
 
-// TODO
-export const getIconSvg = () => {
-  throw new Error('Not implemented')
-}
+import demoQueryResult from './demoQueryResult'
 
 // replace the fill and stroke colors on all child
 // elements of the SVG; but only if those elements
 // already have a fill or stroke set.
-export const replaceFill = (svg: string, color: string) => {
+const replaceFill = (svg: string, color: string) => {
   // this uses node-html-parser instead of native DOM
   // so that it will support server-side-rendering.
   const svgDom = parse(svg)
@@ -33,10 +37,6 @@ export const replaceFill = (svg: string, color: string) => {
 const SVGContainer = styled.div`
   // make the SVG responsive so it takes the size of the parent;
   // stop it from sending mouseout events to the parent
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   & > svg {
     width: 100%;
     height: 100%;
@@ -47,7 +47,7 @@ const SVGContainer = styled.div`
 // This query and interface lives here because it assumes the
 // CMS airtable base has this table already, because the table
 // will be part of the template.
-export interface IconsQuery {
+interface IconsQuery {
   iconsQuery: {
     nodes: {
       data: {
@@ -64,62 +64,36 @@ export interface IconsQuery {
     }[]
   }
 }
-export interface IconsQueryMap {
-  iconsQueryMap: {
-    nodes: {
-      data: {
-        Name: string
-        Text: string
-        SVG: {
-          localFiles: {
-            childSvg: {
-              svgString: string
-            }
-          }[]
-        }
-      }
-    }[]
-  }
-}
 
-export interface IconInterface {
+interface AirtableCMSImageProps {
+  /** Name of the icon in the icons tab */
   name: string
+  /** color of the icon; note icons only accept one color */
   color: string
+  /** className which will be applied to the svg container */
   className?: string
+  /** color to change the icon to when hovered */
   hoverColor?: string
+  /** CSS styles to apply to the svg container */
   style?: React.CSSProperties
+  /**
+   * Suppress missing icon error message;
+   * component will return a fragment instead
+   */
   noEmitError?: boolean
 }
 
-const AirtableCMSIcon: React.FC<IconInterface> = ({
+const AirtableCMSIcon = ({
   name,
   color,
   className,
   hoverColor,
   style,
   noEmitError = false,
-}) => {
+}: AirtableCMSImageProps): JSX.Element => {
   const {
     iconsQuery: { nodes: icons },
-  } = useStaticQuery<IconsQuery>(graphql`
-    query iconsQuery {
-      iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
-        nodes {
-          data {
-            Name
-            Text
-            SVG {
-              localFiles {
-                childSvg {
-                  svgString
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
+  } = demoQueryResult as IconsQuery
 
   const icon = icons.find(({ data }) => data.Name === name)
   const [hover, setHover] = useState(false)

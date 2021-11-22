@@ -2,15 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
-import AirtableCMSText, { getCMSText } from '../../airtable-cms/AirtableCMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
+import Typeahead from '@talus-analytics/library.ui.typeahead'
 
 import ButtonLink from '../ui/ButtonLink'
-import TypeaheadControl from '../ui/TypeaheadControl/TypeaheadControl'
-import TypeaheadResult from '../ui/TypeaheadControl/TypeaheadResult'
 
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
-import { urlString } from '../../airtable-cms/utilities'
+import { getDetailURL } from '../../utilities/urls'
 
 const SearchControls = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ const SearchBoxContainer = styled.div`
   margin-left: 40px;
   flex-grow: 1;
 `
-const StyledTypeaheadControl = styled(TypeaheadControl)`
+const StyledTypeaheadControl = styled(Typeahead)`
   margin-top: 0 !important;
 
   > input {
@@ -43,12 +42,12 @@ const StyledTypeaheadControl = styled(TypeaheadControl)`
     right: 18px;
   }
 `
-const Examples = styled.p`
-  padding-top: 15px;
-  font-size: 16px !important;
-  line-height: 22px !important;
-  color: ${({ theme }) => theme.colorDarkGray} !important;
-`
+// const Examples = styled.p`
+//   padding-top: 15px;
+//   font-size: 16px !important;
+//   line-height: 22px !important;
+//   color: ${({ theme }) => theme.colorDarkGray} !important;
+// `
 
 const ResourceSearch = (): JSX.Element => {
   const { homePageText, resourceSearchData } = useHomePageData()
@@ -64,29 +63,27 @@ const ResourceSearch = (): JSX.Element => {
   return (
     <SearchControls>
       <ButtonLink to="/explore">
-        <AirtableCMSText name={'Button Text'} data={homePageText} />
+        <CMS.Text name={'Button Text'} data={homePageText} />
       </ButtonLink>
       <SearchBoxContainer>
         <StyledTypeaheadControl
-          placeholder={getCMSText(homePageText, 'Search Placeholder') ?? ''}
+          placeholder={CMS.getText(homePageText, 'Search Placeholder') ?? ''}
           items={resources}
           values={[]}
           onAdd={resource => {
             if (resource)
               navigate(
-                `/resource/` +
-                  urlString(resource.Resource_Type) +
-                  urlString(resource.key)
+                getDetailURL({
+                  Resource_type: resource.Resource_Type,
+                  Short_name: resource.key,
+                })
               )
           }}
           onRemove={() => {}}
-          RenderItem={({ item: { label } }) => (
-            <TypeaheadResult>{label}</TypeaheadResult>
-          )}
         />
-        <Examples>
+        {/*<Examples>
           <AirtableCMSText name="Search Examples" data={homePageText} />
-        </Examples>
+        </Examples>*/}
       </SearchBoxContainer>
     </SearchControls>
   )

@@ -12,24 +12,46 @@ import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import {
-  IconsQueryMap,
-  replaceFill,
-} from '../../../../airtable-cms/AirtableCMSIcon'
+import { replaceFill } from '../../../../airtable-cms/CMSIcon'
 import * as network from '@talus-analytics/viz.charts.network'
-import { getNodeIdsForLinks } from './helpers/packageMethods'
+// import * as network from '../../../../bit/viz/charts/network'
+import {
+  AppGraphData,
+  getNodeIdsForLinks,
+  GraphLink,
+  GraphNode,
+} from '@talus-analytics/viz.charts.network/dist/helpers'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
 import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
+import parse from 'node-html-parser'
 
 /**
  * Icon data from Airtable
  */
 export type Icon = {
   data: { Name: string; Text: string; SVG: any }
+}
+
+export interface IconsQueryMap {
+  iconsQueryMap: {
+    nodes: {
+      data: {
+        Name: string
+        Text: string
+        SVG: {
+          localFiles: {
+            childSvg: {
+              svgString: string
+            }
+          }[]
+        }
+      }
+    }[]
+  }
 }
 
 const Section = styled.section`
@@ -73,7 +95,7 @@ const NodeHoverLabelBox = styled.div`
  */
 export const ResourceMap: React.FC<{
   selectedNode?: PageContext['data']
-  graphData?: network.AppGraphData
+  graphData?: AppGraphData
   curvedLinks?: boolean
 }> = ({ selectedNode, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
@@ -102,7 +124,7 @@ export const ResourceMap: React.FC<{
   const icons = iconsQueryMapRes?.iconsQueryMap.nodes || []
 
   const theme: any = useTheme()
-  const formattedGraphData: network.AppGraphData | undefined = useMemo(
+  const formattedGraphData: AppGraphData | undefined = useMemo(
     () =>
       formatGraphData(
         graphData,
@@ -139,8 +161,8 @@ export const ResourceMap: React.FC<{
    */
   const getLinkDirectionalArrowLength = useCallback(
     (l: LinkObject): number => {
-      return (l.source as network.GraphNode)._id === hoveredNode ||
-        (l.target as network.GraphNode)._id === hoveredNode
+      return (l.source as GraphNode)._id === hoveredNode ||
+        (l.target as GraphNode)._id === hoveredNode
         ? 5
         : 0
     },
@@ -232,6 +254,7 @@ export const ResourceMap: React.FC<{
             }}
           >
             <network.Network
+              key={selectedNode?.Record_ID_INTERNAL}
               enableNodeDrag={false}
               onRenderFramePost={updateCanvasLeftMargin}
               nodeLabel={hideTipForLabeledNodes}
@@ -270,7 +293,7 @@ export default ResourceMap
  */
 function getCitationCountText(
   resId: string | undefined,
-  graphData: network.AppGraphData
+  graphData: AppGraphData
 ): string {
   if (resId === undefined) return ''
   const cites: number = getUniqueNodeIdCount(graphData, 'target', resId)
@@ -317,7 +340,7 @@ function getCitationString(cites: number, citedBy: number) {
  * @returns The count
  */
 function getUniqueNodeIdCount(
-  graphData: network.AppGraphData,
+  graphData: AppGraphData,
   field: 'target' | 'source',
   selectedNodeId: string | undefined
 ): number {
@@ -351,18 +374,18 @@ function getUniqueNodeIdCount(
  * @returns The graph data formatted for display in the resource map
  */
 function formatGraphData(
-  graphData: network.AppGraphData = { nodes: [], links: [] },
+  graphData: AppGraphData = { nodes: [], links: [] },
   icons: Icon[],
   theme: any = {},
-  selectedNode?: network.GraphNode
-): network.AppGraphData | undefined {
-  const formattedNodes: network.GraphNode[] = getFormattedNodes(
+  selectedNode?: GraphNode
+): AppGraphData | undefined {
+  const formattedNodes: GraphNode[] = getFormattedNodes(
     graphData,
     icons,
     theme,
     selectedNode
   )
-  const formattedLinks: network.GraphLink[] = getFormattedLinks(
+  const formattedLinks: GraphLink[] = getFormattedLinks(
     graphData,
     formattedNodes,
     theme
@@ -386,10 +409,10 @@ function formatGraphData(
  * @returns A version of it with links formatted for display
  */
 function getFormattedLinks(
-  graphData: network.AppGraphData,
-  formattedNodes: network.GraphNode[],
+  graphData: AppGraphData,
+  formattedNodes: GraphNode[],
   theme: any = {}
-): network.GraphLink[] {
+): GraphLink[] {
   return graphData.links.map(l => {
     const source = formattedNodes.find(n =>
       getNodeIdsForLinks([l], 'source').includes(n._id)
@@ -420,11 +443,11 @@ function getFormattedLinks(
  * @returns A version of it with nodes formatted for display
  */
 function getFormattedNodes(
-  graphData: network.AppGraphData,
+  graphData: AppGraphData,
   icons: Icon[],
   theme: any = {},
-  selectedNode: network.GraphNode | undefined
-): network.GraphNode[] {
+  selectedNode: GraphNode | undefined
+): GraphNode[] {
   const showAllNodeLabels: boolean = graphData.nodes.length <= 5
   return graphData.nodes.map(n => {
     // const n: GraphNode  = initResourceMapNode(selectedNodeData)
@@ -437,16 +460,17 @@ function getFormattedNodes(
     )
     if (icon === undefined) return n
     const displayIcon = replaceFill(
-      icon.data.SVG.localFiles[0].childSvg.svgString,
+      parse(icon.data.SVG.localFiles[0].childSvg.svgString),
       n._color || theme.colorDarker
     )
 
-    const updatedN: network.GraphNode = {
+    const updatedN: GraphNode = {
       ...n,
       _show: true,
-      _icon: displayIcon,
+      _icon: displayIcon.toString(),
       _showLabel: showAllNodeLabels || isSelectedNode,
       _color: theme.colorDarker,
+      _backgroundColor: theme.colorVeryLightGray,
       _labelColor: undefined,
       _labelFont: undefined,
       _labelYOffset: 1,

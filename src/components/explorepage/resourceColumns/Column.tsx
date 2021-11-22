@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import { ResourceGroup } from '../../../airtableQueryHooks/useExplorePageData'
 import { Expand, Return } from './ColumnButtons'
@@ -54,7 +54,7 @@ const Column: React.FC<{
       <Header>
         <IconRow>
           {!expand && <Expand onClick={() => setExpandColumn(name)} />}
-          <AirtableCMSIcon
+          <CMS.Icon
             noEmitError
             name={resources.fieldValue}
             color={theme.colorGolden}

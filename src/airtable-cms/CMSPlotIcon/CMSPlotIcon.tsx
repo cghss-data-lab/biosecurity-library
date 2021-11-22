@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import AirtableCMSIcon from './AirtableCMSIcon'
+import CMSIcon from '@talus-analytics/library.airtable.cms-icon'
 
 const IconHolder = styled.foreignObject`
   overflow: visible;
@@ -9,7 +9,8 @@ const IconHolder = styled.foreignObject`
   justify-content: center;
 `
 
-interface SVGIconProps extends React.SVGAttributes<SVGForeignObjectElement> {
+export interface CMSPlotIconProps
+  extends React.SVGAttributes<SVGForeignObjectElement> {
   /** X position of the center of the icon */
   x: number
   /** Y position of the center of the icon */
@@ -28,23 +29,29 @@ interface SVGIconProps extends React.SVGAttributes<SVGForeignObjectElement> {
   noEmitError?: boolean
 }
 
-const AirtableCMSPlotIcon = ({
-  x,
-  y,
-  height,
-  width,
-  name,
-  color,
-  hoverColor,
-  noEmitError,
-  ...props
-}: SVGIconProps): JSX.Element => (
-  <IconHolder {...props} x={x - width / 2} y={y - height / 2}>
-    <AirtableCMSIcon
-      style={{ width, height }}
-      {...{ name, color, hoverColor, noEmitError }}
-    />
-  </IconHolder>
+const CMSPlotIcon = React.forwardRef<HTMLDivElement, CMSPlotIconProps>(
+  (
+    {
+      x,
+      y,
+      height,
+      width,
+      name,
+      color,
+      hoverColor,
+      noEmitError = false,
+      ...props
+    },
+    ref
+  ): JSX.Element => (
+    <IconHolder {...props} x={x - width / 2} y={y - height / 2}>
+      <CMSIcon
+        ref={ref}
+        style={{ width, height }}
+        {...{ name, color, hoverColor, noEmitError }}
+      />
+    </IconHolder>
+  )
 )
 
-export default AirtableCMSPlotIcon
+export default CMSPlotIcon

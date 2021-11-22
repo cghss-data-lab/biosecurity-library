@@ -15,7 +15,7 @@ const AccessTab: React.FC<PageContext> = ({ data }) => (
       Download the resource here or by clicking the button in the upper left
     </p>
     <h5>ACCESS INFORMATION</h5>
-    <p>{data.Access_information}</p>
+    <p>{data.Access_method}</p>
     <h5>ACCESS LIMITATIONS</h5>
     <p>{data.Access_limitations}</p>
     <h5>{data.Resource_language.length > 1 ? 'LANGUAGES' : 'LANGUAGE'}</h5>

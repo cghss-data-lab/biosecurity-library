@@ -21,7 +21,7 @@ const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Target_user_role: ['Test'],
   Potential_user_role: ['Test'],
   URL_for_resource: 'Test',
-  Access_information: 'Test',
+  Access_method: 'Test',
   Access_limitations: 'Test',
   Resource_language: ['Test'],
   Edition: 'Test',

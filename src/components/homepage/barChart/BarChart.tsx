@@ -1,17 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
+
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
+import Main from '../../layout/Main'
 
 import Bar from './Bar'
 
+const Content = styled(Main)`
+  padding: 0 65px;
+`
 const Section = styled.section`
-  padding: 0 35px;
+  padding: 35px 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20em;
+  background: ${({ theme }) => theme.colorDarkest};
 `
 const Instruction = styled.div`
   font-style: italic;
@@ -21,11 +27,14 @@ const Instruction = styled.div`
   color: ${({ theme }) => theme.colorBlack};
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   margin-top: 18px;
+  color: white;
+  text-align: center;
 `
 const Svg = styled.svg`
   margin-top: 30px;
   width: 100%;
   overflow: visible;
+  padding-bottom: 12vw;
 `
 
 export interface DimObj {
@@ -42,7 +51,7 @@ const BarChart = (): JSX.Element => {
     height: 150,
     barGap: 10,
     iconSize: 10,
-    labelPad: 5,
+    labelPad: 10,
   }
 
   const barCount = homePageResources.group.length
@@ -57,17 +66,19 @@ const BarChart = (): JSX.Element => {
 
   return (
     <Section>
-      <h2>
-        <AirtableCMSText name="Third header" data={homePageText} />
-      </h2>
-      <Instruction>
-        <AirtableCMSText name="Third header subtext" data={homePageText} />
-      </Instruction>
-      <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
-        {sortedBars.map((bar, index) => (
-          <Bar {...{ index, bar, dim }} />
-        ))}
-      </Svg>
+      <Content>
+        <h2 style={{ color: 'white', textAlign: 'center' }}>
+          <CMS.Text name="Third header" data={homePageText} />
+        </h2>
+        <Instruction>
+          <CMS.Text name="Third header subtext" data={homePageText} />
+        </Instruction>
+        <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
+          {sortedBars.map((bar, index) => (
+            <Bar key={index} {...{ index, bar, dim }} />
+          ))}
+        </Svg>
+      </Content>
     </Section>
   )
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { PageProps } from 'gatsby'
 import qs from 'qs'
 
 import FigmaProvider from '../figma/FigmaProvider'
@@ -7,7 +6,7 @@ import FigmaProvider from '../figma/FigmaProvider'
 import { applyFilters } from '../components/explorepage/FilterBar/filterOperations'
 import { Filters } from '../components/explorepage/exploreReducer'
 
-import AirtableCMSText from '../airtable-cms/AirtableCMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import NavBar from '../components/layout/NavBar/NavBar'
 import Main from '../components/layout/Main'
@@ -28,9 +27,13 @@ export interface ExploreState {
   defs?: string
   type?: string
   filters?: Filters
+  // sort?: {
+  //   on: string // field name
+  //   compare: 'gt' | 'lt'
+  // }
 }
 
-const ExplorePage: React.FC<PageProps> = () => {
+const ExplorePage = (): JSX.Element => {
   const { explorePageText, groupedResources } = useExplorePageData()
 
   const [exploreState, setExploreState] = useState<ExploreState>(
@@ -38,6 +41,10 @@ const ExplorePage: React.FC<PageProps> = () => {
       ? qs.parse(window.location.search.split('?')[1])
       : {}
   )
+
+  // useLayoutEffect(() => {
+  //   setExploreState(qs.parse(window.location.search.split('?')[1]))
+  // }, [])
 
   // store explore state in the query string whenever it chagnges
   useEffect(() => {
@@ -62,6 +69,10 @@ const ExplorePage: React.FC<PageProps> = () => {
 
   resources = applyFilters(resources, exploreState.filters)
 
+  // resources.map(group =>
+  //   group.nodes.sort(node => node.data.Authoring_organization)
+  // )
+
   return (
     <FigmaProvider>
       <NavBar />
@@ -69,7 +80,7 @@ const ExplorePage: React.FC<PageProps> = () => {
       <Main>
         <Header>
           <h1>
-            <AirtableCMSText name={'First Header'} data={explorePageText} />
+            <CMS.Text name={'First Header'} data={explorePageText} />
           </h1>
         </Header>
         <FilterBar

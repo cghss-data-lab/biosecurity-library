@@ -2,12 +2,16 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { commaSeparatedList } from '../../../utilities/grammar'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import ResourceContainer from './ResourceContainer'
+
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+
 import * as urls from '../../../utilities/urls'
 
 // const ResourceContainer = styled.section<{ expanded: boolean }>`
@@ -47,8 +51,8 @@ const IconContainer = styled.div`
   grid-area: icons;
   display: flex;
   align-items: flex-start;
-
   gap: 8px;
+  margin-top: 8px;
 `
 const Users = styled.div`
   grid-area: users;
@@ -59,7 +63,6 @@ const Summary = styled.div`
 const ThumbnailContainer = styled.div`
   grid-area: image;
   width: 100px;
-  /* height: 100px; */
   padding-right: 15px;
 `
 const Thumbnail = styled(GatsbyImage)`
@@ -87,23 +90,14 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       <Title to={urls.getDetailURL(data)}>{data.Short_name}</Title>
       <Author>{data.Authoring_organization[0].data.Name}</Author>
       <IconContainer>
-        {/* The Topic Area Icons column doesn't exist right now */}
-        {/* {JSON.parse(data.Topic_area_icons).map((name: string) => (
-          <AirtableCMSIcon
-            key={name}
-            name={name}
-            color={theme.colorDarkest}
-            style={{ width: 30 }}
-          />
-        ))} */}
         {data.Key_topic_area.map(name => (
-          <AirtableCMSIcon
-            noEmitError
-            key={name}
-            name={name}
-            color={theme.colorDarkest}
-            style={{ width: 30 }}
-          />
+          <Tippy content={name} key={name}>
+            <CMS.Icon
+              name={name}
+              color={theme.colorDarkest}
+              style={{ width: 30 }}
+            />
+          </Tippy>
         ))}
       </IconContainer>
       {expand && (

@@ -1,18 +1,17 @@
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import AirtableCMSIcon from '../../../airtable-cms/AirtableCMSIcon'
-import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
 import { urlString } from '../../../airtable-cms/utilities'
 
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
+import Main from '../../layout/Main'
 
 import Carousel from '../../ui/Carousel/Carousel'
 
 const H2 = styled.h2`
   text-align: center;
-  margin-top: 80px !important;
 `
 const KeyResourceLegend = styled.div`
   display: flex;
@@ -26,30 +25,38 @@ const KeyResourceLegend = styled.div`
   line-height: 22px;
   color: ${({ theme }) => theme.colorBlack};
 `
+const CarouselBackground = styled.div`
+  background-color: ${({ theme }) => theme.colorLightest};
+  padding-top: 40px;
+  margin-top: 40px;
+`
 const StyledCarousel = styled(Carousel)`
   margin-top: 30px;
+  padding-bottom: 80px;
 `
 const Card = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: ${({ theme }) => theme.colorLightest};
+  // background-color: ${({ theme }) => theme.colorLightest};
+  background-color: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   padding: 40px 90px;
   display: flex;
   /* min-height: 575px; */
   /* min-height: 500px; */
   min-height: 385px;
+  border-radius: 3px;
 `
-const KeyResourceFlag = styled(AirtableCMSIcon)`
+const KeyResourceFlag = styled(CMS.Icon)`
   position: absolute;
-  top: -5px;
+  top: -10px;
   left: 15px;
   height: 60px;
   width: 60px;
 `
 const TextContent = styled.div`
-  margin-left: 15px;
+  margin-left: 30px;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -115,69 +122,87 @@ const CarouselSection = (): JSX.Element => {
   const theme: any = useTheme()
 
   return (
-    <>
-      <H2>Explore key biosafety resources</H2>
+    <CarouselBackground>
+      <H2>
+        <CMS.Text name="Second header" data={homePageText} />
+      </H2>
       <KeyResourceLegend>
-        <AirtableCMSIcon
+        <CMS.Icon
           name="Key resource"
-          color={theme.colorOrange}
+          color={theme.colorDarkest}
           style={{ width: 24, height: 24, marginRight: 5 }}
         />
-        <AirtableCMSText name="Key resource explanation" data={homePageText} />
+        <CMS.Text name="Key resource explanation" data={homePageText} />
       </KeyResourceLegend>
-      <StyledCarousel>
-        {carouselResources.nodes.map(({ data: resource }) => (
-          <Card>
-            <KeyResourceFlag name="Key resource" color={theme.colorOrange} />
-            <div>
-              {resource.Thumbnail_INTERNAL && (
-                <GatsbyImage
-                  image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
-                  alt={resource.Short_name + 'thumbnail image'}
-                  style={{ width: 200 }}
-                />
-              )}
-            </div>
-            <TextContent>
-              <ResourceType>
-                <AirtableCMSIcon
-                  name={resource.Resource_type}
-                  color={theme.colorDarkest}
-                  style={{ width: 24, height: 24, marginRight: 8 }}
-                />
-                {resource.Resource_type}
-              </ResourceType>
-              <Title
-                href={getResourceUrl(
-                  resource.Resource_type,
-                  resource.Short_name
-                )}
+      <Main>
+        <StyledCarousel
+          buttonColor={theme.colorDarkest}
+          disabledButtonColor={theme.colorWhite}
+        >
+          {carouselResources.nodes.map(({ data: resource }) => (
+            <Card key={resource.Resource_name}>
+              <KeyResourceFlag name="Key resource" color={theme.colorGolden} />
+              <div
+                style={
+                  {
+                    // overflow: 'hidden',
+                  }
+                }
               >
-                {resource.Resource_name}
-              </Title>
-              <ShortName>{resource.Short_name}</ShortName>
-              <Author>{resource.Authoring_organization[0].data.Name}</Author>
-              <Description>
-                {truncateDescription(
-                  resource.Short_description,
-                  resource.Resource_type,
-                  resource.Short_name
-                )}
-              </Description>
-              <KeyTopicArea>
-                {resource.Key_topic_area.map(topic => (
-                  <AirtableCMSIcon
-                    noEmitError
-                    name={topic}
-                    color={theme.colorDarkest}
+                {resource.Thumbnail_INTERNAL && (
+                  <GatsbyImage
+                    image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
+                    alt={resource.Short_name + 'thumbnail image'}
+                    style={{
+                      width: 200,
+                      boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.24)',
+                      borderRadius: '3px',
+                    }}
                   />
-                ))}
-              </KeyTopicArea>
-            </TextContent>
-          </Card>
-        ))}
-      </StyledCarousel>
-    </>
+                )}
+              </div>
+              <TextContent>
+                <ResourceType>
+                  <CMS.Icon
+                    name={resource.Resource_type}
+                    color={theme.colorDarkest}
+                    style={{ width: 24, height: 24, marginRight: 8 }}
+                  />
+                  {resource.Resource_type}
+                </ResourceType>
+                <Title
+                  href={getResourceUrl(
+                    resource.Resource_type,
+                    resource.Short_name
+                  )}
+                >
+                  {resource.Resource_name}
+                </Title>
+                <ShortName>{resource.Short_name}</ShortName>
+                <Author>{resource.Authoring_organization[0].data.Name}</Author>
+                <Description>
+                  {truncateDescription(
+                    resource.Short_description,
+                    resource.Resource_type,
+                    resource.Short_name
+                  )}
+                </Description>
+                <KeyTopicArea>
+                  {resource.Key_topic_area.map(topic => (
+                    <CMS.Icon
+                      key={topic}
+                      noEmitError
+                      name={topic}
+                      color={theme.colorDarkest}
+                    />
+                  ))}
+                </KeyTopicArea>
+              </TextContent>
+            </Card>
+          ))}
+        </StyledCarousel>
+      </Main>
+    </CarouselBackground>
   )
 }
 

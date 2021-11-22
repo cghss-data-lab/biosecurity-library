@@ -1,17 +1,13 @@
 import React from 'react'
 import { ExploreState } from '../../../pages/explore'
 
-import TypeaheadControl, {
-  Item,
-} from '../../ui/TypeaheadControl/TypeaheadControl'
+import Typeahead from '@talus-analytics/library.ui.typeahead'
 
-import TypeaheadResult from '../../ui/TypeaheadControl/TypeaheadResult'
 import { FilterContainer, NameContainer } from './displayComponents'
 import ExpandDefinitionsButton from './ExpandDefinitionsButton'
 import { addFilter, removeFilter } from './filterOperations'
 
-const getItems = (keys: string[]) =>
-  keys.map(key => ({ label: key, key: key })) as Item[]
+const getItems = (keys: string[]) => keys.map(key => ({ label: key, key: key }))
 
 interface FilterControlProps {
   name: string
@@ -39,9 +35,8 @@ const FilterControl: React.FC<FilterControlProps> = ({
         <div>{name.replace(/_/g, ' ')}</div>
         <ExpandDefinitionsButton {...{ name, exploreState, setExploreState }} />
       </NameContainer>
-      <TypeaheadControl
+      <Typeahead
         multiselect
-        className={''}
         ariaLabel={name.replace(/_/g, ' ') + ' filter search'}
         placeholder={`${selectedOptionKeys?.length ?? 0} of ${options.length}`}
         items={getItems(remainingOptionKeys)}
@@ -50,9 +45,6 @@ const FilterControl: React.FC<FilterControlProps> = ({
         onRemove={item =>
           removeFilter({ [name]: [item.label] }, setExploreState)
         }
-        RenderItem={({ item: { label } }) => (
-          <TypeaheadResult>{label}</TypeaheadResult>
-        )}
       />
     </FilterContainer>
   )

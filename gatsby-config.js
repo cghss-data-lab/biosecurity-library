@@ -1,3 +1,4 @@
+// @ts-nocheck
 module.exports = {
   siteMetadata: {
     siteUrl: 'https://biosecurity-library.talusanalytics.com/',
