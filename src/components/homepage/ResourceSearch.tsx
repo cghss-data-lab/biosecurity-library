@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import { navigate } from 'gatsby'
 
 import CMS from '@talus-analytics/library.airtable-cms'
+import Typeahead from '@talus-analytics/library.ui.typeahead'
 
 import ButtonLink from '../ui/ButtonLink'
-import TypeaheadControl from '../ui/Typeahead/Typeahead'
-import TypeaheadResult from '../ui/Typeahead/TypeaheadResult'
 
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
@@ -22,7 +21,7 @@ const SearchBoxContainer = styled.div`
   margin-left: 40px;
   flex-grow: 1;
 `
-const StyledTypeaheadControl = styled(TypeaheadControl)`
+const StyledTypeaheadControl = styled(Typeahead)`
   margin-top: 0 !important;
 
   > input {
@@ -81,9 +80,6 @@ const ResourceSearch = (): JSX.Element => {
               )
           }}
           onRemove={() => {}}
-          RenderItem={({ item: { label } }) => (
-            <TypeaheadResult>{label}</TypeaheadResult>
-          )}
         />
         {/*<Examples>
           <AirtableCMSText name="Search Examples" data={homePageText} />
