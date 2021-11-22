@@ -3,14 +3,11 @@ import React from 'react'
 import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
-import CMS from '@talus-analytics/library.airtable-cms'
 
 const DetailsTab = ({ data }: PageContext): JSX.Element => {
   return (
     <TabContentContainer>
-      <h5>
-        <CMS.text name="header name" data={dataquery} />
-      </h5>
+      <h5>RESOURCE TYPE</h5>
       <p>{data.Resource_type}</p>
       <h5>CATEGORIES</h5>
       <p>{commaSeparatedList(data.Key_topic_area)}</p>
