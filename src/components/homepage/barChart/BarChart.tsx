@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import CMS from '../../../AirtableCMS'
+import CMS from '@talus-analytics/library.airtable-cms'
 
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 import Main from '../../layout/Main'
