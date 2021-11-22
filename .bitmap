@@ -57,17 +57,5 @@
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Carousel"
     },
-    "charts/network": {
-        "scope": "talus-analytics.viz",
-        "version": "0.0.10",
-        "mainFile": "index.ts",
-        "rootDir": "src/network"
-    },
-    "charts/network-tools": {
-        "scope": "talus-analytics.viz",
-        "version": "0.0.1",
-        "mainFile": "index.ts",
-        "rootDir": "src/network-tools"
-    },
     "$schema-version": "14.9.0"
 }
