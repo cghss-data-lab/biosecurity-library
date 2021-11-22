@@ -2990,6 +2990,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@talus-analytics/viz.charts.network-tools@npm:0.0.2":
+  version: 0.0.2
+  resolution: "@talus-analytics/viz.charts.network-tools@npm:0.0.2::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Fviz.charts.network-tools%2F-%2F%40talus-analytics-viz.charts.network-tools-0.0.2.tgz"
+  dependencies:
+    airtable: 0.11.1
+    csvtojson: ^2.0.10
+    react: ^17.0.1
+    styled-components: ^5.3.0
+  checksum: 29c42dd608ab9a03ecef9836c239579343db57dc1e8f1412853e51291056b22ce3101d2471058f8b3af200f03c49a2e6de68c097fcbeb9c06e63658722b3aedd
+  languageName: node
+  linkType: hard
+
 "@talus-analytics/viz.charts.network@npm:^0.0.9":
   version: 0.0.9
   resolution: "@talus-analytics/viz.charts.network@npm:0.0.9::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Fviz.charts.network%2F-%2F%40talus-analytics-viz.charts.network-0.0.9.tgz"
@@ -18939,6 +18951,7 @@ __metadata:
     "@mdx-js/react": ^1.6.22
     "@talus-analytics/library.airtable.cms-seo": 0.0.3
     "@talus-analytics/viz.charts.network": ^0.0.9
+    "@talus-analytics/viz.charts.network-tools": 0.0.2
     "@testing-library/react": ^12.1.2
     "@tippyjs/react": ^4.2.5
     "@types/jest": ^26.0.0

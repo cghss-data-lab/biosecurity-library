@@ -1,8 +1,12 @@
 // Exports all components directly relevant to DOM manipulation
 import { ForceGraphProps } from 'react-force-graph-2d'
 import { Network2DProps } from '..'
-import { Project, Settings } from '../internal/internal'
-import { AppGraphData, SetState } from '../helpers'
+import {
+  AppGraphData,
+  SetState,
+  Project,
+  Settings,
+} from '@talus-analytics/viz.charts.network-tools'
 export * from '../components/Network2D/Network2D'
 export { NetworkMap } from '../components/NetworkMap'
 export type NetworkProps = Pick<Network2DProps, 'zoomToFitSettings'> &

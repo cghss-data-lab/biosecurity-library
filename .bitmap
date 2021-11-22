@@ -59,7 +59,7 @@
     },
     "charts/network": {
         "scope": "talus-analytics.viz",
-        "version": "0.0.10",
+        "version": "0.0.11",
         "mainFile": "index.ts",
         "rootDir": "src/bit/viz/charts/network"
     },

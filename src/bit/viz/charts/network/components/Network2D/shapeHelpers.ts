@@ -1,4 +1,4 @@
-import { GraphNode } from '../../helpers'
+import { GraphNode } from '@talus-analytics/viz.charts.network-tools'
 import { NodePos } from './shapeTypes'
 
 // shape functions
