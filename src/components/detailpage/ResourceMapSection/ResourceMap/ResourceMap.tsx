@@ -29,7 +29,7 @@ import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
-import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
+// import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
 import parse from 'node-html-parser'
 
 /**
