@@ -2975,9 +2975,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@talus-analytics/library.airtable.cms-seo@npm:^0.0.4":
-  version: 0.0.4
-  resolution: "@talus-analytics/library.airtable.cms-seo@npm:0.0.4::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-seo%2F-%2F%40talus-analytics-library.airtable.cms-seo-0.0.4.tgz"
+"@talus-analytics/library.airtable.cms-seo@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "@talus-analytics/library.airtable.cms-seo@npm:0.0.3::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-seo%2F-%2F%40talus-analytics-library.airtable.cms-seo-0.0.3.tgz"
   dependencies:
     "@reach/router": ^1.3.4
     "@talus-analytics/library.airtable.cms-image": 0.0.8
@@ -2988,7 +2988,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: df6dfc49c5afc540ffaf41d4734fa0b2e484d7502be6f9b30f2a9071ebe4da96aaf0d3c961adfded856249afa87e1e7e0c76d736c47f7f2b9cc9a192daaf21ce
+  checksum: 5821360a1da99ce1e4c8803de751f3a1280beb29172f89f6ee051a10d86d3a142998adca34e771133382dca095fe3c558321b681f10ebd372af30d958e87510f
   languageName: node
   linkType: hard
 
@@ -3030,19 +3030,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@talus-analytics/viz.charts.network@npm:^0.0.9":
-  version: 0.0.9
-  resolution: "@talus-analytics/viz.charts.network@npm:0.0.9::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Fviz.charts.network%2F-%2F%40talus-analytics-viz.charts.network-0.0.9.tgz"
+"@talus-analytics/viz.charts.network@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "@talus-analytics/viz.charts.network@npm:0.0.11::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Fviz.charts.network%2F-%2F%40talus-analytics-viz.charts.network-0.0.11.tgz"
   dependencies:
-    airtable: 0.11.1
+    "@talus-analytics/viz.charts.network-tools": 0.0.2
     core-js: ^3.0.0
-    csvtojson: 2.0.10
-    react-force-graph-2d: 1.23.8
+    react-force-graph-2d: ^1.23.8
+    styled-components: ^5.3.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-    styled-components: 5.3.1
-  checksum: 427a3410d7618b5501d16891516fdbb1c865b2e03e6609510fb24e5c93635fffd72fb4d316aa0f1c9aeaa6842d38462e48f24b2064e2b3c827bd1772c2fe2ced
+  checksum: 78ecb0f7295bcbb1d499bd589179992407d69b917619a1a13d93d3b491acff448dbc02c10a372200047b4381d1f0caf05f75f3a9ff9a8637ddf0d75341338b62
   languageName: node
   linkType: hard
 
@@ -6882,7 +6881,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csvtojson@npm:2.0.10, csvtojson@npm:^2.0.10":
+"csvtojson@npm:^2.0.10":
   version: 2.0.10
   resolution: "csvtojson@npm:2.0.10"
   dependencies:
@@ -7715,9 +7714,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.896":
-  version: 1.3.905
-  resolution: "electron-to-chromium@npm:1.3.905"
-  checksum: 45c8a751f530ab556189050fbcaf374754a7503fb2f1e96cf73e5ee83bf92ec6a15755e3e920550d4ac296fe0be4d91462307ed0e3d4c957b976921f7e6fe2cd
+  version: 1.3.906
+  resolution: "electron-to-chromium@npm:1.3.906"
+  checksum: 087330249a424066cbdb882890164b3cb944f0ea293838a1445274428549e5b6c5edd25c353fed733d20d055ba276d4e3b069554b5e06ebfe511134c4f68cf87
   languageName: node
   linkType: hard
 
@@ -9116,6 +9115,8 @@ __metadata:
 "fsevents@npm:^2.3.2, fsevents@npm:~2.3.2":
   version: 2.3.2
   resolution: "fsevents@npm:2.3.2"
+  dependencies:
+    node-gyp: latest
   checksum: 97ade64e75091afee5265e6956cb72ba34db7819b4c3e94c431d4be2b19b8bb7a2d4116da417950c3425f17c8fe693d25e20212cac583ac1521ad066b77ae31f
   conditions: os=darwin
   languageName: node
@@ -9124,6 +9125,8 @@ __metadata:
 "fsevents@patch:fsevents@^2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
   resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
+  dependencies:
+    node-gyp: latest
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -13578,8 +13581,8 @@ __metadata:
   linkType: hard
 
 "mdast-util-to-markdown@npm:^1.0.0":
-  version: 1.2.4
-  resolution: "mdast-util-to-markdown@npm:1.2.4"
+  version: 1.2.6
+  resolution: "mdast-util-to-markdown@npm:1.2.6"
   dependencies:
     "@types/mdast": ^3.0.0
     "@types/unist": ^2.0.0
@@ -13588,7 +13591,7 @@ __metadata:
     micromark-util-decode-string: ^1.0.0
     unist-util-visit: ^4.0.0
     zwitch: ^2.0.0
-  checksum: b2d3a62430c8ff461fd0b76c6905d11aa2ed513d74763a72472fb722cc1084f23307fecaa4566ebb69f2b448a2eaf4f6c43778709fae9d566dbaf33ac780c5d9
+  checksum: f15a24caffbd951c8ff6b599cfd67cef102f520bd17be07c31950b60fc1341d3fd8f915b19dfcd69bf6565fad2baedb4a888bc3f34bcd0699425e33cf77ec581
   languageName: node
   linkType: hard
 
@@ -14594,15 +14597,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"network-7e9e3b@workspace:src/bit/viz/charts/network":
-  version: 0.0.0-use.local
-  resolution: "network-7e9e3b@workspace:src/bit/viz/charts/network"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
-  languageName: unknown
-  linkType: soft
-
 "next-tick@npm:1, next-tick@npm:^1.1.0":
   version: 1.1.0
   resolution: "next-tick@npm:1.1.0"
@@ -14662,8 +14656,6 @@ __metadata:
 "node-addon-api@npm:^4.2.0":
   version: 4.2.0
   resolution: "node-addon-api@npm:4.2.0"
-  dependencies:
-    node-gyp: latest
   checksum: 52ea6ff01a882766ceec74a0752c0cf9571fa72559a7a3e8969779fa5ae113a2d63cb54dd267fa83a533ab2b7617131d4a6996114701f4ca27246d2513b0e5a5
   languageName: node
   linkType: hard
@@ -16696,7 +16688,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-force-graph-2d@npm:1.23.8, react-force-graph-2d@npm:^1.23.8":
+"react-force-graph-2d@npm:^1.23.8":
   version: 1.23.8
   resolution: "react-force-graph-2d@npm:1.23.8"
   dependencies:
@@ -19008,9 +19000,8 @@ __metadata:
     "@mdx-js/mdx": ^1.6.22
     "@mdx-js/react": ^1.6.22
     "@talus-analytics/library.airtable.cms-plot-icon": 0.0.5
-    "@talus-analytics/library.airtable.cms-seo": ^0.0.4
-    "@talus-analytics/viz.charts.network": ^0.0.9
-    "@talus-analytics/viz.charts.network-tools": 0.0.2
+    "@talus-analytics/library.airtable.cms-seo": ^0.0.3
+    "@talus-analytics/viz.charts.network": ^0.0.11
     "@testing-library/react": ^12.1.2
     "@tippyjs/react": ^4.2.5
     "@types/jest": ^26.0.0
@@ -19635,9 +19626,9 @@ __metadata:
   linkType: hard
 
 "type-fest@npm:^2.5.3":
-  version: 2.5.4
-  resolution: "type-fest@npm:2.5.4"
-  checksum: ced03d6d01dd1040f3c53458d333c657d1cae0bc0331e8aacedb4c880919eb3013ce0aff8afdb8ce51718d34fc98637333ea43b3bcb29c63c7f3e1c149ddb9c3
+  version: 2.6.0
+  resolution: "type-fest@npm:2.6.0"
+  checksum: 8cb11716f3c2e02d062edc4cafab10097fdcd6de323e34f8929e0eca15c490ba877e2f400d2c322f71922dae60f1750e1733604196ba96b0748c4fe54e958b7d
   languageName: node
   linkType: hard
 

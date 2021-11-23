@@ -7,54 +7,39 @@
  */
 
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { navigate } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import { replaceFill } from '../../../../airtable-cms/CMSIcon'
+import {
+  useAllCMSIcons,
+  replaceFill,
+} from '@talus-analytics/library.airtable.cms-icon'
 import * as network from '@talus-analytics/viz.charts.network'
-// import * as network from '../../../../bit/viz/charts/network'
+import {
+  SettingsContext,
+  defaultSettings,
+} from '@talus-analytics/viz.charts.network-tools'
 import {
   AppGraphData,
   getNodeIdsForLinks,
   GraphLink,
   GraphNode,
-} from '@talus-analytics/viz.charts.network/dist/helpers'
+} from '@talus-analytics/viz.charts.network-tools'
 import Legend from './Legend/Legend'
 import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from './Legend/IconEntries'
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
-import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
 import parse from 'node-html-parser'
 
 /**
  * Icon data from Airtable
  */
-export type Icon = {
-  data: { Name: string; Text: string; SVG: any }
-}
+export type Icon = { name: string; text: string; svg: any }
 
-export interface IconsQueryMap {
-  iconsQueryMap: {
-    nodes: {
-      data: {
-        Name: string
-        Text: string
-        SVG: {
-          localFiles: {
-            childSvg: {
-              svgString: string
-            }
-          }[]
-        }
-      }
-    }[]
-  }
-}
-
-const Section = styled.section`
+const Section = styled.div`
   display: flex;
 `
 const MapContainer = styled.div`
@@ -99,29 +84,8 @@ export const ResourceMap: React.FC<{
   curvedLinks?: boolean
 }> = ({ selectedNode, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
-  const [mapLeftMargin, setMapLeftMargin] = useState<number>(0)
-  const [positioned, setPositioned] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const iconsQueryMapRes = useStaticQuery<IconsQueryMap>(graphql`
-    query iconsQueryMap {
-      iconsQueryMap: allAirtable(filter: { table: { eq: "Icons" } }) {
-        nodes {
-          data {
-            Name
-            Text
-            SVG {
-              localFiles {
-                childSvg {
-                  svgString
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-  const icons = iconsQueryMapRes?.iconsQueryMap.nodes || []
+  const icons = useAllCMSIcons()
 
   const theme: any = useTheme()
   const formattedGraphData: AppGraphData | undefined = useMemo(
@@ -132,9 +96,7 @@ export const ResourceMap: React.FC<{
         theme,
         graphData?.nodes.find(n => n._id === selectedNode?.Record_ID_INTERNAL)
       ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [graphData, icons, theme]
-    // [graphData, icons, selectedNode, theme]
+    [graphData, icons, selectedNode?.Record_ID_INTERNAL, theme]
   )
 
   const selectedNodeId: string | undefined = selectedNode?.Record_ID_INTERNAL
@@ -169,19 +131,28 @@ export const ResourceMap: React.FC<{
     [hoveredNode]
   )
 
-  const updateCanvasLeftMargin = useCallback(() => {
-    if (ref.current !== null && !positioned) {
-      const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
-      if (c !== null) {
-        const xMin: number = getCanvasPixelsXMin(c)
-        if (xMin !== Infinity) {
-          const newLeftMargin: number = -1 * xMin + 100
-          if (newLeftMargin === mapLeftMargin) setPositioned(true)
-          setMapLeftMargin(newLeftMargin)
-        }
-      }
-    }
-  }, [mapLeftMargin, positioned])
+  // /**
+  //  * Ensure constant gap between main canvas and legend component.
+  //  */
+  // const updateCanvasLeftMargin = useCallback(() => {
+  //   if (ref.current !== null && !positioned) {
+  //     const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
+  //     if (c !== null) {
+  //       const xMin: number = getCanvasPixelsXMin(c)
+  //       if (xMin === Infinity) return
+  //       console.log('curXMin = ' + curXMin)
+  //       console.log('xMin = ' + xMin)
+  //       if (curXMin > xMin) setCurXMin(xMin)
+  //       else if (xMin !== Infinity) {
+  //         const newLeftMargin: number = -1 * xMin + 100
+  //         if (newLeftMargin === mapLeftMargin) setPositioned(true)
+  //         console.log('newLeftMargin = ' + newLeftMargin)
+
+  //         setMapLeftMargin(newLeftMargin)
+  //       }
+  //     }
+  //   }
+  // }, [mapLeftMargin, positioned, curXMin])
 
   const showAllNodeLabels: boolean =
     graphData !== undefined && graphData.nodes.length <= 5
@@ -203,18 +174,11 @@ export const ResourceMap: React.FC<{
 
   // return null if no map to show
   if (graphData === undefined) return <div>Wow</div>
-  // // return null if no map to show
-  // if (
-  //   graphData === undefined ||
-  //   graphData.nodes.length === 0 ||
-  //   graphData.links.length === 0
-  // )
-  //   return null
 
   const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
 
   return (
-    <section>
+    <div>
       <p>{citationDesc}</p>
       <em>Click resource in map to go to page</em>
       <Section>
@@ -231,7 +195,7 @@ export const ResourceMap: React.FC<{
           )}
           <IconEntries
             icons={icons.filter(icon => {
-              return graphData?.nodes.map(n => n._icon).includes(icon.data.Name)
+              return graphData?.nodes.map(n => n._icon).includes(icon.name)
             })}
           />
           {/* Link direction legend */}
@@ -241,14 +205,14 @@ export const ResourceMap: React.FC<{
         </Legend>
         <MapContainer
           data-network
-          style={{ marginLeft: mapLeftMargin }}
+          // style={{ marginLeft: mapLeftMargin }}
           {...{ ref }}
         >
-          <network.SettingsContext.Provider
+          <SettingsContext.Provider
             value={{
-              ...network.defaultSettings,
+              ...defaultSettings,
               nodes: {
-                ...network.defaultSettings.nodes,
+                ...defaultSettings.nodes,
                 selectedColor: theme.colorDarker,
               },
             }}
@@ -256,12 +220,12 @@ export const ResourceMap: React.FC<{
             <network.Network
               key={selectedNode?.Record_ID_INTERNAL}
               enableNodeDrag={false}
-              onRenderFramePost={updateCanvasLeftMargin}
+              // onRenderFramePost={updateCanvasLeftMargin}
               nodeLabel={hideTipForLabeledNodes}
               containerStyle={{ transition: 'opacity .25s ease-in-out' }}
               linkDirectionalArrowLength={getLinkDirectionalArrowLength}
               linkCurvature={curvedLinks ? 0.5 : 0}
-              warmupTicks={1000}
+              warmupTicks={5000}
               zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
               interactionSettings={{
                 enableZoomInteraction: false,
@@ -276,10 +240,10 @@ export const ResourceMap: React.FC<{
                 selectedNode: selectedNode?.Record_ID_INTERNAL,
               }}
             />
-          </network.SettingsContext.Provider>
+          </SettingsContext.Provider>
         </MapContainer>
       </Section>
-    </section>
+    </div>
   )
 }
 
@@ -455,12 +419,10 @@ function getFormattedNodes(
       selectedNode !== undefined && selectedNode._id === n._id
     const iconName: string =
       n._icon !== '' && n._icon !== undefined ? n._icon : ''
-    const icon: Icon | undefined = icons.find(
-      icon => icon.data.Name === iconName
-    )
+    const icon: Icon | undefined = icons.find(icon => icon.name === iconName)
     if (icon === undefined) return n
     const displayIcon = replaceFill(
-      parse(icon.data.SVG.localFiles[0].childSvg.svgString),
+      parse(icon.svg.toString()),
       n._color || theme.colorDarker
     )
 

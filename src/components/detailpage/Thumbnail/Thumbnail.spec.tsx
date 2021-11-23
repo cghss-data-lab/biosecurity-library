@@ -11,13 +11,14 @@ describe('Thumbnail', () => {
 })
 
 const MOCK_RESOURCE_DATA: PageContext['data'] = {
+  Record_ID_INTERNAL: 'Test',
   Short_description: 'Test',
   Long_description: 'Test',
   Key_topic_area: ['Test'],
   Resource_name: 'Test',
   Short_name: 'Test',
   Resource_type: 'Test',
-  Authoring_organization: 'Test',
+  Authoring_organization: [{ data: { Name: 'Test' } }],
   Target_user_role: ['Test'],
   Potential_user_role: ['Test'],
   URL_for_resource: 'Test',
@@ -28,12 +29,12 @@ const MOCK_RESOURCE_DATA: PageContext['data'] = {
   First_release_date: 'Test',
   Last_update_date: 'Test',
   Update_frequency: 'Test',
-  Topic_area_icons: 'Test',
+  Resource_sets: null,
   Files_INTERNAL: {
     localFiles: [{ publicURL: 'Test', name: 'Test' }],
   },
   Thumbnail_INTERNAL: {
     localFiles: [],
   },
-  Auto_other_resources_cited: ['Test 2'],
+  Auto_other_resources_cited: [{ data: { Record_ID_INTERNAL: 'Test' } }],
 }

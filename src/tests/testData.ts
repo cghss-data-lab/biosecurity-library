@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { PageContext } from '../templates/Detail'
 
 export const TEST_DATA: PageContext['data'][] = [

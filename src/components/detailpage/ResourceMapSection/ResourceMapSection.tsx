@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { PageContext } from '../../../templates/Detail'
-// import { InfoTip } from '../../ui/InfoTip'
+import { InfoTip } from '../../ui/InfoTip'
 import ResourceMap from './ResourceMap/ResourceMap'
 
 interface ResourceMapSectionProps {
@@ -15,7 +15,7 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
     <>
       <h5>
         RESOURCE MAP{' '}
-        {/* <InfoTip
+        <InfoTip
           content={
             <span style={{ fontFamily: `'Open Sans', sans-serif` }}>
               Citations between resources in the biosecurity library are
@@ -23,12 +23,12 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
               some manual review.
             </span>
           }
-        /> */}
+        />
       </h5>
       {showMap && (
-        <p>
+        <div>
           <ResourceMap selectedNode={data} graphData={data.resourceMapData} />
-        </p>
+        </div>
       )}
       {!showMap && (
         <p>

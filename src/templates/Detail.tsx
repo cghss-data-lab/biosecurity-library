@@ -1,6 +1,6 @@
 import React from 'react'
 import { ImageDataLike } from 'gatsby-plugin-image'
-import * as network from '@talus-analytics/viz.charts.network'
+import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
 
 // layout components
 import Main from '../components/layout/Main'
@@ -84,7 +84,7 @@ export interface PageContext {
      * Optional: Resource map nodes/links data to render in a network map on the
      * resource's page. Defaults to undefined (no map rendered).
      */
-    resourceMapData?: network.AppGraphData
+    resourceMapData?: AppGraphData
   }
 }
 
