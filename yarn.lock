@@ -2933,6 +2933,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@talus-analytics/library.airtable.cms-icon@npm:0.0.10":
+  version: 0.0.10
+  resolution: "@talus-analytics/library.airtable.cms-icon@npm:0.0.10::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-icon%2F-%2F%40talus-analytics-library.airtable.cms-icon-0.0.10.tgz"
+  dependencies:
+    core-js: ^3.0.0
+    node-html-parser: ^4.1.4
+    styled-components: ^5.3.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: 60ab072a8db801fe87f277078d4e09ab96614cf661411126dece6694ccf7eab902ca23a6c33101ca469f67b6f82b7a2b50f1b2815aedf032327bbc69f219383d
+  languageName: node
+  linkType: hard
+
 "@talus-analytics/library.airtable.cms-image@npm:0.0.8":
   version: 0.0.8
   resolution: "@talus-analytics/library.airtable.cms-image@npm:0.0.8::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-image%2F-%2F%40talus-analytics-library.airtable.cms-image-0.0.8.tgz"
@@ -2947,9 +2961,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@talus-analytics/library.airtable.cms-seo@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "@talus-analytics/library.airtable.cms-seo@npm:0.0.3::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-seo%2F-%2F%40talus-analytics-library.airtable.cms-seo-0.0.3.tgz"
+"@talus-analytics/library.airtable.cms-plot-icon@npm:0.0.5":
+  version: 0.0.5
+  resolution: "@talus-analytics/library.airtable.cms-plot-icon@npm:0.0.5::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-plot-icon%2F-%2F%40talus-analytics-library.airtable.cms-plot-icon-0.0.5.tgz"
+  dependencies:
+    "@talus-analytics/library.airtable.cms-icon": 0.0.10
+    core-js: ^3.0.0
+    styled-components: ^5.3.0
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  checksum: c948a6929d0fa96eb122bdf6058fedc46b8009af20adc5c134b2c695823125c36ccde33ff50c9379b91f788ffe86fd420e4432d3976b871ce8f3967d5c19b24a
+  languageName: node
+  linkType: hard
+
+"@talus-analytics/library.airtable.cms-seo@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "@talus-analytics/library.airtable.cms-seo@npm:0.0.4::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-seo%2F-%2F%40talus-analytics-library.airtable.cms-seo-0.0.4.tgz"
   dependencies:
     "@reach/router": ^1.3.4
     "@talus-analytics/library.airtable.cms-image": 0.0.8
@@ -2960,7 +2988,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 5821360a1da99ce1e4c8803de751f3a1280beb29172f89f6ee051a10d86d3a142998adca34e771133382dca095fe3c558321b681f10ebd372af30d958e87510f
+  checksum: df6dfc49c5afc540ffaf41d4734fa0b2e484d7502be6f9b30f2a9071ebe4da96aaf0d3c961adfded856249afa87e1e7e0c76d736c47f7f2b9cc9a192daaf21ce
   languageName: node
   linkType: hard
 
@@ -7159,6 +7187,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"decode-named-character-reference@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "decode-named-character-reference@npm:1.0.0"
+  dependencies:
+    character-entities: ^2.0.0
+  checksum: cb48c0a2b343b54d96944221374c2815a722945ae2db38edfbca2511f74061e37a81dc8aaf4dcf66c4ee01cb91242e656ef391d3bd589f82ac1f5c951e4ed9a3
+  languageName: node
+  linkType: hard
+
 "decode-uri-component@npm:^0.2.0":
   version: 0.2.0
   resolution: "decode-uri-component@npm:0.2.0"
@@ -7678,9 +7715,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.3.896":
-  version: 1.3.904
-  resolution: "electron-to-chromium@npm:1.3.904"
-  checksum: 51cd8de455721c921ab5522e868071f7ea53eeff20938b7186283b50f3c5aad98ff10c9d6b991d98d0bef09db8206bfab63d0458adba33b25104ead9bcd395de
+  version: 1.3.905
+  resolution: "electron-to-chromium@npm:1.3.905"
+  checksum: 45c8a751f530ab556189050fbcaf374754a7503fb2f1e96cf73e5ee83bf92ec6a15755e3e920550d4ac296fe0be4d91462307ed0e3d4c957b976921f7e6fe2cd
   languageName: node
   linkType: hard
 
@@ -9079,8 +9116,6 @@ __metadata:
 "fsevents@npm:^2.3.2, fsevents@npm:~2.3.2":
   version: 2.3.2
   resolution: "fsevents@npm:2.3.2"
-  dependencies:
-    node-gyp: latest
   checksum: 97ade64e75091afee5265e6956cb72ba34db7819b4c3e94c431d4be2b19b8bb7a2d4116da417950c3425f17c8fe693d25e20212cac583ac1521ad066b77ae31f
   conditions: os=darwin
   languageName: node
@@ -9089,8 +9124,6 @@ __metadata:
 "fsevents@patch:fsevents@^2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
   resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
-  dependencies:
-    node-gyp: latest
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -13443,11 +13476,12 @@ __metadata:
   linkType: hard
 
 "mdast-util-from-markdown@npm:^1.0.0":
-  version: 1.1.1
-  resolution: "mdast-util-from-markdown@npm:1.1.1"
+  version: 1.2.0
+  resolution: "mdast-util-from-markdown@npm:1.2.0"
   dependencies:
     "@types/mdast": ^3.0.0
     "@types/unist": ^2.0.0
+    decode-named-character-reference: ^1.0.0
     mdast-util-to-string: ^3.1.0
     micromark: ^3.0.0
     micromark-util-decode-numeric-character-reference: ^1.0.0
@@ -13455,10 +13489,9 @@ __metadata:
     micromark-util-normalize-identifier: ^1.0.0
     micromark-util-symbol: ^1.0.0
     micromark-util-types: ^1.0.0
-    parse-entities: ^3.0.0
     unist-util-stringify-position: ^3.0.0
     uvu: ^0.5.0
-  checksum: 16e54d769a35bcb9d238f67a77db1de346439ee2930bc4ed5dfb6fdfeabcb712d81d40f74e0b7cbf2fc6b1993b8d3a833b8a0ef6fa777a56a6569120f05bbe31
+  checksum: fadc3521a3d95f4adbadad462ca27c28b3bfe08740ae158dc0c4a22329bf5593254d98b8fd4024ecad8c47c77ec275454dfacfb907ff1b98ff8f5de25c716d40
   languageName: node
   linkType: hard
 
@@ -13472,18 +13505,18 @@ __metadata:
   linkType: hard
 
 "mdast-util-mdx-jsx@npm:^1.0.0":
-  version: 1.1.3
-  resolution: "mdast-util-mdx-jsx@npm:1.1.3"
+  version: 1.2.0
+  resolution: "mdast-util-mdx-jsx@npm:1.2.0"
   dependencies:
     "@types/estree-jsx": ^0.0.1
     "@types/mdast": ^3.0.0
     mdast-util-to-markdown: ^1.0.0
-    parse-entities: ^3.0.0
+    parse-entities: ^4.0.0
     stringify-entities: ^4.0.0
     unist-util-remove-position: ^4.0.0
     unist-util-stringify-position: ^3.0.0
     vfile-message: ^3.0.0
-  checksum: 7d920da03965fff9e612d1f0bcc88778b016dc874ff818e652cbb71a903829f087f01911c732abb8f58d50861997d96ba93d717c39779cc3e72f60b4a9d1ba66
+  checksum: 1aeb8c5ac3b2ab675e3e45a9ae89c7cd0d30526029b7bb8c797fff91fafc275c1cf7350fada863776f387b6cb7ea8991a7da5821cbee01f738a6fada11938f6a
   languageName: node
   linkType: hard
 
@@ -13735,9 +13768,10 @@ __metadata:
   linkType: hard
 
 "micromark-core-commonmark@npm:^1.0.0, micromark-core-commonmark@npm:^1.0.1":
-  version: 1.0.4
-  resolution: "micromark-core-commonmark@npm:1.0.4"
+  version: 1.0.5
+  resolution: "micromark-core-commonmark@npm:1.0.5"
   dependencies:
+    decode-named-character-reference: ^1.0.0
     micromark-factory-destination: ^1.0.0
     micromark-factory-label: ^1.0.0
     micromark-factory-space: ^1.0.0
@@ -13752,9 +13786,8 @@ __metadata:
     micromark-util-subtokenize: ^1.0.0
     micromark-util-symbol: ^1.0.0
     micromark-util-types: ^1.0.1
-    parse-entities: ^3.0.0
     uvu: ^0.5.0
-  checksum: f8e704dd8c0529263621f7463721f6bc113de817b5db8a4b8ac45fa60a11ccbd9a51ee8680f4fb04f85cb25bbd73e0a2098b948c828db5bdce5e0c26157995e1
+  checksum: 4b4b51feb0b61892de3d8422538b1f5d59f464af0836e727ff3231864194281c319e48af51f08c715c787b127e866e7976443079eed1b2b4463b60a91defff86
   languageName: node
   linkType: hard
 
@@ -13955,14 +13988,14 @@ __metadata:
   linkType: hard
 
 "micromark-util-decode-string@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "micromark-util-decode-string@npm:1.0.1"
+  version: 1.0.2
+  resolution: "micromark-util-decode-string@npm:1.0.2"
   dependencies:
+    decode-named-character-reference: ^1.0.0
     micromark-util-character: ^1.0.0
     micromark-util-decode-numeric-character-reference: ^1.0.0
     micromark-util-symbol: ^1.0.0
-    parse-entities: ^3.0.0
-  checksum: 54f71a848017fe8212d6dead03b6ac52aabd787d5fb38425b5134fc7adb747ed23a9eb5405e6ddcc3e8195667857f72c18972fc4bcbaba68764ea72421ab7f50
+  checksum: 2dbb41c9691cc71505d39706405139fb7d6699429d577a524c7c248ac0cfd09d3dd212ad8e91c143a00b2896f26f81136edc67c5bda32d20446f0834d261b17a
   languageName: node
   linkType: hard
 
@@ -14050,11 +14083,12 @@ __metadata:
   linkType: hard
 
 "micromark@npm:^3.0.0":
-  version: 3.0.8
-  resolution: "micromark@npm:3.0.8"
+  version: 3.0.9
+  resolution: "micromark@npm:3.0.9"
   dependencies:
     "@types/debug": ^4.0.0
     debug: ^4.0.0
+    decode-named-character-reference: ^1.0.0
     micromark-core-commonmark: ^1.0.1
     micromark-factory-space: ^1.0.0
     micromark-util-character: ^1.0.0
@@ -14068,9 +14102,8 @@ __metadata:
     micromark-util-subtokenize: ^1.0.0
     micromark-util-symbol: ^1.0.0
     micromark-util-types: ^1.0.1
-    parse-entities: ^3.0.0
     uvu: ^0.5.0
-  checksum: 607fb65d4a44f802bd151fc29c64a42ef868254f8aa0f77a65aebe13d5e91f6f0b61e403e5f721af296e59423e2fc0b17de3c40493668c988b1cd08f9397815c
+  checksum: 59f0485bc22bbf3bde027cab1186554962b03dddd81297d63435241e424cb5860cff30d804a213d11b57dba24ab93ad6d3095ef94f206f3b92ca8fd15f1eea57
   languageName: node
   linkType: hard
 
@@ -15431,18 +15464,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-entities@npm:^3.0.0":
-  version: 3.1.0
-  resolution: "parse-entities@npm:3.1.0"
+"parse-entities@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "parse-entities@npm:4.0.0"
   dependencies:
     "@types/unist": ^2.0.0
     character-entities: ^2.0.0
     character-entities-legacy: ^3.0.0
     character-reference-invalid: ^2.0.0
+    decode-named-character-reference: ^1.0.0
     is-alphanumerical: ^2.0.0
     is-decimal: ^2.0.0
     is-hexadecimal: ^2.0.0
-  checksum: 6986b75052d4ce79cfb422650dfc9bbc2e3c18f25980fa97b764b927156a6dc7d7a9c592f98fec0279522109575beb67a98a6fb533edfbf102f887e02489ca4e
+  checksum: cd9fa53bc056ad8cf8a45494bfd7ce65e8bf6f1b12dcc9a6343376fa529c2012041303c5d0f86babf70afbd13b71c2f219fc3a76fb97d9d559b66578e19cdaf0
   languageName: node
   linkType: hard
 
@@ -18136,13 +18170,13 @@ __metadata:
   linkType: hard
 
 "socks-proxy-agent@npm:^6.0.0":
-  version: 6.1.0
-  resolution: "socks-proxy-agent@npm:6.1.0::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsocks-proxy-agent%2F-%2Fsocks-proxy-agent-6.1.0.tgz"
+  version: 6.1.1
+  resolution: "socks-proxy-agent@npm:6.1.1::__archiveUrl=https%3A%2F%2Fregistry.npmjs.org%2Fsocks-proxy-agent%2F-%2Fsocks-proxy-agent-6.1.1.tgz"
   dependencies:
     agent-base: ^6.0.2
     debug: ^4.3.1
     socks: ^2.6.1
-  checksum: 32ea0d62c848b5c246955e8d6c34832fe6cd8c5f3b66f5ace3a9bd7387bafae3e67d96474d41291723ba7135e2da46d65e008a8a35a793dfa5cb0f4ac05429df
+  checksum: 9a8a4f791bba0060315cf7291ca6f9db37d6fc280fd0860d73d8887d3efe4c22e823aa25a8d5375f6079279f8dc91b50c075345179bf832bfe3c7c26d3582e3c
   languageName: node
   linkType: hard
 
@@ -18973,7 +19007,8 @@ __metadata:
     "@babel/runtime": 7.12.18
     "@mdx-js/mdx": ^1.6.22
     "@mdx-js/react": ^1.6.22
-    "@talus-analytics/library.airtable.cms-seo": ^0.0.3
+    "@talus-analytics/library.airtable.cms-plot-icon": 0.0.5
+    "@talus-analytics/library.airtable.cms-seo": ^0.0.4
     "@talus-analytics/viz.charts.network": ^0.0.9
     "@talus-analytics/viz.charts.network-tools": 0.0.2
     "@testing-library/react": ^12.1.2
