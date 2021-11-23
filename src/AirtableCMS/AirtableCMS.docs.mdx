@@ -110,9 +110,13 @@ titles, descriptions, social sharing images, etc.
 
 ```js
 const Providers = ({ children }: { children: React.ReactNode }) => {
+  // get site metadata
   const siteMetadata = useSiteMetadata()
+  // get GA tracking ID
+  const trackingId = getTrackingId()
+
   return (
-    <CMS.SiteMetadataProvider data={siteMetadata}>
+    <CMS.SiteMetadataProvider data={siteMetadata} trackingId={trackingId}>
       {children}
     </CMS.SiteMetadataProvider>
   )
@@ -120,6 +124,10 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 ```
 
 Site metadata provider takes the result from the `useSiteMetadata()` hook content from `Site metadata` airtable available to all pages (to be accessed by the `<SEO />` component). This should go in a layout or "providers" component at the top level of the component tree.
+
+This provider also injects a cookie consent popup for enabling Google Analytics,
+provided your Google Analytics tracking ID is configured properly in `gatsby-config.js`.
+See [full details for GA configuration here](https://bit.dev/talus-analytics/library/airtable/cms-seo).
 
 ## Functions
 

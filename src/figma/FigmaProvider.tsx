@@ -6,7 +6,7 @@ import { semanticStyles } from './semanticStyles.module.scss'
 import './fonts.css'
 
 import CMS from '@talus-analytics/library.airtable-cms'
-import useCMSIconsQuery from '../airtableQueryHooks/useCMSIconsQuery'
+import useCMSIconsQuery from '../airtableQueryHooks/useIconsQuery'
 
 // inline webpack require because it's easier that way in gatsby
 // eslint-disable-next-line import/no-webpack-loader-syntax

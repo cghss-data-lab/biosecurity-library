@@ -56,12 +56,14 @@
     /**
      * "*" is a special rule which applied on all components in the workspace.
      **/
-    // "{charts/*": {
-    //   /**
-    //    * uncomment to apply the chosen environment on all components.
-    //    **/
-    //   "teambit.react/react": {},
-    //   "talus-analytics.viz/envs/network-env@0.0.3": "-"
-    // }
+    "{ui/**}": {
+      "teambit.react/react": {}
+    },
+    "*": {
+      /**
+       * uncomment to apply the chosen environment on all components.
+       **/
+      // "teambit.react/react": {}
+    }
   }
 }
