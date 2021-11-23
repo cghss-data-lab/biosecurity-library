@@ -1,10 +1,9 @@
 import React from 'react'
-
+import CMS from '@talus-analytics/library.airtable-cms'
 import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 // import { commaSeparatedList } from '../../../../utilities/grammar'
 import ResourceMapSection from '../../ResourceMapSection/ResourceMapSection'
-import CMS from '@talus-analytics/library.airtable-cms'
 
 const OverviewTab: React.FC<PageContext> = ({ data }) => {
   return (
