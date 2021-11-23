@@ -1,7 +1,7 @@
 /**
  * this is the main configuration file of your bit workspace.
  * for full documentation, please see: https://harmony-docs.bit.dev/workspace/configurations
- **/{
+ **/ {
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
   /**
    * main configuration of the Bit workspace.
@@ -39,8 +39,8 @@
     "packageManager": "teambit.dependencies/yarn",
     "policy": {
       "dependencies": {
-        "@talus-analytics/viz.charts.network": "0.0.11",
-        "@talus-analytics/viz.charts.network-tools": "0.0.2"
+        // "@talus-analytics/viz.charts.network": "0.0.11",
+        // "@talus-analytics/viz.charts.network-tools": "0.0.2"
       },
       "peerDependencies": {}
     }
