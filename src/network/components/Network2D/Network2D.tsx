@@ -38,6 +38,7 @@ const NetworkContainer = styled.div`
   height: 100%;
   width: 100%;
 `
+
 export interface Network2DProps extends ForceGraphProps {
   show: boolean
   activeProj: Project
@@ -94,6 +95,8 @@ export const Network2D: FC<Network2DProps> = ({
 
   const networkRef = useRef<any>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  console.log('hoveredNode')
+  console.log(hoveredNode)
 
   // This function updates the state to re-render components
   const resizeHandler = useCallback(() => {
@@ -287,6 +290,11 @@ export const Network2D: FC<Network2DProps> = ({
             node._labelPos || settings.nodes.labelPos
           ctx.textBaseline = nodeLabelPos === 'center' ? 'middle' : 'top'
           ctx.fillStyle = node._labelColor || theme.colors.text
+          const dimLabel = hoveredNode !== null && node._id !== hoveredNode
+          ctx.save()
+          if (dimLabel) ctx.globalAlpha = 0.2
+
+          // if (hoveredNode === node._id) ctx.fillStyle = '#ff0000'
 
           // add half of icon height including global scale to text y pos
           const iconHeight: number = 5 // DEBUG
@@ -297,11 +305,13 @@ export const Network2D: FC<Network2DProps> = ({
           const textY: number =
             (node.y || 0) + textYOffset + (node._labelYOffset || 0)
           drawTextLabel(ctx, text, node, textY, fontSize, nodeLabelPos)
+          ctx.restore()
         }
       })
     },
     [
       graphData.nodes,
+      hoveredNode,
       selectedNode,
       settings.nodes.fontSize,
       settings.nodes.labelPos,
