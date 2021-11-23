@@ -4,7 +4,8 @@
 import React, { useMemo } from 'react'
 import * as network from '@talus-analytics/viz.charts.network'
 import styled, { useTheme } from 'styled-components'
-import { AppGraphData, initNode } from '@talus-analytics/viz.charts.network'
+import { initNode } from '@talus-analytics/viz.charts.network'
+import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
 const LinkLegendContainer = styled.div`
   position: relative;
   width: 150px;
