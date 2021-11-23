@@ -222,7 +222,7 @@ export const ResourceMap: React.FC<{
   const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
 
   return (
-    <section>
+    <div>
       <p>{citationDesc}</p>
       <em>Click resource in map to go to page</em>
       <Section>
@@ -287,7 +287,7 @@ export const ResourceMap: React.FC<{
           </SettingsContext.Provider>
         </MapContainer>
       </Section>
-    </section>
+    </div>
   )
 }
 

@@ -26,9 +26,9 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
         /> */}
       </h5>
       {showMap && (
-        <p>
+        <div>
           <ResourceMap selectedNode={data} graphData={data.resourceMapData} />
-        </p>
+        </div>
       )}
       {!showMap && (
         <p>
