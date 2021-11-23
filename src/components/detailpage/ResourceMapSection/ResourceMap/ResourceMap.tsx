@@ -59,12 +59,14 @@ export interface IconsQueryMap {
 
 const Section = styled.section`
   display: flex;
+  /* border: 1px solid cyan; */
 `
 const MapContainer = styled.div`
   z-index: 0;
   position: relative;
   width: 100%;
   height: 500px;
+  /* border: 1px solid red; */
 `
 
 const NodeHoverLabelBox = styled.div`
@@ -102,8 +104,9 @@ export const ResourceMap: React.FC<{
   curvedLinks?: boolean
 }> = ({ selectedNode, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
-  const [mapLeftMargin, setMapLeftMargin] = useState<number>(0)
-  const [positioned, setPositioned] = useState(false)
+  // const [curXMin, setCurXMin] = useState<number>(Infinity)
+  // const [mapLeftMargin, setMapLeftMargin] = useState<number>(0)
+  // const [positioned, setPositioned] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const iconsQueryMapRes = useStaticQuery<IconsQueryMap>(graphql`
     query iconsQueryMap {
@@ -172,19 +175,28 @@ export const ResourceMap: React.FC<{
     [hoveredNode]
   )
 
-  const updateCanvasLeftMargin = useCallback(() => {
-    if (ref.current !== null && !positioned) {
-      const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
-      if (c !== null) {
-        const xMin: number = getCanvasPixelsXMin(c)
-        if (xMin !== Infinity) {
-          const newLeftMargin: number = -1 * xMin + 100
-          if (newLeftMargin === mapLeftMargin) setPositioned(true)
-          setMapLeftMargin(newLeftMargin)
-        }
-      }
-    }
-  }, [mapLeftMargin, positioned])
+  // /**
+  //  * Ensure constant gap between main canvas and legend component.
+  //  */
+  // const updateCanvasLeftMargin = useCallback(() => {
+  //   if (ref.current !== null && !positioned) {
+  //     const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
+  //     if (c !== null) {
+  //       const xMin: number = getCanvasPixelsXMin(c)
+  //       if (xMin === Infinity) return
+  //       console.log('curXMin = ' + curXMin)
+  //       console.log('xMin = ' + xMin)
+  //       if (curXMin > xMin) setCurXMin(xMin)
+  //       else if (xMin !== Infinity) {
+  //         const newLeftMargin: number = -1 * xMin + 100
+  //         if (newLeftMargin === mapLeftMargin) setPositioned(true)
+  //         console.log('newLeftMargin = ' + newLeftMargin)
+
+  //         setMapLeftMargin(newLeftMargin)
+  //       }
+  //     }
+  //   }
+  // }, [mapLeftMargin, positioned, curXMin])
 
   const showAllNodeLabels: boolean =
     graphData !== undefined && graphData.nodes.length <= 5
@@ -237,7 +249,7 @@ export const ResourceMap: React.FC<{
         </Legend>
         <MapContainer
           data-network
-          style={{ marginLeft: mapLeftMargin }}
+          // style={{ marginLeft: mapLeftMargin }}
           {...{ ref }}
         >
           <SettingsContext.Provider
@@ -252,12 +264,12 @@ export const ResourceMap: React.FC<{
             <network.Network
               key={selectedNode?.Record_ID_INTERNAL}
               enableNodeDrag={false}
-              onRenderFramePost={updateCanvasLeftMargin}
+              // onRenderFramePost={updateCanvasLeftMargin}
               nodeLabel={hideTipForLabeledNodes}
               containerStyle={{ transition: 'opacity .25s ease-in-out' }}
               linkDirectionalArrowLength={getLinkDirectionalArrowLength}
               linkCurvature={curvedLinks ? 0.5 : 0}
-              warmupTicks={1000}
+              warmupTicks={5000}
               zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
               interactionSettings={{
                 enableZoomInteraction: false,
