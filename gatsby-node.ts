@@ -1,11 +1,11 @@
 import path from 'path'
 import { GatsbyNode } from 'gatsby'
 import { PageContext } from './src/templates/Detail'
-// import {
-// getResourceMapData,
-// getFullResourceMapData,
-// } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/packageMethods'
-// import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/resourceMapTypes'
+import {
+  getResourceMapData,
+  getFullResourceMapData,
+} from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/packageMethods'
+import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/resourceMapTypes'
 import * as urls from './src/utilities/urls'
 
 export const createPages: GatsbyNode['createPages'] = async ({
@@ -92,20 +92,20 @@ export const createPages: GatsbyNode['createPages'] = async ({
   // removed:
   // Topic_Area_Icons
 
-  // const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
-  //   result.data.resources.nodes,
-  //   ['Auto_other_resources_cited'],
-  //   'Short_name',
-  //   'Record_ID_INTERNAL',
-  //   'Resource_type'
-  // )
+  const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
+    result.data.resources.nodes,
+    ['Auto_other_resources_cited'],
+    'Short_name',
+    'Record_ID_INTERNAL',
+    'Resource_type'
+  )
 
   result.data.resources.nodes.forEach(
     ({ data }: { data: PageContext['data'] }) => {
-      // const resourceMapData: HyperlinkedGraphData = getResourceMapData(
-      //   data.Record_ID_INTERNAL,
-      //   fullResourceMapData
-      // )
+      const resourceMapData: HyperlinkedGraphData = getResourceMapData(
+        data.Record_ID_INTERNAL,
+        fullResourceMapData
+      )
       data.Resource_sets = resultResourceSets.data.resourceSets.nodes.filter(
         (d: {
           data: {
@@ -122,7 +122,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         context: {
           data: {
             ...data,
-            // resourceMapData
+            resourceMapData,
           },
         },
       })
