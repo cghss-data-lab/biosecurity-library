@@ -2933,20 +2933,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@talus-analytics/library.airtable.cms-icon@npm:0.0.10":
-  version: 0.0.10
-  resolution: "@talus-analytics/library.airtable.cms-icon@npm:0.0.10::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-icon%2F-%2F%40talus-analytics-library.airtable.cms-icon-0.0.10.tgz"
-  dependencies:
-    core-js: ^3.0.0
-    node-html-parser: ^4.1.4
-    styled-components: ^5.3.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
-  checksum: 60ab072a8db801fe87f277078d4e09ab96614cf661411126dece6694ccf7eab902ca23a6c33101ca469f67b6f82b7a2b50f1b2815aedf032327bbc69f219383d
-  languageName: node
-  linkType: hard
-
 "@talus-analytics/library.airtable.cms-image@npm:0.0.8":
   version: 0.0.8
   resolution: "@talus-analytics/library.airtable.cms-image@npm:0.0.8::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-image%2F-%2F%40talus-analytics-library.airtable.cms-image-0.0.8.tgz"
@@ -2958,20 +2944,6 @@ __metadata:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
   checksum: b9ea1c65ad84bbeef8dce2b12d5263af1a7a2c9c007f3a084737e8fc2343b7743a0d2fbf7a8cba50e982a59db9fcc8bf478800b76e285567f986a3abc2ab294c
-  languageName: node
-  linkType: hard
-
-"@talus-analytics/library.airtable.cms-plot-icon@npm:0.0.5":
-  version: 0.0.5
-  resolution: "@talus-analytics/library.airtable.cms-plot-icon@npm:0.0.5::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Flibrary.airtable.cms-plot-icon%2F-%2F%40talus-analytics-library.airtable.cms-plot-icon-0.0.5.tgz"
-  dependencies:
-    "@talus-analytics/library.airtable.cms-icon": 0.0.10
-    core-js: ^3.0.0
-    styled-components: ^5.3.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
-  checksum: c948a6929d0fa96eb122bdf6058fedc46b8009af20adc5c134b2c695823125c36ccde33ff50c9379b91f788ffe86fd420e4432d3976b871ce8f3967d5c19b24a
   languageName: node
   linkType: hard
 
@@ -14597,6 +14569,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"network-fe2cca@workspace:src/network":
+  version: 0.0.0-use.local
+  resolution: "network-fe2cca@workspace:src/network"
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
+  languageName: unknown
+  linkType: soft
+
 "next-tick@npm:1, next-tick@npm:^1.1.0":
   version: 1.1.0
   resolution: "next-tick@npm:1.1.0"
@@ -18999,9 +18980,9 @@ __metadata:
     "@babel/runtime": 7.12.18
     "@mdx-js/mdx": ^1.6.22
     "@mdx-js/react": ^1.6.22
-    "@talus-analytics/library.airtable.cms-plot-icon": 0.0.5
     "@talus-analytics/library.airtable.cms-seo": ^0.0.3
     "@talus-analytics/viz.charts.network": ^0.0.11
+    "@talus-analytics/viz.charts.network-tools": 0.0.2
     "@testing-library/react": ^12.1.2
     "@tippyjs/react": ^4.2.5
     "@types/jest": ^26.0.0
