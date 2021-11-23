@@ -76,10 +76,10 @@ jobs:
             echo "@teambit:registry=https://node.bit.dev" >> ~/.npmrc;
             echo "//node.bit.dev/:_authToken={$BIT_TOKEN}" >> ~/.npmrc;
 
-      - restore_cache:
-          keys:
-            - yarn-deps-{{ checksum "yarn.lock" }}
-            - yarn-deps-
+      # - restore_cache:
+      #     keys:
+      #       - yarn-deps-{{ checksum "yarn.lock" }}
+      #       - yarn-deps-
 
       - run:
           name: Yarn Install
@@ -108,9 +108,9 @@ jobs:
             --distribution-id <<parameters.distribution>> \
             --paths "/*"
 
-      - save_cache:
-          key: yarn-deps-{{ checksum "yarn.lock" }}
-          paths:
-            - 'node_modules'
-            - '.cache'
-            - 'public'
+      # - save_cache:
+      #     key: yarn-deps-{{ checksum "yarn.lock" }}
+      #     paths:
+      #       - 'node_modules'
+      #       - '.cache'
+      #       - 'public'

@@ -8,9 +8,11 @@ import CMSIcon from './BIT_PLAYGROUND_ONLY/DEMO_AirtableCMSIcon'
 
 # Setup
 
-This component requires an airtable configured with two columns, `Name`, `Text`, and `SVG`.
-
 The `talus-gatsby-transformer-svg` and `gatsby-source-filesystem` plugins must be installed and enabled in `gatsby-config.js`.
+
+## Icons airtable
+
+This component requires an airtable configured with two columns, `Name`, `Text`, and `SVG`.
 
 The `gatsby-source-airtable` plugin must be configured with the Icons table:
 
@@ -39,6 +41,54 @@ The `mapping: {SVG: 'fileNode'}` call tells `gatsby-plugin-airtable` to download
 attachment as a file; from there `talus-gatsby-transformer-svg` will automatically
 recognize the node and make the SVG file contents available to the `<AirtableCMSIcon/>`
 component.
+
+## Content query
+
+This component requires a context provider to access the result from the `useCMSIconsQuery()` hook. This hook should live in the `src/cmsHooks/` directory.
+
+> src/cmsHooks/useHomePageData.ts
+>
+> ```ts
+> import { useStaticQuery, graphql } from 'gatsby'
+> import { IconsQuery } from '@talus-analytics/library.airtable.cms-icon'
+>
+> const useCMSIconsQuery = () => {
+>   const iconsQuery = useStaticQuery<IconsQuery>(graphql`
+>     query iconsQuery {
+>       iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
+>         nodes {
+>           data {
+>             Name
+>             Text
+>             SVG {
+>               localFiles {
+>                 childSvg {
+>                   svgString
+>                 }
+>               }
+>             }
+>           }
+>         }
+>       }
+>     }
+>   `)
+>
+>   return iconsQuery
+> }
+>
+> export default useCMSIconsQuery
+> ```
+
+## Context provider
+
+The result from this query must be passed to the `<CMSIconProvider />` context provider in the Layout component:
+
+```js
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const icons = useCMSIconsQuery()
+  return <CMSIconProvider data={icons}>{children}</CMSIconProvider>
+}
+```
 
 # Example usage
 

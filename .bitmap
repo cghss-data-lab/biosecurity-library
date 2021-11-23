@@ -11,13 +11,13 @@
 {
     "airtable-cms": {
         "scope": "talus-analytics.library",
-        "version": "0.0.15",
+        "version": "0.0.20",
         "mainFile": "index.tsx",
         "rootDir": "src/AirtableCMS"
     },
     "airtable/cms-icon": {
         "scope": "talus-analytics.library",
-        "version": "0.0.8",
+        "version": "0.0.11",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSIcon"
     },
@@ -29,7 +29,7 @@
     },
     "airtable/cms-plot-icon": {
         "scope": "talus-analytics.library",
-        "version": "0.0.3",
+        "version": "0.0.6",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSPlotIcon"
     },

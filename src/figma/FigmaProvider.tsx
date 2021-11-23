@@ -5,7 +5,7 @@ import { semanticStyles } from './semanticStyles.module.scss'
 
 import './fonts.css'
 
-import { CMSIconProvider } from '@talus-analytics/library.airtable.cms-icon'
+import CMS from '@talus-analytics/library.airtable-cms'
 import useCMSIconsQuery from '../airtableQueryHooks/useCMSIconsQuery'
 
 // inline webpack require because it's easier that way in gatsby
@@ -17,9 +17,9 @@ const FigmaProvider: React.FC = ({ children }) => {
 
   return (
     <ThemeProvider theme={figmaStyles}>
-      <CMSIconProvider data={icons}>
+      <CMS.IconProvider data={icons}>
         <div className={semanticStyles}>{children}</div>
-      </CMSIconProvider>
+      </CMS.IconProvider>
     </ThemeProvider>
   )
 }

@@ -27,6 +27,10 @@ export interface ExploreState {
   defs?: string
   type?: string
   filters?: Filters
+  // sort?: {
+  //   on: string // field name
+  //   compare: 'gt' | 'lt'
+  // }
 }
 
 const ExplorePage = (): JSX.Element => {
@@ -37,6 +41,10 @@ const ExplorePage = (): JSX.Element => {
       ? qs.parse(window.location.search.split('?')[1])
       : {}
   )
+
+  // useLayoutEffect(() => {
+  //   setExploreState(qs.parse(window.location.search.split('?')[1]))
+  // }, [])
 
   // store explore state in the query string whenever it chagnges
   useEffect(() => {
@@ -60,6 +68,10 @@ const ExplorePage = (): JSX.Element => {
   }))
 
   resources = applyFilters(resources, exploreState.filters)
+
+  // resources.map(group =>
+  //   group.nodes.sort(node => node.data.Authoring_organization)
+  // )
 
   return (
     <FigmaProvider>

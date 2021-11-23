@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
 
-export interface IconsQuery {
+export interface IconsQueryData {
   iconsQuery: {
     nodes: {
       data: {
@@ -18,11 +18,11 @@ export interface IconsQuery {
   }
 }
 
-export const IconsContext = createContext<null | IconsQuery>(null)
+export const IconsContext = createContext<null | IconsQueryData>(null)
 
-interface CMSIconProviderProps {
+export interface CMSIconProviderProps {
   children: React.ReactNode
-  data: IconsQuery
+  data: IconsQueryData
 }
 
 const CMSIconProvider = ({
