@@ -27,9 +27,7 @@ import {
   GraphLink,
   GraphNode,
 } from '@talus-analytics/viz.charts.network-tools'
-import Legend from './Legend/Legend'
-import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
-import IconEntries, { IconEntry } from './Legend/IconEntries'
+
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
 import parse from 'node-html-parser'
@@ -39,9 +37,6 @@ import parse from 'node-html-parser'
  */
 export type Icon = { name: string; text: string; svg: any }
 
-const Section = styled.div`
-  display: flex;
-`
 const MapContainer = styled.div`
   z-index: 0;
   position: relative;
@@ -175,151 +170,50 @@ export const ResourceMap: React.FC<{
   // return null if no map to show
   if (graphData === undefined) return <div>Wow</div>
 
-  const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
-
   return (
-    <div>
-      <p>{citationDesc}</p>
-      <em>Click resource in map to go to page</em>
-      <Section>
-        <Legend>
-          <h6>Legend</h6>
-          {/* Resource type icons legend */}
-          {selectedNode !== undefined && (
-            <IconEntry
-              label={'This resource'}
-              value={selectedNode.Resource_type}
-              frameColor={theme.colorYellow}
-              frameShape={'hexagon'}
-            />
-          )}
-          <IconEntries
-            icons={icons.filter(icon => {
-              return graphData?.nodes.map(n => n._icon).includes(icon.name)
-            })}
-          />
-          {/* Link direction legend */}
-          {curvedLinks && (
-            <CurvedEdgeEntry nodeColor={theme?.colorDarker || 'skyblue'} />
-          )}
-        </Legend>
-        <MapContainer
-          data-network
-          // style={{ marginLeft: mapLeftMargin }}
-          {...{ ref }}
-        >
-          <SettingsContext.Provider
-            value={{
-              ...defaultSettings,
-              nodes: {
-                ...defaultSettings.nodes,
-                selectedColor: theme.colorDarker,
-              },
-            }}
-          >
-            <network.Network
-              key={selectedNode?.Record_ID_INTERNAL}
-              enableNodeDrag={false}
-              // onRenderFramePost={updateCanvasLeftMargin}
-              nodeLabel={hideTipForLabeledNodes}
-              containerStyle={{ transition: 'opacity .25s ease-in-out' }}
-              linkDirectionalArrowLength={getLinkDirectionalArrowLength}
-              linkCurvature={curvedLinks ? 0.5 : 0}
-              warmupTicks={5000}
-              zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
-              interactionSettings={{
-                enableZoomInteraction: false,
-                enablePanInteraction: false,
-                maxZoom: 5,
-              }}
-              onNodeClick={onNodeClick}
-              initGraphData={formattedGraphData}
-              {...{
-                hoveredNode,
-                setHoveredNode,
-                selectedNode: selectedNode?.Record_ID_INTERNAL,
-              }}
-            />
-          </SettingsContext.Provider>
-        </MapContainer>
-      </Section>
-    </div>
+    <MapContainer
+      data-network
+      // style={{ marginLeft: mapLeftMargin }}
+      {...{ ref }}
+    >
+      <SettingsContext.Provider
+        value={{
+          ...defaultSettings,
+          nodes: {
+            ...defaultSettings.nodes,
+            selectedColor: theme.colorDarker,
+          },
+        }}
+      >
+        <network.Network
+          key={selectedNode?.Record_ID_INTERNAL}
+          enableNodeDrag={false}
+          // onRenderFramePost={updateCanvasLeftMargin}
+          nodeLabel={hideTipForLabeledNodes}
+          containerStyle={{ transition: 'opacity .25s ease-in-out' }}
+          linkDirectionalArrowLength={getLinkDirectionalArrowLength}
+          linkCurvature={curvedLinks ? 0.5 : 0}
+          warmupTicks={5000}
+          zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
+          interactionSettings={{
+            enableZoomInteraction: false,
+            enablePanInteraction: false,
+            maxZoom: 5,
+          }}
+          onNodeClick={onNodeClick}
+          initGraphData={formattedGraphData}
+          {...{
+            hoveredNode,
+            setHoveredNode,
+            selectedNode: selectedNode?.Record_ID_INTERNAL,
+          }}
+        />
+      </SettingsContext.Provider>
+    </MapContainer>
   )
 }
 
 export default ResourceMap
-
-/**
- * Returns text describing how many resources this one cites or is cited by
- * @param resId The ID of the resource whose page it is
- * @param graphData The nodes and links
- * @returns Text describing citation counts
- */
-function getCitationCountText(
-  resId: string | undefined,
-  graphData: AppGraphData
-): string {
-  if (resId === undefined) return ''
-  const cites: number = getUniqueNodeIdCount(graphData, 'target', resId)
-  const citedBy: number = getUniqueNodeIdCount(graphData, 'source', resId)
-  const citationDesc: string = getCitationString(cites, citedBy)
-  return citationDesc
-}
-
-/**
- * Returns text describing how many resources this one cites or is cited by
- * @param cites Number of other resources cited
- * @param citedBy Number of other resources cited by
- * @returns Text describing the counts
- */
-function getCitationString(cites: number, citedBy: number) {
-  let text: string = 'This resource '
-  const pieces: string[] = []
-  if (cites > 0)
-    pieces.push(`cites ${cites} other resource${cites === 1 ? '' : 's'}`)
-  if (citedBy > 0)
-    pieces.push(
-      `is cited by ${citedBy} other resource${citedBy === 1 ? '' : 's'}`
-    )
-  pieces.forEach((s, i) => {
-    if (i > 0) text += ' and ' + s
-    else text += s
-  })
-  text += ` that ${cites + citedBy === 1 ? 'is' : 'are'} also in the library.`
-  return text
-}
-
-/**
- * Returns the count of unique target/source connections the selected node
- * has in the graph data.
- *
- * @param graphData The nodes and links
- *
- * @param field The field (target or source) for which to count unique node IDs
- *
- * @param selectedNodeId
- * The ID of the node whose incoming and outgoing connections are
- * to be counted
- *
- * @returns The count
- */
-function getUniqueNodeIdCount(
-  graphData: AppGraphData,
-  field: 'target' | 'source',
-  selectedNodeId: string | undefined
-): number {
-  const otherField: 'target' | 'source' =
-    field === 'target' ? 'source' : 'target'
-  return [
-    ...new Set(
-      graphData.links
-        .filter(
-          l => l[field] !== selectedNodeId && l[otherField] === selectedNodeId
-        )
-        .map(l => l[field])
-    ),
-  ].length
-}
 
 /**
  * Given input graph data, returns a version of it formatted for display in the
