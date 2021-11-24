@@ -16,8 +16,7 @@ import {
   useAllCMSIcons,
   replaceFill,
 } from '@talus-analytics/library.airtable.cms-icon'
-import * as network from '../../../../network'
-// import * as network from '@talus-analytics/viz.charts.network'
+import * as network from '@talus-analytics/viz.charts.network'
 import {
   SettingsContext,
   defaultSettings,
