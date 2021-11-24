@@ -3002,9 +3002,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@talus-analytics/viz.charts.network@npm:^0.0.12":
-  version: 0.0.12
-  resolution: "@talus-analytics/viz.charts.network@npm:0.0.12::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Fviz.charts.network%2F-%2F%40talus-analytics-viz.charts.network-0.0.12.tgz"
+"@talus-analytics/viz.charts.network@npm:^0.0.13":
+  version: 0.0.13
+  resolution: "@talus-analytics/viz.charts.network@npm:0.0.13::__archiveUrl=https%3A%2F%2Fnode.bit.dev%2F%40talus-analytics%2Fviz.charts.network%2F-%2F%40talus-analytics-viz.charts.network-0.0.13.tgz"
   dependencies:
     "@talus-analytics/viz.charts.network-tools": 0.0.2
     core-js: ^3.0.0
@@ -3013,7 +3013,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: fc5fd38fce6479946b72532e8965d6d6dd6497e1de23e7c5d714f6f9e536deb1e4f15d29c03a58cdc84d53272e9975aa00733385c7f26d536efa1b0cdb222bbd
+  checksum: 6567452e24a6babe2ae4223be56bc915325440b2619796b14d0704bc82baf8d373ffcd93e92b8ba6159e64b303749e3f8dd396f975c82ebad298030c819330cc
   languageName: node
   linkType: hard
 
@@ -14569,15 +14569,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"network-fe2cca@workspace:src/network":
-  version: 0.0.0-use.local
-  resolution: "network-fe2cca@workspace:src/network"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
-  languageName: unknown
-  linkType: soft
-
 "next-tick@npm:1, next-tick@npm:^1.1.0":
   version: 1.1.0
   resolution: "next-tick@npm:1.1.0"
@@ -18983,8 +18974,7 @@ __metadata:
     "@mdx-js/mdx": ^1.6.22
     "@mdx-js/react": ^1.6.22
     "@talus-analytics/library.airtable.cms-seo": ^0.0.4
-    "@talus-analytics/viz.charts.network": ^0.0.12
-    "@talus-analytics/viz.charts.network-tools": 0.0.2
+    "@talus-analytics/viz.charts.network": ^0.0.13
     "@testing-library/react": ^12.1.2
     "@tippyjs/react": ^4.2.5
     "@types/jest": ^26.0.0
