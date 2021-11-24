@@ -292,11 +292,15 @@ export const Network2D: FC<Network2DProps> = ({
             node._labelPos || settings.nodes.labelPos
           ctx.textBaseline = nodeLabelPos === 'center' ? 'middle' : 'top'
           ctx.fillStyle = node._labelColor || theme.colors.text
-          const dimLabel = hoveredNode !== null && node._id !== hoveredNode
-          ctx.save()
-          if (dimLabel) ctx.globalAlpha = 0.2
 
-          // if (hoveredNode === node._id) ctx.fillStyle = '#ff0000'
+          // dim labels whose nodes are dimmed
+          const notHoveredNode =
+            hoveredNode !== null &&
+            hoveredNode !== node._id &&
+            !getHoveredNodePrimaryLinkNodes().includes(node._id)
+          // const dimLabel = hoveredNode !== null && node._id !== hoveredNode
+          ctx.save()
+          if (notHoveredNode) ctx.globalAlpha = 0.2
 
           // add half of icon height including global scale to text y pos
           const iconHeight: number = 5 // DEBUG
@@ -318,6 +322,7 @@ export const Network2D: FC<Network2DProps> = ({
       settings.nodes.fontSize,
       settings.nodes.labelPos,
       theme.colors.text,
+      getHoveredNodePrimaryLinkNodes,
     ]
   )
 
