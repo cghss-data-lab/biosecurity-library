@@ -57,6 +57,24 @@ export interface Network2DProps extends ForceGraphProps {
   containerStyle?: Record<string, any>
 }
 
+const DEBUG_IMG_SRC: string =
+  'data:image/svg+xml;charset=utf-8,' +
+  encodeURIComponent(
+    replaceFill(
+      `<svg width="30" height="30"  fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12.0008 22.9996C12.0008 22.4486 11.5528 21.9995 11.0007 21.9995H5.00019C4.44813 21.9995 4.00009 22.4486 4.00009 22.9996V24.9998H3V27H13.0009V24.9998H12.0008V22.9996Z" fill="#EDB458"/>
+  <path d="M10.7075 10.2924C10.3165 9.90332 9.68444 9.90332 9.2934 10.2924L7.29322 12.2925C6.90218 12.6826 6.90218 13.3166 7.29322 13.7067L13.2938 19.7072C13.4888 19.9043 13.7448 19.9993 14.0008 19.9993C14.2569 19.9993 14.5129 19.9043 14.7079 19.7072L16.7081 17.707C17.0991 17.317 17.0991 16.683 16.7081 16.2929L10.7075 10.2924Z" fill="#EDB458"/>
+  <path d="M20.2946 12.7067C20.4896 12.9037 20.7457 12.9987 21.0017 12.9987C21.2577 12.9987 21.5137 12.9037 21.7088 12.7067L23.7089 10.7065C24.1 10.3164 24.1 9.68237 23.7089 9.29234L17.7084 3.29178C17.3174 2.90274 16.6853 2.90274 16.2943 3.29178L14.2941 5.29196C13.903 5.682 13.903 6.31606 14.2941 6.70609L20.2946 12.7067Z" fill="#EDB458"/>
+  <path d="M26.7092 21.2935L18.8734 13.4588C19.0715 13.0827 19.0254 12.6097 18.7084 12.2927L14.708 8.2923C14.317 7.90326 13.685 7.90326 13.2939 8.2923L12.2938 9.29239C11.9028 9.68243 11.9028 10.3165 12.2938 10.7065L16.2942 14.7069C16.4892 14.9039 16.7452 14.9989 17.0013 14.9989C17.1613 14.9989 17.3143 14.9479 17.4593 14.8729L25.295 22.7076L26.7092 21.2935Z" fill="#EDB458"/>
+  </svg>`,
+      '#ff0000'
+    )
+  )
+const DEBUG_IMG = new Image()
+DEBUG_IMG.src = DEBUG_IMG_SRC
+
+const imgLookup: Record<string, HTMLImageElement> = {}
+
 // Create an interface for the size of the window
 interface Size {
   width: number
@@ -333,7 +351,7 @@ export const Network2D: FC<Network2DProps> = ({
         !getHoveredNodePrimaryLinkNodes().includes(node._id)
 
       const isSelectedNode: boolean = selectedNode === node._id
-      const [currentNodeColor, currentNodeColorNoAlpha]: [string, string] =
+      const [currentNodeColor, curNodeColorNoAlpha]: [string, string] =
         getCurrentNodeColor(
           { hovered: !notHoveredNode, selected: isSelectedNode },
           color,
@@ -377,11 +395,26 @@ export const Network2D: FC<Network2DProps> = ({
       ctx.fillStyle = currentNodeColor
 
       if (usingImg) {
-        const img = new Image()
+        // const img = DEBUG_IMG
+        // const img = new Image()
         // img.src = DEBUG_IMG_SRC
-        img.src =
+        // img.src =
+        //   'data:image/svg+xml;charset=utf-8,' +
+        //   encodeURIComponent(replaceFill(node._icon, currentNodeColorNoAlpha))
+        const imgSrc =
           'data:image/svg+xml;charset=utf-8,' +
-          encodeURIComponent(replaceFill(node._icon, currentNodeColorNoAlpha))
+          encodeURIComponent(replaceFill(node._icon, curNodeColorNoAlpha))
+        let img: HTMLImageElement | undefined = undefined
+        if (imgLookup[imgSrc] === undefined) {
+          const newImg = new Image()
+          newImg.src = imgSrc
+          imgLookup[imgSrc] = newImg
+          img = newImg
+        } else {
+          img = imgLookup[imgSrc]
+        }
+        if (img === undefined)
+          throw new Error('Missing image source for node ID ' + node._id)
 
         ctx.save()
         ctx.globalAlpha = notHoveredNode ? 0.2 : 1.0
