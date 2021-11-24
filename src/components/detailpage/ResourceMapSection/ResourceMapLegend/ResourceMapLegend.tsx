@@ -1,19 +1,26 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { useTheme } from 'styled-components'
+
+import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
+import { useAllCMSIcons } from '@talus-analytics/library.airtable.cms-icon'
 
 import Legend from '../ResourceMap/Legend/Legend'
 import CurvedEdgeEntry from '../ResourceMap/Legend/CurvedEdgeEntry'
 import IconEntries, { IconEntry } from '../ResourceMap/Legend/IconEntries'
-import { useAllCMSIcons } from '@talus-analytics/library.airtable.cms-icon'
+import { PageContext } from '../../../../templates/Detail'
 
-const ResourceMapLegend = ({
+interface ResourceMapLegendProps {
+  selectedNode: PageContext['data']
+  graphData: AppGraphData
+  curvedLinks?: boolean
+}
+const ResourceMapLegend: FC<ResourceMapLegendProps> = ({
   selectedNode,
   graphData,
   curvedLinks = true,
 }): JSX.Element => {
   const theme: any = useTheme()
   const icons = useAllCMSIcons()
-  console.log('hello I am a legend')
   return (
     <Legend>
       <h6>Legend</h6>

@@ -17,15 +17,10 @@ const Section = styled.div`
 `
 
 export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
-  const showMap: boolean =
+  const mapNotEmpty: boolean =
     data.resourceMapData !== undefined &&
     data.resourceMapData.links.length > 0 &&
     data.resourceMapData.nodes.length > 1
-
-  const citationDesc: string = getCitationCountText(
-    data?.Record_ID_INTERNAL,
-    data.resourceMapData
-  )
 
   return (
     <>
@@ -41,9 +36,14 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
           }
         />
       </h5>
-      {showMap && (
+      {data.resourceMapData !== undefined && mapNotEmpty && (
         <div>
-          <p>{citationDesc}</p>
+          <p>
+            {getCitationCountText(
+              data?.Record_ID_INTERNAL,
+              data.resourceMapData
+            )}
+          </p>
           <em>Click resource in map to go to page</em>
           <Section>
             <ResourceMapLegend
@@ -54,7 +54,7 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
           </Section>
         </div>
       )}
-      {!showMap && (
+      {!mapNotEmpty && (
         <p>
           This resource is not currently known to cite or be cited by any other
           resources in the library.
