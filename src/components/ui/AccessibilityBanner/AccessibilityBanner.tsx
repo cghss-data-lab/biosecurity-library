@@ -10,7 +10,7 @@ const Container = styled.section`
   border-radius: 5px;
   padding: 15px;
   flex-grow: 0;
-  width: fit-content;
+  width: 100%;
   margin: 0 auto;
 
   p {
@@ -34,7 +34,7 @@ const AccessibilityBanner = ({
       <CMS.Icon
         name="Notice"
         color={theme.colorGolden}
-        style={{ position: 'relative', top: -1, marginRight: 2 }}
+        style={{ position: 'relative', top: -1, marginRight: 4 }}
       />
       {children}
     </Container>
