@@ -38,10 +38,7 @@
      */
     "packageManager": "teambit.dependencies/yarn",
     "policy": {
-      "dependencies": {
-        // "@talus-analytics/viz.charts.network": "0.0.11",
-        // "@talus-analytics/viz.charts.network-tools": "0.0.2"
-      },
+      "dependencies": {},
       "peerDependencies": {}
     }
   },
