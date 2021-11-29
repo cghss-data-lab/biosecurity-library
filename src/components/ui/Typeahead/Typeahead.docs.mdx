@@ -1,0 +1,50 @@
+---
+description: 'A typeahead single or multiselect component with fuzzy search.'
+labels: ['search', 'filter', 'selection']
+---
+
+import Typeahead from './'
+
+## React Component for rendering a single or multiple selection control
+
+Takes an array of items, which must have "key" and "label" properties, but can have
+any additional properties as necessary, and allows the user to search through and
+select them. The control can be used with just the mouse, just the keyboard, or a
+combination of the two.
+
+### Component usage
+
+Simple usage example of multiple select component. This component is designed to work
+in different situations with different state management (useState or useReducer, for
+example), so the parent component is expected to set that up.
+
+Modify the placeholder text, add items, or add other props to see changes live:
+
+```js live
+// prettier-ignore
+() => {
+  const exampleItems = [
+    { key: '1', label: 'item one' },
+    { key: '2', label: 'item two' },
+    { key: '3', label: 'another item' },
+  ]
+
+  const [selected, setSelected] = React.useState([])
+  const selectedKeys = selected.map(i => i.key)
+  const unselected = exampleItems.filter(i => !selectedKeys.includes(i.key))
+
+  return (
+    <Typeahead
+      multiselect
+      placeholder={`${selected.length} items selected`}
+      items={unselected}
+      values={selected}
+      onAdd={item => setSelected(prev => [...prev, item])}
+      onRemove={item =>
+        setSelected(prev => prev.filter(i => i.key !== item.key))
+      }
+      style={{ width: 300 }}
+    />
+  )
+}
+```

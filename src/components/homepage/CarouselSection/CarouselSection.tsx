@@ -1,8 +1,7 @@
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import CMSIcon from '../../../airtable-cms/CMSIcon/CMSIcon'
-import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
 import { urlString } from '../../../airtable-cms/utilities'
 
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
@@ -49,7 +48,7 @@ const Card = styled.div`
   min-height: 385px;
   border-radius: 3px;
 `
-const KeyResourceFlag = styled(CMSIcon)`
+const KeyResourceFlag = styled(CMS.Icon)`
   position: absolute;
   top: -10px;
   left: 15px;
@@ -125,15 +124,15 @@ const CarouselSection = (): JSX.Element => {
   return (
     <CarouselBackground>
       <H2>
-        <AirtableCMSText name="Second header" data={homePageText} />
+        <CMS.Text name="Second header" data={homePageText} />
       </H2>
       <KeyResourceLegend>
-        <CMSIcon
+        <CMS.Icon
           name="Key resource"
           color={theme.colorDarkest}
           style={{ width: 24, height: 24, marginRight: 5 }}
         />
-        <AirtableCMSText name="Key resource explanation" data={homePageText} />
+        <CMS.Text name="Key resource explanation" data={homePageText} />
       </KeyResourceLegend>
       <Main>
         <StyledCarousel
@@ -141,7 +140,7 @@ const CarouselSection = (): JSX.Element => {
           disabledButtonColor={theme.colorWhite}
         >
           {carouselResources.nodes.map(({ data: resource }) => (
-            <Card>
+            <Card key={resource.Resource_name}>
               <KeyResourceFlag name="Key resource" color={theme.colorGolden} />
               <div
                 style={
@@ -164,7 +163,7 @@ const CarouselSection = (): JSX.Element => {
               </div>
               <TextContent>
                 <ResourceType>
-                  <CMSIcon
+                  <CMS.Icon
                     name={resource.Resource_type}
                     color={theme.colorDarkest}
                     style={{ width: 24, height: 24, marginRight: 8 }}
@@ -190,7 +189,8 @@ const CarouselSection = (): JSX.Element => {
                 </Description>
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
-                    <CMSIcon
+                    <CMS.Icon
+                      key={topic}
                       noEmitError
                       name={topic}
                       color={theme.colorDarkest}

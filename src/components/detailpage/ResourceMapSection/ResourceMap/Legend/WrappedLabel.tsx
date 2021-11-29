@@ -15,10 +15,10 @@ export const WrappedLabel = ({
   return (
     <span>
       {getLinesOfCharCount(children, maxChars).map((text, i) => (
-        <>
+        <span key={`${i}-${text}}`}>
           {text}
           {i < text.length - 1 ? <br /> : null}
-        </>
+        </span>
       ))}
     </span>
   )

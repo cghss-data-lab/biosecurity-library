@@ -25,6 +25,8 @@ const LegendContainer = styled.div`
   > h6 {
     text-transform: uppercase;
     margin: 0;
+    font-weight: normal;
+    color: ${({ theme }) => theme.colorDarkGray};
   }
 `
 

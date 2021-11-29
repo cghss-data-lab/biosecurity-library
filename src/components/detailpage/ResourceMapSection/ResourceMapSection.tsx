@@ -1,16 +1,27 @@
 import React, { FC } from 'react'
+import styled from 'styled-components'
+
 import { PageContext } from '../../../templates/Detail'
 import { InfoTip } from '../../ui/InfoTip'
 import ResourceMap from './ResourceMap/ResourceMap'
+import ResourceMapLegend from './ResourceMapLegend/ResourceMapLegend'
+
+import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
 
 interface ResourceMapSectionProps {
   data: PageContext['data']
 }
+
+const Section = styled.div`
+  display: flex;
+`
+
 export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
-  const showMap: boolean =
+  const mapNotEmpty: boolean =
     data.resourceMapData !== undefined &&
     data.resourceMapData.links.length > 0 &&
     data.resourceMapData.nodes.length > 1
+
   return (
     <>
       <h5>
@@ -25,12 +36,25 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
           }
         />
       </h5>
-      {showMap && (
-        <p>
-          <ResourceMap selectedNode={data} graphData={data.resourceMapData} />
-        </p>
+      {data.resourceMapData !== undefined && mapNotEmpty && (
+        <div>
+          <p>
+            {getCitationCountText(
+              data?.Record_ID_INTERNAL,
+              data.resourceMapData
+            )}
+          </p>
+          <em>Click resource in map to go to page</em>
+          <Section>
+            <ResourceMapLegend
+              selectedNode={data}
+              graphData={data.resourceMapData}
+            />
+            <ResourceMap selectedNode={data} graphData={data.resourceMapData} />
+          </Section>
+        </div>
       )}
-      {!showMap && (
+      {!mapNotEmpty && (
         <p>
           This resource is not currently known to cite or be cited by any other
           resources in the library.
@@ -38,6 +62,78 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
       )}
     </>
   )
+}
+
+/**
+ * Returns text describing how many resources this one cites or is cited by
+ * @param resId The ID of the resource whose page it is
+ * @param graphData The nodes and links
+ * @returns Text describing citation counts
+ */
+function getCitationCountText(
+  resId: string | undefined,
+  graphData: AppGraphData
+): string {
+  if (resId === undefined) return ''
+  const cites: number = getUniqueNodeIdCount(graphData, 'target', resId)
+  const citedBy: number = getUniqueNodeIdCount(graphData, 'source', resId)
+  const citationDesc: string = getCitationString(cites, citedBy)
+  return citationDesc
+}
+
+/**
+ * Returns the count of unique target/source connections the selected node
+ * has in the graph data.
+ *
+ * @param graphData The nodes and links
+ *
+ * @param field The field (target or source) for which to count unique node IDs
+ *
+ * @param selectedNodeId
+ * The ID of the node whose incoming and outgoing connections are
+ * to be counted
+ *
+ * @returns The count
+ */
+function getUniqueNodeIdCount(
+  graphData: AppGraphData,
+  field: 'target' | 'source',
+  selectedNodeId: string | undefined
+): number {
+  const otherField: 'target' | 'source' =
+    field === 'target' ? 'source' : 'target'
+  return [
+    ...new Set(
+      graphData.links
+        .filter(
+          l => l[field] !== selectedNodeId && l[otherField] === selectedNodeId
+        )
+        .map(l => l[field])
+    ),
+  ].length
+}
+
+/**
+ * Returns text describing how many resources this one cites or is cited by
+ * @param cites Number of other resources cited
+ * @param citedBy Number of other resources cited by
+ * @returns Text describing the counts
+ */
+function getCitationString(cites: number, citedBy: number) {
+  let text: string = 'This resource '
+  const pieces: string[] = []
+  if (cites > 0)
+    pieces.push(`cites ${cites} other resource${cites === 1 ? '' : 's'}`)
+  if (citedBy > 0)
+    pieces.push(
+      `is cited by ${citedBy} other resource${citedBy === 1 ? '' : 's'}`
+    )
+  pieces.forEach((s, i) => {
+    if (i > 0) text += ' and ' + s
+    else text += s
+  })
+  text += ` that ${cites + citedBy === 1 ? 'is' : 'are'} also in the library.`
+  return text
 }
 
 export default ResourceMapSection
