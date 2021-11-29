@@ -9,10 +9,11 @@ export interface AirtableCMSData {
     data: {
       Name: string
       Text: string
-      Image: {
+      Image?: {
         localFiles: FileNode[] &
           { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
       }
+      Download: {}
     }
   }[]
 }
