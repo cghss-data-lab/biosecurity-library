@@ -21,7 +21,7 @@ const ImageHolder = styled.div`
   justify-content: space-around;
   margin-bottom: 1em;
 `
-const ButtonLink = styled.a`
+const ButtonLink = styled(CMS.Download)`
   display: block;
   width: fit-content;
   text-decoration: none;
@@ -37,7 +37,7 @@ const ButtonLink = styled.a`
   margin-top: 1em;
 `
 
-const About = () => {
+const About = (): JSX.Element => {
   const data = useAboutPageData()
 
   return (
@@ -73,19 +73,20 @@ const About = () => {
           <CMS.Image name="Talus logo" data={data} />
         </ImageHolder>
         <CMS.RichText name="Contributors text" data={data} />
+
         <h3>
           <CMS.Text name="Funder h3" data={data} />
         </h3>
         <ImageHolder>
           <CMS.Image name="Funder logo" data={data} />
         </ImageHolder>
+
         <h3>
           <CMS.Text name="Methods h3" data={data} />
         </h3>
         <CMS.RichText name="Methods text" data={data} />
-        <ButtonLink>
-          <CMS.Text name="Methods button" data={data} />
-        </ButtonLink>
+        <ButtonLink name="Methods button" data={data} />
+
         <h3>
           <CMS.Text name="Other h3" data={data} />
         </h3>
