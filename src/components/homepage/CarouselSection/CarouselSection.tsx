@@ -8,7 +8,7 @@ import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 import Main from '../../layout/Main'
 
-import Carousel from '../../ui/Carousel/Carousel'
+import Carousel from '@talus-analytics/library.ui.carousel'
 
 const H2 = styled.h2`
   text-align: center;

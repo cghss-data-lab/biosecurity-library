@@ -51,9 +51,9 @@
         "mainFile": "index.ts",
         "rootDir": "src/airtable-cms/CMSTypes"
     },
-    "carousel": {
+    "ui/carousel": {
         "scope": "talus-analytics.library",
-        "version": "0.0.2",
+        "version": "0.0.1",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Carousel"
     },
