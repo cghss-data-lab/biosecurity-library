@@ -1,9 +1,14 @@
+import { useContext, useMemo } from 'react'
 import { parse } from 'node-html-parser'
-import { useMemo } from 'react'
-import useCMSIconsQuery from './useCMSIconsQuery'
+
+import { IconsContext } from './CMSIconContext'
 
 const useAllCMSIcons = () => {
-  const nodes = useCMSIconsQuery()
+  let iconsQuery = useContext(IconsContext)
+  if (!iconsQuery) iconsQuery = { iconsQuery: { nodes: [] } }
+
+  const nodes = iconsQuery.iconsQuery.nodes
+
   const icons = useMemo(() => {
     return nodes.map(node => ({
       name: node.data.Name,

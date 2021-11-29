@@ -1,5 +1,5 @@
 import React from 'react'
-
+import CMS from '@talus-analytics/library.airtable-cms'
 import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 // import { commaSeparatedList } from '../../../../utilities/grammar'
@@ -10,7 +10,7 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => {
     <TabContentContainer>
       {typeof window !== 'undefined' && <ResourceMapSection {...{ data }} />}
       <h5>SUMMARY</h5>
-      <p>{data.Long_description}</p>
+      <CMS.RenderRichText markdown={data.Long_description} />
       {/*<h5>RESOURCE TYPE</h5>
       <p>{data.Resource_type}</p>
       <h5>CATEGORIES</h5>

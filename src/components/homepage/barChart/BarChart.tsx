@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import AirtableCMSText from '../../../airtable-cms/AirtableCMSText'
+import CMS from '@talus-analytics/library.airtable-cms'
+
 import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
 import Main from '../../layout/Main'
 
@@ -47,7 +48,7 @@ const BarChart = (): JSX.Element => {
 
   const dim: DimObj = {
     width: 500,
-    height: 100,
+    height: 150,
     barGap: 10,
     iconSize: 10,
     labelPad: 10,
@@ -67,14 +68,14 @@ const BarChart = (): JSX.Element => {
     <Section>
       <Content>
         <h2 style={{ color: 'white', textAlign: 'center' }}>
-          <AirtableCMSText name="Third header" data={homePageText} />
+          <CMS.Text name="Third header" data={homePageText} />
         </h2>
         <Instruction>
-          <AirtableCMSText name="Third header subtext" data={homePageText} />
+          <CMS.Text name="Third header subtext" data={homePageText} />
         </Instruction>
         <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
           {sortedBars.map((bar, index) => (
-            <Bar {...{ index, bar, dim }} />
+            <Bar key={index} {...{ index, bar, dim }} />
           ))}
         </Svg>
       </Content>

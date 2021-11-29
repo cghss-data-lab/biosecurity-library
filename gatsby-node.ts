@@ -119,7 +119,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
       actions.createPage({
         path: urls.getDetailURL(data),
         component: detailPageTemplate,
-        context: { data: { ...data, resourceMapData } },
+        context: {
+          data: {
+            ...data,
+            resourceMapData,
+          },
+        },
       })
     }
   )
