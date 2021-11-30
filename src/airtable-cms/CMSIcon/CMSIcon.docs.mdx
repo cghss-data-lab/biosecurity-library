@@ -6,6 +6,25 @@ labels: ['airtable', 'typescript', 'ui']
 
 import CMSIcon from './BIT_PLAYGROUND_ONLY/DEMO_AirtableCMSIcon'
 
+# Example usage
+
+This is using a pre-saved query result; the same as when Gatsby runs the query and
+transforms the result into a static `.json` file.
+
+**Available icons are "Syringe" and "Learn more"**
+
+```js live
+// prettier-ignore
+() => (
+  <CMSIcon
+    name="Syringe"
+    color="#282e40"
+    hoverColor="#45a26a"
+    style={{ height: 100, padding: 30 }}
+  />
+)
+```
+
 # Setup
 
 The `talus-gatsby-transformer-svg` and `gatsby-source-filesystem` plugins must be installed and enabled in `gatsby-config.js`.
@@ -27,7 +46,7 @@ module.exports = {
           {
             baseId: `appXXXXXXXXXXXXXX`,
             tableName: `Icons`,
-            view: `CMS View`,
+            view: `CMS`,
             mapping: { SVG: `fileNode` },
           },
         ],
@@ -50,28 +69,29 @@ This component requires a context provider to access the result from the `useCMS
 >
 > ```ts
 > import { useStaticQuery, graphql } from 'gatsby'
-> import { IconsQuery } from '@talus-analytics/library.airtable.cms-icon'
+> import { AirtableCMSData } from '@talus-analytics/library.airtable-cms'
 >
 > const useCMSIconsQuery = () => {
->   const iconsQuery = useStaticQuery<IconsQuery>(graphql`
->     query iconsQuery {
->       iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
->         nodes {
->           data {
->             Name
->             Text
->             SVG {
->               localFiles {
->                 childSvg {
->                   svgString
+>   const { iconsQuery }: { iconsQuery: AirtableCMSData } =
+>     useStaticQuery(graphql`
+>       query iconsQuery {
+>         iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
+>           nodes {
+>             data {
+>               Name
+>               Text
+>               SVG {
+>                 localFiles {
+>                   childSvg {
+>                     svgString
+>                   }
 >                 }
 >               }
 >             }
 >           }
 >         }
 >       }
->     }
->   `)
+>     `)
 >
 >   return iconsQuery
 > }
@@ -88,25 +108,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const icons = useCMSIconsQuery()
   return <CMSIconProvider data={icons}>{children}</CMSIconProvider>
 }
-```
-
-# Example usage
-
-This is using a pre-saved query result; the same as when Gatsby runs the query and
-transforms the result into a static `.json` file.
-
-**Available icons are "Syringe" and "Learn more"**
-
-```js live
-// prettier-ignore
-() => (
-  <CMSIcon
-    name="Syringe"
-    color="#282e40"
-    hoverColor="#45a26a"
-    style={{ height: 100, padding: 30 }}
-  />
-)
 ```
 
 # Exported utilities and hooks

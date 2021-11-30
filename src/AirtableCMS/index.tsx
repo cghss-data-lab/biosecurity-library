@@ -5,7 +5,6 @@ import CMSText, {
 import CMSIcon, {
   useCMSIcon,
   CMSIconProps,
-  IconsQueryData,
   CMSIconProvider,
   CMSIconProviderProps,
 } from '@talus-analytics/library.airtable.cms-icon'
@@ -20,6 +19,10 @@ import CMSRichText, {
 import CMSPlotIcon, {
   CMSPlotIconProps,
 } from '@talus-analytics/library.airtable.cms-plot-icon'
+import CMSDownload, {
+  CMSDownloadProps,
+  getCMSDownloadInfo,
+} from '@talus-analytics/library.airtable.cms-download'
 import SEO, {
   SEOProps,
   SiteMetadataContext,
@@ -34,14 +37,14 @@ export type {
   // query data type
   AirtableCMSData,
   // component prop types
+  SEOProps,
   CMSTextProps,
   CMSIconProps,
   CMSImageProps,
-  IconsQueryData,
+  CMSDownloadProps,
   CMSPlotIconProps,
   CMSIconProviderProps,
   SiteMetadataProviderProps,
-  SEOProps,
 }
 
 const CMS = {
@@ -51,12 +54,14 @@ const CMS = {
   RichText: CMSRichText,
   Icon: CMSIcon,
   PlotIcon: CMSPlotIcon,
+  Download: CMSDownload,
   SEO,
   // non-AirtableCMSData components
   RenderRichText: RenderCMSRichText,
   // getters
   getImage: getCMSImage,
   getText: getCMSText,
+  getDownloadInfo: getCMSDownloadInfo,
   // hooks
   useIcon: useCMSIcon,
   // utilities
