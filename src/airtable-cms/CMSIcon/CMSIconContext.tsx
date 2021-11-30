@@ -1,28 +1,11 @@
 import React, { createContext } from 'react'
+import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
 
-export interface IconsQueryData {
-  iconsQuery: {
-    nodes: {
-      data: {
-        Name: string
-        Text: string
-        SVG: {
-          localFiles: {
-            childSvg: {
-              svgString: string
-            }
-          }[]
-        }
-      }
-    }[]
-  }
-}
-
-export const IconsContext = createContext<null | IconsQueryData>(null)
+export const IconsContext = createContext<null | AirtableCMSData>(null)
 
 export interface CMSIconProviderProps {
   children: React.ReactNode
-  data: IconsQueryData
+  data: AirtableCMSData
 }
 
 const CMSIconProvider = ({

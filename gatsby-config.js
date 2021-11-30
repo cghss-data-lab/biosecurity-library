@@ -60,7 +60,7 @@ module.exports = {
             baseId: `appmL0p5H21CiY7tL`,
             tableName: `About Page`,
             tableView: `CMS`,
-            mapping: { Image: `fileNode` },
+            mapping: { Image: `fileNode`, Download: `fileNode` },
           },
           {
             baseId: `appmL0p5H21CiY7tL`,

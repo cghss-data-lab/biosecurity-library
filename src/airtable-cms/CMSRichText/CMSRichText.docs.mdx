@@ -6,6 +6,40 @@ labels: ['airtable', 'typescript', 'ui']
 
 # Usage
 
+## Using a [content table](https://bit.dev/talus-analytics/library/airtable/cms-types)
+
+```js
+import CMSRichText from '@talus-analytics/library.airtable.cms-rich-text'
+
+const SomeComponent = () => {
+  // cms data should come from custom hooks
+  const cmsData = useCMSData()
+
+  return <CMSRichText name={'Main text'} data={cmsData} />
+}
+```
+
+## Render rich text string
+
+This is a react component which takes a string of rich text from airtable and renders as html into a div container.
+
+This component is useful for things like detail pages, where the incoming data is not sourced from a standard `AirtableCMSData` query format, but from a more complex object.
+
+```js
+import { RenderCMSRichText } from '@talus-analytics/library.airtable.cms-rich-text'
+
+const SomeComponent = () => {
+  // cms data should come from custom hooks
+  const explorePageData = useExplorePageData()
+
+  return (
+    <RenderCMSRichText markdown={explorePageData.Record.Long_description} />
+  )
+}
+```
+
+# Setup
+
 This component requires an Airtable table configured with `Name` and `Text` columns, where the Text column has the "Enable rich text formatting" option enabled, and a CMS query in a custom hook which should look something like this (at a minimum—content queries may also include images).
 
 ### Example CMS query hook
@@ -28,38 +62,6 @@ const useCMSData = () => {
   }`)
 
   return cmsData
-}
-```
-
-### Example usage
-
-```js
-import CMSRichText from '@talus-analytics/library.airtable.cms-rich-text'
-
-const SomeComponent = () => {
-  // cms data should come from custom hooks
-  const cmsData = useCMSData()
-
-  return <CMSRichText name={'Main text'} data={cmsData} />
-}
-```
-
-# Render rich text component
-
-This is a react component which takes a string of rich text from airtable and renders as html into a div container.
-
-This component is useful for things like detail pages, where the incoming data is not sourced from a standard `AirtableCMSData` query format, but from a more complex object.
-
-```js
-import { RenderCMSRichText } from '@talus-analytics/library.airtable.cms-rich-text'
-
-const SomeComponent = () => {
-  // cms data should come from custom hooks
-  const explorePageData = useExplorePageData()
-
-  return (
-    <RenderCMSRichText markdown={explorePageData.Record.Long_description} />
-  )
 }
 ```
 

@@ -7,13 +7,26 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 export interface AirtableCMSData {
   nodes: {
     data: {
-      Name: string
-      Text: string
+      Name: string // name is used as the identifier
+      Text: string // text is required for accessibility
       Image?: {
         localFiles: FileNode[] &
           { childImageSharp: IGatsbyImageDataParent<IGatsbyImageData> }[]
       }
-      Download: {}
+      Download?: {
+        localFiles: {
+          name: string
+          prettySize: string
+          publicURL: string
+        }[]
+      }
+      SVG?: {
+        localFiles: {
+          childSvg: {
+            svgString: string
+          }
+        }[]
+      }
     }
   }[]
 }

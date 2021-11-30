@@ -27,7 +27,7 @@ function useCMSIcon(
 ) {
   const iconsQuery = useContext(IconsContext)
   if (!iconsQuery) return undefined
-  const icons = iconsQuery.iconsQuery.nodes
+  const icons = iconsQuery.nodes
 
   if (icons.length === 0) {
     if (noEmitError) return undefined
@@ -41,7 +41,7 @@ function useCMSIcon(
 
   const icon = icons.find(icon => icon.data.Name === name)
 
-  if (!icon) {
+  if (!icon?.data.SVG) {
     if (noEmitError === true) return undefined
 
     throw new Error(

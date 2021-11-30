@@ -20,6 +20,13 @@ const useAboutPageData = () => {
                 }
               }
             }
+            Download {
+              localFiles {
+                name
+                prettySize
+                publicURL
+              }
+            }
           }
         }
       }
