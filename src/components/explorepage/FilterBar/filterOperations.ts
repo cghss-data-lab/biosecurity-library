@@ -123,9 +123,18 @@ export const applyFilters: ApplyFilterFunction = (resources, filters) => {
       prev.map(group => ({
         ...group,
         nodes: group.nodes.filter(node =>
-          values.some(value =>
-            node.data[field as keyof typeof filters].includes(value)
-          )
+          values.some(value => {
+            const fields = node.data[field as keyof typeof filters]
+
+            // this handles the case of linked records where we actually
+            // need to filter on the Name column of the linked record
+            if ((fields as any[]).every(d => typeof d === 'object' && d.data))
+              return fields
+                .map(d => (d as { data: { Name: string } }).data.Name)
+                .includes(value)
+
+            return (fields as string[]).includes(value)
+          })
         ),
       })),
     resources
