@@ -138,13 +138,7 @@ const CarouselSection = (): JSX.Element => {
           {carouselResources.nodes.map(({ data: resource }) => (
             <Card key={resource.Resource_name}>
               <KeyResourceFlag name="Key resource" color={theme.colorGolden} />
-              <div
-                style={
-                  {
-                    // overflow: 'hidden',
-                  }
-                }
-              >
+              <div>
                 {resource.Thumbnail_INTERNAL && (
                   <GatsbyImage
                     image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
