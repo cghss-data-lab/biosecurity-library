@@ -64,11 +64,13 @@ const BarPopup = ({ barName }: BarPopupProps): JSX.Element => {
         />
         {barName}
       </Header>
-      <Content>
-        <DefinitionHeader>About this topic</DefinitionHeader>
-        <Definition>{definition}</Definition>
-        <CTA>Click to explore topic</CTA>
-      </Content>
+      {definition && (
+        <Content>
+          <DefinitionHeader>About this topic</DefinitionHeader>
+          <Definition>{definition}</Definition>
+          <CTA>Click to explore topic</CTA>
+        </Content>
+      )}
     </Container>
   )
 }
