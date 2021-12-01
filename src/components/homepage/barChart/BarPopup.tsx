@@ -52,8 +52,6 @@ const BarPopup = ({ barName }: BarPopupProps): JSX.Element => {
     def => def.data.Name.trim() === barName.trim()
   )?.data.Definition
 
-  console.log(definition)
-
   return (
     <Container>
       <Header>
