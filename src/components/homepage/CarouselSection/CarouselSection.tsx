@@ -185,6 +185,7 @@ const CarouselSection = (): JSX.Element => {
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
                     <Link
+                      key={topic}
                       to={`explore?${qs.stringify({
                         filters: { Key_topic_area: [topic] },
                       })}`}
