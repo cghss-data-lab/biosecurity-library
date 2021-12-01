@@ -152,7 +152,11 @@ const CarouselSection = (): JSX.Element => {
                 )}
               </div>
               <TextContent>
-                <IconTag dark name={resource.Resource_type} />
+                <IconTag
+                  dark
+                  name={resource.Resource_type}
+                  style={{ marginBottom: '1em' }}
+                />
                 <Title
                   href={getResourceUrl(
                     resource.Resource_type,
@@ -172,11 +176,12 @@ const CarouselSection = (): JSX.Element => {
                 </Description>
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
-                    <CMS.Icon
-                      key={topic}
-                      noEmitError
+                    <IconTag
                       name={topic}
-                      color={theme.colorDarkest}
+                      style={{
+                        marginTop: '1em',
+                        marginRight: '1em',
+                      }}
                     />
                   ))}
                 </KeyTopicArea>
