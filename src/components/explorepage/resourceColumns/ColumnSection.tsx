@@ -24,8 +24,8 @@ const ResourceCount = styled.div`
   margin-top: 15px;
 `
 const InfoIcon = styled(CMS.Icon)`
-  height: 1.2em;
-  width: 1.2em;
+  height: 1.1em;
+  width: 1.1em;
   display: inline-block;
   position: relative;
   top: 0.2em;
