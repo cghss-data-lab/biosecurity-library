@@ -12,6 +12,7 @@ import useHomePageData from 'airtableQueryHooks/useHomePageData'
 import Main from 'components/layout/Main'
 
 import Carousel from '@talus-analytics/library.ui.carousel'
+import IconTag from 'components/ui/IconTag/IconTag'
 
 const H2 = styled.h2`
   text-align: center;
@@ -63,14 +64,6 @@ const TextContent = styled.div`
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
-`
-const ResourceType = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  line-height: 19px;
-  color: ${({ theme }) => theme.colorDarkest};
-  margin-bottom: 24px;
 `
 const Title = styled.a`
   font-weight: bold !important;
@@ -165,14 +158,7 @@ const CarouselSection = (): JSX.Element => {
                 )}
               </div>
               <TextContent>
-                <ResourceType>
-                  <CMS.Icon
-                    name={resource.Resource_type}
-                    color={theme.colorDarkest}
-                    style={{ width: 24, height: 24, marginRight: 8 }}
-                  />
-                  {resource.Resource_type}
-                </ResourceType>
+                <IconTag dark name={resource.Resource_type} />
                 <Title
                   href={getResourceUrl(
                     resource.Resource_type,

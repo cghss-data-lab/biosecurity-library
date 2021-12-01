@@ -10,6 +10,7 @@ const Tag = styled.div<{ dark: boolean }>`
   display: flex;
   align-items: center;
   color: ${({ theme, dark }) => (dark ? theme.colorWhite : theme.colorDarkest)};
+  margin-bottom: 10px;
   ${({ theme, dark }) => dark && `background-color: ${theme.colorDarkest}`}
 `
 
