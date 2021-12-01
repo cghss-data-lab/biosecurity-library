@@ -30,9 +30,9 @@ const IconTag = ({
 }: IconTagProps): JSX.Element => {
   const theme: any = useTheme()
 
-  let backgroundColor = dark ? theme.colorDarkest : `rgba(0,0,0,0)`
-  let borderColor = theme.colorDarkest
-  let foregroundColor = dark ? theme.colorWhite : theme.colorDarkest
+  let backgroundColor: string = dark ? theme.colorDarkest : `rgba(0,0,0,0)`
+  let borderColor: string = theme.colorDarkest
+  let foregroundColor: string = dark ? theme.colorWhite : theme.colorDarkest
 
   // special case for key resource
   if (name === 'Key resource') {
