@@ -1,4 +1,4 @@
-import path from 'path'
+import * as path from 'path'
 import { GatsbyNode } from 'gatsby'
 import { PageContext } from './src/templates/Detail'
 import {
