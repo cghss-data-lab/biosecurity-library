@@ -68,11 +68,9 @@ const Column: React.FC<{
         </ResourceCount>
       </Header>
       {resources &&
-        resources.nodes
-          .sort((a, b) => a.data.Short_name.localeCompare(b.data.Short_name))
-          .map(({ data }) => (
-            <ResourcePreview key={data.Short_name} {...{ data, expand }} />
-          ))}
+        resources.nodes.map(({ data }) => (
+          <ResourcePreview key={data.Short_name} {...{ data, expand }} />
+        ))}
     </ColumnContainer>
   )
 }
