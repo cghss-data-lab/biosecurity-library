@@ -8,6 +8,7 @@ export interface Resource {
     Short_name: string
     Resource_name: string
     Resource_type: string
+    Seminal_resource: string
     Authoring_organization: {
       data: {
         Name: string
@@ -71,6 +72,7 @@ const useExplorePageData = () => {
               Short_name
               Resource_name
               Resource_type
+              Seminal_resource
               Authoring_organization {
                 data {
                   Name
