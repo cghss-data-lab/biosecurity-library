@@ -1,17 +1,21 @@
-import CMS from '@talus-analytics/library.airtable-cms'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
+import CMS from '@talus-analytics/library.airtable-cms'
 
-const Tag = styled.div<{ dark: boolean }>`
+const Tag = styled.div<{
+  foregroundColor: string
+  backgroundColor: string
+  borderColor: string
+}>`
   padding: 0.3em 1em;
-  border: 1px solid ${({ theme }) => theme.colorDarkest};
+  border: 1px solid ${({ borderColor }) => borderColor};
   border-radius: 2em;
   width: fit-content;
   display: flex;
   align-items: center;
-  color: ${({ theme, dark }) => (dark ? theme.colorWhite : theme.colorDarkest)};
+  color: ${({ foregroundColor }) => foregroundColor};
   font-size: 16px;
-  ${({ theme, dark }) => dark && `background-color: ${theme.colorDarkest}`}
+  background-color: ${({ backgroundColor }) => backgroundColor}; ;
 `
 
 interface IconTagProps extends React.ComponentPropsWithoutRef<'div'> {
@@ -26,11 +30,22 @@ const IconTag = ({
 }: IconTagProps): JSX.Element => {
   const theme: any = useTheme()
 
+  let backgroundColor = dark ? theme.colorDarkest : `rgba(0,0,0,0)`
+  let borderColor = theme.colorDarkest
+  let foregroundColor = dark ? theme.colorWhite : theme.colorDarkest
+
+  // special case for key resource
+  if (name === 'Key resource') {
+    backgroundColor = theme.colorGolden
+    borderColor = theme.colorGolden
+    foregroundColor = theme.colorDarkest
+  }
+
   return (
-    <Tag dark={dark} {...props}>
+    <Tag {...{ foregroundColor, backgroundColor, borderColor, ...props }}>
       <CMS.Icon
         name={name}
-        color={dark ? theme.colorWhite : theme.colorDarkest}
+        color={foregroundColor}
         style={{
           height: '1.4em',
           width: '1.4em',
