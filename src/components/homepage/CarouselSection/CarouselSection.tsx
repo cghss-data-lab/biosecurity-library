@@ -99,9 +99,9 @@ const truncateDescription = (
   Resource_type: string,
   Short_name: string
 ) =>
-  Short_description.split(' ').length > 28 ? (
+  Short_description.split(' ').length > 27 ? (
     <>
-      {Short_description.split(' ').slice(0, 26).join(' ')}
+      {Short_description.split(' ').slice(0, 25).join(' ')}
       ...
       <em>
         {' '}
