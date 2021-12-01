@@ -87,7 +87,22 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
           )}
         </ThumbnailContainer>
       )}
-      <Title to={urls.getDetailURL(data)}>{data.Short_name}</Title>
+      <Title to={urls.getDetailURL(data)}>
+        {data.Seminal_resource === 'Yes' && (
+          <CMS.Icon
+            name="Key resource"
+            color={theme.colorOrange}
+            style={{
+              height: '1.2em',
+              display: 'inline-block',
+              position: 'relative',
+              top: '.2em',
+              left: '-.2em',
+            }}
+          />
+        )}
+        {data.Short_name}
+      </Title>
       <Author>{data.Authoring_organization[0].data.Name}</Author>
       <IconContainer>
         {data.Key_topic_area.map(name => (
