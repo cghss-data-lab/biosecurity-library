@@ -13,18 +13,38 @@ const HeaderContainer = styled.header`
 const IconContainer = styled.div`
   display: flex;
   margin-bottom: 30px;
+  margin-top: 15px;
   gap: 20px;
+`
+const Author = styled.h4`
+  font-style: normal !important;
+  font-weight: bold !important;
+  font-size: 24px !important;
+  line-height: 33px;
+  margin-top: 20px;
+  margin-bottom: 20px !important;
+  color: ${({ theme }) => theme.colorVeryDarkGray};
+`
+
+const ShortName = styled.h6`
+  margin-bottom: 20px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
 `
 
 const Header: React.FC<PageContext> = ({ data }) => {
   const theme: any = useTheme()
 
+  console.log(data)
+
   return (
     <HeaderContainer>
-      <h2>{data.Resource_name}</h2>
-      <h6>[{data.Short_name.trim()}]</h6>
-      <h4>{data.Authoring_organization[0].data.Name}</h4>
       <IconTag dark name={data.Resource_type} style={{ marginTop: 35 }} />
+      <h2 style={{ marginTop: 20 }}>{data.Resource_name}</h2>
+      <ShortName>[{data.Short_name.trim()}]</ShortName>
+      <Author>{data.Authoring_organization[0].data.Name}</Author>
       <p>{data.Short_description}</p>
       <IconContainer>
         {data.Key_topic_area.map(name => (
