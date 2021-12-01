@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import styled, { useTheme } from 'styled-components'
+import styled, { createGlobalStyle, useTheme } from 'styled-components'
 
 import { DimObj } from './BarChart'
 
 import CMS from '@talus-analytics/library.airtable-cms'
 
 import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css'
+import 'tippy.js/themes/light.css'
 import BarPopup from './BarPopup'
 
 const Label = styled.text`
@@ -14,6 +14,14 @@ const Label = styled.text`
   transform: rotate(-45deg);
   text-anchor: end;
   fill: white;
+`
+const DisableTippyPadding = createGlobalStyle`
+  .tippy-content {
+    pointer-events: all;
+    position: relative;
+    padding: 0;
+    z-index: 1;
+  }
 `
 
 interface BarProps {
@@ -58,6 +66,7 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
 
   return (
     <>
+      <DisableTippyPadding />
       <rect
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
