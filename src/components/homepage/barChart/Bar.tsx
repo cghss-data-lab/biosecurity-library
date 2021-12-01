@@ -26,10 +26,7 @@ const Label = styled.text`
 `
 const DisableTippyPadding = createGlobalStyle`
   .tippy-content {
-    pointer-events: all;
-    position: relative;
     padding: 0;
-    z-index: 1;
   }
 `
 
