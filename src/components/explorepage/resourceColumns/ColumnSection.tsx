@@ -12,9 +12,12 @@ const ColumnsContainer = styled.section`
   justify-content: space-between;
   align-items: flex-start;
   padding-top: 40px;
-  margin-top: 40px;
+  /* margin-top: 40px; */
   border-top: 2px solid ${({ theme }) => theme.colorDarkGray};
   margin-bottom: 10vw;
+`
+const ResourceCount = styled.div`
+  margin-top: 15px;
 `
 
 interface ColumnSectionProps {
@@ -40,18 +43,28 @@ const ColumnSection: React.FC<ColumnSectionProps> = ({
     ? resources.filter(r => r.fieldValue === exploreState.type)
     : resources
 
+  const resourceCount = resources.reduce(
+    (acc, group) => acc + group.nodes.length,
+    0
+  )
+
   return (
-    <ColumnsContainer>
-      {displayResources.map(group => (
-        <Column
-          key={group.fieldValue}
-          name={group.fieldValue}
-          resources={group}
-          expand={group.fieldValue === exploreState.type}
-          setExpandColumn={handleExpandColumn}
-        />
-      ))}
-    </ColumnsContainer>
+    <>
+      <ResourceCount>
+        {resourceCount} {resourceCount === 1 ? 'Result' : 'Results'}
+      </ResourceCount>
+      <ColumnsContainer>
+        {displayResources.map(group => (
+          <Column
+            key={group.fieldValue}
+            name={group.fieldValue}
+            resources={group}
+            expand={group.fieldValue === exploreState.type}
+            setExpandColumn={handleExpandColumn}
+          />
+        ))}
+      </ColumnsContainer>
+    </>
   )
 }
 
