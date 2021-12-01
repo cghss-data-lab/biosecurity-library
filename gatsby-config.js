@@ -100,6 +100,7 @@ module.exports = {
     'talus-gatsby-transformer-svg',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-root-import',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-image',
