@@ -8,6 +8,7 @@ import CMS from '@talus-analytics/library.airtable-cms'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
+import BarPopup from './BarPopup'
 
 const Label = styled.text`
   font-size: 5px;
@@ -74,7 +75,12 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
         fill={hover ? theme.colorGolden : theme.colorWhite}
         stroke={'#173057'}
       />
-      <Tippy content={definition} visible={hover}>
+      <Tippy
+        content={<BarPopup barName={bar.fieldValue} />}
+        visible={hover}
+        maxWidth="600px"
+        theme="light"
+      >
         <CMS.PlotIcon
           style={iconStyle}
           name={bar.fieldValue}
