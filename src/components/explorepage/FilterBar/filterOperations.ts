@@ -108,6 +108,10 @@ export const toggleFilter: FilterFunction = (filter, setExploreState) => {
   })
 }
 
+export const removeAllFilters = (
+  setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
+) => setExploreState(prev => ({ ...prev, filters: {} }))
+
 type ApplyFilterFunction = (
   resources: ResourceGroup[],
   filters: ExploreState['filters']
