@@ -2,6 +2,9 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import CMS from '@talus-analytics/library.airtable-cms'
+
+// this import is risky... TODO find a better place for
+// this utility because it's not part of airtable-cms.
 import { urlString } from '../../../airtable-cms/utilities'
 
 import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
