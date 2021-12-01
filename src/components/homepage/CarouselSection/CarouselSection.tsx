@@ -7,9 +7,9 @@ import CMS from '@talus-analytics/library.airtable-cms'
 // this utility because it's not part of airtable-cms.
 import { urlString } from '../../../airtable-cms/utilities'
 
-import useCaroselData from '../../../airtableQueryHooks/useCarouselResources'
-import useHomePageData from '../../../airtableQueryHooks/useHomePageData'
-import Main from '../../layout/Main'
+import useCaroselData from 'airtableQueryHooks/useCarouselResources'
+import useHomePageData from 'airtableQueryHooks/useHomePageData'
+import Main from 'components/layout/Main'
 
 import Carousel from '@talus-analytics/library.ui.carousel'
 
