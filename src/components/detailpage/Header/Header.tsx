@@ -33,6 +33,10 @@ const ShortName = styled.h6`
   font-size: 16px;
   line-height: 22px;
 `
+const TagHolder = styled.div`
+  display: flex;
+  margin-top: 35px;
+`
 
 const Header: React.FC<PageContext> = ({ data }) => {
   const theme: any = useTheme()
@@ -41,7 +45,12 @@ const Header: React.FC<PageContext> = ({ data }) => {
 
   return (
     <HeaderContainer>
-      <IconTag dark name={data.Resource_type} style={{ marginTop: 35 }} />
+      <TagHolder>
+        <IconTag dark name={data.Resource_type} />
+        {data.Seminal_resource === 'Yes' && (
+          <IconTag dark name={'Key resource'} style={{ marginLeft: '1em' }} />
+        )}
+      </TagHolder>
       <h2 style={{ marginTop: 20 }}>{data.Resource_name}</h2>
       <ShortName>[{data.Short_name.trim()}]</ShortName>
       <Author>{data.Authoring_organization[0].data.Name}</Author>

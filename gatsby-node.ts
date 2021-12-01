@@ -26,6 +26,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             Short_description
             Long_description
             Key_topic_area
+            Seminal_resource
             Authoring_organization {
               data {
                 Name

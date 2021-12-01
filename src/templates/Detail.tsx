@@ -43,6 +43,7 @@ export interface PageContext {
     Resource_name: string
     Short_name: string
     Resource_type: string
+    Seminal_resource: string
     Authoring_organization: {
       data: {
         Name: string
