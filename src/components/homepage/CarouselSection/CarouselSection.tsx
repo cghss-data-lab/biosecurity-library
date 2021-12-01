@@ -1,5 +1,6 @@
-import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
+import qs from 'qs'
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import styled, { useTheme } from 'styled-components'
 import CMS from '@talus-analytics/library.airtable-cms'
 
@@ -13,6 +14,7 @@ import Main from 'components/layout/Main'
 
 import Carousel from '@talus-analytics/library.ui.carousel'
 import IconTag from 'components/ui/IconTag/IconTag'
+import { Link } from 'gatsby'
 
 const H2 = styled.h2`
   text-align: center;
@@ -152,11 +154,17 @@ const CarouselSection = (): JSX.Element => {
                 )}
               </div>
               <TextContent>
-                <IconTag
-                  dark
-                  name={resource.Resource_type}
-                  style={{ marginBottom: '1em' }}
-                />
+                <Link
+                  to={`explore?${qs.stringify({
+                    type: resource.Resource_type,
+                  })}`}
+                >
+                  <IconTag
+                    dark
+                    name={resource.Resource_type}
+                    style={{ marginBottom: '1em' }}
+                  />
+                </Link>
                 <Title
                   href={getResourceUrl(
                     resource.Resource_type,
@@ -176,13 +184,19 @@ const CarouselSection = (): JSX.Element => {
                 </Description>
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
-                    <IconTag
-                      name={topic}
-                      style={{
-                        marginTop: '1em',
-                        marginRight: '1em',
-                      }}
-                    />
+                    <Link
+                      to={`explore?${qs.stringify({
+                        filters: { Key_topic_area: [topic] },
+                      })}`}
+                    >
+                      <IconTag
+                        name={topic}
+                        style={{
+                          marginTop: '1em',
+                          marginRight: '1em',
+                        }}
+                      />
+                    </Link>
                   ))}
                 </KeyTopicArea>
               </TextContent>
