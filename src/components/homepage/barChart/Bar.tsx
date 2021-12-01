@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { DimObj } from './BarChart'
 
 import CMS from '@talus-analytics/library.airtable-cms'
@@ -37,11 +36,6 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
   const endY = startY + height
   const midX = startX + 0.5 * dim.barWidth
   const midY = startY + 0.5 * height
-
-  const definitions = useDefinitions()
-  const definition = definitions.find(
-    def => def.data.Name.trim() === bar.fieldValue.trim()
-  )?.data.Definition
 
   const iconPadding = 1
   let iconStyle: React.CSSProperties = { pointerEvents: 'none' }
