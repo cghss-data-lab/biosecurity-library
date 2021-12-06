@@ -128,16 +128,17 @@ export const applyFilters: ApplyFilterFunction = (resources, filters) => {
         ...group,
         nodes: group.nodes.filter(node =>
           values.some(value => {
-            const fields = node.data[field as keyof typeof filters]
+            const values = node.data[field as keyof typeof filters]
 
-            // this handles the case of linked records where we actually
-            // need to filter on the Name column of the linked record
-            if ((fields as any[]).every(d => typeof d === 'object' && d.data))
-              return fields
-                .map(d => (d as { data: { Name: string } }).data.Name)
+            // this handles the case of linked records where we will alias them so that
+            // the string array is in is field.data.value
+            // I just realized this only works if the column we're filtering on is a string type...
+            if ((values as any[]).every(d => typeof d === 'object' && d.data))
+              return values
+                .map(d => (d as { data: { value: string } }).data.value)
                 .includes(value)
 
-            return (fields as string[]).includes(value)
+            return (values as string[]).includes(value)
           })
         ),
       })),

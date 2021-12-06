@@ -103,7 +103,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         )}
         {data.Short_name}
       </Title>
-      <Author>{data.Authoring_organization[0].data.Name}</Author>
+      <Author>{data.Authoring_organization[0].data.value}</Author>
       <IconContainer>
         {data.Key_topic_area.map(name => (
           <Tippy content={name} key={name}>

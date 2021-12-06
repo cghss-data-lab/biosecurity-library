@@ -27,6 +27,7 @@ export interface ExploreState {
   defs?: string
   type?: string
   filters?: Filters
+  moreFilters?: boolean
   // sort?: {
   //   on: string // field name
   //   compare: 'gt' | 'lt'

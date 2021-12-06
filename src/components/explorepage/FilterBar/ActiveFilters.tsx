@@ -57,7 +57,13 @@ const ActiveFilters: React.FC<FilterProps> = ({
     <ClearFilters onClick={() => removeAllFilters(setExploreState)}>
       Clear filters
     </ClearFilters>
-    <MoreFilters>+ More filters</MoreFilters>
+    <MoreFilters
+      onClick={() =>
+        setExploreState(prev => ({ ...prev, moreFilters: !prev.moreFilters }))
+      }
+    >
+      + More filters
+    </MoreFilters>
   </Section>
 )
 

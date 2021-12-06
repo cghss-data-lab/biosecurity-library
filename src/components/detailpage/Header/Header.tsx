@@ -53,7 +53,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
       </TagHolder>
       <h2 style={{ marginTop: 20 }}>{data.Resource_name}</h2>
       <ShortName>[{data.Short_name.trim()}]</ShortName>
-      <Author>{data.Authoring_organization[0].data.Name}</Author>
+      <Author>{data.Authoring_organization[0].data.value}</Author>
       <p>{data.Short_description}</p>
       <IconContainer>
         {data.Key_topic_area.map(name => (

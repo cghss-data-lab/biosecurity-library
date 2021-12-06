@@ -9,16 +9,24 @@ export interface Resource {
     Resource_name: string
     Resource_type: string
     Seminal_resource: string
-    Authoring_organization: {
-      data: {
-        Name: string
-      }
-    }[]
+    Resource_language: string[]
+    Access_limitations: string[]
+    Resource_format: string[]
     Key_resource_INTERNAL: true | null
     Key_topic_area: string[]
     Short_description: string
     Target_user_role: string[]
     User_roll_up: string[]
+    Authoring_organization: {
+      data: {
+        value: string
+      }
+    }[]
+    Authoring_organization_type: {
+      data: {
+        value: string
+      }
+    }[]
     Thumbnail_INTERNAL: {
       localFiles: ImageDataLike[]
     }
@@ -73,17 +81,24 @@ const useExplorePageData = () => {
               Resource_name
               Resource_type
               Seminal_resource
-              Authoring_organization {
-                data {
-                  Name
-                }
-              }
               Target_user_role
               Short_description
               Key_topic_area
               Key_resource_INTERNAL
               User_roll_up
-              # Topic_area_icons
+              Resource_language
+              Access_limitations
+              Resource_format
+              Authoring_organization: Authoring_organization {
+                data {
+                  value: Name
+                }
+              }
+              Authoring_organization_type: Authoring_organization {
+                data {
+                  value: Type
+                }
+              }
               Thumbnail_INTERNAL {
                 localFiles {
                   childImageSharp {
