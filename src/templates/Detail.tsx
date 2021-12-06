@@ -44,22 +44,27 @@ export interface PageContext {
     Short_name: string
     Resource_type: string
     Seminal_resource: string
-    Authoring_organization: {
-      data: {
-        Name: string
-      }
-    }[]
     Target_user_role: string[]
     Potential_user_role: string[]
     URL_for_resource: string
     Access_method: string
-    Access_limitations: string
+    Access_limitations: string[]
     Resource_language: string[]
     Edition: string | null
     First_release_date: string
     Last_update_date: string
     Update_frequency: string
     // Topic_area_icons: string
+    Authoring_organization: {
+      data: {
+        value: string
+      }
+    }[]
+    Authoring_organization_type: {
+      data: {
+        value: string
+      }
+    }[]
     Auto_other_resources_cited:
       | {
           data: {

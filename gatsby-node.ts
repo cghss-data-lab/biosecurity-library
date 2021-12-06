@@ -27,11 +27,6 @@ export const createPages: GatsbyNode['createPages'] = async ({
             Long_description
             Key_topic_area
             Seminal_resource
-            Authoring_organization {
-              data {
-                Name
-              }
-            }
             Target_user_role
             Potential_user_role
             URL_for_resource
@@ -42,6 +37,16 @@ export const createPages: GatsbyNode['createPages'] = async ({
             First_release_date
             Last_update_date
             Update_frequency
+            Authoring_organization: Authoring_organization {
+              data {
+                value: Name
+              }
+            }
+            Authoring_organization_type: Authoring_organization {
+              data {
+                value: Type
+              }
+            }
             Auto_other_resources_cited {
               data {
                 Record_ID_INTERNAL
