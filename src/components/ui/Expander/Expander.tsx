@@ -9,13 +9,10 @@ interface ExpanderProps {
   /** animation duration in number of milliseconds */
   animDuration?: number
   // TODO: add floating back in
+  // though maybe handle through style prop?
   // floating?: boolean
 }
 
-const ContentHider = styled.div<{ animDuration: number }>`
-  overflow: hidden;
-  transition: ${({ animDuration }) => animDuration}ms ease;
-`
 const ContentContainer = styled.div`
   // force this to be a new Block Formatting Context to contain
   // margins that the children might set.
@@ -99,11 +96,17 @@ const Expander = ({ children, open, animDuration = 250 }: ExpanderProps) => {
   }, [open, hiderHeight, animDuration])
 
   return (
-    <ContentHider style={{ height: hiderHeight }} animDuration={animDuration}>
+    <div
+      style={{
+        height: hiderHeight,
+        overflow: hiderHeight === 'auto' ? 'visible' : 'hidden',
+        transition: `${animDuration}ms ease`,
+      }}
+    >
       <ContentContainer ref={contentContainer}>
         {renderChildren && children}
       </ContentContainer>
-    </ContentHider>
+    </div>
   )
 }
 
