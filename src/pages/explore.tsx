@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import qs from 'qs'
 
 import FigmaProvider from '../figma/FigmaProvider'
@@ -37,15 +37,11 @@ export interface ExploreState {
 const ExplorePage = (): JSX.Element => {
   const { explorePageText, groupedResources } = useExplorePageData()
 
-  const [exploreState, setExploreState] = useState<ExploreState>(
-    typeof window !== 'undefined'
-      ? qs.parse(window.location.search.split('?')[1])
-      : {}
-  )
+  const [exploreState, setExploreState] = useState<ExploreState>({})
 
-  // useLayoutEffect(() => {
-  //   setExploreState(qs.parse(window.location.search.split('?')[1]))
-  // }, [])
+  useLayoutEffect(() => {
+    setExploreState(qs.parse(window.location.search.split('?')[1]))
+  }, [])
 
   // store explore state in the query string whenever it chagnges
   useEffect(() => {

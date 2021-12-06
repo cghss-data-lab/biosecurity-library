@@ -7,32 +7,32 @@ import CMS from '@talus-analytics/library.airtable-cms'
 import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { commaSeparatedList } from '../../../utilities/grammar'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import ResourceContainer from './ResourceContainer'
+// import ResourceContainer from './ResourceContainer'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import * as urls from '../../../utilities/urls'
 
-// const ResourceContainer = styled.section<{ expanded: boolean }>`
-//   background: ${({ theme }) => theme.colorVeryLightGray};
-//   padding: 20px;
-//   display: grid;
-//   gap: 15px;
-//   grid-template-areas:
-//     'title'
-//     'author'
-//     'icons';
-//   grid-template-rows: min-content 1fr;
-//   border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
+const ResourceContainer = styled.section<{ expanded: boolean }>`
+  background: ${({ theme }) => theme.colorVeryLightGray};
+  padding: 20px;
+  display: grid;
+  gap: 15px;
+  grid-template-areas:
+    'title'
+    'author'
+    'icons';
+  grid-template-rows: min-content 1fr;
+  border-bottom: 1px solid ${({ theme }) => theme.colorMedGray};
 
-//   ${({ expanded }) =>
-//     expanded &&
-//     `grid-template-areas:
-//       "image title author users summary"
-//       "image icons author users summary";
-//       grid-template-columns: 100px 250px 180px 250px auto;`}
-// `
+  ${({ expanded }) =>
+    expanded &&
+    `grid-template-areas:
+      "image title author users summary"
+      "image icons author users summary";
+      grid-template-columns: 100px 250px 180px 250px auto;`}
+`
 const Title = styled(Link)`
   grid-area: title;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
