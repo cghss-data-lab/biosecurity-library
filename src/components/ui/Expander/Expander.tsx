@@ -5,7 +5,7 @@ interface ExpanderProps {
   /** child elements to render inside the expander */
   children: React.ReactNode
   /** whether or not the expander is open */
-  open?: boolean
+  open: boolean
   /** animation duration in number of milliseconds */
   animDuration?: number
   // TODO: add floating back in
@@ -22,7 +22,7 @@ const ContentContainer = styled.div`
 
 const Expander = ({ children, open, animDuration = 250 }: ExpanderProps) => {
   // persist animation timer reference across renders to handle animation cancelling
-  const animTimer = React.useRef<ReturnType<typeof global.setTimeout>>()
+  const animTimer = React.useRef<ReturnType<typeof setTimeout>>()
 
   // ref for measuring the height of the content inside the section
   const contentContainer = React.useRef<HTMLDivElement>(null)
@@ -48,7 +48,6 @@ const Expander = ({ children, open, animDuration = 250 }: ExpanderProps) => {
 
     // if expander is closed and needs to be open
     if (open && hiderHeight === 0) {
-      console.log('open expander')
       // reset timer to interupt current animation
       if (animTimer.current) clearTimeout(animTimer.current)
 
@@ -70,7 +69,6 @@ const Expander = ({ children, open, animDuration = 250 }: ExpanderProps) => {
 
     // if expander is open and needs to be closed
     if (!open && hiderHeight === 'auto') {
-      console.log('close expander')
       // reset timer to interupt current animation
       if (animTimer.current) clearTimeout(animTimer.current)
 
