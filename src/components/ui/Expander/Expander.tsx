@@ -5,12 +5,17 @@ interface ExpanderProps {
   /** child elements to render inside the expander */
   children: React.ReactNode
   /** whether or not the expander is open */
-  open: boolean
+  open: boolean | undefined
   /** animation duration in number of milliseconds */
   animDuration?: number
-  // TODO: add floating back in
-  // though maybe handle through style prop?
-  // floating?: boolean
+  /**
+   * If set to true, the container will be absolutely
+   * positioned with a shadow, to make a dropdown type
+   * component which doesn't interefere with layout.
+   */
+  floating?: boolean
+  /** Styles object to pass on to the container */
+  style?: React.CSSProperties
 }
 
 const ContentContainer = styled.div`
@@ -20,7 +25,13 @@ const ContentContainer = styled.div`
   display: flow-root;
 `
 
-const Expander = ({ children, open, animDuration = 250 }: ExpanderProps) => {
+const Expander = ({
+  open,
+  children,
+  floating = false,
+  animDuration = 250,
+  style = {},
+}: ExpanderProps) => {
   // persist animation timer reference across renders to handle animation cancelling
   const animTimer = React.useRef<ReturnType<typeof setTimeout>>()
 
@@ -32,7 +43,7 @@ const Expander = ({ children, open, animDuration = 250 }: ExpanderProps) => {
   // to open and stop rendering only after the animation finishes closing.
   // not rendering children while the expander is closed is important for
   // both performance and accessibility (takes invisible things out of the tree)
-  const [renderChildren, setRenderChildren] = useState(open || false)
+  const [renderChildren, setRenderChildren] = useState(open ?? false)
 
   // height of the collapsing section which animates to hide / reveal children
   const [hiderHeight, setHiderHeight] = useState<string | number | undefined>(
@@ -99,6 +110,13 @@ const Expander = ({ children, open, animDuration = 250 }: ExpanderProps) => {
         height: hiderHeight,
         overflow: hiderHeight === 'auto' ? 'visible' : 'hidden',
         transition: `${animDuration}ms ease`,
+        ...(floating && {
+          borderRadius: 5,
+          background: 'white',
+          position: 'absolute',
+          boxShadow: '0px 15px 30px -10px rgba(0, 0, 0, 0.25)',
+        }),
+        ...style,
       }}
     >
       <ContentContainer ref={contentContainer}>
