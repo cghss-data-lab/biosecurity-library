@@ -71,7 +71,7 @@
     },
     "ui/expander": {
         "scope": "talus-analytics.library",
-        "version": "0.0.1",
+        "version": "0.0.3",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Expander"
     },
