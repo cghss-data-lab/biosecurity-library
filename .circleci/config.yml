@@ -71,10 +71,11 @@ jobs:
       - run:
           name: Checkout and link Talus gatsby-source-airtable fork
           command: |
+            cd ../; 
             git checkout git@github.com:ryan-talus/gatsby-source-airtable.git;
             cd gatsby-source-airtable;
             yarn link;
-            cd ../;
+            cd ../biosecurity-library;
             yarn link gatsby-source-airtable;
 
       - run:
