@@ -37,6 +37,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             First_release_date
             Last_update_date
             Update_frequency
+            Other_language_URLs
             Authoring_organization: Authoring_organization {
               data {
                 value: Name
@@ -53,6 +54,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
               }
             }
             Files_INTERNAL {
+              localFiles {
+                publicURL
+                name
+              }
+            }
+            Other_language_files_INTERNAL {
               localFiles {
                 publicURL
                 name
