@@ -74,7 +74,7 @@ jobs:
             pwd;
             cd ../; 
             pwd;
-            git checkout git@github.com:ryan-talus/gatsby-source-airtable.git;
+            git clone git@github.com:ryan-talus/gatsby-source-airtable.git;
             ls;
             cd gatsby-source-airtable;
             pwd;
