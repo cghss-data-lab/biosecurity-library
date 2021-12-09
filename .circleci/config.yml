@@ -79,7 +79,7 @@ jobs:
             cd gatsby-source-airtable;
             pwd;
             yarn link;
-            cd ../biosecurity-library;
+            cd ../repo;
             yarn link gatsby-source-airtable;
 
       - run:
