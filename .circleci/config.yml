@@ -69,6 +69,15 @@ jobs:
       - aws-cli/install
 
       - run:
+          name: Checkout and link Talus gatsby-source-airtable fork
+          command: |
+            git checkout git@github.com:ryan-talus/gatsby-source-airtable.git;
+            cd gatsby-source-airtable;
+            yarn link;
+            cd ../;
+            yarn link gatsby-source-airtable;
+
+      - run:
           name: Adding bit.dev to NPM Registry
           command: |
             echo "always-auth=true" >> ~/.npmrc;
