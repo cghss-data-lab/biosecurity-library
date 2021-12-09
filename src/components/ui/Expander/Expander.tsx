@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react'
 import styled from 'styled-components'
 
-interface ExpanderProps {
+export interface ExpanderProps {
   /** child elements to render inside the expander */
   children: React.ReactNode
   /** whether or not the expander is open */
@@ -111,7 +111,8 @@ const Expander = ({
         overflow: hiderHeight === 'auto' ? 'visible' : 'hidden',
         transition: `${animDuration}ms ease`,
         ...(floating && {
-          borderRadius: 5,
+          borderBottomRightRadius: 5,
+          borderBottomLeftRadius: 5,
           background: 'white',
           position: 'absolute',
           boxShadow: '0px 15px 30px -10px rgba(0, 0, 0, 0.25)',

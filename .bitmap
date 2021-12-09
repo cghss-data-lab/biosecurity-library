@@ -69,9 +69,15 @@
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Carousel"
     },
+    "ui/dropdown": {
+        "scope": "talus-analytics.library",
+        "version": "0.0.5",
+        "mainFile": "index.tsx",
+        "rootDir": "src/components/ui/Dropdown"
+    },
     "ui/expander": {
         "scope": "talus-analytics.library",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Expander"
     },
