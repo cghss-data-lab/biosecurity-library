@@ -76,6 +76,7 @@ jobs:
             cd gatsby-source-airtable;
             npm install;
             yarn link;
+            cd ../repo;
             yarn link gatsby-source-airtable;
 
       - run:
