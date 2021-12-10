@@ -141,7 +141,11 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
           />
         )}
         {Object.keys(languageFiles).length === 1 && (
-          <DownloadLinkButton href={languageFiles.English}>
+          <DownloadLinkButton
+            href={languageFiles.English}
+            target="_blank"
+            rel="noreferrer"
+          >
             Download
           </DownloadLinkButton>
         )}
@@ -157,14 +161,20 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
             <DownloadContainer>
               {Object.entries(languageFiles).map(([lang, url]) => (
                 <p key={url}>
-                  <a href={url}>{lang}</a>
+                  <a href={url} target="_blank" rel="noreferrer">
+                    {lang}
+                  </a>
                 </p>
               ))}
             </DownloadContainer>
           </Dropdown>
         )}
         {Object.keys(languageURLs).length === 1 && (
-          <DownloadLinkButton href={languageURLs.English}>
+          <DownloadLinkButton
+            href={languageURLs.English}
+            target="_blank"
+            rel="noreferrer"
+          >
             Access
           </DownloadLinkButton>
         )}
@@ -180,7 +190,9 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
             <DownloadContainer>
               {Object.entries(languageURLs).map(([lang, url]) => (
                 <p key={lang}>
-                  <a href={url ?? lang}>{lang}</a>
+                  <a href={url ?? lang} target="_blank" rel="noreferrer">
+                    {lang}
+                  </a>
                 </p>
               ))}
             </DownloadContainer>
