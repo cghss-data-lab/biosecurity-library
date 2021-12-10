@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+
 import Expander, { ExpanderProps } from '@talus-analytics/library.ui.expander'
+
+const InteractionTarget = styled.div`
+  // start a new block context to capture margins
+  display: flow-root;
+`
 
 export interface DropdownProps
   extends Omit<ExpanderProps, 'open' | 'style' | 'floating'> {
@@ -127,9 +134,9 @@ const Dropdown = ({
         style={expanderStyle}
         {...{ open, animDuration }}
       >
-        <div {...hoverHandlers} tabIndex={-1}>
+        <InteractionTarget {...hoverHandlers} tabIndex={-1}>
           {children}
-        </div>
+        </InteractionTarget>
       </Expander>
     </div>
   )
