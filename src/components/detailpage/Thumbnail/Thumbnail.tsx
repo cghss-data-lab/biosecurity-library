@@ -38,7 +38,22 @@ interface ThumbnailProps {
   }
 }
 
+const DropdownCaret = styled.div<{ open: boolean; animDuration: number }>`
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='6' viewBox='0 0 12 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L6 6L12 0H0Z' fill='%233A3A3C'/%3E%3C/svg%3E%0A");
+  transform: ${({ open }) => (open ? `scaleY(-1)` : `scaleY(1)`)};
+  transition: ${({ animDuration }) => animDuration + 'ms ease'};
+  background-position: 100% 60%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 15px;
+  height: 10px;
+  width: 15px;
+`
+
 const DropdownButton = styled.button<{ open: boolean; animDuration: number }>`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: ${({ theme }) => theme.colorBlack} !important;
   background: linear-gradient(
       180deg,
@@ -99,14 +114,7 @@ const DownloadContainer = styled.div`
 const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
   const thumbnail = getImage(data.Thumbnail_INTERNAL?.localFiles[0])
 
-  // console.log(data.Other_language_files_INTERNAL)
-
-  // console.log(languageURLs)
-
-  // console.log(data.Resource_language)
-
   const languageFiles: { [key: string]: string } = {}
-
   if (data.Files_INTERNAL?.localFiles[0].publicURL)
     languageFiles['English'] = data.Files_INTERNAL?.localFiles[0].publicURL
 
@@ -124,9 +132,6 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
       languageURLs[lang] = url
     })
   }
-
-  console.log(languageFiles)
-  console.log(languageURLs)
 
   if (thumbnail) {
     return (
@@ -154,7 +159,8 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
             hover
             renderButton={(open, animDuration) => (
               <DropdownButton {...{ open, animDuration }}>
-                Download
+                Download ({Object.keys(languageFiles).length})
+                <DropdownCaret {...{ open, animDuration }} />
               </DropdownButton>
             )}
           >
@@ -183,7 +189,8 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
             hover
             renderButton={(open, animDuration) => (
               <DropdownButton {...{ open, animDuration }}>
-                Access
+                Access ({Object.keys(languageURLs).length})
+                <DropdownCaret {...{ open, animDuration }} />
               </DropdownButton>
             )}
           >
