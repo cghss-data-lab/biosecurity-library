@@ -66,7 +66,9 @@ Then that button component can be used in the the dropdown. This is how open / c
 // prettier-ignore
 () => (
   <div style={{ width: 400, height: 200 }}>
-    <Dropdown hover renderButton={(open, animDuration) => (
+    <Dropdown 
+      hover 
+      renderButton={(open, animDuration) => (
         <DropdownButton {...{open, animDuration}}>
           Hover me <DropdownCaret {...{open, animDuration}}/>
         </DropdownButton>
