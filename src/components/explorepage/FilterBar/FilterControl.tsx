@@ -6,6 +6,8 @@ import Typeahead from '@talus-analytics/library.ui.typeahead'
 import { FilterContainer, NameContainer } from './displayComponents'
 import ExpandDefinitionsButton from './ExpandDefinitionsButton'
 import { addFilter, removeFilter } from './filterOperations'
+import useDefinitions from 'airtableQueryHooks/useDefinitions'
+import { cleanAirtableKey } from 'airtable-cms/utilities'
 
 const getItems = (keys: string[]) => keys.map(key => ({ label: key, key: key }))
 
@@ -29,11 +31,24 @@ const FilterControl: React.FC<FilterControlProps> = ({
     option => !selectedOptionKeys?.includes(option)
   )
 
+  const definitons = useDefinitions()
+
+  const hasDefinitions =
+    definitons.filter(def =>
+      def.data.Column.some(col => cleanAirtableKey(col) === name)
+    ).length > 0
+
+  console.log({ definitons, name, hasDefinitions })
+
   return (
     <FilterContainer>
       <NameContainer expanded={exploreState.defs === name}>
         <div>{name.replace(/_/g, ' ')}</div>
-        <ExpandDefinitionsButton {...{ name, exploreState, setExploreState }} />
+        {hasDefinitions && (
+          <ExpandDefinitionsButton
+            {...{ name, exploreState, setExploreState }}
+          />
+        )}
       </NameContainer>
       <Typeahead
         multiselect

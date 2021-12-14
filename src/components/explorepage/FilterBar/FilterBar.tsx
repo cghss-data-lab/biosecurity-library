@@ -58,39 +58,41 @@ const FilterBar = ({
   const theme: any = useTheme()
   const definitions = useDefinitions()
 
+  const activeDefinitions =
+    exploreState.defs !== undefined &&
+    definitions.filter(def =>
+      def.data.Column.some(col =>
+        exploreState.defs?.includes(cleanAirtableKey(col))
+      )
+    )
+
   return (
     <>
       <DefinitionsContainer>
-        {exploreState.defs &&
-          definitions
-            .filter(def =>
-              def.data.Column.some(col =>
-                exploreState.defs?.includes(cleanAirtableKey(col))
-              )
-            )
-            .map(def => (
-              <Tippy key={def.data.Name} content={def.data.Definition}>
-                <DefinitionButton
-                  onClick={() => {
-                    toggleFilter(
-                      { [exploreState.defs!]: [def.data.Name] },
-                      setExploreState
-                    )
-                  }}
-                  active={exploreState.filters?.[
-                    exploreState.defs! as keyof typeof exploreState.filters
-                  ]?.includes(def.data.Name)}
-                >
-                  <CMS.Icon
-                    noEmitError
-                    name={def.data.Name}
-                    color={theme.colorBlack}
-                    style={{ width: 30, marginRight: 10 }}
-                  />
-                  {def.data.Name}
-                </DefinitionButton>
-              </Tippy>
-            ))}
+        {activeDefinitions &&
+          activeDefinitions.map(def => (
+            <Tippy key={def.data.Name} content={def.data.Definition}>
+              <DefinitionButton
+                onClick={() => {
+                  toggleFilter(
+                    { [exploreState.defs!]: [def.data.Name] },
+                    setExploreState
+                  )
+                }}
+                active={exploreState.filters?.[
+                  exploreState.defs! as keyof typeof exploreState.filters
+                ]?.includes(def.data.Name)}
+              >
+                <CMS.Icon
+                  noEmitError
+                  name={def.data.Name}
+                  color={theme.colorBlack}
+                  style={{ width: 30, marginRight: 10 }}
+                />
+                {def.data.Name}
+              </DefinitionButton>
+            </Tippy>
+          ))}
       </DefinitionsContainer>
       <FilterSection {...{ exploreState, setExploreState }} />
     </>
