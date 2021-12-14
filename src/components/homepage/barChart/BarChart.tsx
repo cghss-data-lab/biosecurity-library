@@ -16,7 +16,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20em;
+  margin-bottom: 65px;
   background: ${({ theme }) => theme.colorDarkest};
 `
 const Instruction = styled.div`

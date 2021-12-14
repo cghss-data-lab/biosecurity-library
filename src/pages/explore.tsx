@@ -18,6 +18,7 @@ import useExplorePageData, {
   ResourceGroup,
 } from '../airtableQueryHooks/useExplorePageData'
 import ImageHeader from '../components/layout/ImageHeader'
+import Footer from 'components/layout/Footer'
 
 const Header = styled.header`
   text-align: center;
@@ -101,6 +102,7 @@ const ExplorePage = (): JSX.Element => {
         <ActiveFilters {...{ exploreState, setExploreState }} />
         <ColumnSection {...{ exploreState, setExploreState, resources }} />
       </Main>
+      <Footer />
     </FigmaProvider>
   )
 }

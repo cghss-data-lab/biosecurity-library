@@ -1,4 +1,5 @@
 import CMS from '@talus-analytics/library.airtable-cms'
+import Footer from 'components/layout/Footer'
 import React from 'react'
 import styled from 'styled-components'
 import useAboutPageData from '../airtableQueryHooks/useAboutPageData'
@@ -92,6 +93,7 @@ const About = (): JSX.Element => {
         </h3>
         <CMS.RichText name="Other text" data={data} />
       </AboutMain>
+      <Footer />
     </FigmaProvider>
   )
 }
