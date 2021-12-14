@@ -17,12 +17,12 @@ body {
 .semanticStyles {
   h1 {
     @include textStyleH1;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Rawline', Arial, Helvetica, sans-serif;
     color: $colorBlack;
   }
   h2 {
     @include textStyleH2;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Rawline', Arial, Helvetica, sans-serif;
     color: $colorBlack;
     margin-top: 35px;
     margin-bottom: 0;
