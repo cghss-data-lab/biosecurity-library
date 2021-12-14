@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { useTheme } from 'styled-components'
+import styled, { useTheme, createGlobalStyle } from 'styled-components'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
@@ -12,6 +12,7 @@ import { cleanAirtableKey } from '../../../airtable-cms/utilities'
 
 import FilterSection from './FilterSection'
 import { toggleFilter } from './filterOperations'
+import DefinitionPopup from './DefinitionPopup'
 
 const DefinitionsContainer = styled.div`
   display: flex;
@@ -45,6 +46,11 @@ const DefinitionButton = styled.button<{ active: boolean | undefined }>`
       }
     `}
 `
+const DisableTippyPadding = createGlobalStyle`
+  .tippy-content {
+    padding: 0;
+  }
+`
 
 export interface FilterProps {
   exploreState: ExploreState
@@ -69,9 +75,20 @@ const FilterBar = ({
   return (
     <>
       <DefinitionsContainer>
+        <DisableTippyPadding />
         {activeDefinitions &&
           activeDefinitions.map(def => (
-            <Tippy key={def.data.Name} content={def.data.Definition}>
+            <Tippy
+              theme="light"
+              maxWidth="600px"
+              key={def.data.Name}
+              content={
+                <DefinitionPopup
+                  name={def.data.Name}
+                  definition={def.data.Definition}
+                />
+              }
+            >
               <DefinitionButton
                 onClick={() => {
                   toggleFilter(

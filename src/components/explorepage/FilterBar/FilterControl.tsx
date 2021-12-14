@@ -38,8 +38,6 @@ const FilterControl: React.FC<FilterControlProps> = ({
       def.data.Column.some(col => cleanAirtableKey(col) === name)
     ).length > 0
 
-  console.log({ definitons, name, hasDefinitions })
-
   return (
     <FilterContainer>
       <NameContainer expanded={exploreState.defs === name}>
