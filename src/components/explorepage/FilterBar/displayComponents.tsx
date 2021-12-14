@@ -11,6 +11,7 @@ export const NameContainer = styled.div<{ expanded: boolean }>`
   font-family: 'Open Sans';
   font-weight: Bold;
   font-size: 18px;
+  min-height: 30px;
 
   ${({ expanded, theme }) =>
     expanded &&
