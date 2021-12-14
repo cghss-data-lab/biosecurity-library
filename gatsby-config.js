@@ -59,6 +59,12 @@ module.exports = {
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
+            tableName: `Footer`,
+            tableView: `CMS`,
+            mapping: { Image: `fileNode` },
+          },
+          {
+            baseId: `appmL0p5H21CiY7tL`,
             tableName: `About Page`,
             tableView: `CMS`,
             mapping: { Image: `fileNode`, Download: `fileNode` },
