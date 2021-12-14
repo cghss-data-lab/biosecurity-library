@@ -13,6 +13,7 @@ import Grid from '../components/detailpage/Grid'
 import Header from '../components/detailpage/Header/Header'
 import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
 import TabSection from '../components/detailpage/TabSection/TabSection'
+import Footer from 'components/layout/Footer'
 
 /**
  * Resource Airtable fields that link to other records
@@ -112,6 +113,7 @@ const Detail: React.FC<{ pageContext: PageContext }> = ({
         <TabSection {...{ data }} />
       </Grid>
     </Main>
+    <Footer />
   </FigmaProvider>
 )
 
