@@ -16,7 +16,7 @@ const Header = styled.header`
   font-family: 'Rawline', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 24px;
   padding: 15px;
 `
 const Content = styled.section`
