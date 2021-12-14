@@ -32,6 +32,14 @@ const StyledTypeaheadControl = styled(Typeahead)`
     border: 2px solid ${({ theme }) => theme.colorGolden};
     border-radius: 2px;
     font-size: 20px;
+    z-index: 11;
+
+    &:focus {
+      border: 2px solid ${({ theme }) => theme.colorYellow};
+    }
+    &:hover {
+      border: 2px solid ${({ theme }) => theme.colorYellow};
+    }
   }
   > button {
     box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.25%);
