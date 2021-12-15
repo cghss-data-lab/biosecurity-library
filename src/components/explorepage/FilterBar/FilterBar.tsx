@@ -4,11 +4,11 @@ import styled, { useTheme, createGlobalStyle } from 'styled-components'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
-import { ExploreState } from '../../../pages/explore'
+import useDefinitions from 'airtableQueryHooks/useDefinitions'
+import { ExploreState } from 'pages/explore'
 
 import CMS from '@talus-analytics/library.airtable-cms'
-import { cleanAirtableKey } from '../../../airtable-cms/utilities'
+import { cleanAirtableKey } from 'airtable-cms/utilities'
 
 import FilterSection from './FilterSection'
 import { toggleFilter } from './filterOperations'
