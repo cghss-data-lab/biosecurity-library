@@ -24,11 +24,6 @@ const Label = styled.text`
   text-anchor: end;
   fill: white;
 `
-const DisableTippyPadding = createGlobalStyle`
-  .tippy-content {
-    padding: 0;
-  }
-`
 
 interface BarProps {
   index: number
@@ -73,7 +68,6 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
 
   return (
     <>
-      <DisableTippyPadding />
       <rect
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
