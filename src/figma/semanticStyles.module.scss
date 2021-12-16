@@ -16,20 +16,29 @@ body {
 
 .semanticStyles {
   h1 {
-    @include textStyleH1;
-    font-family: 'Rawline', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 44px;
+    line-height: 67px;
     color: $colorBlack;
   }
   h2 {
-    @include textStyleH2;
-    font-family: 'Rawline', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 48px;
     color: $colorBlack;
     margin-top: 35px;
     margin-bottom: 0;
   }
   h3 {
-    @include textStyleH3;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 40px;
   }
   h4 {
     @include textStyleH4Regular;
@@ -52,8 +61,12 @@ body {
     margin-top: 5px;
   }
   p {
-    @include textStyleParagraphMoreSpace;
+    // @include textStyleParagraphMoreSpace;
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
     margin: 0;
     color: $colorBlack;
   }

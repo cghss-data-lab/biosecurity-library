@@ -51,7 +51,7 @@ const Card = styled.div`
   display: flex;
   /* min-height: 575px; */
   /* min-height: 500px; */
-  min-height: 385px;
+  min-height: 442px;
   border-radius: 3px;
 `
 const KeyResourceFlag = styled(CMS.Icon)`
@@ -68,22 +68,24 @@ const TextContent = styled.div`
   font-weight: normal;
 `
 const Title = styled.a`
-  font-weight: bold !important;
-  font-size: 24px !important;
-  line-height: 33px !important;
-  color: ${({ theme }) => theme.colorDarkest} !important;
+  /* font-weight: bold !important; */
+  /* font-size: 24px !important; */
+  /* line-height: 33px !important; */
+  color: ${({ theme }) => theme.colorDarker} !important;
   margin-bottom: 10px !important;
+  margin-top: 15px;
 `
 const ShortName = styled.div`
   font-weight: 600;
   font-size: 16px;
   line-height: 22px;
-  margin-bottom: 20px;
+  margin-bottom: 17px;
 `
 const Author = styled.div`
   font-size: 20px;
   line-height: 27px;
   margin-bottom: 20px;
+  color: ${({ theme }) => theme.colorDarkGray};
 `
 const Description = styled.p`
   font-size: 18px;
@@ -171,7 +173,7 @@ const CarouselSection = (): JSX.Element => {
                     resource.Short_name
                   )}
                 >
-                  {resource.Resource_name}
+                  <h3 style={{ margin: 0 }}>{resource.Resource_name}</h3>
                 </Title>
                 <ShortName>{resource.Short_name}</ShortName>
                 <Author>{resource.Authoring_organization[0].data.Name}</Author>
