@@ -36,8 +36,8 @@ const IconTag = ({
 
   // special case for key resource
   if (name === 'Key resource') {
-    backgroundColor = theme.colorGolden
-    borderColor = theme.colorGolden
+    backgroundColor = theme.colorYellow
+    borderColor = theme.colorYellow
     foregroundColor = theme.colorDarkest
   }
 
