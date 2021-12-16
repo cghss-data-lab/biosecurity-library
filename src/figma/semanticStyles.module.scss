@@ -60,7 +60,11 @@ body {
   }
   h6 {
     @include textStyleH6;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
     margin-top: 5px;
   }
   p {
