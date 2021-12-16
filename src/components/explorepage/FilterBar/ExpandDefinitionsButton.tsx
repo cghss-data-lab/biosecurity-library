@@ -12,7 +12,7 @@ interface ButtonProps {
   setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
 }
 
-const Button = styled.button`
+const Button = styled.button<{ open: boolean }>`
   background: none;
   border: none;
   width: 30px;
@@ -27,6 +27,8 @@ const Button = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colorGolden};
   }
+
+  ${({ theme, open }) => open && `background-color: ${theme.colorGolden}`}
 `
 
 const ExpandDefinitionsButton: React.FC<ButtonProps> = ({
@@ -38,6 +40,7 @@ const ExpandDefinitionsButton: React.FC<ButtonProps> = ({
   return (
     <Tippy content="Click to expand all options">
       <Button
+        open={exploreState.defs === name}
         onClick={() =>
           setExploreState(prev => {
             if (prev.defs !== name) return { ...prev, defs: name }
