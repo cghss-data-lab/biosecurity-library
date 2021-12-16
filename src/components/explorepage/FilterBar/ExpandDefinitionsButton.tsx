@@ -25,7 +25,7 @@ const Button = styled.button<{ open: boolean }>`
   justify-content: center;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colorGolden};
+    background-color: ${({ theme }) => theme.colorYellow};
   }
 
   ${({ theme, open }) => open && `background-color: ${theme.colorGolden}`}
