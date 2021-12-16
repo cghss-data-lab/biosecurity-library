@@ -15,13 +15,14 @@ const Section = styled.section`
     text-align: center;
     margin-bottom: 0px;
   }
-
-  h3 {
-    margin-top: 30px;
-    font-weight: normal;
-    font-style: normal;
-    line-height: 38px;
-  }
+`
+const IntroParagraph = styled.p`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  padding-bottom: 40px;
+  padding-top: 30px;
 `
 
 const IntroSection = (): JSX.Element => {
@@ -32,9 +33,9 @@ const IntroSection = (): JSX.Element => {
       <h1>
         <CMS.Text name={'First Header'} data={homePageText} />
       </h1>
-      <h3>
-        <CMS.Text name={'First Paragraph'} data={homePageText} />
-      </h3>
+      <IntroParagraph>
+        <CMS.RichText name={'First Paragraph'} data={homePageText} />
+      </IntroParagraph>
     </Section>
   )
 }
