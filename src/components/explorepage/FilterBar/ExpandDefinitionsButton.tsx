@@ -4,6 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import CMS from '@talus-analytics/library.airtable-cms'
 
 import { ExploreState } from '../../../pages/explore'
+import Tippy from '@tippyjs/react'
 
 interface ButtonProps {
   name: string
@@ -35,29 +36,31 @@ const ExpandDefinitionsButton: React.FC<ButtonProps> = ({
 }) => {
   const theme: any = useTheme()
   return (
-    <Button
-      onClick={() =>
-        setExploreState(prev => {
-          if (prev.defs !== name) return { ...prev, defs: name }
-          const { defs: _, ...next } = prev
-          return next
-        })
-      }
-    >
-      {exploreState.defs === name ? (
-        <CMS.Icon
-          name={'Collapse topic'}
-          color={theme.colorBlack}
-          style={{ width: 20, height: 20 }}
-        />
-      ) : (
-        <CMS.Icon
-          name={'Expand topic'}
-          color={theme.colorBlack}
-          style={{ width: 20, height: 20 }}
-        />
-      )}
-    </Button>
+    <Tippy content="Click to expand all options">
+      <Button
+        onClick={() =>
+          setExploreState(prev => {
+            if (prev.defs !== name) return { ...prev, defs: name }
+            const { defs: _, ...next } = prev
+            return next
+          })
+        }
+      >
+        {exploreState.defs === name ? (
+          <CMS.Icon
+            name={'Collapse topic'}
+            color={theme.colorBlack}
+            style={{ width: 20, height: 20 }}
+          />
+        ) : (
+          <CMS.Icon
+            name={'Expand topic'}
+            color={theme.colorBlack}
+            style={{ width: 20, height: 20 }}
+          />
+        )}
+      </Button>
+    </Tippy>
   )
 }
 
