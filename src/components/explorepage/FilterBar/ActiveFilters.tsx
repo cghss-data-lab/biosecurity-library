@@ -50,7 +50,7 @@ const ActiveFilters: React.FC<FilterProps> = ({
                 removeFilter({ [filterName]: [value] }, setExploreState)
               }
             >
-              {filterName.replace(/_/g, ' ')}: {value}
+              {filterName.replace(/_/g, ' ')}: <strong>{value}</strong>
             </RemoveFilterButton>
           ))
         )}
