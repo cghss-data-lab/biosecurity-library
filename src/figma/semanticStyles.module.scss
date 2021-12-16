@@ -41,8 +41,11 @@ body {
     line-height: 40px;
   }
   h4 {
-    @include textStyleH4Regular;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 32px;
     margin-top: 20px;
     margin-bottom: 30px;
   }
