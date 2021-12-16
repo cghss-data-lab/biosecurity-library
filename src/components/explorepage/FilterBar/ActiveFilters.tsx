@@ -28,6 +28,7 @@ const ClearFilters = styled.button`
 
   &:hover {
     box-shadow: 2px 2px 12px 0px rgba(0, 0, 0, 0.25);
+    background: ${({ theme }) => theme.colorYellow};
   }
 `
 const MoreFilters = styled(ClearFilters)<{ open: boolean | undefined }>`
