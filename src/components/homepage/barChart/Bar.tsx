@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled, { createGlobalStyle, useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import { DimObj } from './BarChart'
 
