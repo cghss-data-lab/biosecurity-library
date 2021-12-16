@@ -16,13 +16,20 @@ const Section = styled.section`
     margin-bottom: 0px;
   }
 `
-const IntroParagraph = styled.p`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 30px;
-  padding-bottom: 40px;
-  padding-top: 30px;
+const IntroParagraph = styled.div`
+  p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    padding-bottom: 1em;
+    &:first-of-type {
+      padding-top: 30px;
+    }
+    &:last-of-type {
+      padding-bottom: 40px;
+    }
+  }
 `
 
 const IntroSection = (): JSX.Element => {
