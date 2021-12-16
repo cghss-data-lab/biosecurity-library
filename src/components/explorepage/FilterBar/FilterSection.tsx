@@ -12,7 +12,7 @@ import Expander from 'components/ui/Expander'
 const FilterContainer = styled.section`
   display: flex;
   justify-content: stretch;
-  gap: 15px;
+  gap: 36px;
   margin-top: 50px;
 `
 
