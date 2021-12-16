@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { useTheme, createGlobalStyle } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
