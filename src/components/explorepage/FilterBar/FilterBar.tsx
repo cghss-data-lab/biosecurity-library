@@ -46,11 +46,6 @@ const DefinitionButton = styled.button<{ active: boolean | undefined }>`
       }
     `}
 `
-const DisableTippyPadding = createGlobalStyle`
-  .tippy-content {
-    padding: 0;
-  }
-`
 
 export interface FilterProps {
   exploreState: ExploreState
@@ -75,7 +70,6 @@ const FilterBar = ({
   return (
     <>
       <DefinitionsContainer>
-        <DisableTippyPadding />
         {activeDefinitions &&
           activeDefinitions.map(def => (
             <Tippy
