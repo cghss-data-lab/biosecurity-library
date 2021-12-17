@@ -21,15 +21,17 @@ const defaultActiveStyle = {
 
 interface Props {
   to: string
-  props?: any
   activeStyle?: object
+  children: React.ReactNode
+  className: string
 }
 
-const NavLink: React.FC<Props> = ({ to, activeStyle, ...props }) => (
+const NavLink = ({ to, activeStyle, className, ...props }: Props) => (
   <StyledLink
+    {...{ props }}
     to={to}
     activeStyle={activeStyle || defaultActiveStyle}
-    {...{ props }}
+    className={className}
   >
     {props.children}
   </StyledLink>
