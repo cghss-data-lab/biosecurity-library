@@ -7,17 +7,18 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colorWhite};
   border-radius: 5px;
   overflow: hidden;
+  margin: -5px -9px;
 `
 const Header = styled.header`
   background-color: ${({ theme }) => theme.colorVeryLightGray};
   color: ${({ theme }) => theme.colorOrange};
   display: flex;
   align-items: center;
-  font-family: 'Rawline', Arial, Helvetica, sans-serif;
+  font-family: 'Overpass', Arial, Helvetica, sans-serif;
   font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  padding: 15px;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 32px;
 `
 const Content = styled.section`
   padding: 15px;

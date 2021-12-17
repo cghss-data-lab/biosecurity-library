@@ -28,10 +28,12 @@ const ClearFilters = styled.button`
 
   &:hover {
     box-shadow: 2px 2px 12px 0px rgba(0, 0, 0, 0.25);
+    background: ${({ theme }) => theme.colorYellow};
   }
 `
-const MoreFilters = styled(ClearFilters)`
+const MoreFilters = styled(ClearFilters)<{ open: boolean | undefined }>`
   margin-left: 0.5em;
+  ${({ theme, open }) => open && `background: ${theme.colorGolden}`}
 `
 
 const ActiveFilters: React.FC<FilterProps> = ({
@@ -49,7 +51,7 @@ const ActiveFilters: React.FC<FilterProps> = ({
                 removeFilter({ [filterName]: [value] }, setExploreState)
               }
             >
-              {filterName.replace(/_/g, ' ')}: {value}
+              {filterName.replace(/_/g, ' ')}: <strong>{value}</strong>
             </RemoveFilterButton>
           ))
         )}
@@ -58,6 +60,7 @@ const ActiveFilters: React.FC<FilterProps> = ({
       Clear filters
     </ClearFilters>
     <MoreFilters
+      open={exploreState.moreFilters}
       onClick={() =>
         setExploreState(prev => ({ ...prev, moreFilters: !prev.moreFilters }))
       }

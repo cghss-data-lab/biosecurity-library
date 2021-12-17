@@ -17,10 +17,10 @@ const IconContainer = styled.div`
   gap: 20px;
 `
 const Author = styled.h4`
-  font-style: normal !important;
+  /* font-style: normal !important;
   font-weight: bold !important;
   font-size: 24px !important;
-  line-height: 33px;
+  line-height: 33px; */
   margin-top: 20px;
   margin-bottom: 20px !important;
   color: ${({ theme }) => theme.colorVeryDarkGray};

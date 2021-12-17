@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled, { createGlobalStyle, useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import { DimObj } from './BarChart'
 
@@ -23,11 +23,6 @@ const Label = styled.text`
   transform: rotate(-45deg);
   text-anchor: end;
   fill: white;
-`
-const DisableTippyPadding = createGlobalStyle`
-  .tippy-content {
-    padding: 0;
-  }
 `
 
 interface BarProps {
@@ -73,7 +68,6 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
 
   return (
     <>
-      <DisableTippyPadding />
       <rect
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}

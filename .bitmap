@@ -63,6 +63,12 @@
         "mainFile": "index.ts",
         "rootDir": "src/airtable-cms/CMSTypes"
     },
+    "hooks/use-dark-preference": {
+        "scope": "talus-analytics.library",
+        "version": "0.0.2",
+        "mainFile": "index.tsx",
+        "rootDir": "src/hooks/useDarkPreference"
+    },
     "ui/carousel": {
         "scope": "talus-analytics.library",
         "version": "0.0.1",
@@ -71,7 +77,7 @@
     },
     "ui/dropdown": {
         "scope": "talus-analytics.library",
-        "version": "0.0.6",
+        "version": "0.0.7",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Dropdown"
     },

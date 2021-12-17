@@ -51,7 +51,7 @@ const Card = styled.div`
   display: flex;
   /* min-height: 575px; */
   /* min-height: 500px; */
-  min-height: 385px;
+  min-height: 442px;
   border-radius: 3px;
 `
 const KeyResourceFlag = styled(CMS.Icon)`
@@ -68,26 +68,32 @@ const TextContent = styled.div`
   font-weight: normal;
 `
 const Title = styled.a`
-  font-weight: bold !important;
-  font-size: 24px !important;
-  line-height: 33px !important;
-  color: ${({ theme }) => theme.colorDarkest} !important;
-  margin-bottom: 10px !important;
+  display: block;
+  /* font-weight: bold !important; */
+  /* font-size: 24px !important; */
+  /* line-height: 33px !important; */
+  color: ${({ theme }) => theme.colorDarker} !important;
+  margin-bottom: 5px !important;
+  /* margin-top: 35px !important; */
 `
-const ShortName = styled.div`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 22px;
-  margin-bottom: 20px;
-`
+// const ShortName = styled.div`
+//   font-weight: 500;
+//   font-size: 16px;
+//   line-height: 22px;
+//   margin-bottom: 17px;
+//   margin-top: 2px;
+//   color: ${({ theme }) => theme.colorDarkest} !important;
+// `
 const Author = styled.div`
-  font-size: 20px;
+  font-size: 22px;
   line-height: 27px;
   margin-bottom: 20px;
+  color: ${({ theme }) => theme.colorDarkGray};
 `
 const Description = styled.p`
   font-size: 18px;
   line-height: 28px;
+  margin-bottom: 20px !important;
 `
 const KeyTopicArea = styled.div`
   display: flex;
@@ -154,26 +160,15 @@ const CarouselSection = (): JSX.Element => {
                 )}
               </div>
               <TextContent>
-                <Link
-                  to={`explore?${qs.stringify({
-                    type: resource.Resource_type,
-                  })}`}
-                >
-                  <IconTag
-                    dark
-                    name={resource.Resource_type}
-                    style={{ marginBottom: '1em' }}
-                  />
-                </Link>
                 <Title
                   href={getResourceUrl(
                     resource.Resource_type,
                     resource.Short_name
                   )}
                 >
-                  {resource.Resource_name}
+                  <h3 style={{ margin: 0 }}>{resource.Resource_name}</h3>
                 </Title>
-                <ShortName>{resource.Short_name}</ShortName>
+                {/* <ShortName>[{resource.Short_name.trim()}]</ShortName> */}
                 <Author>{resource.Authoring_organization[0].data.Name}</Author>
                 <Description>
                   {truncateDescription(
@@ -182,6 +177,19 @@ const CarouselSection = (): JSX.Element => {
                     resource.Short_name
                   )}
                 </Description>
+                <KeyTopicArea>
+                  <Link
+                    to={`explore?${qs.stringify({
+                      type: resource.Resource_type,
+                    })}`}
+                  >
+                    <IconTag
+                      dark
+                      name={resource.Resource_type}
+                      style={{ marginBottom: '1em' }}
+                    />
+                  </Link>
+                </KeyTopicArea>
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
                     <Link
@@ -193,7 +201,6 @@ const CarouselSection = (): JSX.Element => {
                       <IconTag
                         name={topic}
                         style={{
-                          marginTop: '1em',
                           marginRight: '1em',
                         }}
                       />
