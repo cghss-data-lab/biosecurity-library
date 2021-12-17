@@ -35,17 +35,18 @@ const ResourceContainer = styled.section<{ expanded: boolean }>`
 `
 const Title = styled(Link)`
   grid-area: title;
-  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-family: 'Overpass', Arial, Helvetica, sans-serif;
   color: ${({ theme }) => theme.colorDarker} !important;
-  font-weight: bold !important;
-  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 22px !important;
+  line-height: 30px !important;
 `
-const Author = styled.div`
+const Author = styled.h6`
   grid-area: author;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  color: ${({ theme }) => theme.colorVeryDarkGray};
-  font-weight: 500;
-  font-size: 18px;
+  color: ${({ theme }) => theme.colorDarkGray} !important;
+  margin: 0px !important;
 `
 const IconContainer = styled.div`
   grid-area: icons;
@@ -91,7 +92,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         {data.Seminal_resource === 'Yes' && (
           <CMS.Icon
             name="Key resource"
-            color={theme.colorOrange}
+            color={theme.colorYellow}
             style={{
               height: '1.2em',
               display: 'inline-block',

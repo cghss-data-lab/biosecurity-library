@@ -1,22 +1,22 @@
 import React from 'react'
-import styled, { useTheme, createGlobalStyle } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
-import { ExploreState } from '../../../pages/explore'
+import useDefinitions from 'airtableQueryHooks/useDefinitions'
+import { ExploreState } from 'pages/explore'
 
 import CMS from '@talus-analytics/library.airtable-cms'
-import { cleanAirtableKey } from '../../../airtable-cms/utilities'
+import { cleanAirtableKey } from 'airtable-cms/utilities'
 
 import FilterSection from './FilterSection'
 import { toggleFilter } from './filterOperations'
 import DefinitionPopup from './DefinitionPopup'
 
 const DefinitionsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
 `
 const DefinitionButton = styled.button<{ active: boolean | undefined }>`
@@ -29,9 +29,13 @@ const DefinitionButton = styled.button<{ active: boolean | undefined }>`
   background: rgba(0, 0, 0, 0.025);
   display: flex;
   align-items: center;
-  width: 200px;
+  /* width: 200px; */
   min-height: 53px;
   text-align: left;
+  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15),
+    inset 0 0 8px 0px rgba(255, 255, 255, 0.5);
+
+  border: 1px solid rgba(0, 0, 0, 0.05);
 
   &:hover {
     background-color: ${({ theme }) => theme.colorLightest};
@@ -45,11 +49,6 @@ const DefinitionButton = styled.button<{ active: boolean | undefined }>`
         background-color: ${theme.colorLighter};
       }
     `}
-`
-const DisableTippyPadding = createGlobalStyle`
-  .tippy-content {
-    padding: 0;
-  }
 `
 
 export interface FilterProps {
@@ -75,41 +74,42 @@ const FilterBar = ({
   return (
     <>
       <DefinitionsContainer>
-        <DisableTippyPadding />
         {activeDefinitions &&
-          activeDefinitions.map(def => (
-            <Tippy
-              theme="light"
-              maxWidth="600px"
-              key={def.data.Name}
-              content={
-                <DefinitionPopup
-                  name={def.data.Name}
-                  definition={def.data.Definition}
-                />
-              }
-            >
-              <DefinitionButton
-                onClick={() => {
-                  toggleFilter(
-                    { [exploreState.defs!]: [def.data.Name] },
-                    setExploreState
-                  )
-                }}
-                active={exploreState.filters?.[
-                  exploreState.defs! as keyof typeof exploreState.filters
-                ]?.includes(def.data.Name)}
+          activeDefinitions
+            .sort((a, b) => a.data.Name.localeCompare(b.data.Name))
+            .map(def => (
+              <Tippy
+                theme="light"
+                maxWidth="600px"
+                key={def.data.Name}
+                content={
+                  <DefinitionPopup
+                    name={def.data.Name}
+                    definition={def.data.Definition}
+                  />
+                }
               >
-                <CMS.Icon
-                  noEmitError
-                  name={def.data.Name}
-                  color={theme.colorBlack}
-                  style={{ width: 30, marginRight: 10 }}
-                />
-                {def.data.Name}
-              </DefinitionButton>
-            </Tippy>
-          ))}
+                <DefinitionButton
+                  onClick={() => {
+                    toggleFilter(
+                      { [exploreState.defs!]: [def.data.Name] },
+                      setExploreState
+                    )
+                  }}
+                  active={exploreState.filters?.[
+                    exploreState.defs! as keyof typeof exploreState.filters
+                  ]?.includes(def.data.Name)}
+                >
+                  <CMS.Icon
+                    noEmitError
+                    name={def.data.Name}
+                    color={theme.colorBlack}
+                    style={{ width: 30, marginRight: 10 }}
+                  />
+                  {def.data.Name}
+                </DefinitionButton>
+              </Tippy>
+            ))}
       </DefinitionsContainer>
       <FilterSection {...{ exploreState, setExploreState }} />
     </>

@@ -17,11 +17,12 @@ const ColumnsContainer = styled.section`
   align-items: flex-start;
   padding-top: 40px;
   /* margin-top: 40px; */
-  border-top: 2px solid ${({ theme }) => theme.colorDarkGray};
+  border-top: 2px solid ${({ theme }) => theme.colorMedGray};
   margin-bottom: 10vw;
 `
 const ResourceCount = styled.div`
   margin-top: 15px;
+  margin-bottom: 5px;
 `
 const InfoIcon = styled(CMS.Icon)`
   height: 1.1em;
