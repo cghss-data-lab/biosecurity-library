@@ -23,7 +23,7 @@ interface Props {
   to: string
   activeStyle?: object
   children: React.ReactNode
-  className: string
+  className?: string
 }
 
 const NavLink = ({ to, activeStyle, className, ...props }: Props) => (
