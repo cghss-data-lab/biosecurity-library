@@ -20,10 +20,12 @@ const Logo = styled(CMS.Image)``
 const Footer = (): JSX.Element => {
   const footerData = useFooterData()
 
+  const imgScale = 0.55
+
   return (
     <Container>
       <LogoLink
-        style={{ height: 90, width: 513 }}
+        style={{ height: 90 * imgScale, width: 513 * imgScale }}
         href={CMS.getText(footerData, 'Canada link')}
       >
         <Logo
@@ -33,7 +35,7 @@ const Footer = (): JSX.Element => {
         />
       </LogoLink>
       <LogoLink
-        style={{ height: 90, width: 265 }}
+        style={{ height: 90 * imgScale, width: 265 * imgScale }}
         href={CMS.getText(footerData, 'Georgetown link')}
       >
         <Logo
@@ -43,7 +45,7 @@ const Footer = (): JSX.Element => {
         />
       </LogoLink>
       <LogoLink
-        style={{ height: 90, width: 168 }}
+        style={{ height: 90 * imgScale, width: 168 * imgScale }}
         href={CMS.getText(footerData, 'Talus link')}
       >
         <Logo
