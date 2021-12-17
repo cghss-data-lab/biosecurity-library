@@ -19,6 +19,8 @@ const Container = styled.section`
     font-weight: normal;
     font-size: 16px !important;
     line-height: 22px;
+    margin-top: 0em !important;
+    margin-bottom: 0em !important;
   }
 `
 
