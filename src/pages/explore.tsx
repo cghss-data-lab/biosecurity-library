@@ -28,7 +28,7 @@ export interface ExploreState {
   defs?: string
   type?: string
   filters?: Filters
-  moreFilters?: boolean
+  moreFilters?: string
   // sort?: {
   //   on: string // field name
   //   compare: 'gt' | 'lt'
@@ -38,24 +38,34 @@ export interface ExploreState {
 const ExplorePage = (): JSX.Element => {
   const { explorePageText, groupedResources } = useExplorePageData()
 
+  if (typeof window !== 'undefined')
+    console.log('before setState ' + window.location.search)
+
   const [exploreState, setExploreState] = useState<ExploreState>({})
 
+  console.log(exploreState)
+
   useLayoutEffect(() => {
+    console.log('In useLayoutEffect ' + window.location.search)
     setExploreState(qs.parse(window.location.search.split('?')[1]))
   }, [])
 
   // store explore state in the query string whenever it chagnges
   useEffect(() => {
+    console.log('In useEffect ' + window.location.search)
     if (
       typeof window !== 'undefined' &&
+      Object.keys(exploreState).length > 0 &&
       window.location.search.split('?')[1] !== qs.stringify(exploreState)
     ) {
+      console.log('In useEffect if statement ' + window.location.search)
       const newURL =
         window.location.origin +
         window.location.pathname +
         '?' +
         qs.stringify(exploreState)
 
+      console.log('replace history with ' + newURL)
       window.history.replaceState({}, '', newURL)
     }
   }, [exploreState])
