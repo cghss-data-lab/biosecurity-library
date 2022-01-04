@@ -31,9 +31,11 @@ const ClearFilters = styled.button`
     background: ${({ theme }) => theme.colorYellow};
   }
 `
-const MoreFilters = styled(ClearFilters)<{ open: boolean | undefined }>`
+const MoreFilters = styled(ClearFilters)<{
+  open: string | undefined
+}>`
   margin-left: 0.5em;
-  ${({ theme, open }) => open && `background: ${theme.colorGolden}`}
+  ${({ theme, open }) => Boolean(open) && `background: ${theme.colorGolden}`}
 `
 
 const ActiveFilters: React.FC<FilterProps> = ({
@@ -62,7 +64,10 @@ const ActiveFilters: React.FC<FilterProps> = ({
     <MoreFilters
       open={exploreState.moreFilters}
       onClick={() =>
-        setExploreState(prev => ({ ...prev, moreFilters: !prev.moreFilters }))
+        setExploreState(prev => ({
+          ...prev,
+          moreFilters: String(!Boolean(prev.moreFilters)),
+        }))
       }
     >
       + More filters
