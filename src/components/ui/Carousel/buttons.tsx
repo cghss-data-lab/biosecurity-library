@@ -20,6 +20,21 @@ const Button = styled.button<{ color: string; disabledColor: string }>`
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
+
+  &:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    opacity: 0.5;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: 150ms ease;
+  }
 `
 export const PrevButton = styled(Button)`
   left: -35px;
@@ -28,6 +43,14 @@ export const PrevButton = styled(Button)`
   &:disabled {
     background-image: ${({ disabledColor }) => getPrevArrow(disabledColor)};
   }
+
+  &:after {
+    background-image: ${({ disabledColor }) => getPrevArrow(disabledColor)};
+  }
+
+  &:hover:not([disabled]):after {
+    opacity: 0;
+  }
 `
 export const NextButton = styled(Button)`
   right: -35px;
@@ -35,5 +58,13 @@ export const NextButton = styled(Button)`
 
   &:disabled {
     background-image: ${({ disabledColor }) => getNextArrow(disabledColor)};
+  }
+
+  &:after {
+    background-image: ${({ disabledColor }) => getNextArrow(disabledColor)};
+  }
+
+  &:hover:not([disabled]):after {
+    opacity: 0;
   }
 `
