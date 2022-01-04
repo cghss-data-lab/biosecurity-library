@@ -36,6 +36,8 @@ const DefinitionButton = styled.button<{ active: boolean | undefined }>`
     inset 0 0 8px 0px rgba(255, 255, 255, 0.5);
 
   border: 1px solid rgba(0, 0, 0, 0.05);
+  font-family: 'Open sans', Arial, Helvetica, sans-serif;
+  font-size: 16px;
 
   &:hover {
     background-color: ${({ theme }) => theme.colorLightest};
