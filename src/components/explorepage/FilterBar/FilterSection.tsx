@@ -13,7 +13,7 @@ const FilterContainer = styled.section`
   display: flex;
   justify-content: stretch;
   gap: 36px;
-  margin-top: 50px;
+  margin-top: 25px;
 `
 
 const FilterSection: React.FC<FilterProps> = ({
@@ -33,7 +33,7 @@ const FilterSection: React.FC<FilterProps> = ({
           />
         ))}
       </FilterContainer>
-      <Expander open={exploreState.moreFilters}>
+      <Expander open={exploreState.moreFilters ? true : false}>
         <FilterContainer>
           {Object.entries(moreFilterOptions).map(
             ([name, { distinct: options }]) => (
