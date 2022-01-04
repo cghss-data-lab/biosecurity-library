@@ -19,6 +19,7 @@ const Header = styled.header`
   font-weight: normal;
   font-size: 26px;
   line-height: 32px;
+  padding: 15px;
 `
 const Content = styled.section`
   padding: 15px;
