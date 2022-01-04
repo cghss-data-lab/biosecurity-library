@@ -71,7 +71,7 @@
     },
     "ui/carousel": {
         "scope": "talus-analytics.library",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Carousel"
     },
