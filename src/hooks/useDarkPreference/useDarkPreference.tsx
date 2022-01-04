@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 const useDarkPreference = () => {
   const [prefersDark, setPrefersDark] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
       // function to check prefers-color-scheme query
       const checkPrefersDark = () => {
