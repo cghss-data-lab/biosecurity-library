@@ -20,7 +20,7 @@ const Logo = styled(CMS.Image)``
 const Footer = (): JSX.Element => {
   const footerData = useFooterData()
 
-  const imgScale = 0.55
+  const imgScale = 0.75
 
   return (
     <Container>
