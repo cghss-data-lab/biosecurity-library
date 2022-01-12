@@ -102,12 +102,14 @@ const FilterBar = ({
                     exploreState.defs! as keyof typeof exploreState.filters
                   ]?.includes(def.data.Name)}
                 >
-                  <CMS.Icon
-                    noEmitError
-                    name={def.data.Name}
-                    color={theme.colorBlack}
-                    style={{ width: 30, marginRight: 10 }}
-                  />
+                  {exploreState.defs !== 'Target_user_role' && (
+                    <CMS.Icon
+                      noEmitError
+                      name={def.data.Name}
+                      color={theme.colorBlack}
+                      style={{ width: 30, marginRight: 10 }}
+                    />
+                  )}
                   {def.data.Name}
                 </DefinitionButton>
               </Tippy>
