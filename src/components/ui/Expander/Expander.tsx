@@ -116,6 +116,7 @@ const Expander = ({
           background: 'white',
           position: 'absolute',
           boxShadow: '0px 15px 30px -10px rgba(0, 0, 0, 0.25)',
+          zIndex: 10,
         }),
         ...style,
       }}
