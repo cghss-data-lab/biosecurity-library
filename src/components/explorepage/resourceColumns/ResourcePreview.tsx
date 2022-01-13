@@ -102,6 +102,19 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
             }}
           />
         )}
+        {data.Access_limitations[0] === 'Restricted' && (
+          <CMS.Icon
+            name={'Restricted'}
+            color={theme.colorRed}
+            style={{
+              height: '1.2em',
+              display: 'inline-block',
+              position: 'relative',
+              top: '.2em',
+              left: '-.2em',
+            }}
+          />
+        )}
         {data.Short_name}
       </Title>
       <Author>{data.Authoring_organization[0].data.value}</Author>
