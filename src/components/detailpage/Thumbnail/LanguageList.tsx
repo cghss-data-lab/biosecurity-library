@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface LanguageListProps {
+  languages: string[] | undefined
   languageFiles: {
     [key: string]: string
   }
@@ -14,11 +15,16 @@ const ListParagraph = styled.p`
   padding-top: 1em;
 `
 
-const LanguageList = ({ languageFiles, languageURLs }: LanguageListProps) => {
-  const languages =
-    Object.keys(languageFiles).length > 0
-      ? Object.keys(languageFiles)
-      : Object.keys(languageURLs)
+const LanguageList = ({
+  languages,
+  languageFiles,
+  languageURLs,
+}: LanguageListProps) => {
+  if (!languages || languages.length === 0)
+    languages =
+      Object.keys(languageFiles).length > 0
+        ? Object.keys(languageFiles)
+        : Object.keys(languageURLs)
 
   let list = ''
   if (languages.length === 1) list = languages[0]
