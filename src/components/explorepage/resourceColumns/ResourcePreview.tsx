@@ -13,6 +13,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import * as urls from '../../../utilities/urls'
+import IconTag from 'components/ui/IconTag/IconTag'
 
 const ResourceContainer = styled.section<{ expanded: boolean }>`
   background: ${({ theme }) => theme.colorVeryLightGray};
@@ -132,7 +133,28 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       {expand && (
         <>
           <Users>
-            <p>{commaSeparatedList(data.Target_user_role)}</p>
+            {/* <p>{commaSeparatedList(data.Target_user_role)}</p> */}
+            <span
+              style={{
+                color:
+                  data.Access_limitations[0] === 'Restricted' && theme.colorRed,
+              }}
+            >
+              {data.Access_limitations[0] === 'Restricted' && (
+                <CMS.Icon
+                  name={'Restricted'}
+                  color={theme.colorRed}
+                  style={{
+                    height: '1.2em',
+                    display: 'inline-block',
+                    position: 'relative',
+                    top: '.2em',
+                    left: '-.2em',
+                  }}
+                />
+              )}
+              {data.Access_method}
+            </span>
           </Users>
           <Summary>
             <p>{data.Short_description}</p>
