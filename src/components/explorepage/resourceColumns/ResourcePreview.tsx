@@ -5,15 +5,12 @@ import styled, { useTheme } from 'styled-components'
 import CMS from '@talus-analytics/library.airtable-cms'
 
 import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
-import { commaSeparatedList } from '../../../utilities/grammar'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-// import ResourceContainer from './ResourceContainer'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import * as urls from '../../../utilities/urls'
-import IconTag from 'components/ui/IconTag/IconTag'
 
 const ResourceContainer = styled.section<{ expanded: boolean }>`
   background: ${({ theme }) => theme.colorVeryLightGray};
