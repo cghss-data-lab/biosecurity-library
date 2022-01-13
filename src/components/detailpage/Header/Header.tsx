@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 
 import { PageContext } from '../../../templates/Detail'
 import IconTag from 'components/ui/IconTag/IconTag'
