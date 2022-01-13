@@ -9,6 +9,7 @@ import LanguageList from './LanguageList'
 const ThumbnailContainer = styled.div`
   grid-area: thumbnail;
   padding: 30px 15px 15px 0;
+  margin-top: 20px;
 `
 
 const ThumbnailShadow = styled(GatsbyImage)`
