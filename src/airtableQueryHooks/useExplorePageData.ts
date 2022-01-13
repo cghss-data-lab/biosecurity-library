@@ -11,6 +11,7 @@ export interface Resource {
     Seminal_resource: string
     Resource_language: string[]
     Access_limitations: string[]
+    Access_method: string
     Resource_format: string[]
     Key_resource_INTERNAL: true | null
     Key_topic_area: string[]
@@ -88,6 +89,7 @@ const useExplorePageData = () => {
               User_roll_up
               Resource_language
               Access_limitations
+              Access_method
               Resource_format
               Authoring_organization: Authoring_organization {
                 data {
