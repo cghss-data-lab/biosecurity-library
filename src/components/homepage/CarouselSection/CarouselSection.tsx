@@ -189,6 +189,12 @@ const CarouselSection = (): JSX.Element => {
                       style={{ marginBottom: '1em' }}
                     />
                   </Link>
+                  {resource.Access_limitations[0] === 'Restricted' && (
+                    <IconTag
+                      name={resource.Access_method}
+                      style={{ marginBottom: '1em', marginLeft: '1em' }}
+                    />
+                  )}
                 </KeyTopicArea>
                 <KeyTopicArea>
                   {resource.Key_topic_area.map(topic => (
