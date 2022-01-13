@@ -1,0 +1,32 @@
+---
+displayName: useDarkPreference hook
+description: React hook for checking user dark mode preference and re-rendering when it changes
+labels: ['hook', 'typescript', 'behavior']
+---
+
+import useDarkPreference from './'
+
+# Hook for checking and adapting to dark mode preference
+
+Attaches and removes event listener to dark mode preference so that if it changes (like when it's set to "auto" mode) the site will re-render with the new preference.
+
+Because this attaches an event listener, it's best to to use it somewhere once and pass the result through context instead of using it in each individual component where it might be needed. This should be a good solution for conditionally rendering different content (such as different CMS content) but as always, if something can be solved in CSS it should be solved in CSS!
+
+# Example
+
+You can test this by setting dark and light mode in user preferences:
+
+```js live
+// prettier-ignore
+() => {
+  const userPrefersDark = useDarkPreference()
+
+  const someStyles = {backgroundColor: userPrefersDark ? '#282C34' : 'white', width: 500, height: 400, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 100}
+
+  return (
+    <div style={ someStyles } >
+      {userPrefersDark ? '🌚' : '🌝'}
+    </div>
+  )
+}
+```

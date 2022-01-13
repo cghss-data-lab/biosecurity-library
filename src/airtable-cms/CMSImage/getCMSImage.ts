@@ -29,7 +29,8 @@ function getCMSImage(
   noEmitError: true | false | boolean | undefined
 ) {
   const image = data.nodes.find(i => i.data.Name === name)
-  if (image) {
+
+  if (image?.data.Image) {
     const sources = getImage(image.data.Image.localFiles[0])
 
     const url =

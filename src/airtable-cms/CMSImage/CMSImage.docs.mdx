@@ -10,7 +10,18 @@ This component finds the specified image in `AirtableCMSData` and displays it us
 
 All props supported by [gatsby-plugin-image](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-image#using-the-gatsby-image-components) are supported.
 
-# Usage
+# Example usage
+
+```js
+const SomeComponent = () => {
+  // cms data should come from custom hook
+  const cmsData = useCMSData()
+
+  return <CMSImage name={'Header image'} data={cmsData} />
+}
+```
+
+# Setup
 
 This component requires an Airtable table configured with `Name`, `Text`, and `Image` columns, and a CMS query in a custom hook which should look something like this.
 
@@ -41,17 +52,6 @@ const useCMSData = () => {
   }`)
 
   return cmsData
-}
-```
-
-### Example usage
-
-```js
-const SomeComponent = () => {
-  // cms data should come from custom hook
-  const cmsData = useCMSData()
-
-  return <CMSImage name={'Header image'} data={cmsData} />
 }
 ```
 

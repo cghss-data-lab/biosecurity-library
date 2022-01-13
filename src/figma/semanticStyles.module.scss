@@ -16,24 +16,36 @@ body {
 
 .semanticStyles {
   h1 {
-    @include textStyleH1;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 44px;
+    line-height: 67px;
     color: $colorBlack;
   }
   h2 {
-    @include textStyleH2;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 48px;
     color: $colorBlack;
     margin-top: 35px;
     margin-bottom: 0;
   }
   h3 {
-    @include textStyleH3;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 40px;
   }
   h4 {
-    @include textStyleH4Regular;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 32px;
     margin-top: 20px;
     margin-bottom: 30px;
   }
@@ -48,12 +60,20 @@ body {
   }
   h6 {
     @include textStyleH6;
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-family: 'Overpass', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 24px;
     margin-top: 5px;
   }
   p {
-    @include textStyleParagraphMoreSpace;
+    // @include textStyleParagraphMoreSpace;
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
     margin: 0;
     color: $colorBlack;
   }

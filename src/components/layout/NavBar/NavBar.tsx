@@ -24,12 +24,9 @@ const LinkList = styled.ol`
   margin: 0;
 `
 const HomeLink = styled(NavLink)`
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 900;
-  font-size: 18px;
+  font-family: 'Overpass', sans-serif !important;
+  font-size: 24px !important;
   color: white;
-  padding: 30px;
-  margin-left: auto;
 `
 
 const NavBar: React.FC = () => (

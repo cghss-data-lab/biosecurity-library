@@ -6,7 +6,9 @@ labels: ['react', 'typescript', 'ui']
 
 import Carousel from './Carousel'
 
-This component provides the structure and animations for a carousel, which allows paging forward and back and jumping to any page using the dots above the carousel. The buttons and dots have customizable colors for active and inactive status, and if only the buttons are assigned colors, the dots will automatically match.
+This component provides the structure and animations for a carousel, which allows paging forward and back and jumping to any page using the dots above the carousel. The buttons and dots have customizable colors for active and inactive status, and if only the buttons are assigned colors, the dots will automatically match. The hover state for the dots is 50% opacity overlay of the "active" color, and the hover state for the left and right arrows is the button color, with the normal color being a 50% opacity overlay of the active color on top of the disabled color. Hover state animation duration is hardcoded to 150ms so that changing the transition duration won't make hover interactions slow and confusing.
+
+## Light background example
 
 ```jsx live=true
 // prettier-ignore
@@ -21,6 +23,32 @@ This component provides the structure and animations for a carousel, which allow
       <Page>Page 2!</Page>
       <Page>Page 3!</Page>
     </Carousel>
+  )
+}
+```
+
+## Dark background example
+
+```jsx live=true
+// prettier-ignore
+() => {
+  // any component can be used for the page, here's a simple div with some styles
+  const style = { width: '200px', height: '100px', background: 'lightgrey', display: 'flex', justifyContent: 'center', alignItems: 'center', borderRadius: 5}
+  const Page = ({children}) => <div style={style}>{children}</div>
+
+  const DarkBackground = ({children})=> <div style={{background: '#282C34', padding: 80}}>{children}</div>
+
+  return (
+    <DarkBackground>
+    <Carousel
+      buttonColor="white"
+      disabledButtonColor="slategray"
+    >
+      <Page>Page 1!</Page>
+      <Page>Page 2!</Page>
+      <Page>Page 3!</Page>
+    </Carousel>
+    </DarkBackground>
   )
 }
 ```
