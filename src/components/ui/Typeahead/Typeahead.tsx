@@ -8,78 +8,12 @@ import {
   ItemButton,
   SearchIcon,
   Selected,
-  SelectedItem,
 } from './DisplayComponents'
 
-import removeSVG from './assets/remove.svg'
 import TypeaheadResult from './TypeaheadResult'
+import Expander from '@talus-analytics/library.ui.expander'
 
-export interface Item {
-  key: string
-  label: string
-  [key: string]: any
-}
-
-interface RenderItemProps {
-  item: Item
-}
-
-export interface TypeaheadProps {
-  /** The array of items that the user should
-   * be able to select from
-   */
-  items: Item[]
-  /**
-   * The currently selected items
-   */
-  values: Item[]
-  /**
-   * Function called when and item is
-   * selected; the first argument will
-   * be passed the selected item
-   */
-  onAdd: (item: Item) => void
-  /**
-   * Function called when and item is removed
-   * from the multiselect, the first argument
-   * will be the removed item.
-   */
-  onRemove: (item: Item) => void
-  /** Toggle multi-select or single-select mode */
-  multiselect?: boolean
-  /**
-   * Placeholder string for the search bar
-   */
-  placeholder?: string
-  /**
-   * React functional component which should be used
-   * to render each item. The props passed to this
-   * component will contain 'item' which is the
-   * item being rendered.
-   */
-  RenderItem?: React.FC<RenderItemProps>
-  /**
-   * The properties of the Item object which should be
-   * considered in the fuzzy search. Properties for search
-   * must have string values.
-   */
-  searchKeys?: Fuse.FuseOptionKey[]
-  /**
-   * className; for supporting scss modules and
-   * styled-components.
-   */
-  className?: string
-  /**
-   * Toggle disabled state
-   */
-  disabled?: boolean
-  /**
-   * object of styles which will be passed
-   * to the container component
-   */
-  style?: React.CSSProperties
-  ariaLabel?: string
-}
+import type { TypeaheadProps, Item } from './TypeaheadTypes'
 
 const Typeahead = ({
   multiselect = false,
@@ -88,8 +22,8 @@ const Typeahead = ({
   onAdd,
   onRemove,
   placeholder = '',
-  RenderItem = ({ item: { label } }) => (
-    <TypeaheadResult>{label}</TypeaheadResult>
+  RenderItem = ({ item, selected }) => (
+    <TypeaheadResult {...{ item, selected }} />
   ),
   searchKeys = ['key', 'label'],
   className = '',
@@ -170,31 +104,32 @@ const Typeahead = ({
         aria-label={ariaLabel}
       />
       <SearchIcon searchString={searchString} />
-
-      <Results style={{ display: showResults ? 'flex' : 'none' }}>
-        {multiselect && values.length > 0 && (
-          <Selected>
-            {values.map((item: Item) => (
-              <SelectedItem onClick={() => onRemove(item)}>
-                {item.label}
-                <img
-                  src={removeSVG}
-                  style={{ flexShrink: 0 }}
-                  alt="Remove item"
-                />
-              </SelectedItem>
-            ))}
-          </Selected>
-        )}
-        {(results.length > 0 && searchString !== values[0]?.label
-          ? results
-          : items
-        ).map(item => (
-          <ItemButton key={item.key} onClick={() => onAdd(item)}>
-            <RenderItem {...{ item }} />
-          </ItemButton>
-        ))}
-      </Results>
+      <Expander
+        floating
+        open={showResults}
+        style={{ width: '100%' }}
+        animDuration={125}
+      >
+        <Results>
+          {multiselect && values.length > 0 && (
+            <Selected>
+              {values.map((item: Item) => (
+                <ItemButton key={item.key} onClick={() => onRemove(item)}>
+                  <RenderItem selected key={item.key} {...{ item }} />
+                </ItemButton>
+              ))}
+            </Selected>
+          )}
+          {(results.length > 0 && searchString !== values[0]?.label
+            ? results
+            : items
+          ).map(item => (
+            <ItemButton key={item.key} onClick={() => onAdd(item)}>
+              <RenderItem {...{ item }} />
+            </ItemButton>
+          ))}
+        </Results>
+      </Expander>
     </Container>
   )
 }

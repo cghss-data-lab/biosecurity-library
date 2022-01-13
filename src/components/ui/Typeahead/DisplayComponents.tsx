@@ -9,18 +9,18 @@ export const Container = styled.form`
 
   &:focus-within {
     outline: none;
-    border-bottom: none;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0); */
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 
     &:after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: 0px;
       left: 12px;
       right: 12px;
       height: 1px;
-      background-color: ${({ theme }) => theme.colorMedGray};
+      background-color: rgb(211, 211, 211);
     }
   }
 `
@@ -37,15 +37,17 @@ export const SearchBar = styled.input`
 
   &:focus {
     outline: none;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0); */
+    padding-bottom: 13px;
     border-bottom: none;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
 `
 export const Results = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
+  /* position: absolute; */
+  /* left: 0; */
+  /* right: 0; */
   display: flex;
   min-width: 15rem;
   max-height: 30rem;
@@ -66,9 +68,9 @@ export const Results = styled.div`
 export const Selected = styled.div`
   /* border-bottom: 1px solid ${({ theme }) => theme.colorMedGray}; */
   position: relative;
-  padding-bottom: 5px;
+  /* padding-bottom: 5px;
   padding-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 5px; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -80,7 +82,7 @@ export const Selected = styled.div`
     left: 11px;
     right: 11px;
     height: 1px;
-    background-color: ${({ theme }) => theme.colorMedGray};
+    background-color: rgb(211, 211, 211);
   }
 `
 
@@ -90,22 +92,8 @@ export const ItemButton = styled.button`
   width: 100%;
   margin: 0;
   padding: 0;
-`
-
-export const SelectedItem = styled(ItemButton)`
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  font-size: 16px;
-  text-align: left;
-  padding: 8px 12px 4px 12px;
-  /* border-top: 1px solid rgba(0, 0, 0, 0.1); */
-  transition: 150ms ease;
-  font-weight: 800;
-  background-color: rgba(80, 0, 50, 0);
-  &:hover {
-    background-color: rgba(100, 0, 50, 0.08);
-  }
 `
 
 const clearButtonHeight = 18

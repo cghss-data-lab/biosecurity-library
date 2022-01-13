@@ -16,19 +16,23 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20em;
+  margin-bottom: 65px;
   background: ${({ theme }) => theme.colorDarkest};
 `
 const Instruction = styled.div`
-  font-style: italic;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 22px;
-  color: ${({ theme }) => theme.colorBlack};
-  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   margin-top: 18px;
-  color: white;
-  text-align: center;
+
+  > div > p {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: ${({ theme }) => theme.colorBlack};
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    color: white;
+    text-align: center;
+    padding-top: 8px;
+  }
 `
 const Svg = styled.svg`
   margin-top: 30px;
@@ -71,7 +75,7 @@ const BarChart = (): JSX.Element => {
           <CMS.Text name="Third header" data={homePageText} />
         </h2>
         <Instruction>
-          <CMS.Text name="Third header subtext" data={homePageText} />
+          <CMS.RichText name="Third header subtext" data={homePageText} />
         </Instruction>
         <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
           {sortedBars.map((bar, index) => (

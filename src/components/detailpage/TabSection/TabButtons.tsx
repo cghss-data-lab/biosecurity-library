@@ -34,7 +34,7 @@ const Button = styled.button<{ active: boolean }>`
 
   ${({ active, theme }) =>
     active &&
-    `background: ${theme.colorDarker}; 
+    `background: ${theme.colorDarker};
     font-weight: 600;
     color: white;
     `}

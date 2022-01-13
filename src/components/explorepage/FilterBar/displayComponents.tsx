@@ -9,8 +9,13 @@ export const NameContainer = styled.div<{ expanded: boolean }>`
   display: flex;
   justify-content: space-between;
   font-family: 'Open Sans';
-  font-weight: Bold;
-  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  text-transform: uppercase;
+
+  min-height: 30px;
 
   ${({ expanded, theme }) =>
     expanded &&

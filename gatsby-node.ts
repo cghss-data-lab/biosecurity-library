@@ -1,11 +1,11 @@
-import path from 'path'
+import * as path from 'path'
 import { GatsbyNode } from 'gatsby'
 import { PageContext } from './src/templates/Detail'
-// import {
-// getResourceMapData,
-// getFullResourceMapData,
-// } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/packageMethods'
-// import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/resourceMapTypes'
+import {
+  getResourceMapData,
+  getFullResourceMapData,
+} from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/packageMethods'
+import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/resourceMapTypes'
 import * as urls from './src/utilities/urls'
 
 export const createPages: GatsbyNode['createPages'] = async ({
@@ -26,11 +26,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             Short_description
             Long_description
             Key_topic_area
-            Authoring_organization {
-              data {
-                Name
-              }
-            }
+            Seminal_resource
             Target_user_role
             Potential_user_role
             URL_for_resource
@@ -41,12 +37,29 @@ export const createPages: GatsbyNode['createPages'] = async ({
             First_release_date
             Last_update_date
             Update_frequency
+            Other_language_URLs
+            Authoring_organization: Authoring_organization {
+              data {
+                value: Name
+              }
+            }
+            Authoring_organization_type: Authoring_organization {
+              data {
+                value: Type
+              }
+            }
             Auto_other_resources_cited {
               data {
                 Record_ID_INTERNAL
               }
             }
             Files_INTERNAL {
+              localFiles {
+                publicURL
+                name
+              }
+            }
+            Other_language_files_INTERNAL {
               localFiles {
                 publicURL
                 name
@@ -92,20 +105,20 @@ export const createPages: GatsbyNode['createPages'] = async ({
   // removed:
   // Topic_Area_Icons
 
-  // const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
-  //   result.data.resources.nodes,
-  //   ['Auto_other_resources_cited'],
-  //   'Short_name',
-  //   'Record_ID_INTERNAL',
-  //   'Resource_type'
-  // )
+  const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
+    result.data.resources.nodes,
+    ['Auto_other_resources_cited'],
+    'Short_name',
+    'Record_ID_INTERNAL',
+    'Resource_type'
+  )
 
   result.data.resources.nodes.forEach(
     ({ data }: { data: PageContext['data'] }) => {
-      // const resourceMapData: HyperlinkedGraphData = getResourceMapData(
-      //   data.Record_ID_INTERNAL,
-      //   fullResourceMapData
-      // )
+      const resourceMapData: HyperlinkedGraphData = getResourceMapData(
+        data.Record_ID_INTERNAL,
+        fullResourceMapData
+      )
       data.Resource_sets = resultResourceSets.data.resourceSets.nodes.filter(
         (d: {
           data: {
@@ -122,7 +135,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         context: {
           data: {
             ...data,
-            // resourceMapData
+            resourceMapData,
           },
         },
       })

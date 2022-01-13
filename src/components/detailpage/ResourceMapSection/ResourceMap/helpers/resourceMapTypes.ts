@@ -1,10 +1,7 @@
 /**
  * Custom types for ResourceMap component, mainly derived from viz.network
  */
-import {
-  GraphNode,
-  GraphLink,
-} from '@talus-analytics/viz.charts.network/dist/helpers'
+import { GraphNode, GraphLink } from '@talus-analytics/viz.charts.network-tools'
 export type HyperlinkedNode = GraphNode & {
   url?: string
 }

@@ -1,13 +1,22 @@
 import React, { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import useDefinitions from '../../../airtableQueryHooks/useDefinitions'
 import { DimObj } from './BarChart'
 
 import CMS from '@talus-analytics/library.airtable-cms'
 
 import Tippy from '@tippyjs/react'
-import 'tippy.js/dist/tippy.css'
+import 'tippy.js/themes/light.css'
+import BarPopup from './BarPopup'
+import { navigate } from 'gatsby'
+import qs from 'qs'
+
+const navigateToTopicArea = (keyTopicArea: string) =>
+  navigate(
+    `explore?${qs.stringify({
+      filters: { Key_topic_area: [keyTopicArea] },
+    })}`
+  )
 
 const Label = styled.text`
   font-size: 5px;
@@ -37,11 +46,6 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
   const midX = startX + 0.5 * dim.barWidth
   const midY = startY + 0.5 * height
 
-  const definitions = useDefinitions()
-  const definition = definitions.find(
-    def => def.data.Name.trim() === bar.fieldValue.trim()
-  )?.data.Definition
-
   const iconPadding = 1
   let iconStyle: React.CSSProperties = { pointerEvents: 'none' }
   let iconStartY = midY
@@ -58,6 +62,7 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
     mouseHandlers = {
       onMouseEnter: () => setHover(true),
       onMouseLeave: () => setHover(false),
+      onClick: () => navigateToTopicArea(bar.fieldValue),
     }
   }
 
@@ -66,6 +71,7 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
       <rect
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        onClick={() => navigateToTopicArea(bar.fieldValue)}
         key={index}
         x={startX}
         y={startY}
@@ -74,7 +80,12 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
         fill={hover ? theme.colorGolden : theme.colorWhite}
         stroke={'#173057'}
       />
-      <Tippy content={definition} visible={hover}>
+      <Tippy
+        content={<BarPopup barName={bar.fieldValue} />}
+        visible={hover}
+        maxWidth="600px"
+        theme="light"
+      >
         <CMS.PlotIcon
           style={iconStyle}
           name={bar.fieldValue}
@@ -94,6 +105,7 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
         <Label
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
+          onClick={() => navigateToTopicArea(bar.fieldValue)}
         >
           {bar.fieldValue}
         </Label>
