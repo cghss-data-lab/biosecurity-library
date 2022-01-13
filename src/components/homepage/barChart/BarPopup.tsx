@@ -1,5 +1,6 @@
 import CMS from 'AirtableCMS'
 import useDefinitions from 'airtableQueryHooks/useDefinitions'
+import useHomePageData from 'airtableQueryHooks/useHomePageData'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 
@@ -48,6 +49,7 @@ interface BarPopupProps {
 
 const BarPopup = ({ barName }: BarPopupProps): JSX.Element => {
   const theme: any = useTheme()
+  const { homePageText } = useHomePageData()
 
   const definitions = useDefinitions()
   const definition = definitions.find(
@@ -68,7 +70,9 @@ const BarPopup = ({ barName }: BarPopupProps): JSX.Element => {
         <Content>
           <DefinitionHeader>About this topic</DefinitionHeader>
           <Definition>{definition}</Definition>
-          <CTA>Click to explore topic</CTA>
+          <CTA>
+            <CMS.Text name="Chart popup CTA" data={homePageText} />
+          </CTA>
         </Content>
       )}
     </Container>
