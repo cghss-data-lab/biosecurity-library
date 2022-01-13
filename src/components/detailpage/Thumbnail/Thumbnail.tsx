@@ -24,6 +24,7 @@ interface ThumbnailProps {
     Short_name: string
     Other_language_URLs: string
     URL_for_resource: string
+    Resource_language?: string[]
     Files_INTERNAL?: {
       localFiles: {
         publicURL: string
@@ -206,7 +207,10 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
             </DownloadContainer>
           </Dropdown>
         )}
-        <LanguageList {...{ languageFiles, languageURLs }} />
+        <LanguageList
+          languages={data.Resource_language}
+          {...{ languageFiles, languageURLs }}
+        />
       </ThumbnailContainer>
     )
   }
