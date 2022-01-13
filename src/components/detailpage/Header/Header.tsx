@@ -46,7 +46,10 @@ const Header: React.FC<PageContext> = ({ data }) => (
       {data.Seminal_resource === 'Yes' && (
         <IconTag dark name={'Key resource'} style={{ marginRight: '1em' }} />
       )}
-      <IconTag dark name={data.Resource_type} />
+      <IconTag dark name={data.Resource_type} style={{ marginRight: '1em' }} />
+      {data.Access_limitations[0] === 'Restricted' && (
+        <IconTag name={data.Access_method} />
+      )}
     </TagHolder>
     <IconContainer>
       {data.Key_topic_area.map(name => (

@@ -30,6 +30,8 @@ const IconTag = ({
 }: IconTagProps): JSX.Element => {
   const theme: any = useTheme()
 
+  let iconOverride
+
   let backgroundColor: string = dark ? theme.colorDarkest : `rgba(0,0,0,0)`
   let borderColor: string = theme.colorDarkest
   let foregroundColor: string = dark ? theme.colorWhite : theme.colorDarkest
@@ -41,10 +43,24 @@ const IconTag = ({
     foregroundColor = theme.colorDarkest
   }
 
+  const accessMethods = [
+    'Email for access',
+    'Register for access',
+    'Purchase for access',
+    'Apply for access',
+  ]
+
+  if (accessMethods.includes(name)) {
+    backgroundColor = `rgba(0,0,0,0)`
+    borderColor = theme.colorRed
+    foregroundColor = theme.colorRed
+    iconOverride = 'Restricted'
+  }
+
   return (
     <Tag {...{ foregroundColor, backgroundColor, borderColor, ...props }}>
       <CMS.Icon
-        name={name}
+        name={iconOverride ?? name}
         color={foregroundColor}
         style={{
           height: '1.4em',
