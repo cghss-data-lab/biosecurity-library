@@ -29,7 +29,6 @@ const ShortName = styled.h6`
   font-size: 16px !important;
   line-height: 22px;
   font-family: 'Open Sans' !important;
-  margin-top: 0px !important;
 `
 const TagHolder = styled.div`
   display: flex;
@@ -38,7 +37,9 @@ const TagHolder = styled.div`
 
 const Header: React.FC<PageContext> = ({ data }) => (
   <HeaderContainer>
-    <h2 style={{ marginTop: 30, marginBottom: 0 }}>{data.Resource_name}</h2>
+    <h2 style={{ marginTop: 30, marginBottom: 0, lineHeight: 1.2 }}>
+      {data.Resource_name}
+    </h2>
     <ShortName>[{data.Short_name.trim()}]</ShortName>
     <Author>{data.Authoring_organization[0].data.value}</Author>
     <p>{data.Short_description}</p>
