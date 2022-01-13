@@ -29,7 +29,7 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
         <InfoTip
           content={
             <span style={{ fontFamily: `'Open Sans', sans-serif` }}>
-              Citations between resources in the biosecurity library are
+              Mentions between resources in the biosecurity library are
               identified using both an automated text-matching algorithm and
               some manual review.
             </span>
@@ -39,7 +39,7 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
       {data.resourceMapData !== undefined && mapNotEmpty && (
         <div>
           <p>
-            {getCitationCountText(
+            {getMentionsCountText(
               data?.Record_ID_INTERNAL,
               data.resourceMapData
             )}
@@ -56,8 +56,8 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
       )}
       {!mapNotEmpty && (
         <p>
-          This resource is not currently known to cite or be cited by any other
-          resources in the library.
+          This resource is not currently known to mention or be mentioned by any
+          other resources in the library.
         </p>
       )}
     </>
@@ -65,20 +65,21 @@ export const ResourceMapSection: FC<ResourceMapSectionProps> = ({ data }) => {
 }
 
 /**
- * Returns text describing how many resources this one cites or is cited by
+ * Returns text describing how many resources this one mentions or is
+ * mentioned by
  * @param resId The ID of the resource whose page it is
  * @param graphData The nodes and links
- * @returns Text describing citation counts
+ * @returns Text describing mention counts
  */
-function getCitationCountText(
+function getMentionsCountText(
   resId: string | undefined,
   graphData: AppGraphData
 ): string {
   if (resId === undefined) return ''
-  const cites: number = getUniqueNodeIdCount(graphData, 'target', resId)
-  const citedBy: number = getUniqueNodeIdCount(graphData, 'source', resId)
-  const citationDesc: string = getCitationString(cites, citedBy)
-  return citationDesc
+  const mentions: number = getUniqueNodeIdCount(graphData, 'target', resId)
+  const mentionedBy: number = getUniqueNodeIdCount(graphData, 'source', resId)
+  const mentionDesc: string = getMentionString(mentions, mentionedBy)
+  return mentionDesc
 }
 
 /**
@@ -114,25 +115,32 @@ function getUniqueNodeIdCount(
 }
 
 /**
- * Returns text describing how many resources this one cites or is cited by
- * @param cites Number of other resources cited
- * @param citedBy Number of other resources cited by
+ * Returns text describing how many resources this one mentions or is
+ * mentioned by
+ * @param mentions Number of other resources mentioned
+ * @param mentionedBy Number of other resources mentioned by
  * @returns Text describing the counts
  */
-function getCitationString(cites: number, citedBy: number) {
+function getMentionString(mentions: number, mentionedBy: number) {
   let text: string = 'This resource '
   const pieces: string[] = []
-  if (cites > 0)
-    pieces.push(`cites ${cites} other resource${cites === 1 ? '' : 's'}`)
-  if (citedBy > 0)
+  if (mentions > 0)
     pieces.push(
-      `is cited by ${citedBy} other resource${citedBy === 1 ? '' : 's'}`
+      `mentions ${mentions} other resource${mentions === 1 ? '' : 's'}`
+    )
+  if (mentionedBy > 0)
+    pieces.push(
+      `is mentioned by ${mentionedBy} other resource${
+        mentionedBy === 1 ? '' : 's'
+      }`
     )
   pieces.forEach((s, i) => {
     if (i > 0) text += ' and ' + s
     else text += s
   })
-  text += ` that ${cites + citedBy === 1 ? 'is' : 'are'} also in the library.`
+  text += ` that ${
+    mentions + mentionedBy === 1 ? 'is' : 'are'
+  } also in the library.`
   return text
 }
 
