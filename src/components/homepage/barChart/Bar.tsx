@@ -20,7 +20,7 @@ const navigateToTopicArea = (keyTopicArea: string) =>
 
 const Label = styled.text`
   font-size: 5px;
-  transform: rotate(-45deg);
+  /* transform: rotate(-45deg); */
   text-anchor: end;
   fill: white;
 `
@@ -66,6 +66,12 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
     }
   }
 
+  const wrap = bar.fieldValue.length > 10
+  const firstLabel = wrap
+    ? bar.fieldValue.split(' ').slice(0, 2).join(' ')
+    : bar.fieldValue
+  const secondLabel = wrap ? bar.fieldValue.split(' ').slice(2).join(' ') : ''
+
   return (
     <>
       <rect
@@ -99,7 +105,9 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
       </Tippy>
       <g
         style={{
-          transform: `translate(${midX}px, ${endY + dim.labelPad}px)`,
+          transform: `translate(${midX}px, ${
+            endY + dim.labelPad
+          }px) rotate(-45deg)`,
         }}
       >
         <Label
@@ -107,7 +115,15 @@ const Bar = ({ index, bar, dim }: BarProps): JSX.Element => {
           onMouseLeave={() => setHover(false)}
           onClick={() => navigateToTopicArea(bar.fieldValue)}
         >
-          {bar.fieldValue}
+          {firstLabel}
+        </Label>
+        <Label
+          y={8}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          onClick={() => navigateToTopicArea(bar.fieldValue)}
+        >
+          {secondLabel}
         </Label>
       </g>
     </>
