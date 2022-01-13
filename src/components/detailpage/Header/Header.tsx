@@ -1,14 +1,13 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import CMS from '@talus-analytics/library.airtable-cms'
-
 import { PageContext } from '../../../templates/Detail'
 import IconTag from 'components/ui/IconTag/IconTag'
 
 const HeaderContainer = styled.header`
   grid-area: header;
   padding-left: 50px;
+  margin-top: 20px;
 `
 const IconContainer = styled.div`
   display: flex;
@@ -16,14 +15,11 @@ const IconContainer = styled.div`
   margin-top: 15px;
   gap: 20px;
 `
-const Author = styled.h4`
-  /* font-style: normal !important;
-  font-weight: bold !important;
-  font-size: 24px !important;
-  line-height: 33px; */
-  margin-top: 20px;
-  margin-bottom: 20px !important;
-  color: ${({ theme }) => theme.colorVeryDarkGray};
+const Author = styled.div`
+  font-size: 22px;
+  line-height: 27px;
+  margin-bottom: 20px;
+  color: ${({ theme }) => theme.colorDarkGray};
 `
 
 const ShortName = styled.h6`
@@ -45,25 +41,19 @@ const Header: React.FC<PageContext> = ({ data }) => {
 
   return (
     <HeaderContainer>
-      <TagHolder>
-        <IconTag dark name={data.Resource_type} />
-        {data.Seminal_resource === 'Yes' && (
-          <IconTag dark name={'Key resource'} style={{ marginLeft: '1em' }} />
-        )}
-      </TagHolder>
-      <h2 style={{ marginTop: 20 }}>{data.Resource_name}</h2>
+      <h2 style={{ marginTop: 30 }}>{data.Resource_name}</h2>
       <ShortName>[{data.Short_name.trim()}]</ShortName>
       <Author>{data.Authoring_organization[0].data.value}</Author>
       <p>{data.Short_description}</p>
+      <TagHolder>
+        {data.Seminal_resource === 'Yes' && (
+          <IconTag dark name={'Key resource'} style={{ marginRight: '1em' }} />
+        )}
+        <IconTag dark name={data.Resource_type} />
+      </TagHolder>
       <IconContainer>
         {data.Key_topic_area.map(name => (
-          <CMS.Icon
-            noEmitError
-            key={name}
-            name={name}
-            color={theme.colorDarkest}
-            style={{ width: 30 }}
-          />
+          <IconTag name={name} />
         ))}
       </IconContainer>
     </HeaderContainer>
