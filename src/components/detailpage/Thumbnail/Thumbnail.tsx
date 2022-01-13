@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image'
 
 import Dropdown from '@talus-analytics/library.ui.dropdown'
+import LanguageList from './LanguageList'
 
 const ThumbnailContainer = styled.div`
   grid-area: thumbnail;
@@ -205,6 +206,7 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
             </DownloadContainer>
           </Dropdown>
         )}
+        <LanguageList {...{ languageFiles, languageURLs }} />
       </ThumbnailContainer>
     )
   }
