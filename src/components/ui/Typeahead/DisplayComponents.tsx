@@ -9,7 +9,6 @@ export const Container = styled.form`
 
   &:focus-within {
     outline: none;
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0); */
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 
@@ -29,16 +28,15 @@ export const SearchBar = styled.input<{ iconLeft: boolean }>`
   width: 100%;
   border-radius: 5px;
 
-  /* padding: 0.33rem 0.5rem; */
   padding: ${({ iconLeft }) =>
     iconLeft ? `12px 15px 12px 36px` : `12px 15px 12px 15px`};
+
   font-weight: normal;
   background: none;
   border: 1px solid #aaa;
 
   &:focus {
     outline: none;
-    /* border-bottom: 1px solid rgba(0, 0, 0, 0); */
     padding-bottom: 13px;
     border-bottom: none;
     border-bottom-right-radius: 0;
@@ -46,9 +44,6 @@ export const SearchBar = styled.input<{ iconLeft: boolean }>`
   }
 `
 export const Results = styled.div`
-  /* position: absolute; */
-  /* left: 0; */
-  /* right: 0; */
   display: flex;
   max-height: 30rem;
   overflow-y: scroll;
@@ -66,11 +61,7 @@ export const Results = styled.div`
 `
 
 export const Selected = styled.div`
-  /* border-bottom: 1px solid ${({ theme }) => theme.colorMedGray}; */
   position: relative;
-  /* padding-bottom: 5px;
-  padding-top: 5px;
-  margin-bottom: 5px; */
   display: flex;
   flex-direction: column;
   width: 100%;
