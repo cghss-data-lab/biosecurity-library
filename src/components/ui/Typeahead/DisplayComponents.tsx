@@ -49,7 +49,6 @@ export const Results = styled.div`
   /* left: 0; */
   /* right: 0; */
   display: flex;
-  min-width: 15rem;
   max-height: 30rem;
   overflow-y: scroll;
   flex-direction: column;
