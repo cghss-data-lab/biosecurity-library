@@ -197,8 +197,12 @@ const Typeahead = ({
       <Expander
         floating
         open={showResults}
-        style={{ width: '100%' }}
-        animDuration={125}
+        style={{
+          width: '100%',
+          borderBottomRightRadius: 10,
+          borderBottomLeftRadius: 10,
+        }}
+        animDuration={200}
       >
         <Results>
           {multiselect && values.length > 0 && (
