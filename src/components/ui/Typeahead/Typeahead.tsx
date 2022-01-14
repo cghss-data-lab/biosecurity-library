@@ -28,7 +28,7 @@ const Typeahead = ({
   searchKeys = ['key', 'label'],
   iconSVG,
   iconLeft = false,
-  className = '',
+  className,
   disabled = false,
   style = {},
   ariaLabel = '',
