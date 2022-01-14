@@ -24,13 +24,13 @@ export const Container = styled.form`
     }
   }
 `
-export const SearchBar = styled.input`
+export const SearchBar = styled.input<{ iconLeft: boolean }>`
   border: none;
   width: 100%;
   border-radius: 5px;
 
   /* padding: 0.33rem 0.5rem; */
-  padding: 12px;
+  padding: 12px 24px 12px 15px;
   font-weight: normal;
   background: none;
   border: 1px solid #aaa;

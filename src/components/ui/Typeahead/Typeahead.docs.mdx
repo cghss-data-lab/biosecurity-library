@@ -12,7 +12,7 @@ any additional properties as necessary, and allows the user to search through an
 select them. The control can be used with just the mouse, just the keyboard, or a
 combination of the two.
 
-### Component usage
+## Component usage
 
 Simple usage example of multiple select component. This component is designed to work
 in different situations with different state management (useState or useReducer, for
@@ -49,7 +49,7 @@ Modify the placeholder text, add items, or add other props to see changes live:
 }
 ```
 
-## Icon customization
+### Icon customization
 
 The Typeahead can take a URI escaped SVG as an icon replacement; one easy way to get that is to use [this tool](https://yoksel.github.io/url-encoder/) and take the text from the "Take Encoded" box (second one).
 
@@ -63,3 +63,14 @@ That encoded string can be passed to the iconSVG prop:
 ```
 
 > Note: _The encoded string should always start with `%C3svg` and quotes must be single quotes._
+
+The icon can be moved to the left side of the input box with the `iconLeft` boolean prop:
+
+```js
+<Typeahead
+  //...other props
+  iconLeft
+/>
+```
+
+### Color Customization

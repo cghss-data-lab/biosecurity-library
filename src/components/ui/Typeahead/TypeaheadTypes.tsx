@@ -71,5 +71,9 @@ export interface TypeaheadProps {
    * a tool like this one: https://yoksel.github.io/url-encoder/
    */
   iconSVG: string
+  /**
+   * Moves the icon to the left side of the input box
+   */
+  iconLeft: boolean
   ariaLabel?: string
 }
