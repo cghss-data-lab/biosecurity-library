@@ -106,7 +106,7 @@ const Typeahead = ({
         aria-label={ariaLabel}
         iconLeft={iconLeft}
       />
-      <SearchIcon searchString={searchString} iconSVG={iconSVG} />
+      <SearchIcon searchString={searchString} {...{ iconSVG, iconLeft }} />
       <Expander
         floating
         open={showResults}

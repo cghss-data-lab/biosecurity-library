@@ -30,7 +30,8 @@ export const SearchBar = styled.input<{ iconLeft: boolean }>`
   border-radius: 5px;
 
   /* padding: 0.33rem 0.5rem; */
-  padding: 12px 24px 12px 15px;
+  padding: ${({ iconLeft }) =>
+    iconLeft ? `12px 15px 12px 36px` : `12px 15px 12px 15px`};
   font-weight: normal;
   background: none;
   border: 1px solid #aaa;
@@ -99,11 +100,13 @@ const clearButtonHeight = 18
 export const SearchIcon = styled.div<{
   searchString: string
   iconSVG?: string
+  iconLeft: boolean
 }>`
-  display: ${({ searchString }) => (searchString === '' ? 'block' : 'none')};
+  display: ${({ searchString, iconLeft }) =>
+    iconLeft || searchString === '' ? 'block' : 'none'};
   position: absolute;
   top: calc(50% - ${clearButtonHeight / 2}px);
-  right: 12px;
+  ${({ iconLeft }) => (iconLeft ? `left: 12px` : `right: 12px`)};
   border: none;
   background: none;
   background-image: ${({ iconSVG }) =>
