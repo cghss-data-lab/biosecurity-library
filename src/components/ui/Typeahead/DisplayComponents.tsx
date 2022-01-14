@@ -7,19 +7,25 @@ export const Container = styled.form`
   box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.125);
   border-radius: 5px;
 
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 12px;
+    right: 12px;
+    height: 1px;
+    background-color: rgba(211, 211, 211, 0);
+    transition-delay: 200ms;
+  }
+
   &:focus-within {
     outline: none;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 
     &:after {
-      content: '';
-      position: absolute;
-      bottom: 0px;
-      left: 12px;
-      right: 12px;
-      height: 1px;
-      background-color: rgb(211, 211, 211);
+      background-color: rgba(211, 211, 211, 255);
+      transition-delay: 0s;
     }
   }
 `
@@ -34,13 +40,17 @@ export const SearchBar = styled.input<{ iconLeft: boolean }>`
   font-weight: normal;
   background: none;
   border: 1px solid #aaa;
+  transition-duration: 0ms;
+  transition-delay: 200ms;
 
   &:focus {
     outline: none;
     padding-bottom: 13px;
-    border-bottom: none;
+    border-bottom: 0px solid #aaaaaa00;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    transition-duration: 0ms;
+    transition-delay: 0s;
   }
 `
 export const Results = styled.div`
@@ -49,7 +59,6 @@ export const Results = styled.div`
   overflow-y: scroll;
   flex-direction: column;
   background-color: #fff;
-  box-shadow: 3px 10px 10px rgba(0, 0, 0, 0.125);
   border-radius: 10px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
