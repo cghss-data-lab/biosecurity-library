@@ -58,7 +58,6 @@ export const Results = styled.div`
   max-height: 30rem;
   overflow-y: scroll;
   flex-direction: column;
-  background-color: #fff;
   border-radius: 10px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;

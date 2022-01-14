@@ -115,6 +115,7 @@ const Typeahead = ({
   searchKeys = ['key', 'label'],
   iconSVG,
   iconLeft = false,
+  backgroundColor = 'white',
   className,
   disabled = false,
   style = {},
@@ -192,6 +193,7 @@ const Typeahead = ({
         placeholder={placeholder}
         aria-label={ariaLabel}
         iconLeft={iconLeft}
+        style={{ backgroundColor }}
       />
       <SearchIcon searchString={searchString} {...{ iconSVG, iconLeft }} />
       <Expander
@@ -204,7 +206,7 @@ const Typeahead = ({
         }}
         animDuration={200}
       >
-        <Results>
+        <Results style={{ backgroundColor }}>
           {multiselect && values.length > 0 && (
             <Selected>
               {values.map((item: Item) => (
