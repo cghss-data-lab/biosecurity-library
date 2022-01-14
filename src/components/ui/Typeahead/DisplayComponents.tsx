@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.form`
+export const Container = styled.form<{ borderColor: string }>`
   position: relative;
   margin-top: 0.5rem;
   background-color: #fff;
@@ -14,8 +14,11 @@ export const Container = styled.form`
     left: 12px;
     right: 12px;
     height: 1px;
-    background-color: rgba(211, 211, 211, 0);
+    /* background-color: rgba(211, 211, 211, 0); */
     transition-delay: 200ms;
+    background-color: ${({ borderColor }) =>
+      borderColor ? borderColor : `rgb(211, 211, 211)`};
+    opacity: 0;
   }
 
   &:focus-within {
@@ -24,7 +27,10 @@ export const Container = styled.form`
     border-bottom-left-radius: 0;
 
     &:after {
-      background-color: rgba(211, 211, 211, 255);
+      /* background-color: rgba(211, 211, 211, 255); */
+      background-color: ${({ borderColor }) =>
+        borderColor ? borderColor : `rgb(211, 211, 211)`};
+      opacity: 0.33;
       transition-delay: 0s;
     }
   }
@@ -68,7 +74,7 @@ export const Results = styled.div`
   padding-top: none;
 `
 
-export const Selected = styled.div`
+export const Selected = styled.div<{ borderColor: string }>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -81,7 +87,9 @@ export const Selected = styled.div`
     left: 11px;
     right: 11px;
     height: 1px;
-    background-color: rgb(211, 211, 211);
+    background-color: ${({ borderColor }) =>
+      borderColor ? borderColor : `rgb(211, 211, 211)`};
+    opacity: 0.33;
   }
 `
 
