@@ -27,6 +27,7 @@ const Typeahead = ({
   ),
   searchKeys = ['key', 'label'],
   iconSVG,
+  iconLeft = false,
   className = '',
   disabled = false,
   style = {},
@@ -103,6 +104,7 @@ const Typeahead = ({
         onChange={e => setSearchString(e.target.value)}
         placeholder={placeholder}
         aria-label={ariaLabel}
+        iconLeft={iconLeft}
       />
       <SearchIcon searchString={searchString} iconSVG={iconSVG} />
       <Expander
