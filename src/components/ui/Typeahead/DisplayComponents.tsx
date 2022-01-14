@@ -96,14 +96,20 @@ export const ItemButton = styled.button`
 `
 
 const clearButtonHeight = 18
-export const SearchIcon = styled.div<{ searchString: string }>`
+export const SearchIcon = styled.div<{
+  searchString: string
+  iconSVG?: string
+}>`
   display: ${({ searchString }) => (searchString === '' ? 'block' : 'none')};
   position: absolute;
   top: calc(50% - ${clearButtonHeight / 2}px);
   right: 12px;
   border: none;
   background: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='15' fill='%23AAACAE'/%3E%3Cpath d='M18.2083 16.8333H17.4842L17.2275 16.5858C18.1258 15.5408 18.6667 14.1842 18.6667 12.7083C18.6667 9.4175 15.9992 6.75 12.7083 6.75C9.4175 6.75 6.75 9.4175 6.75 12.7083C6.75 15.9992 9.4175 18.6667 12.7083 18.6667C14.1842 18.6667 15.5408 18.1258 16.5858 17.2275L16.8333 17.4842V18.2083L21.4167 22.7825L22.7825 21.4167L18.2083 16.8333V16.8333ZM12.7083 16.8333C10.4258 16.8333 8.58333 14.9908 8.58333 12.7083C8.58333 10.4258 10.4258 8.58333 12.7083 8.58333C14.9908 8.58333 16.8333 10.4258 16.8333 12.7083C16.8333 14.9908 14.9908 16.8333 12.7083 16.8333Z' fill='white' stroke='white' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+  background-image: ${({ iconSVG }) =>
+    iconSVG
+      ? `url("data:image/svg+xml,${iconSVG}")`
+      : `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9H6Z' fill='%23333333'/%3E%3C/svg%3E%0A")`};
   /* background-image: ${({ searchString }) =>
     searchString === ''
       ? `url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='15' cy='15' r='15' fill='%23AAACAE'/%3E%3Cpath d='M18.2083 16.8333H17.4842L17.2275 16.5858C18.1258 15.5408 18.6667 14.1842 18.6667 12.7083C18.6667 9.4175 15.9992 6.75 12.7083 6.75C9.4175 6.75 6.75 9.4175 6.75 12.7083C6.75 15.9992 9.4175 18.6667 12.7083 18.6667C14.1842 18.6667 15.5408 18.1258 16.5858 17.2275L16.8333 17.4842V18.2083L21.4167 22.7825L22.7825 21.4167L18.2083 16.8333V16.8333ZM12.7083 16.8333C10.4258 16.8333 8.58333 14.9908 8.58333 12.7083C8.58333 10.4258 10.4258 8.58333 12.7083 8.58333C14.9908 8.58333 16.8333 10.4258 16.8333 12.7083C16.8333 14.9908 14.9908 16.8333 12.7083 16.8333Z' fill='white' stroke='white' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A")`
