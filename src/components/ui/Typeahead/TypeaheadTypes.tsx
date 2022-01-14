@@ -74,6 +74,13 @@ export interface TypeaheadProps {
   /**
    * Moves the icon to the left side of the input box
    */
-  iconLeft: boolean
+  iconLeft?: boolean
+  /** background color for the control */
+  backgroundColor?: string
+  /** font color for the control */
+  fontColor?: string
+  /** border color for the control */
+  borderColor?: string
+  /** Aria-label attribute for the text input */
   ariaLabel?: string
 }
