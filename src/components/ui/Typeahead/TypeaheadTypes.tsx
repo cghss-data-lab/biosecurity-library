@@ -65,5 +65,11 @@ export interface TypeaheadProps {
    * to the container component
    */
   style?: React.CSSProperties
+  /**
+   * takes an encoded SVG string to replace the icon
+   * in the typeahead box. SVG can be encoded with
+   * a tool like this one: https://yoksel.github.io/url-encoder/
+   */
+  iconSVG: string
   ariaLabel?: string
 }

@@ -26,6 +26,7 @@ const Typeahead = ({
     <TypeaheadResult {...{ item, selected }} />
   ),
   searchKeys = ['key', 'label'],
+  iconSVG,
   className = '',
   disabled = false,
   style = {},
@@ -103,7 +104,7 @@ const Typeahead = ({
         placeholder={placeholder}
         aria-label={ariaLabel}
       />
-      <SearchIcon searchString={searchString} />
+      <SearchIcon searchString={searchString} iconSVG={iconSVG} />
       <Expander
         floating
         open={showResults}
