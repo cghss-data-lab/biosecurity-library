@@ -70,7 +70,7 @@ export interface TypeaheadProps {
    * in the typeahead box. SVG can be encoded with
    * a tool like this one: https://yoksel.github.io/url-encoder/
    */
-  iconSVG: string
+  iconSVG?: string
   /**
    * Moves the icon to the left side of the input box
    */
