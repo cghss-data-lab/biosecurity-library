@@ -109,3 +109,50 @@ The default `<TypeaheadResult/>` component will inherit this font color, but the
   fontColor={'darkslategray'}
 />
 ```
+
+## RenderItem prop
+
+Everything about the way items are rendered can be changed by supplying a component to the `RenderItem` prop. This function will pass the current `item` object and a `selected` boolean as props.
+
+This is how multiple item text colors, hover colors, different icons for the 'x' indicator, and formatting for using multiple item fields should be implemented.
+
+### Default `<TypeaheadResult>` component
+
+This component may be used as a boilerplate example and starting point for building custom components for the `RenderItem` render prop:
+
+```js
+import React from 'react'
+import styled from 'styled-components'
+import { RenderItemProps } from '.'
+
+import removeSVG from './assets/remove.svg'
+
+const TypeaheadResultContainer = styled.span<{ selected?: boolean }>`
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 16px;
+  text-align: left;
+  padding: 8px 12px;
+  background-color: rgba(0, 50, 100, 0);
+  transition: 150ms ease;
+  ${({ selected }) => selected && ` font-weight: 800; `}
+
+  &:hover {
+    background-color: rgba(0, 50, 100, 0.08);
+    ${({ selected }) => selected && `background-color: rgba(100, 0, 50, 0.08);`}
+  }
+`
+
+const TypeaheadResult = ({ item: { label }, selected }: RenderItemProps) => (
+  <TypeaheadResultContainer selected={selected}>
+    {label}
+    {selected && (
+      <img src={removeSVG} style={{ flexShrink: 0 }} alt="Remove item" />
+    )}
+  </TypeaheadResultContainer>
+)
+
+export default TypeaheadResult
+```
