@@ -117,6 +117,7 @@ const Typeahead = ({
   iconLeft = false,
   backgroundColor = 'white',
   borderColor = '#aaa',
+  fontColor = 'rgba(51, 51, 51, 1)',
   className,
   disabled = false,
   style = {},
@@ -196,6 +197,7 @@ const Typeahead = ({
         aria-label={ariaLabel}
         iconLeft={iconLeft}
         style={{ backgroundColor, borderColor }}
+        fontColor={fontColor}
       />
       <SearchIcon searchString={searchString} {...{ iconSVG, iconLeft }} />
       <Expander
@@ -213,7 +215,11 @@ const Typeahead = ({
           {multiselect && values.length > 0 && (
             <Selected borderColor={borderColor}>
               {values.map((item: Item) => (
-                <ItemButton key={item.key} onClick={() => onRemove(item)}>
+                <ItemButton
+                  key={item.key}
+                  onClick={() => onRemove(item)}
+                  style={{ color: fontColor }}
+                >
                   <RenderItem selected key={item.key} {...{ item }} />
                 </ItemButton>
               ))}
@@ -223,7 +229,11 @@ const Typeahead = ({
             ? results
             : items
           ).map(item => (
-            <ItemButton key={item.key} onClick={() => onAdd(item)}>
+            <ItemButton
+              key={item.key}
+              onClick={() => onAdd(item)}
+              style={{ color: fontColor }}
+            >
               <RenderItem {...{ item }} />
             </ItemButton>
           ))}
