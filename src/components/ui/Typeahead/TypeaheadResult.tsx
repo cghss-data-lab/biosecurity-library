@@ -13,29 +13,14 @@ const TypeaheadResultContainer = styled.span<{ selected?: boolean }>`
   font-size: 16px;
   text-align: left;
   padding: 8px 12px;
-  /* border-top: 1px solid rgba(187, 70, 70, 0.1); */
   background-color: rgba(0, 50, 100, 0);
   transition: 150ms ease;
 
-  ${({ selected }) => {
-    return (
-      selected &&
-      `
-      font-weight: 800;
-      `
-    )
-  }}
+  ${({ selected }) => selected && ` font-weight: 800; `}
 
   &:hover {
     background-color: rgba(0, 50, 100, 0.08);
-    ${({ selected }) => {
-      return (
-        selected &&
-        `
-      background-color: rgba(100, 0, 50, 0.08); 
-      `
-      )
-    }}
+    ${({ selected }) => selected && `background-color: rgba(100, 0, 50, 0.08);`}
   }
 `
 
