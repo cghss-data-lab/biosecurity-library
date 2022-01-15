@@ -36,7 +36,7 @@ export interface TypeaheadProps {
   /**
    * The currently selected items
    */
-  values: Item[]
+  values?: Item[]
   /**
    * Function called when and item is
    * selected; the first argument will
@@ -48,7 +48,7 @@ export interface TypeaheadProps {
    * from the multiselect, the first argument
    * will be the removed item.
    */
-  onRemove: (item: Item) => void
+  onRemove?: (item: Item) => void
   /** Toggle multi-select or single-select mode */
   multiselect?: boolean
   /**
@@ -168,7 +168,8 @@ const Typeahead = ({
   }
 
   useEffect(() => {
-    if (values.length > 0 && !multiselect) setSearchString(values[0]?.label)
+    if (values && values.length > 0 && !multiselect)
+      setSearchString(values[0]?.label)
   }, [values, multiselect])
 
   useEffect(() => {
@@ -212,20 +213,21 @@ const Typeahead = ({
         animDuration={200}
       >
         <Results style={{ backgroundColor, borderColor }}>
-          {multiselect && values.length > 0 && (
+          {multiselect && values && values.length > 0 && (
             <Selected borderColor={borderColor}>
-              {values.map((item: Item) => (
-                <ItemButton
-                  key={item.key}
-                  onClick={() => onRemove(item)}
-                  style={{ color: fontColor }}
-                >
-                  <RenderItem selected key={item.key} {...{ item }} />
-                </ItemButton>
-              ))}
+              {values &&
+                values.map((item: Item) => (
+                  <ItemButton
+                    key={item.key}
+                    onClick={() => onRemove && onRemove(item)}
+                    style={{ color: fontColor }}
+                  >
+                    <RenderItem selected key={item.key} {...{ item }} />
+                  </ItemButton>
+                ))}
             </Selected>
           )}
-          {(results.length > 0 && searchString !== values[0]?.label
+          {(results.length > 0 && searchString !== (values && values[0]?.label)
             ? results
             : items
           ).map(item => (
