@@ -36,7 +36,7 @@ Modify the placeholder text, add items, or add other props to see changes live:
   return (
     <Typeahead
       multiselect
-      placeholder={`${selected.length} items selected`}
+      placeholder={`${selected.length} ${selected.length === 1 ? 'item' : 'items'} selected`}
       items={unselected}
       values={selected}
       onAdd={item => setSelected(prev => [...prev, item])}
@@ -86,8 +86,6 @@ Customization of the background of both the input and the dropdown section, so i
 />
 ```
 
-#### Font Color
-
 #### Border color
 
 Customization of the border color everywhere; the dividing lines between selected and unselected will match at 33% opacity on top of the background color.
@@ -95,6 +93,19 @@ Customization of the border color everywhere; the dividing lines between selecte
 ```js
 <Typeahead
   //...other props
-  backgroundColor={'darkslategray'}
+  borderColor={'darkslategray'}
+/>
+```
+
+#### Font Colors
+
+Customization of font color, the placeholder text will be the same color at 66% opacity.
+
+The default `<TypeaheadResult/>` component will inherit this font color, but the result font color (or multiple font colors) can be changed separately using the `RenderItem={}` render prop.
+
+```js
+<Typeahead
+  //...other props
+  fontColor={'darkslategray'}
 />
 ```

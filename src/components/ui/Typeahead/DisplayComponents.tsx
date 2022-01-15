@@ -35,7 +35,7 @@ export const Container = styled.form<{ borderColor: string }>`
     }
   }
 `
-export const SearchBar = styled.input<{ iconLeft: boolean }>`
+export const SearchBar = styled.input<{ iconLeft: boolean; fontColor: string }>`
   border: none;
   width: 100%;
   border-radius: 5px;
@@ -48,6 +48,12 @@ export const SearchBar = styled.input<{ iconLeft: boolean }>`
   border: 1px solid #aaa;
   transition-duration: 0ms;
   transition-delay: 200ms;
+
+  color: ${({ fontColor }) => fontColor};
+  &::placeholder {
+    color: ${({ fontColor }) => fontColor};
+    opacity: 0.66;
+  }
 
   &:focus {
     outline: none;
