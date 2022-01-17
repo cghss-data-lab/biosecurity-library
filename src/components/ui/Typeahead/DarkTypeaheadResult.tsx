@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { RenderItemProps } from '.'
 
-import removeSVG from './assets/remove.svg'
+import removeSVG from './assets/darkRemove.svg'
 
 const TypeaheadResultContainer = styled.span<{ selected?: boolean }>`
   box-sizing: border-box;
@@ -19,12 +19,15 @@ const TypeaheadResultContainer = styled.span<{ selected?: boolean }>`
   ${({ selected }) => selected && ` font-weight: 800; `}
 
   &:hover {
-    background-color: rgba(0, 50, 100, 0.08);
-    ${({ selected }) => selected && `background-color: rgba(100, 0, 50, 0.08);`}
+    background-color: #49515d;
+    ${({ selected }) => selected && `background-color: #594141;`}
   }
 `
 
-const TypeaheadResult = ({ item: { label }, selected }: RenderItemProps) => (
+const DarkTypeaheadResult = ({
+  item: { label },
+  selected,
+}: RenderItemProps) => (
   <TypeaheadResultContainer selected={selected}>
     {label}
     {selected && (
@@ -33,4 +36,4 @@ const TypeaheadResult = ({ item: { label }, selected }: RenderItemProps) => (
   </TypeaheadResultContainer>
 )
 
-export default TypeaheadResult
+export default DarkTypeaheadResult

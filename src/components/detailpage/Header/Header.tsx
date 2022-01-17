@@ -14,6 +14,7 @@ const IconContainer = styled.div`
   margin-bottom: 30px;
   margin-top: 15px;
   gap: 20px;
+  flex-wrap: wrap;
 `
 const Author = styled.div`
   font-size: 26px;
