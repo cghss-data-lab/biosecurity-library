@@ -2,7 +2,10 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import ResourceMap from './ResourceMap'
 import { PageContext } from '../../../../templates/Detail'
-import * as network from '@talus-analytics/viz.charts.network'
+import {
+  AppGraphData,
+  GraphNode,
+} from '@talus-analytics/viz.charts.network-tools'
 import FigmaProvider from '../../../../figma/FigmaProvider'
 import ResourceMapSection from '../ResourceMapSection'
 
@@ -53,7 +56,7 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
  * Mock nodes/links based on resource data structure for testing purposes.
  */
 const MOCK_NAME: string = MOCK_RESOURCE_DATA.Resource_name
-export const MOCK_GRAPH_DATA: network.AppGraphData = {
+export const MOCK_GRAPH_DATA: AppGraphData = {
   nodes: [initMockNode(MOCK_NAME, MOCK_NAME)],
   links: [{ source: MOCK_NAME, target: MOCK_NAME }],
 }
@@ -95,7 +98,7 @@ describe('ResourceMap', () => {
  * @param id Node unique ID
  * @returns Initialized mock node
  */
-function initMockNode(label: string, id: number | string): network.GraphNode {
+function initMockNode(label: string, id: number | string): GraphNode {
   return {
     _label: label,
     _id: id,

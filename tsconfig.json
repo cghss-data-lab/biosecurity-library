@@ -12,6 +12,7 @@
     "noUnusedParameters": true,
     "removeComments": false,
     "preserveConstEnums": true,
+    "baseUrl": "src",
     "plugins": [
       {
         "name": "typescript-styled-plugin"

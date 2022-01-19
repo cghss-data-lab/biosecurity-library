@@ -8,11 +8,10 @@ import {
   ItemButton,
   SearchIcon,
   Selected,
-  SelectedItem,
 } from './DisplayComponents'
 
-import removeSVG from './assets/remove.svg'
 import TypeaheadResult from './TypeaheadResult'
+import Expander from '@talus-analytics/library.ui.expander'
 
 export interface Item {
   key: string
@@ -20,10 +19,15 @@ export interface Item {
   [key: string]: any
 }
 
-interface RenderItemProps {
+export interface RenderItemProps {
   item: Item
+  selected?: boolean
 }
 
+// These type definitions should be in their own file
+// But bit won't properly parse the props tabel if
+// the definition isn't literally in the same file
+// as the component itself.
 export interface TypeaheadProps {
   /** The array of items that the user should
    * be able to select from
@@ -32,7 +36,7 @@ export interface TypeaheadProps {
   /**
    * The currently selected items
    */
-  values: Item[]
+  values?: Item[]
   /**
    * Function called when and item is
    * selected; the first argument will
@@ -44,7 +48,7 @@ export interface TypeaheadProps {
    * from the multiselect, the first argument
    * will be the removed item.
    */
-  onRemove: (item: Item) => void
+  onRemove?: (item: Item) => void
   /** Toggle multi-select or single-select mode */
   multiselect?: boolean
   /**
@@ -57,7 +61,7 @@ export interface TypeaheadProps {
    * component will contain 'item' which is the
    * item being rendered.
    */
-  RenderItem?: React.FC<RenderItemProps>
+  RenderItem?: (props: RenderItemProps) => JSX.Element
   /**
    * The properties of the Item object which should be
    * considered in the fuzzy search. Properties for search
@@ -78,6 +82,23 @@ export interface TypeaheadProps {
    * to the container component
    */
   style?: React.CSSProperties
+  /**
+   * takes an encoded SVG string to replace the icon
+   * in the typeahead box. SVG can be encoded with
+   * a tool like this one: https://yoksel.github.io/url-encoder/
+   */
+  iconSVG?: string
+  /**
+   * Moves the icon to the left side of the input box
+   */
+  iconLeft?: boolean
+  /** background color for the control */
+  backgroundColor?: string
+  /** font color for the control */
+  fontColor?: string
+  /** border color for the control */
+  borderColor?: string
+  /** Aria-label attribute for the text input */
   ariaLabel?: string
 }
 
@@ -88,14 +109,19 @@ const Typeahead = ({
   onAdd,
   onRemove,
   placeholder = '',
-  RenderItem = ({ item: { label } }) => (
-    <TypeaheadResult>{label}</TypeaheadResult>
+  RenderItem = ({ item, selected }) => (
+    <TypeaheadResult {...{ item, selected }} />
   ),
   searchKeys = ['key', 'label'],
-  className = '',
+  iconSVG,
+  iconLeft = false,
+  backgroundColor = 'white',
+  borderColor = '#aaa',
+  fontColor = 'rgba(51, 51, 51, 1)',
+  className,
   disabled = false,
   style = {},
-  ariaLabel = '',
+  ariaLabel,
 }: TypeaheadProps) => {
   if (!items) throw new Error('Item array in multiselect cannot be undefined')
 
@@ -142,7 +168,8 @@ const Typeahead = ({
   }
 
   useEffect(() => {
-    if (values.length > 0 && !multiselect) setSearchString(values[0]?.label)
+    if (values && values.length > 0 && !multiselect)
+      setSearchString(values[0]?.label)
   }, [values, multiselect])
 
   useEffect(() => {
@@ -155,7 +182,8 @@ const Typeahead = ({
       onBlur={onBlurHandler}
       className={className}
       onSubmit={e => e.preventDefault()}
-      style={style}
+      style={{ ...style, backgroundColor }}
+      borderColor={borderColor}
     >
       <SearchBar
         disabled={disabled}
@@ -168,33 +196,51 @@ const Typeahead = ({
         onChange={e => setSearchString(e.target.value)}
         placeholder={placeholder}
         aria-label={ariaLabel}
+        iconLeft={iconLeft}
+        style={{ backgroundColor, borderColor }}
+        fontColor={fontColor}
       />
-      <SearchIcon searchString={searchString} />
-
-      <Results style={{ display: showResults ? 'flex' : 'none' }}>
-        {multiselect && values.length > 0 && (
-          <Selected>
-            {values.map((item: Item) => (
-              <SelectedItem onClick={() => onRemove(item)}>
-                {item.label}
-                <img
-                  src={removeSVG}
-                  style={{ flexShrink: 0 }}
-                  alt="Remove item"
-                />
-              </SelectedItem>
-            ))}
-          </Selected>
-        )}
-        {(results.length > 0 && searchString !== values[0]?.label
-          ? results
-          : items
-        ).map(item => (
-          <ItemButton key={item.key} onClick={() => onAdd(item)}>
-            <RenderItem {...{ item }} />
-          </ItemButton>
-        ))}
-      </Results>
+      <SearchIcon searchString={searchString} {...{ iconSVG, iconLeft }} />
+      <Expander
+        floating
+        open={showResults}
+        style={{
+          width: '100%',
+          borderBottomRightRadius: 10,
+          borderBottomLeftRadius: 10,
+          background: 'none',
+        }}
+        animDuration={200}
+      >
+        <Results style={{ backgroundColor, borderColor }}>
+          {multiselect && values && values.length > 0 && (
+            <Selected borderColor={borderColor}>
+              {values &&
+                values.map((item: Item) => (
+                  <ItemButton
+                    key={item.key}
+                    onClick={() => onRemove && onRemove(item)}
+                    style={{ color: fontColor }}
+                  >
+                    <RenderItem selected key={item.key} {...{ item }} />
+                  </ItemButton>
+                ))}
+            </Selected>
+          )}
+          {(results.length > 0 && searchString !== (values && values[0]?.label)
+            ? results
+            : items
+          ).map(item => (
+            <ItemButton
+              key={item.key}
+              onClick={() => onAdd(item)}
+              style={{ color: fontColor }}
+            >
+              <RenderItem {...{ item }} />
+            </ItemButton>
+          ))}
+        </Results>
+      </Expander>
     </Container>
   )
 }

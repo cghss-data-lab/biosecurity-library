@@ -48,6 +48,7 @@ module.exports = {
             mapping: {
               Thumbnail_INTERNAL: `fileNode`,
               Files_INTERNAL: `fileNode`,
+              Other_language_files_INTERNAL: `fileNode`,
             },
           },
           {
@@ -55,6 +56,18 @@ module.exports = {
             tableName: `Landing Page`,
             tableView: `CMS`,
             mapping: { Image: `fileNode` },
+          },
+          {
+            baseId: `appmL0p5H21CiY7tL`,
+            tableName: `Footer`,
+            tableView: `CMS`,
+            mapping: { Image: `fileNode` },
+          },
+          {
+            baseId: `appmL0p5H21CiY7tL`,
+            tableName: `About Page`,
+            tableView: `CMS`,
+            mapping: { Image: `fileNode`, Download: `fileNode` },
           },
           {
             baseId: `appmL0p5H21CiY7tL`,
@@ -94,6 +107,7 @@ module.exports = {
     'talus-gatsby-transformer-svg',
     'gatsby-plugin-styled-components',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-root-import',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-image',

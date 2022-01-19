@@ -8,6 +8,17 @@ This component and helper function makes it easy to retrieve text content from a
 
 # Usage
 
+```js
+const SomeComponent = () => {
+  // cms data should come from custom hooks
+  const cmsData = useCMSData()
+
+  return <CMSText name={'Button Text'} data={cmsData} />
+}
+```
+
+# Setup
+
 This component requires an Airtable table configured with `Name` and `Text` columns, and a CMS query in a custom hook which should look something like this (at a minimum—content queries may also include images).
 
 ### Example CMS query hook
@@ -33,18 +44,7 @@ const useCMSData = () => {
 }
 ```
 
-### Example usage
-
-```js
-const SomeComponent = () => {
-  // cms data should come from custom hooks
-  const cmsData = useCMSData()
-
-  return <CMSText name={'Button Text'} data={cmsData} />
-}
-```
-
-# Exported utilities
+# Exported utility
 
 ```js
 function getCMSText( data: AirtableCMSData, name: string, noEmitError?: false): string

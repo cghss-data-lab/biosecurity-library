@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import qs from 'qs'
 
 import FigmaProvider from '../figma/FigmaProvider'
@@ -18,6 +18,7 @@ import useExplorePageData, {
   ResourceGroup,
 } from '../airtableQueryHooks/useExplorePageData'
 import ImageHeader from '../components/layout/ImageHeader'
+import Footer from 'components/layout/Footer'
 
 const Header = styled.header`
   text-align: center;
@@ -27,6 +28,7 @@ export interface ExploreState {
   defs?: string
   type?: string
   filters?: Filters
+  moreFilters?: string
   // sort?: {
   //   on: string // field name
   //   compare: 'gt' | 'lt'
@@ -36,28 +38,34 @@ export interface ExploreState {
 const ExplorePage = (): JSX.Element => {
   const { explorePageText, groupedResources } = useExplorePageData()
 
-  const [exploreState, setExploreState] = useState<ExploreState>(
-    typeof window !== 'undefined'
-      ? qs.parse(window.location.search.split('?')[1])
-      : {}
-  )
+  if (typeof window !== 'undefined')
+    console.log('before setState ' + window.location.search)
 
-  // useLayoutEffect(() => {
-  //   setExploreState(qs.parse(window.location.search.split('?')[1]))
-  // }, [])
+  const [exploreState, setExploreState] = useState<ExploreState>({})
+
+  console.log(exploreState)
+
+  useLayoutEffect(() => {
+    console.log('In useLayoutEffect ' + window.location.search)
+    setExploreState(qs.parse(window.location.search.split('?')[1]))
+  }, [])
 
   // store explore state in the query string whenever it chagnges
   useEffect(() => {
+    console.log('In useEffect ' + window.location.search)
     if (
       typeof window !== 'undefined' &&
+      Object.keys(exploreState).length > 0 &&
       window.location.search.split('?')[1] !== qs.stringify(exploreState)
     ) {
+      console.log('In useEffect if statement ' + window.location.search)
       const newURL =
         window.location.origin +
         window.location.pathname +
         '?' +
         qs.stringify(exploreState)
 
+      console.log('replace history with ' + newURL)
       window.history.replaceState({}, '', newURL)
     }
   }, [exploreState])
@@ -69,9 +77,21 @@ const ExplorePage = (): JSX.Element => {
 
   resources = applyFilters(resources, exploreState.filters)
 
-  // resources.map(group =>
-  //   group.nodes.sort(node => node.data.Authoring_organization)
-  // )
+  resources.forEach(group => {
+    group.nodes.sort((a, b) => {
+      // if a is a seminal resource
+      if (a.data.Seminal_resource === 'Yes')
+        if (b.data.Seminal_resource === 'Yes')
+          // if b is also seminal, alphabetize
+          return a.data.Short_name.localeCompare(b.data.Short_name)
+        // if b is not seminal, put a before b
+        else return -1
+      // if a is not seminal but b is, b goes first
+      if (b.data.Seminal_resource === 'Yes') return 1
+      // if neither is seminal, alphabetize
+      return a.data.Short_name.localeCompare(b.data.Short_name)
+    })
+  })
 
   return (
     <FigmaProvider>
@@ -92,6 +112,7 @@ const ExplorePage = (): JSX.Element => {
         <ActiveFilters {...{ exploreState, setExploreState }} />
         <ColumnSection {...{ exploreState, setExploreState, resources }} />
       </Main>
+      <Footer />
     </FigmaProvider>
   )
 }

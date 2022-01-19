@@ -108,6 +108,10 @@ export const toggleFilter: FilterFunction = (filter, setExploreState) => {
   })
 }
 
+export const removeAllFilters = (
+  setExploreState: React.Dispatch<React.SetStateAction<ExploreState>>
+) => setExploreState(prev => ({ ...prev, filters: {} }))
+
 type ApplyFilterFunction = (
   resources: ResourceGroup[],
   filters: ExploreState['filters']
@@ -123,9 +127,19 @@ export const applyFilters: ApplyFilterFunction = (resources, filters) => {
       prev.map(group => ({
         ...group,
         nodes: group.nodes.filter(node =>
-          values.some(value =>
-            node.data[field as keyof typeof filters].includes(value)
-          )
+          values.some(value => {
+            const values = node.data[field as keyof typeof filters]
+
+            // this handles the case of linked records where we will alias them so that
+            // the string array is in is field.data.value
+            // I just realized this only works if the column we're filtering on is a string type...
+            if ((values as any[]).every(d => typeof d === 'object' && d.data))
+              return values
+                .map(d => (d as { data: { value: string } }).data.value)
+                .includes(value)
+
+            return (values as string[]).includes(value)
+          })
         ),
       })),
     resources
