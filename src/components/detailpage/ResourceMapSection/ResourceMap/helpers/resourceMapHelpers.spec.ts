@@ -1,10 +1,10 @@
-import * as network from '@talus-analytics/viz.charts.network'
+import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
 import { getResourceMapData, getFullResourceMapData } from './packageMethods'
 import { MOCK_GRAPH_DATA, MOCK_RESOURCE_DATA } from '../ResourceMap.spec'
 
 describe('getFullResourceMapData', () => {
   it('should always include one node for each resource', () => {
-    const fullResourceMapData: network.AppGraphData = getFullResourceMapData(
+    const fullResourceMapData: AppGraphData = getFullResourceMapData(
       [{ data: MOCK_RESOURCE_DATA }],
       ['Auto_other_resources_cited'],
       'Resource_name',
@@ -17,7 +17,7 @@ describe('getFullResourceMapData', () => {
 })
 describe('getResourceMapData', () => {
   it('should always return the resource itself', () => {
-    const resourceMapData: network.AppGraphData = getResourceMapData(
+    const resourceMapData: AppGraphData = getResourceMapData(
       'Test',
       MOCK_GRAPH_DATA
     )

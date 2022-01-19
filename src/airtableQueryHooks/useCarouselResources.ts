@@ -8,6 +8,8 @@ export interface CaroselResourceData {
       Short_name: string
       Short_description: string
       Resource_type: string
+      Access_limitations: string[]
+      Access_method: string
       Authoring_organization: {
         data: {
           Name: string
@@ -38,6 +40,8 @@ const useCaroselData = (): CaroselResourceData => {
               Resource_type
               Short_description
               Key_topic_area
+              Access_limitations
+              Access_method
               Authoring_organization {
                 data {
                   Name

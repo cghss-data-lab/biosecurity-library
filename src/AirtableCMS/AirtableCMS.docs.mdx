@@ -4,6 +4,10 @@ description: Airtable-based content management system for Talus sites
 labels: ['airtable', 'typescript', 'ui']
 ---
 
+Content management system for bringing content from [airtable content tables](https://bit.dev/talus-analytics/library/airtable/cms-types) into Gatsby sites through the Gatsby data structure and easily accessing it.
+
+#### [Airtable content table format documentation can be found here](https://bit.dev/talus-analytics/library/airtable/cms-types)
+
 # Package structure and exports
 
 Import convention:
@@ -68,6 +72,22 @@ A special-case CMS icon component specifically for use in SVG plots.
 
 [Airtable CMS Plot Icon documentation](https://bit.dev/talus-analytics/library/airtable/cms-plot-icon)
 
+### `<CMS.Download />`
+
+```js
+<CMS.Download name="Download name" data={cmsData} />
+
+<CMS.Download name="Download name" data={cmsData}>
+  Optional React elements to override airtable "Text" field
+<CMS.Download>
+```
+
+CMS.Download creates a Google-analytics tracked download link (using `gatsby-plugin-gtag`) for a file specified in Airtable.
+
+If `<CMS.Download/>` has no children, the text from the airtable "Text" field will be the content of the anchor tag, otherwise the children will override Airtable.
+
+[Airtable CMS Download documentation](https://bit.dev/talus-analytics/library/airtable/cms-download)
+
 ## Other React Components
 
 ### `<CMS.RenderRichText />`
@@ -110,9 +130,13 @@ titles, descriptions, social sharing images, etc.
 
 ```js
 const Providers = ({ children }: { children: React.ReactNode }) => {
+  // get site metadata
   const siteMetadata = useSiteMetadata()
+  // get GA tracking ID
+  const trackingId = getTrackingId()
+
   return (
-    <CMS.SiteMetadataProvider data={siteMetadata}>
+    <CMS.SiteMetadataProvider data={siteMetadata} trackingId={trackingId}>
       {children}
     </CMS.SiteMetadataProvider>
   )
@@ -120,6 +144,10 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 ```
 
 Site metadata provider takes the result from the `useSiteMetadata()` hook content from `Site metadata` airtable available to all pages (to be accessed by the `<SEO />` component). This should go in a layout or "providers" component at the top level of the component tree.
+
+This provider also injects a cookie consent popup for enabling Google Analytics,
+provided your Google Analytics tracking ID is configured properly in `gatsby-config.js`.
+See [full details for GA configuration here](https://bit.dev/talus-analytics/library/airtable/cms-seo).
 
 ## Functions
 
@@ -142,6 +170,16 @@ CMS.getImage(data, 'Content name')
 ```
 
 Returns an object: `{sources: IGatsbyImageData, alt: string, url: string}`
+
+[Airtable CMS Image documentation](https://bit.dev/talus-analytics/library/airtable/cms-image)
+
+### `CMS.getDownloadInfo()`
+
+```js
+CMS.getDownloadInfo(data, 'Content name')
+```
+
+Returns an object: `{ text: string | undefined, fileName: string, prettySize: string, publicURL: string }`
 
 [Airtable CMS Image documentation](https://bit.dev/talus-analytics/library/airtable/cms-image)
 
@@ -181,9 +219,11 @@ Content tables drive home pages, about pages, methods pages, and add general con
 
 ### Content airtable column names and types
 
-| Name             | Text      | Image      |
-| ---------------- | --------- | ---------- |
-| Single line text | Long text | Attachment |
+| Name             | Text      | Image\*    | Download\* |
+| ---------------- | --------- | ---------- | ---------- |
+| Single line text | Long text | Attachment | Attachment |
+
+Columns marked with an `*` are optional, and may not be present in all tables conforming to the `AirtableCMSData` format.
 
 An example content table [can be found here.](https://airtable.com/apptYPkeoCz0lSn19/tblJV3LL08O5wNAHP/viwUDYcSVj43EAaqp?blocks=hide)
 
@@ -204,7 +244,9 @@ Rich text formatting may be used with the `<CMS.RichText />` component.
 >          baseId: `appmXXXXXXXXXXXXX`,
 >          tableName: `Landing Page`,
 >          tableView: `CMS`,
->          mapping: { Image: `fileNode` },
+>          // Mapping should be omitted for Image, Download, and SVG
+>          // for tables where those columns are unused
+>          mapping: { Image: `fileNode`, Download: `fileNode`, SVG: `fileNode` },
 >        },
 >    ]
 >  },
@@ -268,7 +310,7 @@ An example SEO "Site metadata" table [can be found here.](https://airtable.com/a
 >        baseId: `appmXXXXXXXXXXXXX`,
 >        tableName: `Site metadata`,
 >        mapping: { Image: `fileNode` },
->        tableView: `CMS view`,
+>        tableView: `CMS`,
 >      },
 >    ]
 >  },
@@ -279,37 +321,49 @@ An example SEO "Site metadata" table [can be found here.](https://airtable.com/a
 
 For content tables, queries will need to be added using hooks which live in the `src/cmsHooks/` directory. These hooks return the `data` object which should be passed to content components such as `<CMS.Text/>` and `<CMS.Image/>`. This pattern with Name, Text, and Image is a standardized pattern for content airtables and content components, but can also be used as a good example and jumping off point for creating queries for Explore pages.
 
-> src/cmsHooks/useHomePageData.ts
+> src/cmsHooks/useLandingPageData.ts
 >
 > ```ts
 > import { AirtableCMSData } from '@talus-analytics/library.airtable-cms'
 >
 > // This uses the custom hook React pattern: https://reactjs.org/docs/hooks-custom.html
-> const useHomepageData = () => {
->   const { homepageData }: { homepageData: AirtableCMSData } =
+> const useLandingPageData = () => {
+>   const { landingPageData }: { landingPageData: AirtableCMSData } =
 >     useStaticQuery(graphql`
->      query {
->        homepageData: allAirtable(filter: { table: { eq: "homePage" } }) {
->          nodes {
->            data {
->              Name
->              Text
->              Image {
->                localFiles {
->                  childImageSharp {
->                    gatsbyImageData(height: 200, placeholder: BLURRED)
->                  }
->                }
->              }
->            }
->          }
->        }
->      }
->    }`)
->   return homepageData
+>       query landingQuery {
+>         landingPageData: allAirtable(
+>           filter: { table: { eq: "Landing page" } }
+>         ) {
+>           nodes {
+>             data {
+>               Name # Name is required
+>               Text # Text is required (often used for accessibility)
+>               # omit Image section if table has no images
+>               Image {
+>                 localFiles {
+>                   childImageSharp {
+>                     gatsbyImageData(height: 200, placeholder: BLURRED)
+>                   }
+>                 }
+>               }
+>               # omit download section if table has no downloads
+>               Download {
+>                 localFiles {
+>                   name
+>                   prettySize
+>                   publicURL
+>                 }
+>               }
+>             }
+>           }
+>         }
+>       }
+>     `)
+>
+>   return landingPageData
 > }
 >
-> export default useHomepageData
+> export default useLandingPageData
 > ```
 
 ## Icons query
@@ -427,7 +481,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 > import useSiteMetadataQuery from '../cmsHooks/useSiteMetadataQuery'
 >
 > // import the page data query hook for this page
-> import useHomepageData from '../cmsHooks/useHomepageData'
+> import useLandingPageData from '../cmsHooks/useLandingPageData'
 >
 > // display components should use styled-components
 > const Section = styled.section`
@@ -435,7 +489,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 >   flex-direction: column;
 > `
 >
-> const HomePage = () => {
+> const LandingPage = () => {
 >   // icons and metadata hook should
 >   // go in the Provider component
 >   const icons = useCMSIconsQuery()
@@ -445,7 +499,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 >   const theme: any = useTheme()
 >
 >   // cms data for this page should come from hook
->   const homepageData = useHomepageData()
+>   const landingPageData = useLandingPageData()
 >
 >   return (
 >     // IconProvider and SiteMetadataProvider should go in a
@@ -454,8 +508,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 >       <CMS.SiteMetadataProvider data={siteMetadata}>
 >         <CMS.SEO title={CMS.getText(data, 'Page title')} />
 >         <Section>
->           <CMS.Image name="First image" data={homepageData} />
->           <CMS.Text name="Main paragraph" data={homepageData} />
+>           <CMS.Image name="First image" data={landingPageData} />
+>           <CMS.Text name="Main paragraph" data={landingPageData} />
+>           <CMS.Download name="Methods document" data={landingPageData} />
 >           <CMS.Icon name="Warning icon" color={theme.exampleColor} />
 >         </Section>
 >       </CMS.SiteMetadataProvider>
@@ -463,5 +518,5 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
 >   )
 > }
 >
-> export default HomePage
+> export default LandingPage
 > ```

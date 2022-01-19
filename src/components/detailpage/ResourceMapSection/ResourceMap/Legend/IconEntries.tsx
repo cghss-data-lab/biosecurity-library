@@ -21,12 +21,12 @@ interface IconEntriesProps {
 export const IconEntries = (props: IconEntriesProps) => {
   const icons: Icon[] =
     props.sorted !== false
-      ? props.icons.sort(object.sortByCustom<Icon>(inst => inst.data.Name))
+      ? props.icons.sort(object.sortByCustom<Icon>(inst => inst.name))
       : props.icons
   return (
     <>
       {icons.map(icon => (
-        <IconEntry value={icon.data.Name} />
+        <IconEntry value={icon.name} />
       ))}
     </>
   )

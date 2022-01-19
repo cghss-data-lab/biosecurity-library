@@ -6,12 +6,14 @@ import { FilterProps } from './FilterBar'
 import useFilterOptions from '../../../airtableQueryHooks/useFilterOptions'
 
 import FilterControl from './FilterControl'
+import useMoreFilterOptions from 'airtableQueryHooks/useMoreFilterOptions'
+import Expander from 'components/ui/Expander'
 
 const FilterContainer = styled.section`
   display: flex;
   justify-content: stretch;
-  gap: 15px;
-  margin-top: 50px;
+  gap: 36px;
+  margin-top: 25px;
 `
 
 const FilterSection: React.FC<FilterProps> = ({
@@ -19,16 +21,31 @@ const FilterSection: React.FC<FilterProps> = ({
   setExploreState,
 }) => {
   const filterOptions = useFilterOptions()
+  const moreFilterOptions = useMoreFilterOptions()
 
   return (
-    <FilterContainer>
-      {Object.entries(filterOptions).map(([name, { distinct: options }]) => (
-        <FilterControl
-          key={name}
-          {...{ name, options, exploreState, setExploreState }}
-        />
-      ))}
-    </FilterContainer>
+    <>
+      <FilterContainer>
+        {Object.entries(filterOptions).map(([name, { distinct: options }]) => (
+          <FilterControl
+            key={name}
+            {...{ name, options, exploreState, setExploreState }}
+          />
+        ))}
+      </FilterContainer>
+      <Expander open={exploreState.moreFilters ? true : false}>
+        <FilterContainer>
+          {Object.entries(moreFilterOptions).map(
+            ([name, { distinct: options }]) => (
+              <FilterControl
+                key={name}
+                {...{ name, options, exploreState, setExploreState }}
+              />
+            )
+          )}
+        </FilterContainer>
+      </Expander>
+    </>
   )
 }
 

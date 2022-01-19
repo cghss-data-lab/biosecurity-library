@@ -8,6 +8,7 @@ import useHomePageData from '../airtableQueryHooks/useHomePageData'
 import ResourceSearch from '../components/homepage/ResourceSearch'
 import CarouselSection from '../components/homepage/CarouselSection/CarouselSection'
 import BarChart from '../components/homepage/barChart/BarChart'
+import Footer from 'components/layout/Footer'
 
 const IndexPage = (): JSX.Element => {
   const { homePageText } = useHomePageData()
@@ -19,6 +20,7 @@ const IndexPage = (): JSX.Element => {
       <ResourceSearch />
       <CarouselSection />
       <BarChart />
+      <Footer />
     </FigmaProvider>
   )
 }

@@ -15,12 +15,20 @@ const Section = styled.section`
     text-align: center;
     margin-bottom: 0px;
   }
-
-  h3 {
-    margin-top: 30px;
-    font-weight: normal;
+`
+const IntroParagraph = styled.div`
+  p {
     font-style: normal;
-    line-height: 38px;
+    font-weight: normal;
+    font-size: 20px !important;
+    line-height: 30px !important;
+    padding-bottom: 1em;
+    &:first-of-type {
+      padding-top: 30px;
+    }
+    &:last-of-type {
+      padding-bottom: 40px;
+    }
   }
 `
 
@@ -32,9 +40,9 @@ const IntroSection = (): JSX.Element => {
       <h1>
         <CMS.Text name={'First Header'} data={homePageText} />
       </h1>
-      <h3>
-        <CMS.Text name={'First Paragraph'} data={homePageText} />
-      </h3>
+      <IntroParagraph>
+        <CMS.RichText name={'First Paragraph'} data={homePageText} />
+      </IntroParagraph>
     </Section>
   )
 }

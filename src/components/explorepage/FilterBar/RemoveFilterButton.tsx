@@ -6,7 +6,7 @@ const RemoveFilterButton = styled.button`
   border: none;
   background: none;
   background-color: ${({ theme }) => theme.colorLighter};
-  padding: 0.2em 0.4em;
+  padding: 0.25em 0.4em 0.2em 0.4em;
   border-radius: 3px;
   color: ${({ theme }) => theme.colorBlack};
   text-align: left;

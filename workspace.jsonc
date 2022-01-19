@@ -56,6 +56,12 @@
     "{ui/**}": {
       "teambit.react/react": {}
     },
+    "{hooks/**}": {
+      "teambit.react/react": {}
+    },
+    "{airtable/**}": {
+      "teambit.react/react": {}
+    },
     "*": {
       /**
        * uncomment to apply the chosen environment on all components.

@@ -26,9 +26,9 @@ const Header = styled.header`
   justify-content: space-between;
 `
 const HeaderText = styled.div`
-  font-family: 'Rawline', Arial, Helvetica, sans-serif;
+  /* font-family: 'Rawline', Arial, Helvetica, sans-serif;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: bold; */
 `
 const ResourceCount = styled.div`
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
@@ -62,17 +62,17 @@ const Column: React.FC<{
           />
           {expand && <Return onClick={() => setExpandColumn(undefined)} />}
         </IconRow>
-        <HeaderText>{name}</HeaderText>
+        <HeaderText>
+          <h4 style={{ margin: 0 }}>{name}</h4>
+        </HeaderText>
         <ResourceCount>
           {resources.nodes.length} of {resources.totalCount} resources
         </ResourceCount>
       </Header>
       {resources &&
-        resources.nodes
-          .sort((a, b) => a.data.Short_name.localeCompare(b.data.Short_name))
-          .map(({ data }) => (
-            <ResourcePreview key={data.Short_name} {...{ data, expand }} />
-          ))}
+        resources.nodes.map(({ data }) => (
+          <ResourcePreview key={data.Short_name} {...{ data, expand }} />
+        ))}
     </ColumnContainer>
   )
 }

@@ -8,7 +8,7 @@ import {
   GraphLink,
   GraphNode,
   getNeighborhood,
-} from '@talus-analytics/viz.charts.network/dist/helpers'
+} from '@talus-analytics/viz.charts.network-tools'
 import { HyperlinkedGraphData, HyperlinkedNode } from './resourceMapTypes'
 import * as urls from '../../../../../utilities/urls'
 

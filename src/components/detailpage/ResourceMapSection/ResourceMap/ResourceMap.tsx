@@ -7,56 +7,36 @@
  */
 
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { navigate } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import { replaceFill } from '../../../../airtable-cms/CMSIcon'
+import {
+  useAllCMSIcons,
+  replaceFill,
+} from '@talus-analytics/library.airtable.cms-icon'
 import * as network from '@talus-analytics/viz.charts.network'
-// import * as network from '../../../../bit/viz/charts/network'
+import {
+  SettingsContext,
+  defaultSettings,
+} from '@talus-analytics/viz.charts.network-tools'
 import {
   AppGraphData,
   getNodeIdsForLinks,
   GraphLink,
   GraphNode,
-} from '@talus-analytics/viz.charts.network/dist/helpers'
-import Legend from './Legend/Legend'
-import CurvedEdgeEntry from './Legend/CurvedEdgeEntry'
-import IconEntries, { IconEntry } from './Legend/IconEntries'
+} from '@talus-analytics/viz.charts.network-tools'
+
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'
-import getCanvasPixelsXMin from './helpers/getCanvasPixelsXMin'
 import parse from 'node-html-parser'
 
 /**
  * Icon data from Airtable
  */
-export type Icon = {
-  data: { Name: string; Text: string; SVG: any }
-}
+export type Icon = { name: string; text: string; svg: any }
 
-export interface IconsQueryMap {
-  iconsQueryMap: {
-    nodes: {
-      data: {
-        Name: string
-        Text: string
-        SVG: {
-          localFiles: {
-            childSvg: {
-              svgString: string
-            }
-          }[]
-        }
-      }
-    }[]
-  }
-}
-
-const Section = styled.section`
-  display: flex;
-`
 const MapContainer = styled.div`
   z-index: 0;
   position: relative;
@@ -99,29 +79,8 @@ export const ResourceMap: React.FC<{
   curvedLinks?: boolean
 }> = ({ selectedNode, graphData, curvedLinks = true }) => {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null)
-  const [mapLeftMargin, setMapLeftMargin] = useState<number>(0)
-  const [positioned, setPositioned] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const iconsQueryMapRes = useStaticQuery<IconsQueryMap>(graphql`
-    query iconsQueryMap {
-      iconsQueryMap: allAirtable(filter: { table: { eq: "Icons" } }) {
-        nodes {
-          data {
-            Name
-            Text
-            SVG {
-              localFiles {
-                childSvg {
-                  svgString
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-  const icons = iconsQueryMapRes?.iconsQueryMap.nodes || []
+  const icons = useAllCMSIcons()
 
   const theme: any = useTheme()
   const formattedGraphData: AppGraphData | undefined = useMemo(
@@ -132,9 +91,7 @@ export const ResourceMap: React.FC<{
         theme,
         graphData?.nodes.find(n => n._id === selectedNode?.Record_ID_INTERNAL)
       ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [graphData, icons, theme]
-    // [graphData, icons, selectedNode, theme]
+    [graphData, icons, selectedNode?.Record_ID_INTERNAL, theme]
   )
 
   const selectedNodeId: string | undefined = selectedNode?.Record_ID_INTERNAL
@@ -169,19 +126,28 @@ export const ResourceMap: React.FC<{
     [hoveredNode]
   )
 
-  const updateCanvasLeftMargin = useCallback(() => {
-    if (ref.current !== null && !positioned) {
-      const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
-      if (c !== null) {
-        const xMin: number = getCanvasPixelsXMin(c)
-        if (xMin !== Infinity) {
-          const newLeftMargin: number = -1 * xMin + 100
-          if (newLeftMargin === mapLeftMargin) setPositioned(true)
-          setMapLeftMargin(newLeftMargin)
-        }
-      }
-    }
-  }, [mapLeftMargin, positioned])
+  // /**
+  //  * Ensure constant gap between main canvas and legend component.
+  //  */
+  // const updateCanvasLeftMargin = useCallback(() => {
+  //   if (ref.current !== null && !positioned) {
+  //     const c: HTMLCanvasElement | null = ref.current.querySelector('canvas')
+  //     if (c !== null) {
+  //       const xMin: number = getCanvasPixelsXMin(c)
+  //       if (xMin === Infinity) return
+  //       console.log('curXMin = ' + curXMin)
+  //       console.log('xMin = ' + xMin)
+  //       if (curXMin > xMin) setCurXMin(xMin)
+  //       else if (xMin !== Infinity) {
+  //         const newLeftMargin: number = -1 * xMin + 100
+  //         if (newLeftMargin === mapLeftMargin) setPositioned(true)
+  //         console.log('newLeftMargin = ' + newLeftMargin)
+
+  //         setMapLeftMargin(newLeftMargin)
+  //       }
+  //     }
+  //   }
+  // }, [mapLeftMargin, positioned, curXMin])
 
   const showAllNodeLabels: boolean =
     graphData !== undefined && graphData.nodes.length <= 5
@@ -203,159 +169,51 @@ export const ResourceMap: React.FC<{
 
   // return null if no map to show
   if (graphData === undefined) return <div>Wow</div>
-  // // return null if no map to show
-  // if (
-  //   graphData === undefined ||
-  //   graphData.nodes.length === 0 ||
-  //   graphData.links.length === 0
-  // )
-  //   return null
-
-  const citationDesc: string = getCitationCountText(selectedNodeId, graphData)
 
   return (
-    <section>
-      <p>{citationDesc}</p>
-      <em>Click resource in map to go to page</em>
-      <Section>
-        <Legend>
-          <h6>Legend</h6>
-          {/* Resource type icons legend */}
-          {selectedNode !== undefined && (
-            <IconEntry
-              label={'This resource'}
-              value={selectedNode.Resource_type}
-              frameColor={theme.colorYellow}
-              frameShape={'hexagon'}
-            />
-          )}
-          <IconEntries
-            icons={icons.filter(icon => {
-              return graphData?.nodes.map(n => n._icon).includes(icon.data.Name)
-            })}
-          />
-          {/* Link direction legend */}
-          {curvedLinks && (
-            <CurvedEdgeEntry nodeColor={theme?.colorDarker || 'skyblue'} />
-          )}
-        </Legend>
-        <MapContainer
-          data-network
-          style={{ marginLeft: mapLeftMargin }}
-          {...{ ref }}
-        >
-          <network.SettingsContext.Provider
-            value={{
-              ...network.defaultSettings,
-              nodes: {
-                ...network.defaultSettings.nodes,
-                selectedColor: theme.colorDarker,
-              },
-            }}
-          >
-            <network.Network
-              key={selectedNode?.Record_ID_INTERNAL}
-              enableNodeDrag={false}
-              onRenderFramePost={updateCanvasLeftMargin}
-              nodeLabel={hideTipForLabeledNodes}
-              containerStyle={{ transition: 'opacity .25s ease-in-out' }}
-              linkDirectionalArrowLength={getLinkDirectionalArrowLength}
-              linkCurvature={curvedLinks ? 0.5 : 0}
-              warmupTicks={1000}
-              zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
-              interactionSettings={{
-                enableZoomInteraction: false,
-                enablePanInteraction: false,
-                maxZoom: 5,
-              }}
-              onNodeClick={onNodeClick}
-              initGraphData={formattedGraphData}
-              {...{
-                hoveredNode,
-                setHoveredNode,
-                selectedNode: selectedNode?.Record_ID_INTERNAL,
-              }}
-            />
-          </network.SettingsContext.Provider>
-        </MapContainer>
-      </Section>
-    </section>
+    <MapContainer
+      data-network
+      // style={{ marginLeft: mapLeftMargin }}
+      {...{ ref }}
+    >
+      <SettingsContext.Provider
+        value={{
+          ...defaultSettings,
+          nodes: {
+            ...defaultSettings.nodes,
+            selectedColor: theme.colorDarker,
+          },
+        }}
+      >
+        <network.Network
+          key={selectedNode?.Record_ID_INTERNAL}
+          enableNodeDrag={false}
+          // onRenderFramePost={updateCanvasLeftMargin}
+          nodeLabel={hideTipForLabeledNodes}
+          containerStyle={{ transition: 'opacity .25s ease-in-out' }}
+          linkDirectionalArrowLength={getLinkDirectionalArrowLength}
+          linkCurvature={curvedLinks ? 0.5 : 0}
+          warmupTicks={5000}
+          zoomToFitSettings={{ durationMsec: 0, initDelayMsec: 0 }}
+          interactionSettings={{
+            enableZoomInteraction: false,
+            enablePanInteraction: false,
+            maxZoom: 5,
+          }}
+          onNodeClick={onNodeClick}
+          initGraphData={formattedGraphData}
+          {...{
+            hoveredNode,
+            setHoveredNode,
+            selectedNode: selectedNode?.Record_ID_INTERNAL,
+          }}
+        />
+      </SettingsContext.Provider>
+    </MapContainer>
   )
 }
 
 export default ResourceMap
-
-/**
- * Returns text describing how many resources this one cites or is cited by
- * @param resId The ID of the resource whose page it is
- * @param graphData The nodes and links
- * @returns Text describing citation counts
- */
-function getCitationCountText(
-  resId: string | undefined,
-  graphData: AppGraphData
-): string {
-  if (resId === undefined) return ''
-  const cites: number = getUniqueNodeIdCount(graphData, 'target', resId)
-  const citedBy: number = getUniqueNodeIdCount(graphData, 'source', resId)
-  const citationDesc: string = getCitationString(cites, citedBy)
-  return citationDesc
-}
-
-/**
- * Returns text describing how many resources this one cites or is cited by
- * @param cites Number of other resources cited
- * @param citedBy Number of other resources cited by
- * @returns Text describing the counts
- */
-function getCitationString(cites: number, citedBy: number) {
-  let text: string = 'This resource '
-  const pieces: string[] = []
-  if (cites > 0)
-    pieces.push(`cites ${cites} other resource${cites === 1 ? '' : 's'}`)
-  if (citedBy > 0)
-    pieces.push(
-      `is cited by ${citedBy} other resource${citedBy === 1 ? '' : 's'}`
-    )
-  pieces.forEach((s, i) => {
-    if (i > 0) text += ' and ' + s
-    else text += s
-  })
-  text += ` that ${cites + citedBy === 1 ? 'is' : 'are'} also in the library.`
-  return text
-}
-
-/**
- * Returns the count of unique target/source connections the selected node
- * has in the graph data.
- *
- * @param graphData The nodes and links
- *
- * @param field The field (target or source) for which to count unique node IDs
- *
- * @param selectedNodeId
- * The ID of the node whose incoming and outgoing connections are
- * to be counted
- *
- * @returns The count
- */
-function getUniqueNodeIdCount(
-  graphData: AppGraphData,
-  field: 'target' | 'source',
-  selectedNodeId: string | undefined
-): number {
-  const otherField: 'target' | 'source' =
-    field === 'target' ? 'source' : 'target'
-  return [
-    ...new Set(
-      graphData.links
-        .filter(
-          l => l[field] !== selectedNodeId && l[otherField] === selectedNodeId
-        )
-        .map(l => l[field])
-    ),
-  ].length
-}
 
 /**
  * Given input graph data, returns a version of it formatted for display in the
@@ -455,12 +313,10 @@ function getFormattedNodes(
       selectedNode !== undefined && selectedNode._id === n._id
     const iconName: string =
       n._icon !== '' && n._icon !== undefined ? n._icon : ''
-    const icon: Icon | undefined = icons.find(
-      icon => icon.data.Name === iconName
-    )
+    const icon: Icon | undefined = icons.find(icon => icon.name === iconName)
     if (icon === undefined) return n
     const displayIcon = replaceFill(
-      parse(icon.data.SVG.localFiles[0].childSvg.svgString),
+      parse(icon.svg.toString()),
       n._color || theme.colorDarker
     )
 
