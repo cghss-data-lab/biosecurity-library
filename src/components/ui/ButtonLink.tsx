@@ -6,7 +6,7 @@ const Button = styled(Link)`
   color: ${({ theme }) => theme.colorBlack} !important;
   text-decoration: none !important;
   cursor: pointer;
-  border: 2px solid ${({ theme }) => theme.colorGolden};
+  border: 1px solid ${({ theme }) => theme.colorGolden};
   border-radius: 2px;
   padding: 10px 20px;
   font-family: 'Open Sans', sans-serif;
@@ -18,17 +18,17 @@ const Button = styled(Link)`
       rgba(255, 255, 255, 0.3) 0%,
       rgba(255, 255, 255, 0) 100%
     ),
-    #edb458;
+    ${({ theme }) => theme.colorGolden};
 
   &:hover {
     transition: 150ms ease;
-    border: 2px solid ${({ theme }) => theme.colorYellow};
+    border: 1px solid ${({ theme }) => theme.colorYellow};
     background: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0.4) 0%,
         rgba(255, 255, 255, 0) 100%
       ),
-      #f6d356;
+      ${({ theme }) => theme.colorYellow};
   }
 `
 
