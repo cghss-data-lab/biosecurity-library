@@ -90,7 +90,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         {data.Seminal_resource === 'Yes' && (
           <CMS.Icon
             name="Key resource"
-            color={theme.colorYellow}
+            color={theme.colorGolden}
             style={{
               height: '1.2em',
               display: 'inline-block',
