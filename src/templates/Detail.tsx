@@ -47,6 +47,7 @@ export interface PageContext {
     Seminal_resource: string
     Target_user_role: string[]
     Potential_user_role: string[]
+    User_type: string[]
     URL_for_resource: string
     Access_method: string
     Access_limitations: string[]
