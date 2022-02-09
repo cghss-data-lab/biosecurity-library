@@ -32,14 +32,14 @@ const IconTag = ({
 
   let iconOverride
 
-  let backgroundColor: string = dark ? theme.colorDarkest : `rgba(0,0,0,0)`
-  let borderColor: string = theme.colorDarkest
+  let backgroundColor: string = dark ? theme.colorDarker : `rgba(0,0,0,0)`
+  let borderColor: string = dark ? theme.colorSuperDarkest : theme.colorDarkest
   let foregroundColor: string = dark ? theme.colorWhite : theme.colorDarkest
 
   // special case for key resource
   if (name === 'Key resource') {
     backgroundColor = theme.colorYellow
-    borderColor = theme.colorYellow
+    borderColor = theme.colorGolden
     foregroundColor = theme.colorDarkest
   }
 
