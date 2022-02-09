@@ -13,7 +13,7 @@ import qs from 'qs'
 
 const navigateToTopicArea = (keyTopicArea: string) =>
   navigate(
-    `explore?${qs.stringify({
+    `explore/?${qs.stringify({
       filters: { Key_topic_area: [keyTopicArea] },
     })}`
   )
