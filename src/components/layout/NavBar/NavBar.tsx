@@ -64,7 +64,7 @@ const NavBar: React.FC = () => {
     <>
       <Nav>
         <Container>
-          <HomeLink style={{ fontWeight: '500' }} to="/">
+          <HomeLink style={{ fontWeight: 500 }} to="/">
             Biosecurity Central
           </HomeLink>
           <LinkList>
