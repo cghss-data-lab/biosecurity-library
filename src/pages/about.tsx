@@ -68,10 +68,6 @@ const About = (): JSX.Element => {
         </h2>
         <CMS.RichText name="Overview" data={data} />
 
-        {/* <h3 style={{ marginBottom: 15 }}>
-          <CMS.Text name="Methods h3" data={data} />
-        </h3> */}
-        <CMS.RichText name="Methods text" data={data} />
         <ButtonLink name="Methods button" data={data} />
 
         <ImageHolder>
