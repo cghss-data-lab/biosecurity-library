@@ -27,6 +27,7 @@ const ImageHolder = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 50px;
+  margin-top: 30px;
 `
 const ButtonLink = styled(CMS.Download)`
   display: block;
@@ -67,6 +68,12 @@ const About = (): JSX.Element => {
         </h2>
         <CMS.RichText name="Overview" data={data} />
 
+        {/* <h3 style={{ marginBottom: 15 }}>
+          <CMS.Text name="Methods h3" data={data} />
+        </h3> */}
+        <CMS.RichText name="Methods text" data={data} />
+        <ButtonLink name="Methods button" data={data} />
+
         <ImageHolder>
           <CMS.Image
             imgStyle={{ objectFit: 'contain' }}
@@ -84,12 +91,6 @@ const About = (): JSX.Element => {
             data={data}
           />
         </ImageHolder>
-
-        <h3 style={{ marginBottom: 15 }}>
-          <CMS.Text name="Methods h3" data={data} />
-        </h3>
-        <CMS.RichText name="Methods text" data={data} />
-        <ButtonLink name="Methods button" data={data} />
 
         <h2 style={{ marginBottom: 15 }}>
           <CMS.Text name="Other h2" data={data} />
