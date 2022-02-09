@@ -38,11 +38,24 @@ const ButtonLink = styled(CMS.Download)`
       rgba(255, 255, 255, 0.3) 0%,
       rgba(255, 255, 255, 0) 100%
     ),
-    #edb458;
+    ${({ theme }) => theme.colorGolden};
   padding: 0.5em 1em;
-  border: 2px solid ${({ theme }) => theme.colorGolden};
+  border: 1px solid ${({ theme }) => theme.colorGolden};
   color: ${({ theme }) => theme.colorBlack} !important;
   margin-top: 1em;
+  transition: 250ms;
+  border-radius: 2px;
+
+  &:hover {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      ${({ theme }) => theme.colorYellow};
+    border: 1px solid ${({ theme }) => theme.colorYellow};
+    text-decoration: none !important;
+  }
 `
 
 const About = (): JSX.Element => {
