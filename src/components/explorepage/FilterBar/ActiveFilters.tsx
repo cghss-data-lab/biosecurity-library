@@ -64,10 +64,11 @@ const ActiveFilters: React.FC<FilterProps> = ({
     <MoreFilters
       open={exploreState.moreFilters}
       onClick={() =>
-        setExploreState(prev => ({
-          ...prev,
-          moreFilters: String(!Boolean(prev.moreFilters)),
-        }))
+        setExploreState(prev => {
+          if (!prev.moreFilters) return { ...prev, moreFilters: 'true' }
+          const { moreFilters, ...next } = prev
+          return { ...next }
+        })
       }
     >
       + More filters
