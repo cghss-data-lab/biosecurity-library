@@ -7,6 +7,7 @@ import useHomePageData from 'airtableQueryHooks/useHomePageData'
 import { navigate } from 'gatsby'
 import { getDetailURL } from 'utilities/urls'
 import NavSearchResult from './NavSearchResult'
+import { fontFace } from 'polished'
 
 const Nav = styled.nav`
   // background-color: ${({ theme }) => theme.colorBlack};
@@ -20,8 +21,9 @@ const Container = styled.div`
   margin: 0 auto;
   max-width: 1500px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
+  padding: 8px;
 `
 const LinkList = styled.ol`
   list-style: none;
@@ -31,6 +33,7 @@ const LinkList = styled.ol`
 `
 const HomeLink = styled(NavLink)`
   font-family: 'Overpass', sans-serif !important;
+  font-family: 'Spectral' !important;
   font-size: 24px !important;
   color: white;
   padding: 0;
@@ -52,16 +55,24 @@ const NavBar: React.FC = () => {
     <>
       <Nav>
         <Container>
-          <HomeLink activeStyle={{}} to="/">
-            Biosecurity Library
-          </HomeLink>
+          <HomeLink to="/">Biosecurity Central</HomeLink>
           <LinkList>
             <div
-              style={{ width: 400, paddingTop: 4 }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                fontFamily: 'Open sans',
+              }}
               onFocus={() => setFocusInSearch(true)}
               onBlur={() => setTimeout(() => setFocusInSearch(false), 200)}
             >
               <Typeahead
+                style={{
+                  margin: 0,
+                  minWidth: 400,
+                  flexShrink: 0,
+                  marginRight: 14,
+                }}
                 iconLeft
                 fontColor={focusInSearch ? 'black' : 'white'}
                 // borderColor="#5B6476"
