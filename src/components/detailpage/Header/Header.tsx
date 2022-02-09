@@ -55,7 +55,7 @@ const Header: React.FC<PageContext> = ({ data }) => (
     </TagHolder>
     <IconContainer>
       {data.Key_topic_area.map(name => (
-        <IconTag name={name} />
+        <IconTag key={name} name={name} />
       ))}
     </IconContainer>
   </HeaderContainer>
