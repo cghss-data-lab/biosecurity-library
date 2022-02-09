@@ -7,7 +7,7 @@ const Container = styled.section`
   align-items: center;
   border: 1px solid ${({ theme }) => theme.colorYellow};
   background-color: ${({ theme }) => theme.colorVeryLightYellow};
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 15px;
   flex-grow: 0;
   width: 100%;
