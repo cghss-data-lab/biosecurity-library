@@ -3,57 +3,72 @@
  */
 import React, { useMemo } from 'react'
 import * as network from '@talus-analytics/viz.charts.network'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import { initNode } from '@talus-analytics/viz.charts.network'
 import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
-const LinkLegendContainer = styled.div`
+
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  margin-top: -5px !important;
+  font-size: 0.8em;
+`
+
+const Entry = styled.div`
   position: relative;
   width: 150px;
   height: 100px;
-  margin-left: -7px;
-  margin-top: -5px !important;
+  left: -31px;
+`
+
+const Label = styled.div`
+  position: relative;
+  top: -15px;
+  margin-bottom: -15px;
 `
 
 export const CurvedEdgeEntry = ({ nodeColor }: { nodeColor: string }) => {
-  const theme: any = useTheme()
-  const legendGraphData: AppGraphData = useMemo(() => {
+  const data: AppGraphData = useMemo(() => {
     return {
-      nodes: [initNode('Mentioned', 1), initNode('Mentioning', 2)].map(n => {
+      nodes: [initNode('B', 1), initNode('A', 2)].map(n => {
         return {
           ...n,
           _color: nodeColor,
-          _labelColor: theme.colorBlack,
+          _labelColor: '#ffffff',
           _labelFontWeight: 'normal',
-          _labelYOffset: 0,
+          _labelYOffset: -8.5,
           _fontSize: 13.4,
         }
       }),
       links: [{ source: 2, target: 1, value: 1 }],
     }
-  }, [theme, nodeColor])
+  }, [nodeColor])
 
   return (
-    <LinkLegendContainer>
-      <network.Network
-        nodeLabel={undefined}
-        linkDirectionalArrowLength={10}
-        linkWidth={3}
-        warmupTicks={1000}
-        zoomToFitSettings={{
-          durationMsec: 0,
-          initDelayMsec: 0,
-          paddingPx: 25,
-        }}
-        interactionSettings={{
-          enableZoomInteraction: false,
-          enablePanInteraction: false,
-          maxZoom: 5,
-        }}
-        enableNodeDrag={false}
-        onNodeHover={undefined}
-        initGraphData={legendGraphData}
-      />
-    </LinkLegendContainer>
+    <Container>
+      <Entry>
+        <network.Network
+          nodeLabel={undefined}
+          linkDirectionalArrowLength={10}
+          linkWidth={3}
+          warmupTicks={1000}
+          zoomToFitSettings={{
+            durationMsec: 0,
+            initDelayMsec: 0,
+            paddingPx: 25,
+          }}
+          interactionSettings={{
+            enableZoomInteraction: false,
+            enablePanInteraction: false,
+            maxZoom: 5,
+          }}
+          enableNodeDrag={false}
+          onNodeHover={undefined}
+          initGraphData={data}
+        />
+      </Entry>
+      <Label>Resource A mentions B</Label>
+    </Container>
   )
 }
 
