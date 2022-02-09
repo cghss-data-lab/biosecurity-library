@@ -97,6 +97,8 @@ const Description = styled.p`
 `
 const KeyTopicArea = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 `
 
 const getResourceUrl = (Resource_type: string, Short_name: string) =>
@@ -204,12 +206,7 @@ const CarouselSection = (): JSX.Element => {
                         filters: { Key_topic_area: [topic] },
                       })}`}
                     >
-                      <IconTag
-                        name={topic}
-                        style={{
-                          marginRight: '1em',
-                        }}
-                      />
+                      <IconTag name={topic} />
                     </Link>
                   ))}
                 </KeyTopicArea>
