@@ -11,7 +11,8 @@ import { fontFace } from 'polished'
 
 const Nav = styled.nav`
   // background-color: ${({ theme }) => theme.colorBlack};
-  background-color: #05213a;
+  /* background-color: #05213a; */
+  background-color: ${({ theme }) => theme.colorSuperDarkest};
   position: fixed;
   width: 100%;
   z-index: 50;
