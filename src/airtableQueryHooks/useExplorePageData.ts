@@ -17,7 +17,7 @@ export interface Resource {
     Key_topic_area: string[]
     Short_description: string
     Target_user_role: string[]
-    User_types: string[]
+    User_type: string[]
     Authoring_organization: {
       data: {
         value: string
@@ -86,7 +86,7 @@ const useExplorePageData = () => {
               Short_description
               Key_topic_area
               Key_resource_INTERNAL
-              User_types
+              User_type
               Resource_language
               Access_limitations
               Access_method
