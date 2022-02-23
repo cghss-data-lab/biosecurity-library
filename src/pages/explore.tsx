@@ -53,9 +53,10 @@ const ExplorePage = (): JSX.Element => {
   // store explore state in the query string whenever it chagnges
   useEffect(() => {
     console.log('In useEffect ' + window.location.search)
+    console.log(qs.stringify(exploreState))
     if (
       typeof window !== 'undefined' &&
-      Object.keys(exploreState).length > 0 &&
+      // Object.keys(exploreState).length > 0 &&
       window.location.search.split('?')[1] !== qs.stringify(exploreState)
     ) {
       console.log('In useEffect if statement ' + window.location.search)

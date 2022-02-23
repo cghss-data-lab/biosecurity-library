@@ -26,6 +26,8 @@ const ImageHolder = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  gap: 50px;
+  margin-top: 30px;
 `
 const ButtonLink = styled(CMS.Download)`
   display: block;
@@ -36,11 +38,24 @@ const ButtonLink = styled(CMS.Download)`
       rgba(255, 255, 255, 0.3) 0%,
       rgba(255, 255, 255, 0) 100%
     ),
-    #edb458;
+    ${({ theme }) => theme.colorGolden};
   padding: 0.5em 1em;
-  border: 2px solid ${({ theme }) => theme.colorGolden};
+  border: 1px solid ${({ theme }) => theme.colorGolden};
   color: ${({ theme }) => theme.colorBlack} !important;
   margin-top: 1em;
+  transition: 250ms;
+  border-radius: 2px;
+
+  &:hover {
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      ${({ theme }) => theme.colorYellow};
+    border: 1px solid ${({ theme }) => theme.colorYellow};
+    text-decoration: none !important;
+  }
 `
 
 const About = (): JSX.Element => {
@@ -62,52 +77,33 @@ const About = (): JSX.Element => {
         </AccessibilityBanner>
 
         <h2 style={{ marginBottom: 20 }}>
-          <CMS.Text name="H2" data={data} />
+          <CMS.Text name="Overview h2" data={data} />
         </h2>
         <CMS.RichText name="Overview" data={data} />
 
-        <h3 style={{ marginBottom: 15 }}>
-          <CMS.Text name="Contact h3" data={data} />
-        </h3>
-        <CMS.RichText name="Contact text" data={data} />
+        <ButtonLink name="Methods button" data={data} />
 
-        <h3 style={{ marginBottom: 15 }}>
-          <CMS.Text name="Contributors h3" data={data} />
-        </h3>
         <ImageHolder>
           <CMS.Image
-            imgStyle={{ height: 80, width: 262, objectFit: 'contain' }}
+            imgStyle={{ objectFit: 'contain' }}
+            name="Funder logo"
+            data={data}
+          />
+          <CMS.Image
+            imgStyle={{ objectFit: 'contain' }}
             name="Georgetown logo"
             data={data}
           />
           <CMS.Image
-            imgStyle={{ height: 80, width: 191, objectFit: 'contain' }}
+            imgStyle={{ objectFit: 'contain' }}
             name="Talus logo"
             data={data}
           />
         </ImageHolder>
-        <CMS.RichText name="Contributors text" data={data} />
 
-        <h3 style={{ marginBottom: 15 }}>
-          <CMS.Text name="Funder h3" data={data} />
-        </h3>
-        <ImageHolder>
-          <CMS.Image
-            imgStyle={{ height: 80, width: 491, objectFit: 'contain' }}
-            name="Funder logo"
-            data={data}
-          />
-        </ImageHolder>
-
-        <h3 style={{ marginBottom: 15 }}>
-          <CMS.Text name="Methods h3" data={data} />
-        </h3>
-        <CMS.RichText name="Methods text" data={data} />
-        <ButtonLink name="Methods button" data={data} />
-
-        <h3 style={{ marginBottom: 15 }}>
-          <CMS.Text name="Other h3" data={data} />
-        </h3>
+        <h2 style={{ marginBottom: 15 }}>
+          <CMS.Text name="Other h2" data={data} />
+        </h2>
         <CMS.RichText name="Other text" data={data} />
       </AboutMain>
       <Footer />
