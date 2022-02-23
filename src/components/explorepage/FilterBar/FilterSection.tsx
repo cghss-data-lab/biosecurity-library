@@ -33,7 +33,7 @@ const FilterSection: React.FC<FilterProps> = ({
           />
         ))}
       </FilterContainer>
-      <Expander open={exploreState.moreFilters ? true : false}>
+      <Expander open={Boolean(exploreState.moreFilters)}>
         <FilterContainer>
           {Object.entries(moreFilterOptions).map(
             ([name, { distinct: options }]) => (
