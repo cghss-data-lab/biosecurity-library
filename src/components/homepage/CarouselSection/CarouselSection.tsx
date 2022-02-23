@@ -194,7 +194,10 @@ const CarouselSection = (): JSX.Element => {
                   {resource.Access_limitations[0] === 'Restricted' && (
                     <IconTag
                       name={resource.Access_method}
-                      style={{ marginBottom: '1em', marginLeft: '1em' }}
+                      style={{ marginBottom: '1em', marginLeft: '0em' }}
+                      overrideBackground={`rgba(0,0,0,0)`}
+                      overrideBorder={theme.colorRed}
+                      overrideForeground={theme.colorRed}
                     />
                   )}
                 </KeyTopicArea>
