@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import { PageContext } from '../../../templates/Detail'
 import IconTag from 'components/ui/IconTag/IconTag'
@@ -36,29 +36,42 @@ const TagHolder = styled.div`
   margin-top: 35px;
 `
 
-const Header: React.FC<PageContext> = ({ data }) => (
-  <HeaderContainer>
-    <h2 style={{ marginTop: 30, marginBottom: 0, lineHeight: 1.2 }}>
-      {data.Resource_name}
-    </h2>
-    <ShortName>[{data.Short_name.trim()}]</ShortName>
-    <Author>{data.Authoring_organization[0].data.value}</Author>
-    <p>{data.Short_description}</p>
-    <TagHolder>
-      {data.Seminal_resource === 'Yes' && (
-        <IconTag dark name={'Key resource'} style={{ marginRight: '1em' }} />
-      )}
-      <IconTag dark name={data.Resource_type} style={{ marginRight: '1em' }} />
-      {data.Access_limitations[0] === 'Restricted' && (
-        <IconTag name={data.Access_method} />
-      )}
-    </TagHolder>
-    <IconContainer>
-      {data.Key_topic_area.map(name => (
-        <IconTag key={name} name={name} />
-      ))}
-    </IconContainer>
-  </HeaderContainer>
-)
+const Header: React.FC<PageContext> = ({ data }) => {
+  const theme: any = useTheme()
+
+  return (
+    <HeaderContainer>
+      <h2 style={{ marginTop: 30, marginBottom: 0, lineHeight: 1.2 }}>
+        {data.Resource_name}
+      </h2>
+      <ShortName>[{data.Short_name.trim()}]</ShortName>
+      <Author>{data.Authoring_organization[0].data.value}</Author>
+      <p>{data.Short_description}</p>
+      <TagHolder>
+        {data.Seminal_resource === 'Yes' && (
+          <IconTag dark name={'Key resource'} style={{ marginRight: '1em' }} />
+        )}
+        <IconTag
+          dark
+          name={data.Resource_type}
+          style={{ marginRight: '1em' }}
+        />
+        {data.Access_limitations[0] === 'Restricted' && (
+          <IconTag
+            name={data.Access_method}
+            overrideBackground={`rgba(0,0,0,0)`}
+            overrideBorder={theme.colorRed}
+            overrideForeground={theme.colorRed}
+          />
+        )}
+      </TagHolder>
+      <IconContainer>
+        {data.Key_topic_area.map(name => (
+          <IconTag key={name} name={name} />
+        ))}
+      </IconContainer>
+    </HeaderContainer>
+  )
+}
 
 export default Header
