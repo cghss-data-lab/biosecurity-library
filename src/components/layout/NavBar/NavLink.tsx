@@ -4,9 +4,11 @@ import styled from 'styled-components'
 
 const StyledLink = styled(Link)`
   color: white !important;
-  padding: 20px;
+  padding: 14px;
   text-decoration: none;
   transition: 500ms ease;
+  font-weight: 400;
+  font-family: 'Open sans', Arial, Helvetica, sans-serif;
 
   &:hover {
     // background-color: ${({ theme }) => theme.colorVeryDarkGray};
@@ -16,7 +18,7 @@ const StyledLink = styled(Link)`
   }
 `
 const defaultActiveStyle = {
-  fontWeight: '900',
+  fontWeight: '600',
 }
 
 interface Props {

@@ -90,7 +90,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         {data.Seminal_resource === 'Yes' && (
           <CMS.Icon
             name="Key resource"
-            color={theme.colorYellow}
+            color={theme.colorGolden}
             style={{
               height: '1.2em',
               display: 'inline-block',
@@ -117,7 +117,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
       </Title>
       <Author>{data.Authoring_organization[0].data.value}</Author>
       <IconContainer>
-        {data.Key_topic_area.map(name => (
+        {data.Key_topic_area.sort().map(name => (
           <Tippy content={name} key={name}>
             <CMS.Icon
               name={name}

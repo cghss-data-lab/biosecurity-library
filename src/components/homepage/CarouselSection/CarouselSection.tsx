@@ -97,6 +97,8 @@ const Description = styled.p`
 `
 const KeyTopicArea = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 `
 
 const getResourceUrl = (Resource_type: string, Short_name: string) =>
@@ -192,7 +194,10 @@ const CarouselSection = (): JSX.Element => {
                   {resource.Access_limitations[0] === 'Restricted' && (
                     <IconTag
                       name={resource.Access_method}
-                      style={{ marginBottom: '1em', marginLeft: '1em' }}
+                      style={{ marginBottom: '1em', marginLeft: '0em' }}
+                      overrideBackground={`rgba(0,0,0,0)`}
+                      overrideBorder={theme.colorRed}
+                      overrideForeground={theme.colorRed}
                     />
                   )}
                 </KeyTopicArea>
@@ -204,12 +209,7 @@ const CarouselSection = (): JSX.Element => {
                         filters: { Key_topic_area: [topic] },
                       })}`}
                     >
-                      <IconTag
-                        name={topic}
-                        style={{
-                          marginRight: '1em',
-                        }}
-                      />
+                      <IconTag name={topic} />
                     </Link>
                   ))}
                 </KeyTopicArea>
