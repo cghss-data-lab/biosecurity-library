@@ -48,6 +48,7 @@ export const SearchBar = styled.input<{ iconLeft: boolean; fontColor: string }>`
   border: 1px solid #aaa;
   transition-duration: 0ms;
   transition-delay: 200ms;
+  font-family: inherit;
 
   color: ${({ fontColor }) => fontColor};
   &::placeholder {

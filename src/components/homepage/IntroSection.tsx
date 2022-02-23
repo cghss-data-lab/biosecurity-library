@@ -14,6 +14,8 @@ const Section = styled.section`
   h1 {
     text-align: center;
     margin-bottom: 0px;
+    font-family: 'Spectral' !important;
+    font-size: 50px !important;
   }
 `
 const IntroParagraph = styled.div`
