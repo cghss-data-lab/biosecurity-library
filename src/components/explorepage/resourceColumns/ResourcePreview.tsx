@@ -102,7 +102,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         )}
         {data.Access_limitations[0] === 'Restricted' && (
           <CMS.Icon
-            name={'Restricted'}
+            name={data.Access_method}
             color={theme.colorRed}
             style={{
               height: '1.2em',
@@ -139,7 +139,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
             >
               {data.Access_limitations[0] === 'Restricted' && (
                 <CMS.Icon
-                  name={'Restricted'}
+                  name={data.Access_method}
                   color={theme.colorRed}
                   style={{
                     height: '1.2em',
