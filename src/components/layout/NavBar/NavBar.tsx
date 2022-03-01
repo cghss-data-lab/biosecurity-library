@@ -6,8 +6,7 @@ import Typeahead from '@talus-analytics/library.ui.typeahead'
 import useHomePageData from 'airtableQueryHooks/useHomePageData'
 import { navigate } from 'gatsby'
 import { getDetailURL } from 'utilities/urls'
-import NavSearchResult from './NavSearchResult'
-import { fontFace } from 'polished'
+// import NavSearchResult from './NavSearchResult'
 
 const Nav = styled.nav`
   // background-color: ${({ theme }) => theme.colorBlack};
