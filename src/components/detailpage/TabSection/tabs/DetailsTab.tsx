@@ -10,15 +10,27 @@ const DetailsTab = ({ data }: PageContext): JSX.Element => {
       <h5>RESOURCE TYPE</h5>
       <p>{data.Resource_type}</p>
       <h5>KEY TOPIC {data.Key_topic_area.length === 1 ? 'AREA' : 'AREAS'}</h5>
-      <p>{commaSeparatedList(data.Key_topic_area)}</p>
+      <p>
+        {commaSeparatedList(
+          data.Key_topic_area.sort((a, b) => a.localeCompare(b))
+        )}
+      </p>
       <h5>
         TARGET USER {data.Target_user_role.length === 1 ? 'ROLE' : 'ROLES'}
       </h5>
-      <p>{commaSeparatedList(data.Target_user_role)}</p>
+      <p>
+        {commaSeparatedList(
+          data.Target_user_role.sort((a, b) => a.localeCompare(b))
+        )}
+      </p>
       {data.User_type && (
         <>
           <h5>USER {data.User_type.length === 1 ? 'TYPE' : 'TYPES'}</h5>
-          <p>{commaSeparatedList(data.User_type)}</p>
+          <p>
+            {commaSeparatedList(
+              data.User_type.sort((a, b) => a.localeCompare(b))
+            )}
+          </p>
         </>
       )}
       <h5>ACCESS LIMITATIONS</h5>
