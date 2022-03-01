@@ -91,7 +91,7 @@ module.exports = {
       // the cookieconsent opt-in system.
       resolve: `gatsby-plugin-gtag`,
       options: {
-        trackingId: `G-XXXXXXXXXX`,
+        trackingId: `G-NFPBK043KG`,
         anonymize: true,
         head: false,
       },
