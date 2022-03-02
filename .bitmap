@@ -11,7 +11,7 @@
 {
     "airtable-cms": {
         "scope": "talus-analytics.library",
-        "version": "0.0.28",
+        "version": "0.0.29",
         "mainFile": "index.tsx",
         "rootDir": "src/AirtableCMS"
     },
@@ -41,7 +41,7 @@
     },
     "airtable/cms-rich-text": {
         "scope": "talus-analytics.library",
-        "version": "0.0.6",
+        "version": "0.0.7",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSRichText"
     },
