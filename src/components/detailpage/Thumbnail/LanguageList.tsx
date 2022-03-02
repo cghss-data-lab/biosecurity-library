@@ -42,7 +42,7 @@ const LanguageList = ({
 
   if (languages.length > 3)
     return (
-      <Tippy content={tooltip} theme={'light'} placement={'bottom'}>
+      <Tippy content={tooltip} theme={'light'} placement={'bottom-end'}>
         <ListParagraph>
           {languages.length === 1 ? 'Language: ' : 'Languages: '} {list}{' '}
           {languages.length > 3 && `(${languages.length})`}
