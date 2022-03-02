@@ -89,7 +89,7 @@
     },
     "ui/typeahead": {
         "scope": "talus-analytics.library",
-        "version": "0.0.4",
+        "version": "0.0.5",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Typeahead"
     },
