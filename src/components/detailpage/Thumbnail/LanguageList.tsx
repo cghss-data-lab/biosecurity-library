@@ -40,13 +40,21 @@ const LanguageList = ({
     </div>
   )
 
+  if (languages.length > 3)
+    return (
+      <Tippy content={tooltip} theme={'light'} placement={'bottom'}>
+        <ListParagraph>
+          {languages.length === 1 ? 'Language: ' : 'Languages: '} {list}{' '}
+          {languages.length > 3 && `(${languages.length})`}
+        </ListParagraph>
+      </Tippy>
+    )
+
   return (
-    <Tippy content={tooltip} theme={'light'} placement={'bottom'}>
-      <ListParagraph>
-        {languages.length === 1 ? 'Language: ' : 'Languages: '} {list}{' '}
-        {languages.length > 3 && `(${languages.length})`}
-      </ListParagraph>
-    </Tippy>
+    <ListParagraph>
+      {languages.length === 1 ? 'Language: ' : 'Languages: '} {list}{' '}
+      {languages.length > 3 && `(${languages.length})`}
+    </ListParagraph>
   )
 }
 
