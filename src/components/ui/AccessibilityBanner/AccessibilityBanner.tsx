@@ -21,6 +21,9 @@ const Container = styled.section`
     line-height: 22px;
     margin-top: 0em !important;
     margin-bottom: 0em !important;
+    > a {
+      font-size: 16px !important;
+    }
   }
 `
 
