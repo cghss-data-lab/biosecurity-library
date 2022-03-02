@@ -3,7 +3,7 @@ import styled, { useTheme } from 'styled-components'
 import CMS from '@talus-analytics/library.airtable-cms'
 
 // prettier-ignore
-const Tag = styled.div<{ foregroundColor: string, backgroundColor: string, borderColor: string, }>`
+const Tag = styled.div<{ foregroundColor: string, backgroundColor: string, borderColor: string, name: string}>`
   padding: 0.3em 1em;
   border: 1px solid ${({ borderColor }) => borderColor};
   border-radius: 2em;
@@ -13,6 +13,13 @@ const Tag = styled.div<{ foregroundColor: string, backgroundColor: string, borde
   color: ${({ foregroundColor }) => foregroundColor};
   font-size: 16px;
   background-color: ${({ backgroundColor }) => backgroundColor}; ;
+
+  ${({name, foregroundColor}) => name !== 'Key resource' && `
+      &:hover {
+        text-decoration: underline;
+        text-decoration-color: ${foregroundColor};
+      }
+  `}
 `
 
 interface IconTagProps extends React.ComponentPropsWithoutRef<'div'> {
@@ -50,7 +57,7 @@ const IconTag = ({
   }
 
   return (
-    <Tag {...{ foregroundColor, backgroundColor, borderColor, ...props }}>
+    <Tag {...{ foregroundColor, backgroundColor, borderColor, name, ...props }}>
       <CMS.Icon
         name={name}
         color={foregroundColor}
