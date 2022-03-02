@@ -136,4 +136,5 @@ export const SearchIcon = styled.div<{
   width: ${clearButtonHeight}px;
   background-position: right center;
   background-size: contain;
+  pointer-events: none;
 `
