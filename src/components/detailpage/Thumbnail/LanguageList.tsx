@@ -35,13 +35,13 @@ const LanguageList = ({
   const tooltip = (
     <div>
       {languages.map(lang => (
-        <p>{lang}</p>
+        <div style={{ padding: 5 }}>{lang}</div>
       ))}
     </div>
   )
 
   return (
-    <Tippy content={tooltip}>
+    <Tippy content={tooltip} theme={'light'} placement={'bottom'}>
       <ListParagraph>
         {languages.length === 1 ? 'Language: ' : 'Languages: '} {list}{' '}
         {languages.length > 3 && `(${languages.length})`}
