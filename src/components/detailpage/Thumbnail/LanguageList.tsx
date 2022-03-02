@@ -1,3 +1,4 @@
+import Tippy from '@tippyjs/react'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -31,11 +32,21 @@ const LanguageList = ({
   if (languages.length <= 3) list = languages.slice(0, 3).join(', ')
   if (languages.length > 3) list = languages.slice(0, 3).join(', ') + '...'
 
+  const tooltip = (
+    <div>
+      {languages.map(lang => (
+        <p>{lang}</p>
+      ))}
+    </div>
+  )
+
   return (
-    <ListParagraph>
-      {languages.length === 1 ? 'Language: ' : 'Languages: '} {list}{' '}
-      {languages.length > 3 && `(${languages.length})`}
-    </ListParagraph>
+    <Tippy content={tooltip}>
+      <ListParagraph>
+        {languages.length === 1 ? 'Language: ' : 'Languages: '} {list}{' '}
+        {languages.length > 3 && `(${languages.length})`}
+      </ListParagraph>
+    </Tippy>
   )
 }
 

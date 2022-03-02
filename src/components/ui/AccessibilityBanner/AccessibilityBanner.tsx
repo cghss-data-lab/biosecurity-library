@@ -14,7 +14,7 @@ const Container = styled.section`
   margin: 0 auto;
 
   p {
-    font-family: Open Sans, Arial, Helvetica, sans-serif !important;
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif !important;
     font-style: normal;
     font-weight: normal;
     font-size: 16px !important;
