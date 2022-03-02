@@ -101,7 +101,13 @@ const About = (): JSX.Element => {
           />
         </ImageHolder>
 
-        <h2 style={{ marginBottom: 15 }}>
+        <h2
+          style={{
+            marginBottom: 15,
+            borderTop: '1px solid #D3D3D3',
+            paddingTop: 30,
+          }}
+        >
           <CMS.Text name="Other h2" data={data} />
         </h2>
         <CMS.RichText name="Other text" data={data} />
