@@ -1,5 +1,7 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
+import { Link } from 'gatsby'
+import qs from 'qs'
 
 import { PageContext } from '../../../templates/Detail'
 import IconTag from 'components/ui/IconTag/IconTag'
@@ -51,23 +53,42 @@ const Header: React.FC<PageContext> = ({ data }) => {
         {data.Seminal_resource === 'Yes' && (
           <IconTag dark name={'Key resource'} style={{ marginRight: '1em' }} />
         )}
-        <IconTag
-          dark
-          name={data.Resource_type}
-          style={{ marginRight: '1em' }}
-        />
-        {data.Access_limitations[0] === 'Restricted' && (
+        <Link
+          to={`/explore?${qs.stringify({
+            type: data.Resource_type,
+          })}`}
+        >
           <IconTag
-            name={data.Access_method}
-            overrideBackground={`rgba(0,0,0,0)`}
-            overrideBorder={theme.colorRed}
-            overrideForeground={theme.colorRed}
+            dark
+            name={data.Resource_type}
+            style={{ marginRight: '1em' }}
           />
+        </Link>
+        {data.Access_limitations[0] === 'Restricted' && (
+          <Link
+            to={`/explore?${qs.stringify({
+              filters: { Access_limitations: [data.Access_limitations[0]] },
+            })}`}
+          >
+            <IconTag
+              name={data.Access_method}
+              overrideBackground={`rgba(0,0,0,0)`}
+              overrideBorder={theme.colorRed}
+              overrideForeground={theme.colorRed}
+            />
+          </Link>
         )}
       </TagHolder>
       <IconContainer>
-        {data.Key_topic_area.map(name => (
-          <IconTag key={name} name={name} />
+        {data.Key_topic_area.map(topic => (
+          <Link
+            key={topic}
+            to={`/explore?${qs.stringify({
+              filters: { Key_topic_area: [topic] },
+            })}`}
+          >
+            <IconTag name={topic} />
+          </Link>
         ))}
       </IconContainer>
     </HeaderContainer>
