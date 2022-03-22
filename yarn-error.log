@@ -1,25 +1,25 @@
 Arguments: 
-  /Users/ryan/.nvm/versions/node/v16.13.2/bin/node /opt/homebrew/Cellar/yarn/1.22.17_2/libexec/bin/yarn.js
+  /home/ubuntu/.nvm/versions/node/v15.14.0/bin/node /home/ubuntu/.nvm/versions/node/v15.14.0/bin/yarn check
 
 PATH: 
-  /Users/ryan/bin:/Users/ryan/.nvm/versions/node/v16.13.2/bin:/usr/local/homebrew/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /home/ubuntu/.nvm/versions/node/v15.14.0/bin:/home/ubuntu/bin:/home/ubuntu/.vscode-server/bin/b5205cc8eb4fbaa726835538cd82372cc0222d43/bin/remote-cli:/home/ubuntu/bin:/home/ubuntu/.rvm/gems/ruby-2.6.3/bin:/home/ubuntu/.rvm/gems/ruby-2.6.3@global/bin:/home/ubuntu/.rvm/rubies/ruby-2.6.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/ubuntu/.rvm/bin
 
 Yarn version: 
-  1.22.17
+  1.22.11
 
 Node version: 
-  16.13.2
+  15.14.0
 
 Platform: 
-  darwin arm64
+  linux x64
 
 Trace: 
-  SyntaxError: /Users/ryan/Documents/code/biosecurity-library/package.json: Unexpected token } in JSON at position 1756
+  SyntaxError: /home/ubuntu/.cache/yarn/v6/npm-@babel-plugin-proposal-optional-catch-binding-7.16.7-c623a430674ffc4ab732fd0a0ae7722b67cb74cf-integrity/node_modules/@babel/plugin-proposal-optional-catch-binding/.yarn-metadata.json: Unexpected end of JSON input
       at JSON.parse (<anonymous>)
-      at /opt/homebrew/Cellar/yarn/1.22.17_2/libexec/lib/cli.js:1625:59
+      at /home/ubuntu/.nvm/versions/node/v15.14.0/lib/node_modules/yarn/lib/cli.js:1625:59
       at Generator.next (<anonymous>)
-      at step (/opt/homebrew/Cellar/yarn/1.22.17_2/libexec/lib/cli.js:310:30)
-      at /opt/homebrew/Cellar/yarn/1.22.17_2/libexec/lib/cli.js:321:13
+      at step (/home/ubuntu/.nvm/versions/node/v15.14.0/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /home/ubuntu/.nvm/versions/node/v15.14.0/lib/node_modules/yarn/lib/cli.js:321:13
 
 npm manifest: 
   {
@@ -80,7 +80,7 @@ npm manifest:
       "styled-components": "^5.3.0",
       "typescript": "^4.4.4",
       "typescript-styled-plugin": "^0.18.1",
-      "unified": "^10.1.1",
+      "unified": "^10.1.1"
     },
     "devDependencies": {
       "@testing-library/react": "^12.1.2",
@@ -9640,7 +9640,7 @@ Lockfile:
       unist-util-position "^3.0.0"
       unist-util-visit "^2.0.0"
   
-  mdast-util-to-hast@^12.0.0, mdast-util-to-hast@^12.1.0:
+  mdast-util-to-hast@^12.0.0:
     version "12.1.1"
     resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-12.1.1.tgz#89a2bb405eaf3b05eb8bf45157678f35eef5dbca"
     integrity sha512-qE09zD6ylVP14jV4mjLIhDBOrpFdShHZcEsYvvKGABlr9mGbV7mTlRWdoFxL/EYSTNDiC9GZXy7y8Shgb9Dtzw==
@@ -11970,15 +11970,6 @@ Lockfile:
     dependencies:
       jsesc "~0.5.0"
   
-  rehype-stringify@^9.0.3:
-    version "9.0.3"
-    resolved "https://registry.yarnpkg.com/rehype-stringify/-/rehype-stringify-9.0.3.tgz#70e3bd6d4d29e7acf36b802deed350305d2c3c17"
-    integrity sha512-kWiZ1bgyWlgOxpqD5HnxShKAdXtb2IUljn3hQAhySeak6IOQPPt6DeGnsIh4ixm7yKJWzm8TXFuC/lPfcWHJqw==
-    dependencies:
-      "@types/hast" "^2.0.0"
-      hast-util-to-html "^8.0.0"
-      unified "^10.0.0"
-  
   remark-footnotes@2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/remark-footnotes/-/remark-footnotes-2.0.0.tgz#9001c4c2ffebba55695d2dd80ffb8b82f7e6303f"
@@ -12060,16 +12051,6 @@ Lockfile:
       unist-util-remove-position "^1.0.0"
       vfile-location "^2.0.0"
       xtend "^4.0.1"
-  
-  remark-rehype@^10.1.0:
-    version "10.1.0"
-    resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-10.1.0.tgz#32dc99d2034c27ecaf2e0150d22a6dcccd9a6279"
-    integrity sha512-EFmR5zppdBp0WQeDVZ/b66CWJipB2q2VLNFMabzDSGR66Z2fQii83G5gTBbgGEnEEA0QRussvrFHxk1HWGJskw==
-    dependencies:
-      "@types/hast" "^2.0.0"
-      "@types/mdast" "^3.0.0"
-      mdast-util-to-hast "^12.1.0"
-      unified "^10.0.0"
   
   remark-retext@^3.1.3:
     version "3.1.3"
@@ -13917,14 +13898,6 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-2.0.0.tgz#0a36cb9a585c4f6abd51ad1deddb285c165297c8"
     integrity sha512-5Zfuy9q/DFr4tfO7ZPeVXb1aPoeQSdeFMLpYuFebehDAhbuevLs5yxSZmIFN1tP5F9Wl4IpJrYojg85/zgyZHQ==
-  
-  unified-stream@^2.0.0:
-    version "2.0.0"
-    resolved "https://registry.yarnpkg.com/unified-stream/-/unified-stream-2.0.0.tgz#53172f26f6a478d1066114fb91b7cb1c96c9bb79"
-    integrity sha512-KdwODjgqGsTbHMLqm57qLxNAkbCboD5EMPC4BULs/9iy5ZTsw3xgc0BUjeCmABt/yfZt0k7rgkBLcdiZ8LwZug==
-    dependencies:
-      unified "^10.0.0"
-      vfile "^5.0.0"
   
   unified@9.2.0:
     version "9.2.0"
