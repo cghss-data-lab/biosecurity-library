@@ -8,6 +8,8 @@ import { navigate } from 'gatsby'
 import { getDetailURL } from 'utilities/urls'
 // import NavSearchResult from './NavSearchResult'
 
+import logoSVG from '../../../../static/Brandmark_wordmark.svg'
+
 const Nav = styled.nav`
   // background-color: ${({ theme }) => theme.colorBlack};
   /* background-color: #05213a; */
@@ -33,11 +35,13 @@ const LinkList = styled.ol`
 `
 const HomeLink = styled(NavLink)`
   font-family: 'Overpass', sans-serif !important;
-  font-family: 'Spectral' !important;
+  /* font-family: 'Spectral' !important; */
+  font-weight: 500 !important;
   font-size: 24px !important;
   color: white;
   padding: 0;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
 `
 
 const NavTypeahead = styled(Typeahead)`
@@ -64,8 +68,12 @@ const NavBar: React.FC = () => {
     <>
       <Nav>
         <Container>
-          <HomeLink style={{ fontWeight: 500 }} to="/">
-            Biosecurity Central
+          <HomeLink to="/">
+            <img
+              src={logoSVG}
+              height={'40px'}
+              alt={'Biosecurity Central Logo'}
+            />
           </HomeLink>
           <LinkList>
             <div
