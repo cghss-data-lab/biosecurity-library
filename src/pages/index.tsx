@@ -1,13 +1,13 @@
 import React from 'react'
-import FigmaProvider from '../figma/FigmaProvider'
+import FigmaProvider from 'figma/FigmaProvider'
 
-import ImageHeader from '../components/layout/ImageHeader'
-import NavBar from '../components/layout/NavBar/NavBar'
-import IntroSection from '../components/homepage/IntroSection'
-import useHomePageData from '../airtableQueryHooks/useHomePageData'
-import ResourceSearch from '../components/homepage/ResourceSearch'
-import CarouselSection from '../components/homepage/CarouselSection/CarouselSection'
-import BarChart from '../components/homepage/barChart/BarChart'
+import ImageHeader from 'components/layout/ImageHeader'
+import NavBar from 'components/layout/NavBar/NavBar'
+import IntroSection from 'components/homepage/IntroSection'
+import useHomePageData from 'airtableQueryHooks/useHomePageData'
+import ResourceSearch from 'components/homepage/ResourceSearch'
+import CarouselSection from 'components/homepage/CarouselSection/CarouselSection'
+import BarChart from 'components/homepage/barChart/BarChart'
 import Footer from 'components/layout/Footer'
 
 const IndexPage = (): JSX.Element => {
