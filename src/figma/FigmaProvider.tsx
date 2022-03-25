@@ -6,7 +6,9 @@ import { semanticStyles } from './semanticStyles.module.scss'
 import './fonts.css'
 
 import CMS from '@talus-analytics/library.airtable-cms'
-import useCMSIconsQuery from '../airtableQueryHooks/useIconsQuery'
+import useCMSIconsQuery from 'airtableQueryHooks/useIconsQuery'
+import useSiteMetadataQuery from 'airtableQueryHooks/useSiteMetadataQuery'
+import getTrackingId from 'utilities/trackingId'
 
 // inline webpack require because it's easier that way in gatsby
 // eslint-disable-next-line import/no-webpack-loader-syntax
@@ -15,10 +17,16 @@ const figmaStyles = require('sass-extract-loader?{"plugins":["sass-extract-js"]}
 const FigmaProvider: React.FC = ({ children }) => {
   const icons = useCMSIconsQuery()
 
+  const siteMetadata = useSiteMetadataQuery()
+  // get GA tracking ID
+  const trackingId = getTrackingId()
+
   return (
     <ThemeProvider theme={figmaStyles}>
       <CMS.IconProvider data={icons}>
-        <div className={semanticStyles}>{children}</div>
+        <CMS.SiteMetadataProvider data={siteMetadata} trackingId={trackingId}>
+          <div className={semanticStyles}>{children}</div>
+        </CMS.SiteMetadataProvider>
       </CMS.IconProvider>
     </ThemeProvider>
   )

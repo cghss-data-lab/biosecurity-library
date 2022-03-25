@@ -1,4 +1,3 @@
-// @ts-nocheck
 module.exports = {
   siteMetadata: {
     siteUrl: 'https://biosecurity-library.talusanalytics.com/',
@@ -80,6 +79,12 @@ module.exports = {
             tableName: `Icons`,
             tableView: `CMS`,
             mapping: { SVG: `fileNode` },
+          },
+          {
+            baseId: `appmL0p5H21CiY7tL`,
+            tableName: `Site metadata`,
+            tableView: `CMS`,
+            mapping: { Image: `fileNode` },
           },
         ],
       },
