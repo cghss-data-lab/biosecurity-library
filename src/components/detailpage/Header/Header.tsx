@@ -22,7 +22,7 @@ const Author = styled.div`
   font-size: 26px;
   line-height: 32px;
   margin-bottom: 20px;
-  color: ${({ theme }) => theme.colorDarkGray};
+  color: ${({ theme }) => theme.colorVeryDarkGray};
 `
 
 const ShortName = styled.h6`

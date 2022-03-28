@@ -43,7 +43,7 @@ const Title = styled(Link)`
 const Author = styled.h6`
   grid-area: author;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  color: ${({ theme }) => theme.colorDarkGray} !important;
+  color: ${({ theme }) => theme.colorVeryDarkGray} !important;
   margin: 0px !important;
 `
 const IconContainer = styled.div`
