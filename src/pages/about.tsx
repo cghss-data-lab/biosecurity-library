@@ -64,7 +64,7 @@ const About = (): JSX.Element => {
   return (
     <FigmaProvider>
       <NavBar />
-
+      <CMS.SEO title={'About'} />
       <AboutMain>
         <Header>
           <h1>
