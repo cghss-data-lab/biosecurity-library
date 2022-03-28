@@ -14,6 +14,7 @@ import Header from '../components/detailpage/Header/Header'
 import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
 import TabSection from '../components/detailpage/TabSection/TabSection'
 import Footer from 'components/layout/Footer'
+import CMS from 'AirtableCMS'
 
 /**
  * Resource Airtable fields that link to other records
@@ -105,6 +106,7 @@ const Detail: React.FC<{ pageContext: PageContext }> = ({
   pageContext: { data },
 }) => (
   <FigmaProvider>
+    <CMS.SEO title={data.Resource_name} description={data.Short_description} />
     <NavBar />
     <Main>
       {/*<Breadcrumbs {...{ data }} />*/}
