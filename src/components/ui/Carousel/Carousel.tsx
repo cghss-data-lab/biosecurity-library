@@ -149,6 +149,7 @@ const Carousel = ({
           </div>
         </Page>
         <PrevButton
+          aria-label="Previous"
           color={buttonColor}
           disabledColor={disabledButtonColor}
           disabled={state.activeIndex === 0}
@@ -157,6 +158,7 @@ const Carousel = ({
           }
         />
         <NextButton
+          aria-label="Next"
           color={buttonColor}
           disabledColor={disabledButtonColor}
           disabled={state.activeIndex === pages.length - 1}

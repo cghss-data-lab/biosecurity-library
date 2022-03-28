@@ -88,7 +88,7 @@ const Author = styled.div`
   font-size: 22px;
   line-height: 27px;
   margin-bottom: 20px;
-  color: ${({ theme }) => theme.colorDarkGray};
+  color: ${({ theme }) => theme.colorVeryDarkGray};
 `
 const Description = styled.p`
   font-size: 18px;

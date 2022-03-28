@@ -74,6 +74,7 @@ const CarouselDots = ({
   <ButtonContainer>
     {pages.map((_, index) => (
       <PageButton
+        aria-label={`Carousel page ${index + 1}`}
         key={index}
         active={index === activeIndex}
         onClick={e => onClick(e, index)}
