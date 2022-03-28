@@ -14,7 +14,7 @@ const StyledLink = styled(Link)`
     // background-color: ${({ theme }) => theme.colorVeryDarkGray};
     transition: 150ms ease;
     text-decoration: none !important;
-    color: ${({ theme }) => theme.colorGolden} !important;
+    color: ${({ theme }) => theme.colorYellow} !important;
   }
 `
 const defaultActiveStyle = {
