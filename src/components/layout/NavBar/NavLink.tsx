@@ -2,6 +2,10 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
 
+const Li = styled.li`
+  display: flex;
+`
+
 const StyledLink = styled(Link)`
   color: white !important;
   padding: 14px;
@@ -29,14 +33,16 @@ interface Props {
 }
 
 const NavLink = ({ to, activeStyle, className, ...props }: Props) => (
-  <StyledLink
-    {...{ props }}
-    to={to}
-    activeStyle={activeStyle || defaultActiveStyle}
-    className={className}
-  >
-    {props.children}
-  </StyledLink>
+  <Li>
+    <StyledLink
+      {...{ props }}
+      to={to}
+      activeStyle={activeStyle || defaultActiveStyle}
+      className={className}
+    >
+      {props.children}
+    </StyledLink>
+  </Li>
 )
 
 export default NavLink
