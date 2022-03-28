@@ -96,6 +96,7 @@ const ExplorePage = (): JSX.Element => {
 
   return (
     <FigmaProvider>
+      <CMS.SEO title={'Explore'} />
       <NavBar />
       <ImageHeader cmsData={explorePageText} />
       <Main>
