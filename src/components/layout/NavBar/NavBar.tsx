@@ -95,7 +95,7 @@ const NavBar: React.FC = () => {
                 iconLeft
                 fontColor={focusInSearch ? 'black' : 'white'}
                 // borderColor="#5B6476"
-                borderColor={theme.colorGolden}
+                borderColor={theme.colorYellow}
                 backgroundColor={focusInSearch ? 'white' : '#082E51'}
                 items={resources}
                 placeholder={`Search`}
