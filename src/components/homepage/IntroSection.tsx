@@ -29,6 +29,9 @@ const IntroParagraph = styled.div`
     }
     &:last-of-type {
       padding-bottom: 40px;
+      @media (max-width: 500px) {
+        padding-bottom: 20px;
+      }
     }
   }
   a {
