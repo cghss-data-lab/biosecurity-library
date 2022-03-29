@@ -122,7 +122,12 @@ const SEO = ({
       {seo.description && (
         <meta name="twitter:description" content={seo.description} />
       )}
-      {seo.image && <meta name="twitter:image" content={seo.image} />}
+      {seo.image && (
+        <meta
+          name="twitter:image"
+          content={(defaults.siteUrl || '') + seo.image}
+        />
+      )}
     </Helmet>
   )
 }
