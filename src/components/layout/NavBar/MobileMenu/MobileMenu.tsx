@@ -1,6 +1,6 @@
 import Dropdown from 'components/ui/Dropdown'
 import React from 'react'
-import styled, { useTheme } from 'styled-components'
+import styled from 'styled-components'
 import HamburgerButton from '../HamburgerButton/HamburgerButton'
 
 const MenuContainer = styled.div`
