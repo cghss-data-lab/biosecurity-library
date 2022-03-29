@@ -32,6 +32,9 @@ const IntroParagraph = styled.div`
       padding-bottom: 40px;
     }
   }
+  a {
+    font-size: inherit !important;
+  }
 `
 
 const IntroSection = (): JSX.Element => {
