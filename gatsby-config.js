@@ -102,6 +102,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-plausible`,
+      options: {
+        domain: `biosecuritycentral.org`,
+      },
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'pages',
