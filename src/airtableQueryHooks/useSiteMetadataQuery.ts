@@ -17,7 +17,7 @@ const useSiteMetadataQuery = () => {
               Image {
                 localFiles {
                   childImageSharp {
-                    gatsbyImageData(height: 500, placeholder: BLURRED)
+                    gatsbyImageData(height: 630, placeholder: BLURRED)
                   }
                 }
               }
