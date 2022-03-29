@@ -20,8 +20,8 @@ const IndexPage = (): JSX.Element => {
       <ImageHeader cmsData={homePageText} />
       <IntroSection />
       <ResourceSearch />
-      <CarouselSection />
-      <BarChart />
+      {/* <CarouselSection /> */}
+      {/* <BarChart /> */}
       <Footer />
     </FigmaProvider>
   )

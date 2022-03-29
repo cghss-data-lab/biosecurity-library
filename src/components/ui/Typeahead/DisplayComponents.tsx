@@ -39,6 +39,8 @@ export const SearchBar = styled.input<{ iconLeft: boolean; fontColor: string }>`
   border: none;
   width: 100%;
   border-radius: 5px;
+  appearance: none;
+  margin: 0;
 
   padding: ${({ iconLeft }) =>
     iconLeft ? `12px 15px 12px 36px` : `12px 15px 12px 15px`};
