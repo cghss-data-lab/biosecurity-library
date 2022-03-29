@@ -34,6 +34,7 @@ export interface DropdownProps
    */
   expanderStyle?: React.CSSProperties
   animDuration?: number
+  debugOpen?: boolean
 }
 
 const Dropdown = ({
@@ -44,6 +45,7 @@ const Dropdown = ({
   hover = false,
   animDuration = 250,
   expanderStyle = {},
+  debugOpen,
   ...props
 }: DropdownProps) => {
   const [open, setOpen] = useState<boolean | undefined>(undefined)
@@ -133,6 +135,7 @@ const Dropdown = ({
         floating
         style={expanderStyle}
         {...{ open, animDuration }}
+        {...(debugOpen ? { open: true } : {})}
       >
         <InteractionTarget {...hoverHandlers} tabIndex={-1}>
           {children}
