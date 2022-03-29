@@ -116,7 +116,9 @@ const SEO = ({
       {defaults.twitterUsername && (
         <meta name="twitter:creator" content={defaults.twitterUsername} />
       )}
-      {seo.title && <meta name="twitter:title" content={seo.title} />}
+      {(seo.title || defaults.title) && (
+        <meta name="twitter:title" content={seo.title || defaults.title} />
+      )}
       {seo.description && (
         <meta name="twitter:description" content={seo.description} />
       )}
