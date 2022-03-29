@@ -32,10 +32,10 @@ export default function HTML(props) {
           href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
         />
         {props.headComponents}
-        <script
+        {/* <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
-        ></script>
+        ></script> */}
         <script
           dangerouslySetInnerHTML={{
             __html: ` 
