@@ -23,6 +23,15 @@ const TabContentContainer = styled.section`
       word-break: break-all;
     }
   }
+
+  @media (max-width: 1000px) {
+    border: 1px solid #05396933;
+    border-top: none;
+  }
+
+  @media (max-width: 700px) {
+    padding: 10px;
+  }
 `
 
 export default TabContentContainer

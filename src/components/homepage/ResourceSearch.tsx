@@ -16,10 +16,21 @@ const SearchControls = styled.div`
   align-items: baseline;
   max-width: 900px;
   margin: 0 auto;
+
+  @media (max-width: 500px) {
+    flex-direction: column-reverse;
+    gap: 15px;
+    padding: 10px;
+  }
 `
 const SearchBoxContainer = styled.div`
   margin-left: 40px;
   flex-grow: 1;
+
+  @media (max-width: 500px) {
+    margin-left: 0;
+    width: 100%;
+  }
 `
 const StyledTypeaheadControl = styled(Typeahead)`
   margin-top: 0 !important;

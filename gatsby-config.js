@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://biosecurity-library.talusanalytics.com/',
+    siteUrl: 'https://biosecuritycentral.org',
     title: 'Talus Analytics',
     cookieConsent: {
       cookieMessage:

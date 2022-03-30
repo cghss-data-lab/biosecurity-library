@@ -30,6 +30,10 @@ const KeyResourceLegend = styled.div`
   font-size: 16px;
   line-height: 22px;
   color: ${({ theme }) => theme.colorBlack};
+
+  @media (max-width: 500px) {
+    padding: 0px 15px;
+  }
 `
 const CarouselBackground = styled.div`
   background-color: ${({ theme }) => theme.colorLightest};
@@ -53,6 +57,12 @@ const Card = styled.div`
   /* min-height: 500px; */
   min-height: 442px;
   border-radius: 3px;
+
+  @media (max-width: 900px) {
+    padding: 25px 10px;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 const KeyResourceFlag = styled(CMS.Icon)`
   position: absolute;
@@ -60,12 +70,17 @@ const KeyResourceFlag = styled(CMS.Icon)`
   left: 15px;
   height: 60px;
   width: 60px;
+  z-index: 2;
 `
 const TextContent = styled.div`
   margin-left: 30px;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: normal;
+  @media (max-width: 900px) {
+    margin-left: 0;
+    margin-top: 25px;
+  }
 `
 const Title = styled.a`
   display: block;
@@ -75,6 +90,13 @@ const Title = styled.a`
   color: ${({ theme }) => theme.colorDarker} !important;
   margin-bottom: 5px !important;
   /* margin-top: 35px !important; */
+  @media (max-width: 900px) {
+    h3 {
+      font-size: 24px !important;
+      line-height: 1.2 !important;
+      padding-bottom: 5px;
+    }
+  }
 `
 // const ShortName = styled.div`
 //   font-weight: 500;
@@ -89,11 +111,19 @@ const Author = styled.div`
   line-height: 27px;
   margin-bottom: 20px;
   color: ${({ theme }) => theme.colorVeryDarkGray};
+
+  @media (max-width: 900px) {
+    font-size: 18px;
+  }
 `
 const Description = styled.p`
   font-size: 18px;
   line-height: 28px;
   margin-bottom: 20px !important;
+  @media (max-width: 900px) {
+    font-size: 15px !important;
+    line-height: 24px !important;
+  }
 `
 const KeyTopicArea = styled.div`
   display: flex;

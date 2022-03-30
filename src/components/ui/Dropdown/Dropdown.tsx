@@ -34,6 +34,8 @@ export interface DropdownProps
    */
   expanderStyle?: React.CSSProperties
   animDuration?: number
+  debugOpen?: boolean
+  floating?: boolean
 }
 
 const Dropdown = ({
@@ -42,8 +44,10 @@ const Dropdown = ({
   onOpen,
   onClose,
   hover = false,
+  floating = true,
   animDuration = 250,
   expanderStyle = {},
+  debugOpen,
   ...props
 }: DropdownProps) => {
   const [open, setOpen] = useState<boolean | undefined>(undefined)
@@ -130,9 +134,10 @@ const Dropdown = ({
       {buttonWithProps}
       <Expander
         {...props}
-        floating
+        floating={floating}
         style={expanderStyle}
         {...{ open, animDuration }}
+        {...(debugOpen ? { open: true } : {})}
       >
         <InteractionTarget {...hoverHandlers} tabIndex={-1}>
           {children}

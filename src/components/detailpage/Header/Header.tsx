@@ -10,6 +10,13 @@ const HeaderContainer = styled.header`
   grid-area: header;
   padding-left: 50px;
   margin-top: 20px;
+
+  @media (max-width: 1000px) {
+    padding-right: 50px;
+  }
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `
 const IconContainer = styled.div`
   display: flex;
@@ -36,6 +43,8 @@ const ShortName = styled.h6`
 const TagHolder = styled.div`
   display: flex;
   margin-top: 35px;
+  flex-wrap: wrap;
+  gap: 15px;
 `
 
 const Header: React.FC<PageContext> = ({ data }) => {
@@ -51,7 +60,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
       <p>{data.Short_description}</p>
       <TagHolder>
         {data.Seminal_resource === 'Yes' && (
-          <IconTag dark name={'Key resource'} style={{ marginRight: '1em' }} />
+          <IconTag dark name={'Key resource'} style={{ marginRight: '0em' }} />
         )}
         <Link
           to={`/explore?${qs.stringify({
@@ -61,7 +70,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
           <IconTag
             dark
             name={data.Resource_type}
-            style={{ marginRight: '1em' }}
+            // style={{ marginRight: '1em' }}
           />
         </Link>
         {data.Access_limitations[0] === 'Restricted' && (
