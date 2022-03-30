@@ -12,7 +12,11 @@ const Header = styled.header`
   text-align: center;
 `
 const AboutMain = styled.section`
-  max-width: 900px;
+  max-width: 1000px;
+  padding: 0 50px;
+  @media (max-width: 700px) {
+    padding: 0px 10px;
+  }
   margin: 0 auto;
   margin-bottom: 3em;
   color: ${({ theme }) => theme.colorBlack};
@@ -28,6 +32,11 @@ const ImageHolder = styled.div`
   justify-content: flex-start;
   gap: 50px;
   margin-top: 30px;
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+    padding: 0px 30px;
+    justify-content: center;
+  }
 `
 const ButtonLink = styled(CMS.Download)`
   display: block;
