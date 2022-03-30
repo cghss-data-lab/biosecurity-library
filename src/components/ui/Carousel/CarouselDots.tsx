@@ -6,6 +6,10 @@ const ButtonContainer = styled.div`
   align-items: center;
   justify-content: flex-end;
   margin-bottom: 15px;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `
 const PageButton = styled.button<{
   active: boolean
@@ -18,6 +22,7 @@ const PageButton = styled.button<{
   background: none;
   width: 15px;
   height: 15px;
+  flex-shrink: 0;
   background-color: ${({ inactiveDotColor }) => inactiveDotColor};
   border-radius: 50%;
   margin-right: 25px;

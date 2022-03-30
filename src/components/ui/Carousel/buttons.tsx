@@ -14,9 +14,9 @@ const Button = styled.button<{ color: string; disabledColor: string }>`
   background: none;
   border: none;
   width: 20px;
-  height: 50px;
+  height: 100%;
   position: absolute;
-  top: calc(50% - 25px);
+  top: 0;
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
