@@ -5,7 +5,13 @@ const Button = styled.button<{ open: boolean }>`
   width: 30px;
   height: 25px;
   position: relative;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
   transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   cursor: pointer;
   border: none;
@@ -21,6 +27,9 @@ const Button = styled.button<{ open: boolean }>`
     border-radius: 2px;
     opacity: 1;
     left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
     transform: rotate(0deg);
     transition: 0.25s ease-in-out;
   }
@@ -42,21 +51,27 @@ const Button = styled.button<{ open: boolean }>`
     open &&
     `
       span:nth-child(1) {
-        top: 18px;
+        top: calc(50% - 2px);
         width: 0%;
         left: 50%;
       }
 
       span:nth-child(2) {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
         transform: rotate(45deg);
       }
 
       span:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
         transform: rotate(-45deg);
       }
 
       span:nth-child(4) {
-        top: 18px;
+        top: calc(50% - 2px);
         width: 0%;
         left: 50%;
       }

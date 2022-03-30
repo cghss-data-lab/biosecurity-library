@@ -10,6 +10,7 @@ import Bar from './Bar'
 
 const Content = styled(Main)`
   padding: 0 65px;
+  min-width: 900px;
 `
 const Section = styled.section`
   padding: 35px 35px;
@@ -18,6 +19,7 @@ const Section = styled.section`
   align-items: center;
   margin-bottom: 65px;
   background: ${({ theme }) => theme.colorDarkest};
+  /* overflow-x: scroll; */
 `
 const Instruction = styled.div`
   margin-top: 18px;
