@@ -18,6 +18,21 @@ const DefinitionsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 20px;
+
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 700px) {
+    /* grid-template-columns: repeat(2, 1fr); */
+    display: none;
+  }
+  /* @media (max-width: 400px) {
+    grid-template-columns: repeat(1, 1fr);
+  } */
 `
 const DefinitionButton = styled.button<{ active: boolean | undefined }>`
   border: none;

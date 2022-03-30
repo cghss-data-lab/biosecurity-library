@@ -8,7 +8,11 @@ import { removeAllFilters, removeFilter } from './filterOperations'
 const Section = styled.section`
   display: flex;
   align-items: flex-start;
-  margin-top: 30px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    gap: 15px;
+  }
 `
 const FilterContainer = styled.div`
   display: flex;
@@ -17,6 +21,7 @@ const FilterContainer = styled.div`
 `
 const ClearFilters = styled.button`
   background: none;
+  color: inherit;
   border: none;
   border: 1px solid ${({ theme }) => theme.colorBlack};
   padding: 0.5em 1em;
@@ -30,12 +35,6 @@ const ClearFilters = styled.button`
     box-shadow: 2px 2px 12px 0px rgba(0, 0, 0, 0.25);
     background: ${({ theme }) => theme.colorYellow};
   }
-`
-const MoreFilters = styled(ClearFilters)<{
-  open: boolean
-}>`
-  margin-left: 0.5em;
-  ${({ theme, open }) => open && `background: ${theme.colorGolden}`}
 `
 
 const ActiveFilters: React.FC<FilterProps> = ({
@@ -58,22 +57,11 @@ const ActiveFilters: React.FC<FilterProps> = ({
           ))
         )}
     </FilterContainer>
-    <ClearFilters onClick={() => removeAllFilters(setExploreState)}>
-      Clear filters
-    </ClearFilters>
-    <MoreFilters
-      open={Boolean(exploreState.moreFilters)}
-      onClick={() =>
-        setExploreState(prev => {
-          if (!prev.moreFilters) return { ...prev, moreFilters: 'true' }
-          const { moreFilters, ...next } = prev
-          console.log({ next })
-          return { ...next }
-        })
-      }
-    >
-      + More filters
-    </MoreFilters>
+    {exploreState.filters && Object.keys(exploreState.filters).length > 0 && (
+      <ClearFilters onClick={() => removeAllFilters(setExploreState)}>
+        Clear filters
+      </ClearFilters>
+    )}
   </Section>
 )
 
