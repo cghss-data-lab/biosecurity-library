@@ -8,16 +8,18 @@ import Main from '../../layout/Main'
 
 import Bar from './Bar'
 
-const Content = styled(Main)`
-  padding: 0 65px;
-`
+const Content = styled(Main)``
 const Section = styled.section`
   padding: 35px 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 65px;
+  /* margin-bottom: 65px; */
   background: ${({ theme }) => theme.colorDarkest};
+
+  @media (max-width: 800px) {
+    padding: 10px;
+  }
 `
 const Instruction = styled.div`
   margin-top: 18px;
@@ -39,6 +41,29 @@ const Svg = styled.svg`
   width: 100%;
   overflow: visible;
   padding-bottom: 12vw;
+`
+const ChartScroller = styled.div`
+  max-width: 100%;
+  overflow-x: scroll;
+`
+const ChartHolder = styled.div`
+  min-width: 1100px;
+  padding: 65px 65px 80px 65px;
+`
+const SwipeInstruction = styled.div`
+  font-style: italic;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: ${({ theme }) => theme.colorBlack};
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  padding-top: 8px;
+
+  @media (min-width: 1200px) {
+    display: none;
+  }
 `
 
 export interface DimObj {
@@ -77,11 +102,18 @@ const BarChart = (): JSX.Element => {
         <Instruction>
           <CMS.RichText name="Third header subtext" data={homePageText} />
         </Instruction>
-        <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
-          {sortedBars.map((bar, index) => (
-            <Bar key={index} {...{ index, bar, dim }} />
-          ))}
-        </Svg>
+        <SwipeInstruction>
+          Swipe sideways to view more categories.
+        </SwipeInstruction>
+        <ChartScroller>
+          <ChartHolder>
+            <Svg viewBox={`0 0 ${dim.width} ${dim.height}`}>
+              {sortedBars.map((bar, index) => (
+                <Bar key={index} {...{ index, bar, dim }} />
+              ))}
+            </Svg>
+          </ChartHolder>
+        </ChartScroller>
       </Content>
     </Section>
   )

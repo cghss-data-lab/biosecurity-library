@@ -15,6 +15,8 @@ import Thumbnail from '../components/detailpage/Thumbnail/Thumbnail'
 import TabSection from '../components/detailpage/TabSection/TabSection'
 import Footer from 'components/layout/Footer'
 import CMS from 'AirtableCMS'
+import { useMediaQuery } from 'react-responsive'
+import MobileDetailLayout from 'components/detailpage/MobileDetailLayout/MobileDetailLayout'
 
 /**
  * Resource Airtable fields that link to other records
@@ -104,20 +106,30 @@ export interface PageContext {
 
 const Detail: React.FC<{ pageContext: PageContext }> = ({
   pageContext: { data },
-}) => (
-  <FigmaProvider>
-    <CMS.SEO title={data.Resource_name} description={data.Short_description} />
-    <NavBar />
-    <Main>
-      {/*<Breadcrumbs {...{ data }} />*/}
-      <Grid>
-        <Thumbnail {...{ data }} />
-        <Header {...{ data }} />
-        <TabSection {...{ data }} />
-      </Grid>
-    </Main>
-    <Footer />
-  </FigmaProvider>
-)
+}) => {
+  const mobileLayout = useMediaQuery({ query: '(max-width: 1000px)' })
+
+  return (
+    <FigmaProvider>
+      <CMS.SEO
+        title={data.Resource_name}
+        description={data.Short_description}
+      />
+      <NavBar />
+      <Main>
+        {/*<Breadcrumbs {...{ data }} />*/}
+        {!mobileLayout && (
+          <Grid>
+            <Thumbnail {...{ data }} />
+            <Header {...{ data }} />
+            <TabSection {...{ data }} />
+          </Grid>
+        )}
+        {mobileLayout && <MobileDetailLayout {...{ data }} />}
+      </Main>
+      <Footer />
+    </FigmaProvider>
+  )
+}
 
 export default Detail

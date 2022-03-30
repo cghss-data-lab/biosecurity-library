@@ -28,8 +28,18 @@ const Button = styled.button<{ open: boolean }>`
     background-color: ${({ theme }) => theme.colorYellow};
   }
 
-  ${({ theme, open }) => open && `background-color: ${theme.colorGolden}`}
+  ${({ theme, open }) => open && `background-color: ${theme.colorGolden};`}
+
+  @media(max-width: 700px) {
+    display: none;
+  }
 `
+
+// const CollapseIcon = styled(CMS.Icon)`
+//   @media (max-width: 700px) {
+//     display: none;
+//   }
+// `
 
 const ExpandDefinitionsButton: React.FC<ButtonProps> = ({
   name,

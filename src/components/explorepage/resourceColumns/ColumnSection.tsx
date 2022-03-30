@@ -9,6 +9,8 @@ import useExplorePageData, {
 } from 'airtableQueryHooks/useExplorePageData'
 import Tippy from '@tippyjs/react'
 import CMS from 'AirtableCMS'
+import { useMediaQuery } from 'react-responsive'
+import MobileColumns from './MobileColumns/MobileColumns'
 
 const ColumnsContainer = styled.section`
   display: flex;
@@ -64,6 +66,8 @@ const ColumnSection: React.FC<ColumnSectionProps> = ({
   const { explorePageText } = useExplorePageData()
   const theme: any = useTheme()
 
+  const mobileLayout = useMediaQuery({ query: '(max-width: 1200px)' })
+
   return (
     <>
       <ResourceCount>
@@ -73,15 +77,17 @@ const ColumnSection: React.FC<ColumnSectionProps> = ({
         </Tippy>
       </ResourceCount>
       <ColumnsContainer>
-        {displayResources.map(group => (
-          <Column
-            key={group.fieldValue}
-            name={group.fieldValue}
-            resources={group}
-            expand={group.fieldValue === exploreState.type}
-            setExpandColumn={handleExpandColumn}
-          />
-        ))}
+        {!mobileLayout &&
+          displayResources.map(group => (
+            <Column
+              key={group.fieldValue}
+              name={group.fieldValue}
+              resources={group}
+              expand={group.fieldValue === exploreState.type}
+              setExpandColumn={handleExpandColumn}
+            />
+          ))}
+        {mobileLayout && <MobileColumns resourceGroups={displayResources} />}
       </ColumnsContainer>
     </>
   )
