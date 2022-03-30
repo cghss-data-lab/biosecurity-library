@@ -98,7 +98,9 @@ const SEO = ({
     >
       {/* Default meta tags */}
       <meta name="description" content={seo.description} />
-      {seo.image && <meta name="image" content={seo.image} />}
+      {seo.image && (
+        <meta name="image" content={(defaults.siteUrl || '') + seo.image} />
+      )}
 
       {/* Open Graph */}
       {seo.url && <meta property="og:url" content={seo.url} />}
@@ -109,7 +111,12 @@ const SEO = ({
       {seo.description && (
         <meta property="og:description" content={seo.description} />
       )}
-      {seo.image && <meta property="og:image" content={seo.image} />}
+      {seo.image && (
+        <meta
+          property="og:image"
+          content={(defaults.siteUrl || '') + seo.image}
+        />
+      )}
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
