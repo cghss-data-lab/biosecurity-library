@@ -62,7 +62,7 @@ const BarPopup = ({ barName }: BarPopupProps): JSX.Element => {
         <CMS.Icon
           name={barName}
           color={theme.colorGolden}
-          style={{ height: 40, marginRight: 10 }}
+          style={{ height: 40, width: 40, marginRight: 10 }}
         />
         {barName}
       </Header>
