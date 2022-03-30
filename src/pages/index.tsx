@@ -21,7 +21,7 @@ const IndexPage = (): JSX.Element => {
       <IntroSection />
       <ResourceSearch />
       <CarouselSection />
-      {/* <BarChart /> */}
+      <BarChart />
       <Footer />
     </FigmaProvider>
   )
