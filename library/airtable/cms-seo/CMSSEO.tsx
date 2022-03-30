@@ -125,7 +125,7 @@ const SEO = ({
       {seo.image && (
         <meta
           name="twitter:image"
-          content={(defaults.siteUrl || '') + seo.image}
+          content={'https://review-biosecurity.talusanalytics.com' + seo.image}
         />
       )}
     </Helmet>
