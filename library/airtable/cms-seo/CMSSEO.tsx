@@ -125,7 +125,7 @@ const SEO = ({
       {seo.image && (
         <meta
           name="twitter:image"
-          content={'https://biosecuritycentral.org/' + seo.image}
+          content={'https://biosecuritycentral.org' + seo.image}
         />
       )}
     </Helmet>
