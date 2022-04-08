@@ -107,14 +107,17 @@ const Dropdown = ({
   // if hover is true, only allow onClick events from the keyboard
   // (detected because the clientX and clientY are zero) and use
   // onMouseEnter and onMouseLeave to open / close the dropdown
-  if (hover && !touchScreen) {
+  if (hover) {
     mouseHandlers = {
       onClick: e => {
+        if (touchScreen) setOpen(prev => !prev)
         if (e.clientX === 0 && e.clientY === 0) setOpen(prev => !prev)
       },
     }
     hoverHandlers = {
-      onMouseEnter: () => setOpen(true),
+      onMouseEnter: () => {
+        if (!touchScreen) setOpen(true)
+      },
       onMouseLeave: () => setOpen(false),
     }
   }
