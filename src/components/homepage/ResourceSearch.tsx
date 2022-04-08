@@ -80,7 +80,7 @@ const ResourceSearch = (): JSX.Element => {
 
   return (
     <SearchControls>
-      <ButtonLink to="/explore">
+      <ButtonLink to="/explore/">
         <CMS.Text name={'Button Text'} data={homePageText} />
       </ButtonLink>
       <SearchBoxContainer>

@@ -25,19 +25,26 @@ const ResourceList = styled.ul`
   gap: 1em;
   grid-template-columns: 1fr 1fr;
   padding: 0;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
 `
 const ResourceListItem = styled.li``
 const ResourceLink = styled(Link)`
   display: flex;
-  align-items: flex-start;
-  width: max-content;
+  /* align-items: flex-start; */
+  /* align-items: center; */
+  /* width: max-content; */
   svg {
     width: unset;
   }
   span {
     font-size: 1rem;
-    line-height: 30px;
+    line-height: 20px;
+    padding-top: 0.35em;
   }
+  padding-bottom: 10px;
 `
 
 export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
