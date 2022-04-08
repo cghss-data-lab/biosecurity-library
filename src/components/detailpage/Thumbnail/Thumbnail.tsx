@@ -8,8 +8,14 @@ import LanguageList from './LanguageList'
 
 const ThumbnailContainer = styled.div`
   grid-area: thumbnail;
-  padding: 30px 15px 15px 0;
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 1000px) {
+    display: block;
+    padding: 30px 15px 15px 0;
+    margin-top: 20px;
+  }
 `
 
 const ThumbnailShadow = styled(GatsbyImage)`
@@ -145,6 +151,7 @@ const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
             alt={data.Short_name + 'thumbnail image'}
             style={{
               boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.24)',
+              margin: 'auto',
             }}
           />
         )}
