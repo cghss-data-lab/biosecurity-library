@@ -14,6 +14,12 @@ Instructions for setting up and starting the local develop server for Biosecurit
 
 ### Installation checklist
 
+1. Clone this repository to your local GitHub directory.
+
+   ```bash
+   git clone https://github.com/talus-analytics-bus/biosecurity-library.git
+   ```
+
 1. In your GitHub directory, install the Talus fork of the `gatsby-source-airtable` plugin.
 
    ```bash
