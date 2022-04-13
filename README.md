@@ -1,61 +1,67 @@
-<h1 align="center">
-  Talus-Gatsby-Starter
-</h1>
+# Biosecurity Central (https://www.biosecuritycentral.org)
 
-## 🚀 Quick start
+Biosecurity Central is a publicly available web-based library that helps users find relevant and reliable sources of information for key areas of biosecurity.
 
-1.  **Clone This Starter.**
+## Getting started
 
-    And pull it before using it!
+Instructions for setting up and starting the local develop server for Biosecurity Central follow.
 
-2.  **Build AWS Stack & Update CCI config**
+### What you need
 
-    Use the `build-stack` repo to set up all AWS resources for this project:
+1. Your Airtable API key, obtained from https://airtable.com/account
+1. Read access to the `Biosecurity Library (workspace)` Airtable base here: https://airtable.com/app708Ctx0rz1c1n7
+1. `git` command line interface (CLI) installation
 
-    ```shell
-    aws cloudformation deploy --stack-name [project-name] --template-file build-stack.yaml --capabilities CAPABILITY_NAMED_IAM
-    ```
+### Installation checklist
 
-    The "Outputs" tab of the CloudFormation stack will contain the distribution IDs which should be used in `/.circleci/config.yml`.
+1. In your GitHub directory, install the Talus fork of the `gatsby-source-airtable` plugin.
 
-3.  **Check Gatsby CLI configuration**
+   ```bash
+   git clone https://github.com/ryan-talus/gatsby-source-airtable.git
+   ```
 
-    To be compatible with our CCI build scripts, Gatsby CLI should use `yarn`:
+1. Enter the cloned directory, install Node packages, and link the package.
 
-    `~/.config/gatsby/config.json` should include:
+   ```bash
+   $ cd gatsby-source-airtable
+   $ yarn
+   $ yarn link
+   ```
 
-    ```json
-    "cli": {
-      "packageManager": "yarn"
-    }
-    ```
+1. Return to this repo's directory and install Node packages.
 
-4.  **Create a Gatsby site.**
+   ```bash
+   $ cd ../biosecurity-library
+   $ yarn
+   ```
 
-    Use the Gatsby CLI to create a new site, specifying this local starter.
+1. Configure `@talus-analytics` on bit.dev as a Scoped Registry to allow installing bit.dev packages from `@talus-analytics`.
 
-    ```shell
-    # create a new Gatsby site using the talus starter
-    gatsby new [project-name] ./talus-gatsby-starter
-    ```
+   ```bash
+   $ npm config set '@talus-analytics:registry' https://node.bit.dev
+   ```
 
-5.  **Set AIRTABLE_API_KEY env var**
+1. Install bit.dev packages, i.e., Talus reusable and extendable components.
 
-    The easiest way to do this locally is in a script in the `sh/` directory, which is included in the starter but all contents are gitignored.
+   ```bash
+   $ bit install
+   ```
 
-    ```shell
-    export AIRTABLE_API_KEY=keyXXXXXXXXXXXXXX;
-    gatsby develop;
-    ```
+1. Link the Talus fork of `gatsby-source-airtable` that you installed above to this project.
 
-6.  **Set up Git**
+   ```bash
+   $ yarn link "gatsby-source-airtable"
+   ```
 
-    Execute the included `setup-repo.sh` script to initialize a git repo with the continuous integration and deployment branches configured to match the CCI config.
+1. Create a start script for yourself at `sh/start.sh` with the below content, replacing `xxxxxx` with your Airtable API key. **Important: Never commit API keys to version control or otherwise share them.**
 
-    ```shell
-    ./setup-repo.sh
-    ```
+   ```bash
+   # !/bin/bash
+   export AIRTABLE_API_KEY=xxxxxx && yarn start;
+   ```
 
-7.  **Update `gatsby-config.js`.**
+1. Start the local develop server.
 
-    `gatsby-config.js` will automatically configure opt-in analytics, cookieconsent, and airtable connections based on the values provided.
+   ```bash
+   $ ./sh/start.sh
+   ```
