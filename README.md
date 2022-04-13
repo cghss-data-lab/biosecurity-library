@@ -23,34 +23,34 @@ Instructions for setting up and starting the local develop server for Biosecurit
 1. Enter the cloned directory, install Node packages, and link the package.
 
    ```bash
-   $ cd gatsby-source-airtable
-   $ yarn
-   $ yarn link
+   cd gatsby-source-airtable && \
+   yarn && \
+   yarn link;
    ```
 
 1. Return to this repo's directory and install Node packages.
 
    ```bash
-   $ cd ../biosecurity-library
-   $ yarn
+   cd ../biosecurity-library && \
+   yarn;
    ```
 
 1. Configure `@talus-analytics` on bit.dev as a Scoped Registry to allow installing bit.dev packages from `@talus-analytics`.
 
    ```bash
-   $ npm config set '@talus-analytics:registry' https://node.bit.dev
+   npm config set '@talus-analytics:registry' https://node.bit.dev
    ```
 
 1. Install bit.dev packages, i.e., Talus reusable and extendable components.
 
    ```bash
-   $ bit install
+   bit install
    ```
 
 1. Link the Talus fork of `gatsby-source-airtable` that you installed above to this project.
 
    ```bash
-   $ yarn link "gatsby-source-airtable"
+   yarn link "gatsby-source-airtable"
    ```
 
 1. Create a start script for yourself at `sh/start.sh` with the below content, replacing `xxxxxx` with your Airtable API key. **Important: Never commit API keys to version control or otherwise share them.**
@@ -63,5 +63,5 @@ Instructions for setting up and starting the local develop server for Biosecurit
 1. Start the local develop server.
 
    ```bash
-   $ ./sh/start.sh
+   bash ./sh/start.sh
    ```
