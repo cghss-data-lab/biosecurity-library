@@ -47,6 +47,8 @@ const DetailsTab = ({ data }: PageContext): JSX.Element => {
           <p>{data.Edition}</p>
         </>
       )}
+      <h5>DOWNLOAD OR ACCESS</h5>
+
       <h5>FIRST RELEASE DATE</h5>
       <p>{data.First_release_date?.split('-')[0]}</p>
       <h5>LAST UPDATE</h5>
