@@ -34,10 +34,11 @@ Instructions for setting up and starting the local develop server for Biosecurit
    yarn link;
    ```
 
-1. Return to this repo's directory and install Node packages.
+1. Return to this repo's directory, link the Talus fork of `gatsby-source-airtable` that you installed above, and install Node packages.
 
    ```bash
    cd ../biosecurity-library && \
+   yarn link "gatsby-source-airtable" && \
    yarn;
    ```
 
@@ -51,12 +52,6 @@ Instructions for setting up and starting the local develop server for Biosecurit
 
    ```bash
    bit install
-   ```
-
-1. Link the Talus fork of `gatsby-source-airtable` that you installed above to this project.
-
-   ```bash
-   yarn link "gatsby-source-airtable"
    ```
 
 1. Create a start script for yourself at `sh/start.sh` with the below content, replacing `xxxxxx` with your Airtable API key. **Important: Never commit API keys to version control or otherwise share them.**
