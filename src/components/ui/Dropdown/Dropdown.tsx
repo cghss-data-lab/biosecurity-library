@@ -51,6 +51,29 @@ const Dropdown = ({
   ...props
 }: DropdownProps) => {
   const [open, setOpen] = useState<boolean | undefined>(undefined)
+  const [touchScreen, setTouchScreen] = useState(false)
+
+  // Handle touch screens: if a touch event is detected, override the
+  // hover prop to change the behavior to respond to tap events as
+  // though the dropdown was in click-to-open mode the whole time.
+  // detecting touch events like this is a better way to detect
+  // what the user wants rather than what the device can do, like
+  // in cases where the user is using a touchscreen laptop but
+  // might only be using their mouse, in which case we would still
+  // want the dropdown to act as a hover dropdown and not a tap dropdown.
+  useEffect(() => {
+    const handleTouch = () => setTouchScreen(true)
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('touchstart', handleTouch)
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('touchstart', handleTouch)
+      }
+    }
+  }, [])
 
   // handle onOpen and onClose effects
   useEffect(() => {
@@ -87,11 +110,14 @@ const Dropdown = ({
   if (hover) {
     mouseHandlers = {
       onClick: e => {
+        if (touchScreen) setOpen(prev => !prev)
         if (e.clientX === 0 && e.clientY === 0) setOpen(prev => !prev)
       },
     }
     hoverHandlers = {
-      onMouseEnter: () => setOpen(true),
+      onMouseEnter: () => {
+        if (!touchScreen) setOpen(true)
+      },
       onMouseLeave: () => setOpen(false),
     }
   }

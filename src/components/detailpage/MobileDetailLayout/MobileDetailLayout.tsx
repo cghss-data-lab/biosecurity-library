@@ -5,7 +5,8 @@ import { PageContext } from '../../../templates/Detail'
 import Header from '../Header/Header'
 import DetailsTab from '../TabSection/tabs/DetailsTab'
 import OverviewTab from '../TabSection/tabs/OverviewTab'
-// import RelatedTab from '../TabSection/tabs/RelatedTab'
+import RelatedTab from '../TabSection/tabs/RelatedTab'
+import Thumbnail from '../Thumbnail/Thumbnail'
 
 const Container = styled.section`
   display: flex;
@@ -26,11 +27,17 @@ const MobileDetailLayout = ({ data }: PageContext) => {
   return (
     <Container>
       <Header {...{ data }} />
+      <Thumbnail {...{ data }} />
       <TabHeader>Overview</TabHeader>
       <OverviewTab {...{ data }} />
       <TabHeader>Details</TabHeader>
       <DetailsTab {...{ data }} />
-      {/* <RelatedTab {...{ data }} /> */}
+      {data.Resource_sets !== null && data.Resource_sets.length > 0 && (
+        <>
+          <TabHeader>Related resources</TabHeader>
+          <RelatedTab {...{ data }} />
+        </>
+      )}
     </Container>
   )
 }

@@ -3,6 +3,7 @@ import React from 'react'
 import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
+import DownloadOrAccessDropdown from 'components/detailpage/DownloadOrAccessDropdown/DownloadOrAccessDropdown'
 
 const DetailsTab = ({ data }: PageContext): JSX.Element => {
   return (
@@ -47,6 +48,10 @@ const DetailsTab = ({ data }: PageContext): JSX.Element => {
           <p>{data.Edition}</p>
         </>
       )}
+      <h5>DOWNLOAD OR ACCESS</h5>
+      <div>
+        <DownloadOrAccessDropdown showBothButtons {...{ data }} />
+      </div>
       <h5>FIRST RELEASE DATE</h5>
       <p>{data.First_release_date?.split('-')[0]}</p>
       <h5>LAST UPDATE</h5>

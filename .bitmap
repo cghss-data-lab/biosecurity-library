@@ -77,7 +77,7 @@
     },
     "ui/dropdown": {
         "scope": "talus-analytics.library",
-        "version": "0.0.8",
+        "version": "0.0.9",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Dropdown"
     },
