@@ -98,11 +98,13 @@ interface DownloadOrAccessDropdownProps {
     }
   }
   showLanguages?: boolean
+  showBothButtons?: boolean
 }
 
 const DownloadOrAccessDropdown = ({
   data,
   showLanguages,
+  showBothButtons,
 }: DownloadOrAccessDropdownProps) => {
   const languageFiles: { [key: string]: string } = {}
   if (data.Files_INTERNAL?.localFiles[0].publicURL)
@@ -114,7 +116,7 @@ const DownloadOrAccessDropdown = ({
   })
 
   const languageURLs: { [key: string]: string } = {}
-  if (Object.keys(languageFiles).length === 0) {
+  if (Object.keys(languageFiles).length === 0 || showBothButtons) {
     if (data.URL_for_resource) languageURLs['English'] = data.URL_for_resource
 
     data.Other_language_URLs?.split('\n').forEach(row => {
