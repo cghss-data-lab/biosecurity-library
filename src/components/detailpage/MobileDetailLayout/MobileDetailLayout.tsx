@@ -32,8 +32,12 @@ const MobileDetailLayout = ({ data }: PageContext) => {
       <OverviewTab {...{ data }} />
       <TabHeader>Details</TabHeader>
       <DetailsTab {...{ data }} />
-      <TabHeader>Related Resources</TabHeader>
-      <RelatedTab {...{ data }} />
+      {data.Resource_sets !== null && data.Resource_sets.length > 0 && (
+        <>
+          <TabHeader>Related Resources</TabHeader>
+          <RelatedTab {...{ data }} />
+        </>
+      )}
     </Container>
   )
 }
