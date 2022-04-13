@@ -7,6 +7,7 @@ import * as urls from '../../../../utilities/urls'
 import CMS from '@talus-analytics/library.airtable-cms'
 import Tippy from '@tippyjs/react'
 import { followCursor } from 'tippy.js'
+import { useMediaQuery } from 'react-responsive'
 
 const ResourceSetContainer = styled.div`
   display: flex;
@@ -50,6 +51,9 @@ const ResourceLink = styled(Link)`
 export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
   const theme: any = useTheme()
   const nameField = props.nameField || 'Resource_name'
+  const probablyTappingNotClicking: boolean = useMediaQuery(
+    { query: '(max-width: 700px)' }
+  )
   return (
     <ResourceSetContainer>
       {/* Set name */}
@@ -71,7 +75,7 @@ export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
             <Tippy
               followCursor
               delay={[500, 0]}
-              content={d.data.Resource_name}
+              content={probablyTappingNotClicking ? null : d.data.Resource_name}
               plugins={[followCursor]}
             >
               <ResourceLink to={urls.getDetailURL(d.data)}>
