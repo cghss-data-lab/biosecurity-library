@@ -1,0 +1,3 @@
+echo "HELLO I'M AN INSTALL SCRIPT"
+
+yarn;
