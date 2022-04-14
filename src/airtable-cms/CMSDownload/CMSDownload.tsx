@@ -2,6 +2,7 @@ import React from 'react'
 
 import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
 import getCMSDownloadInfo from './getCMSDownloadInfo'
+import { OutboundLink } from 'gatsby-plugin-gtag'
 
 export interface CMSDownloadProps extends React.ComponentPropsWithRef<'a'> {
   /**
@@ -39,14 +40,9 @@ const CMSDownload = ({
   if (!downloadInfo) return <></>
 
   return (
-    <a
-      href={downloadInfo.publicURL}
-      target="_blank"
-      rel="noreferrer"
-      {...props}
-    >
+    <OutboundLink href={downloadInfo.publicURL} target="_blank" {...props}>
       {children || downloadInfo.text}
-    </a>
+    </OutboundLink>
   )
 }
 
