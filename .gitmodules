@@ -1,0 +1,3 @@
+[submodule "gatsby-source-airtable"]
+	path = gatsby-source-airtable
+	url = git@github.com:ryan-talus/gatsby-source-airtable.git
