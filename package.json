@@ -8,12 +8,12 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
+    "develop": "scripts/start.sh",
+    "start": "scripts/start.sh",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "jest"
+    "preinstall": "scripts/preinstall.sh",
+    "postinstall": "scripts/postinstall.sh"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
