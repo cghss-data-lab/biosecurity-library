@@ -4,6 +4,7 @@ yarn unlink "gatsby-source-airtable"
 cd gatsby-source-airtable;
 git submodule init;
 git submodule update;
+npm install
 yarn unlink; 
 yarn link; 
 cd ..;
