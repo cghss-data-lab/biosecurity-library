@@ -9,5 +9,6 @@ yarn link;
 cd ..;
 yarn link "gatsby-source-airtable"
 echo "Add talus-analytics registry"
+bit login
 npm config set '@talus-analytics:registry' https://node.bit.dev
 
