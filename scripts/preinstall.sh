@@ -1,9 +1,10 @@
 echo "Installing Talus-Analytics gatsby-source-airtable fork"
-# yarn unlink "gatsby-source-airtable"
+# unlinking and re-linking in case of multiple installations
+yarn unlink "gatsby-source-airtable"
 cd gatsby-source-airtable;
 git submodule init;
 git submodule update;
-# yarn unlink; 
+yarn unlink; 
 yarn link; 
 cd ..;
 yarn link "gatsby-source-airtable"
