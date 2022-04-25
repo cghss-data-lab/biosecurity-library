@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { GatsbyNode } from 'gatsby'
-import { PageContext } from './src/templates/Detail'
+import { PageContextData } from './src/templates/Detail'
 import {
   getResourceMapData,
   getFullResourceMapData,
@@ -28,6 +28,12 @@ export const createPages: GatsbyNode['createPages'] = async ({
             Short_name
             Record_ID_INTERNAL
             Resource_type
+            Resource_name
+            Auto_other_resources_cited {
+              data {
+                Record_ID_INTERNAL
+              }
+            }
           }
         }
       }
@@ -61,20 +67,20 @@ export const createPages: GatsbyNode['createPages'] = async ({
   // removed:
   // Topic_Area_Icons
 
-  // const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
-  //   result.data.resources.nodes,
-  //   ['Auto_other_resources_cited'],
-  //   'Short_name',
-  //   'Record_ID_INTERNAL',
-  //   'Resource_type'
-  // )
+  const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
+    result.data.resources.nodes,
+    ['Auto_other_resources_cited'],
+    'Short_name',
+    'Record_ID_INTERNAL',
+    'Resource_type'
+  )
 
   result.data.resources.nodes.forEach(
-    ({ data, id }: { data: PageContext['data']; id: string }) => {
-      // const resourceMapData: HyperlinkedGraphData = getResourceMapData(
-      //   data.Record_ID_INTERNAL,
-      //   fullResourceMapData
-      // )
+    ({ data, id }: { data: PageContextData['data']; id: string }) => {
+      const resourceMapData: HyperlinkedGraphData = getResourceMapData(
+        data.Record_ID_INTERNAL,
+        fullResourceMapData
+      )
       data.Resource_sets = resultResourceSets.data.resourceSets.nodes.filter(
         (d: {
           data: {
@@ -92,7 +98,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
           id,
           data: {
             ...data,
-            // resourceMapData,
+            resourceMapData,
           },
         },
       })

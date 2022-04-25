@@ -12,9 +12,9 @@ const OverviewTab: React.FC<PageContext> = ({ data }) => {
 
   return (
     <TabContentContainer>
-      {/* {typeof window !== 'undefined' && !tooSmallForResourceMap && (
+      {typeof window !== 'undefined' && !tooSmallForResourceMap && (
         <ResourceMapSection {...{ data }} />
-      )} */}
+      )}
       <h5>SUMMARY</h5>
       <CMS.RenderRichText markdown={data.Long_description} />
       {/*<h5>RESOURCE TYPE</h5>
