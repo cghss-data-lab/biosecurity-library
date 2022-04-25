@@ -69,16 +69,16 @@ jobs:
       - checkout
       - aws-cli/install
 
-      - run:
-          name: Checkout and link Talus gatsby-source-airtable fork
-          command: |
-            cd ../; 
-            git clone git@github.com:ryan-talus/gatsby-source-airtable.git;
-            cd gatsby-source-airtable;
-            npm install;
-            yarn link;
-            cd ../repo;
-            yarn link gatsby-source-airtable;
+      # - run:
+      #     name: Checkout and link Talus gatsby-source-airtable fork
+      #     command: |
+      #       cd ../;
+      #       git clone git@github.com:ryan-talus/gatsby-source-airtable.git;
+      #       cd gatsby-source-airtable;
+      #       npm install;
+      #       yarn link;
+      #       cd ../repo;
+      #       yarn link gatsby-source-airtable;
 
       - run:
           name: Adding bit.dev to NPM Registry
@@ -94,16 +94,15 @@ jobs:
       #       - yarn-deps-
 
       - run:
-          name: Yarn Install
-          command: yarn install --network-timeout 1000000
-
-      - run:
-          name: Install bit and link local components
+          name: Install bit
           command: |
             yarn global add @teambit/bvm;
             bvm install;
             bit config set user.token ${BIT_TOKEN};
-            bit link;
+
+      - run:
+          name: Yarn Install
+          command: yarn install --network-timeout 1000000
 
       - run:
           name: Gatsby build
