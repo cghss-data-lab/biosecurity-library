@@ -8,6 +8,11 @@ import {
 import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/resourceMapTypes'
 import * as urls from './src/utilities/urls'
 
+// for debugging depreciation warning
+// process.on('warning', warning => {
+//   console.log(warning.stack)
+// })
+
 export const createPages: GatsbyNode['createPages'] = async ({
   actions,
   graphql,
@@ -18,61 +23,11 @@ export const createPages: GatsbyNode['createPages'] = async ({
     {
       resources: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         nodes {
+          id
           data {
-            Record_ID_INTERNAL
-            Resource_name
-            Resource_type
             Short_name
-            Short_description
-            Long_description
-            Key_topic_area
-            Seminal_resource
-            Target_user_role
-            Potential_user_role
-            User_type
-            URL_for_resource
-            Access_method
-            Access_limitations
-            Resource_language
-            Edition
-            First_release_date
-            Last_update_date
-            Update_frequency
-            Other_language_URLs
-            Authoring_organization: Authoring_organization {
-              data {
-                value: Name
-              }
-            }
-            Authoring_organization_type: Authoring_organization {
-              data {
-                value: Type
-              }
-            }
-            Auto_other_resources_cited {
-              data {
-                Record_ID_INTERNAL
-              }
-            }
-            Files_INTERNAL {
-              localFiles {
-                publicURL
-                name
-              }
-            }
-            Other_language_files_INTERNAL {
-              localFiles {
-                publicURL
-                name
-              }
-            }
-            Thumbnail_INTERNAL {
-              localFiles {
-                childImageSharp {
-                  gatsbyImageData(width: 200, placeholder: BLURRED)
-                }
-              }
-            }
+            Record_ID_INTERNAL
+            Resource_type
           }
         }
       }
@@ -106,20 +61,20 @@ export const createPages: GatsbyNode['createPages'] = async ({
   // removed:
   // Topic_Area_Icons
 
-  const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
-    result.data.resources.nodes,
-    ['Auto_other_resources_cited'],
-    'Short_name',
-    'Record_ID_INTERNAL',
-    'Resource_type'
-  )
+  // const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
+  //   result.data.resources.nodes,
+  //   ['Auto_other_resources_cited'],
+  //   'Short_name',
+  //   'Record_ID_INTERNAL',
+  //   'Resource_type'
+  // )
 
   result.data.resources.nodes.forEach(
-    ({ data }: { data: PageContext['data'] }) => {
-      const resourceMapData: HyperlinkedGraphData = getResourceMapData(
-        data.Record_ID_INTERNAL,
-        fullResourceMapData
-      )
+    ({ data, id }: { data: PageContext['data']; id: string }) => {
+      // const resourceMapData: HyperlinkedGraphData = getResourceMapData(
+      //   data.Record_ID_INTERNAL,
+      //   fullResourceMapData
+      // )
       data.Resource_sets = resultResourceSets.data.resourceSets.nodes.filter(
         (d: {
           data: {
@@ -134,9 +89,10 @@ export const createPages: GatsbyNode['createPages'] = async ({
         path: urls.getDetailURL(data),
         component: detailPageTemplate,
         context: {
+          id,
           data: {
             ...data,
-            resourceMapData,
+            // resourceMapData,
           },
         },
       })

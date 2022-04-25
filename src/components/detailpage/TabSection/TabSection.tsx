@@ -27,9 +27,9 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
   const tabs: Tab[] = [
     { id: 'overview', label: 'Overview' },
     { id: 'details', label: 'Resource details' },
-    ...(data.Resource_sets !== null && data.Resource_sets.length > 0
-      ? [{ id: 'related', label: 'Related resources' }]
-      : []),
+    // ...(data.Resource_sets !== null && data.Resource_sets.length > 0
+    //   ? [{ id: 'related', label: 'Related resources' }]
+    //   : []),
     ...(data.Files_INTERNAL
       ? [{ id: 'document', label: 'Document preview' }]
       : []),
