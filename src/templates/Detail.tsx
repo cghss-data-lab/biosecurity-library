@@ -137,6 +137,8 @@ const Detail = ({ data: queryData, pageContext }: PageContext) => {
 
   data = { ...data, ...pageContext.data }
 
+  console.log(`Building page ${data.Short_name}`)
+
   return (
     <FigmaProvider>
       <CMS.SEO
