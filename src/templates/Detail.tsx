@@ -39,7 +39,28 @@ export type ResourceSetProps = {
   }
   nameField?: keyof ResourceSetProps['data']['Resources_in_set'][0]['data']
 }
-export interface PageContext {
+interface PageContext {
+  data: {
+    resources: {
+      nodes: PageContextData[]
+    }
+  }
+  pageContext: {
+    data: {
+      Resource_sets: ResourceSetProps[] | null
+
+      // Below: Additional data elements not directly sourced from Airtable.
+
+      /**
+       * Optional: Resource map nodes/links data to render in a network map on the
+       * resource's page. Defaults to undefined (no map rendered).
+       */
+      resourceMapData?: AppGraphData
+    }
+  }
+}
+
+export interface PageContextData {
   data: {
     Record_ID_INTERNAL: string
     Short_description: string
@@ -105,17 +126,16 @@ export interface PageContext {
   }
 }
 
-const Detail: React.FC<{ data: PageContext }> = ({
-  data: queryData,
-  // pageContext,
-}) => {
+const Detail = ({ data: queryData, pageContext }: PageContext) => {
   const mobileLayout = useMediaQuery({ query: '(max-width: 1000px)' })
 
-  const {
+  let {
     resources: {
       nodes: [{ data }],
     },
   } = queryData
+
+  data = { ...data, ...pageContext.data }
 
   return (
     <FigmaProvider>
