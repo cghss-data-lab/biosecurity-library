@@ -97,8 +97,9 @@ jobs:
           name: Install bit
           command: |
             yarn global add @teambit/bvm;
-            bvm install;
+            echo $(yarn global bin)
             echo 'export PATH=$(yarn global bin):$PATH'  >> ~/.bashrc && source ~/.bashrc
+            bvm install;
             bit config set user.token ${BIT_TOKEN};
 
       - run:
