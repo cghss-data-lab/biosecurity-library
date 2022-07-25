@@ -18,7 +18,6 @@ workflows:
             branches:
               only:
                 - dev
-                - fix-dev-env
       # review site
       - deploy:
           bucket: 's3://review-biosecurity'
