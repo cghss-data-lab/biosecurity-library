@@ -29,7 +29,7 @@ if [ "$clean" == "1" ]; then
   gatsby clean
 fi
 
-gatsby build --verbose;
+gatsby build;
 
 
 
