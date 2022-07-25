@@ -12,8 +12,10 @@ const Container = styled.div`
 `
 
 const LogoLink = styled.a`
-  display: block;
+  display: flex;
   margin: 15px 33px;
+  align-items: center;
+  justify-content: center;
 `
 const Logo = styled(CMS.Image)``
 
@@ -35,10 +37,11 @@ const Footer = (): JSX.Element => {
         />
       </LogoLink>
       <LogoLink
-        style={{ height: 90 * imgScale, width: 265 * imgScale }}
+        style={{ height: 90 * imgScale, width: 523 * imgScale }}
         href={CMS.getText(footerData, 'Georgetown link')}
       >
         <Logo
+          style={{ top: 2 }}
           imgStyle={{ objectFit: 'contain' }}
           name="Georgetown logo"
           data={footerData}
