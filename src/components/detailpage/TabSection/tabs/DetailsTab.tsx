@@ -1,11 +1,11 @@
 import React from 'react'
 
 import TabContentContainer from '../TabContentContainer'
-import { PageContext } from '../../../../templates/Detail'
+import { PageContextData } from '../../../../templates/Detail'
 import { commaSeparatedList } from '../../../../utilities/grammar'
 import DownloadOrAccessDropdown from 'components/detailpage/DownloadOrAccessDropdown/DownloadOrAccessDropdown'
 
-const DetailsTab = ({ data }: PageContext): JSX.Element => {
+const DetailsTab = ({ data }: PageContextData): JSX.Element => {
   return (
     <TabContentContainer>
       <h5>RESOURCE TYPE</h5>

@@ -10,10 +10,7 @@ declare global {
   }
 }
 
-export {
-  SEOProps,
-  SiteMetadataContext,
-  SiteMetadataProvider,
-  SiteMetadataProviderProps,
-}
+export type { SEOProps, SiteMetadataProviderProps }
+
+export { SiteMetadataContext, SiteMetadataProvider }
 export default SEO
