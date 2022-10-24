@@ -1,12 +1,17 @@
 import * as path from 'path'
 import { GatsbyNode } from 'gatsby'
-import { PageContext } from './src/templates/Detail'
+import { PageContextData } from './src/templates/Detail'
 import {
   getResourceMapData,
   getFullResourceMapData,
 } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/packageMethods'
 import { HyperlinkedGraphData } from './src/components/detailpage/ResourceMapSection/ResourceMap/helpers/resourceMapTypes'
 import * as urls from './src/utilities/urls'
+
+// for debugging depreciation warning
+// process.on('warning', warning => {
+//   console.log(warning.stack)
+// })
 
 export const createPages: GatsbyNode['createPages'] = async ({
   actions,
@@ -18,59 +23,15 @@ export const createPages: GatsbyNode['createPages'] = async ({
     {
       resources: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         nodes {
+          id
           data {
-            Record_ID_INTERNAL
-            Resource_name
-            Resource_type
             Short_name
-            Short_description
-            Long_description
-            Key_topic_area
-            Seminal_resource
-            Target_user_role
-            Potential_user_role
-            User_type
-            URL_for_resource
-            Access_method
-            Access_limitations
-            Resource_language
-            Edition
-            First_release_date
-            Last_update_date
-            Update_frequency
-            Other_language_URLs
-            Authoring_organization: Authoring_organization {
-              data {
-                value: Name
-              }
-            }
-            Authoring_organization_type: Authoring_organization {
-              data {
-                value: Type
-              }
-            }
+            Record_ID_INTERNAL
+            Resource_type
+            Resource_name
             Auto_other_resources_cited {
               data {
                 Record_ID_INTERNAL
-              }
-            }
-            Files_INTERNAL {
-              localFiles {
-                publicURL
-                name
-              }
-            }
-            Other_language_files_INTERNAL {
-              localFiles {
-                publicURL
-                name
-              }
-            }
-            Thumbnail_INTERNAL {
-              localFiles {
-                childImageSharp {
-                  gatsbyImageData(width: 200, placeholder: BLURRED)
-                }
               }
             }
           }
@@ -115,7 +76,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
   )
 
   result.data.resources.nodes.forEach(
-    ({ data }: { data: PageContext['data'] }) => {
+    ({ data, id }: { data: PageContextData['data']; id: string }) => {
       const resourceMapData: HyperlinkedGraphData = getResourceMapData(
         data.Record_ID_INTERNAL,
         fullResourceMapData
@@ -134,6 +95,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         path: urls.getDetailURL(data),
         component: detailPageTemplate,
         context: {
+          id,
           data: {
             ...data,
             resourceMapData,
