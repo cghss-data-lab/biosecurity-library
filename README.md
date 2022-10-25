@@ -3,7 +3,7 @@
 </h1>
 
 Branch | Status | Url
-Prod | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/prod.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/prod) | [https://www.biosecuritycentral.org/](https://www.biosecuritycentral.org/)
+Prod | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/prod.svg?style=svg&circle-token=6b8c304f660fc23bf6f01234a4b0fbe32f419c39)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/prod) | [https://www.biosecuritycentral.org/](https://www.biosecuritycentral.org/)
 
 ## 🚀 Quick start
 
