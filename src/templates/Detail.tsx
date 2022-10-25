@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import { ImageDataLike } from 'gatsby-plugin-image'
 import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
 
@@ -38,7 +39,28 @@ export type ResourceSetProps = {
   }
   nameField?: keyof ResourceSetProps['data']['Resources_in_set'][0]['data']
 }
-export interface PageContext {
+interface PageContext {
+  data: {
+    resources: {
+      nodes: PageContextData[]
+    }
+  }
+  pageContext: {
+    data: {
+      Resource_sets: ResourceSetProps[] | null
+
+      // Below: Additional data elements not directly sourced from Airtable.
+
+      /**
+       * Optional: Resource map nodes/links data to render in a network map on the
+       * resource's page. Defaults to undefined (no map rendered).
+       */
+      resourceMapData?: AppGraphData
+    }
+  }
+}
+
+export interface PageContextData {
   data: {
     Record_ID_INTERNAL: string
     Short_description: string
@@ -104,10 +126,18 @@ export interface PageContext {
   }
 }
 
-const Detail: React.FC<{ pageContext: PageContext }> = ({
-  pageContext: { data },
-}) => {
+const Detail = ({ data: queryData, pageContext }: PageContext) => {
   const mobileLayout = useMediaQuery({ query: '(max-width: 1000px)' })
+
+  let {
+    resources: {
+      nodes: [{ data }],
+    },
+  } = queryData
+
+  data = { ...data, ...pageContext.data }
+
+  console.log(`Building page ${data.Short_name}`)
 
   return (
     <FigmaProvider>
@@ -131,5 +161,70 @@ const Detail: React.FC<{ pageContext: PageContext }> = ({
     </FigmaProvider>
   )
 }
+
+export const query = graphql`
+  query ($id: String!) {
+    resources: allAirtable(filter: { id: { eq: $id } }) {
+      nodes {
+        data {
+          Short_name
+          Record_ID_INTERNAL
+          Resource_type
+          Resource_name
+          Short_description
+          Long_description
+          Key_topic_area
+          Seminal_resource
+          Target_user_role
+          Potential_user_role
+          User_type
+          URL_for_resource
+          Access_method
+          Access_limitations
+          Resource_language
+          Edition
+          First_release_date
+          Last_update_date
+          Update_frequency
+          Other_language_URLs
+          Authoring_organization: Authoring_organization {
+            data {
+              value: Name
+            }
+          }
+          Authoring_organization_type: Authoring_organization {
+            data {
+              value: Type
+            }
+          }
+          Auto_other_resources_cited {
+            data {
+              Record_ID_INTERNAL
+            }
+          }
+          Files_INTERNAL {
+            localFiles {
+              publicURL
+              name
+            }
+          }
+          Other_language_files_INTERNAL {
+            localFiles {
+              publicURL
+              name
+            }
+          }
+          Thumbnail_INTERNAL {
+            localFiles {
+              childImageSharp {
+                gatsbyImageData(width: 200, placeholder: BLURRED)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 export default Detail

@@ -11,13 +11,13 @@
 {
     "airtable-cms": {
         "scope": "talus-analytics.library",
-        "version": "0.0.29",
+        "version": "0.0.30",
         "mainFile": "index.tsx",
         "rootDir": "src/AirtableCMS"
     },
     "airtable/cms-download": {
         "scope": "talus-analytics.library",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.tsx",
         "rootDir": "src/airtable-cms/CMSDownload"
     },
@@ -47,7 +47,7 @@
     },
     "airtable/cms-seo": {
         "scope": "talus-analytics.library",
-        "version": "0.0.6",
+        "version": "0.0.7",
         "mainFile": "index.tsx",
         "rootDir": "library/airtable/cms-seo"
     },
@@ -71,7 +71,7 @@
     },
     "ui/carousel": {
         "scope": "talus-analytics.library",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Carousel"
     },
@@ -89,7 +89,7 @@
     },
     "ui/typeahead": {
         "scope": "talus-analytics.library",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Typeahead"
     },
