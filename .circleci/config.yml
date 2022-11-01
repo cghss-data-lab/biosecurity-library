@@ -68,17 +68,6 @@ jobs:
       - checkout
       - aws-cli/install
 
-      # - run:
-      #     name: Checkout and link Talus gatsby-source-airtable fork
-      #     command: |
-      #       cd ../;
-      #       git clone git@github.com:ryan-talus/gatsby-source-airtable.git;
-      #       cd gatsby-source-airtable;
-      #       npm install;
-      #       yarn link;
-      #       cd ../repo;
-      #       yarn link gatsby-source-airtable;
-
       - run:
           name: Adding bit.dev to NPM Registry
           command: |
@@ -87,10 +76,10 @@ jobs:
             echo "@teambit:registry=https://node.bit.dev" >> ~/.npmrc;
             echo "//node.bit.dev/:_authToken={$BIT_TOKEN}" >> ~/.npmrc;
 
-      # - restore_cache:
-      #     keys:
-      #       - yarn-deps-{{ checksum "yarn.lock" }}
-      #       - yarn-deps-
+      - restore_cache:
+          keys:
+            - yarn-deps-{{ checksum "yarn.lock" }}
+            - yarn-deps-
 
       - run:
           name: Install bit
@@ -118,9 +107,9 @@ jobs:
             --distribution-id <<parameters.distribution>> \
             --paths "/*"
 
-      # - save_cache:
-      #     key: yarn-deps-{{ checksum "yarn.lock" }}
-      #     paths:
-      #       - 'node_modules'
-      #       - '.cache'
-      #       - 'public'
+      - save_cache:
+          key: yarn-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - 'node_modules'
+            - '.cache'
+            - 'public'
