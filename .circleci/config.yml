@@ -54,7 +54,7 @@ jobs:
     working_directory: ~/repo
 
     docker:
-      - image: cimg/node:lts
+      - image: cimg/node:18.12.0
 
     resource_class: xlarge
 
