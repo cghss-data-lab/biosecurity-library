@@ -26,10 +26,10 @@ const AboutMain = styled.section`
     margin-bottom: 1em;
   }
 `
-const ImageHolder = styled.div`
+const ImageBar = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 50px;
   margin-top: 30px;
   @media (max-width: 500px) {
@@ -37,6 +37,11 @@ const ImageHolder = styled.div`
     padding: 0px 30px;
     justify-content: center;
   }
+`
+const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 const ButtonLink = styled(CMS.Download)`
   display: block;
@@ -70,6 +75,8 @@ const ButtonLink = styled(CMS.Download)`
 const About = (): JSX.Element => {
   const data = useAboutPageData()
 
+  const imgScale = 0.75
+
   return (
     <FigmaProvider>
       <NavBar />
@@ -92,23 +99,35 @@ const About = (): JSX.Element => {
 
         <ButtonLink name="Methods button" data={data} />
 
-        <ImageHolder>
-          <CMS.Image
-            imgStyle={{ objectFit: 'contain' }}
-            name="Funder logo"
-            data={data}
-          />
-          <CMS.Image
-            imgStyle={{ objectFit: 'contain' }}
-            name="Georgetown logo"
-            data={data}
-          />
-          <CMS.Image
-            imgStyle={{ objectFit: 'contain' }}
-            name="Talus logo"
-            data={data}
-          />
-        </ImageHolder>
+        <ImageBar>
+          <ImageContainer
+            style={{ height: 90 * imgScale, width: 513 * imgScale }}
+          >
+            <CMS.Image
+              imgStyle={{ objectFit: 'contain' }}
+              name="Funder logo"
+              data={data}
+            />
+          </ImageContainer>
+          <ImageContainer
+            style={{ height: 90 * imgScale, width: 523 * imgScale }}
+          >
+            <CMS.Image
+              imgStyle={{ objectFit: 'contain' }}
+              name="Georgetown logo"
+              data={data}
+            />
+          </ImageContainer>
+          <ImageContainer
+            style={{ height: 90 * imgScale, width: 168 * imgScale }}
+          >
+            <CMS.Image
+              imgStyle={{ objectFit: 'contain' }}
+              name="Talus logo"
+              data={data}
+            />
+          </ImageContainer>
+        </ImageBar>
 
         <h2
           style={{
