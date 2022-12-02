@@ -47,3 +47,5 @@ the `/CloudFormation/` directory. All changes to hosting, domain names, alternat
 names, and access control must be made in the template and deployed using the update command.
 
 Infrastructure updates must be made with care as they can cause site downtime.
+
+Remember to update site passwords before running deployment command.
