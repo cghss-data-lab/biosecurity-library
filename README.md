@@ -1,61 +1,51 @@
 <h1 align="center">
-  Talus-Gatsby-Starter
+  Biosecurity Central
 </h1>
 
-## 🚀 Quick start
+## 📈 Analytics
 
-1.  **Clone This Starter.**
+- [Plausible Dashboard](https://plausible.io/biosecuritycentral.org?period=30d)
+- [Google Search Console](https://search.google.com/search-console?resource_id=sc-domain%3Abiosecuritycentral.org)
+- [Google Analytics](https://analytics.google.com/analytics/web/?authuser=1#/p305404298/reports/intelligenthome)
 
-    And pull it before using it!
+## 🚀 Deployment Status
 
-2.  **Build AWS Stack & Update CCI config**
+| Branch  | CI/CD Status                                                                                                                                                                                                                                                                               | Url                                                                       |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Prod    | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/prod.svg?style=svg&circle-token=6b8c304f660fc23bf6f01234a4b0fbe32f419c39)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/prod)       | [biosecuritycentral.org](https://biosecuritycentral.org/)                 |
+| Staging | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/staging.svg?style=svg&circle-token=6b8c304f660fc23bf6f01234a4b0fbe32f419c39)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/staging) | [staging.biosecuritycentral.org](https://staging.biosecuritycentral.com/) |
+| Review  | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/review.svg?style=svg&circle-token=6b8c304f660fc23bf6f01234a4b0fbe32f419c39)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/review)   | [review.biosecuritycentral.org](https://review.biosecuritycentral.com/)   |
+| Dev     | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/dev.svg?style=svg&circle-token=6b8c304f660fc23bf6f01234a4b0fbe32f419c39)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/dev)         | [dev.biosecuritycentral.org](https://dev.biosecuritycentral.org/)         |
 
-    Use the `build-stack` repo to set up all AWS resources for this project:
+Automated deployment schedule: all data are ingested to `Staging` weekly.
 
-    ```shell
-    aws cloudformation deploy --stack-name [project-name] --template-file build-stack.yaml --capabilities CAPABILITY_NAMED_IAM
-    ```
+## 📄 Ingest Latest Data from Airtable
 
-    The "Outputs" tab of the CloudFormation stack will contain the distribution IDs which should be used in `/.circleci/config.yml`.
+1. Click the "CI/CD Status" badge above next to the site where you want to update data
+2. Click "Trigger Pipeline" button on the top right section of that page.
 
-3.  **Check Gatsby CLI configuration**
+## 👩‍💻 Local Development Quick start
 
-    To be compatible with our CCI build scripts, Gatsby CLI should use `yarn`:
+1. [Install](https://bit.dev/docs/getting-started/installing-bit/installing-bit) & [log in](https://bit.dev/reference/reference/cli-reference/#login) to Bit
 
-    `~/.config/gatsby/config.json` should include:
+2. Install dependencies
 
-    ```json
-    "cli": {
-      "packageManager": "yarn"
-    }
-    ```
+```
+yarn
+```
 
-4.  **Create a Gatsby site.**
+3. Start development server
 
-    Use the Gatsby CLI to create a new site, specifying this local starter.
+```
+yarn start
+```
 
-    ```shell
-    # create a new Gatsby site using the talus starter
-    gatsby new [project-name] ./talus-gatsby-starter
-    ```
+## 🖥 Deployment Infrastructure
 
-5.  **Set AIRTABLE_API_KEY env var**
+All Biosecurity Central Infrastructure is managed using the CloudFormation template within
+the `/CloudFormation/` directory. All changes to hosting, domain names, alternate domain
+names, and access control must be made in the template and deployed using the update command.
 
-    The easiest way to do this locally is in a script in the `sh/` directory, which is included in the starter but all contents are gitignored.
+Infrastructure updates must be made with care as they can cause site downtime.
 
-    ```shell
-    export AIRTABLE_API_KEY=keyXXXXXXXXXXXXXX;
-    gatsby develop;
-    ```
-
-6.  **Set up Git**
-
-    Execute the included `setup-repo.sh` script to initialize a git repo with the continuous integration and deployment branches configured to match the CCI config.
-
-    ```shell
-    ./setup-repo.sh
-    ```
-
-7.  **Update `gatsby-config.js`.**
-
-    `gatsby-config.js` will automatically configure opt-in analytics, cookieconsent, and airtable connections based on the values provided.
+Remember to update site passwords before running deployment command.

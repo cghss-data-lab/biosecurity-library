@@ -111,7 +111,7 @@ const DownloadOrAccessDropdown = ({
     languageFiles['English'] = data.Files_INTERNAL?.localFiles[0].publicURL
 
   data.Other_language_files_INTERNAL?.localFiles.forEach(file => {
-    const [lang] = file.name.split('_').slice(-1)
+    const lang = file.name.split('_').slice(-1)[0].replace('.', '')
     languageFiles[lang] = file.publicURL
   })
 
