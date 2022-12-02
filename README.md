@@ -26,13 +26,15 @@ Automated deployment schedule: all data are ingested to `Staging` weekly.
 
 ## 👩‍💻 Local Development Quick start
 
-1. Install dependencies
+1. [Install](https://bit.dev/docs/getting-started/installing-bit/installing-bit) & [log in](https://bit.dev/reference/reference/cli-reference/#login) to Bit
+
+2. Install dependencies
 
 ```
 yarn
 ```
 
-2. Start development server
+3. Start development server
 
 ```
 yarn start
