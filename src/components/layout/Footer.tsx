@@ -27,7 +27,17 @@ const Footer = (): JSX.Element => {
   return (
     <Container>
       <LogoLink
-        style={{ height: 90 * imgScale, width: 513 * imgScale }}
+        style={{ height: 90 * imgScale, width: 272 * imgScale }}
+        href={CMS.getText(footerData, 'WOAH link')}
+      >
+        <Logo
+          imgStyle={{ objectFit: 'contain' }}
+          name="WOAH logo"
+          data={footerData}
+        />
+      </LogoLink>
+      <LogoLink
+        style={{ height: 90 * imgScale, width: 448 * imgScale }}
         href={CMS.getText(footerData, 'Canada link')}
       >
         <Logo
@@ -37,23 +47,13 @@ const Footer = (): JSX.Element => {
         />
       </LogoLink>
       <LogoLink
-        style={{ height: 90 * imgScale, width: 523 * imgScale }}
+        style={{ height: 90 * imgScale, width: 460 * imgScale }}
         href={CMS.getText(footerData, 'Georgetown link')}
       >
         <Logo
           style={{ top: 2 }}
           imgStyle={{ objectFit: 'contain' }}
           name="Georgetown logo"
-          data={footerData}
-        />
-      </LogoLink>
-      <LogoLink
-        style={{ height: 90 * imgScale, width: 168 * imgScale }}
-        href={CMS.getText(footerData, 'Talus link')}
-      >
-        <Logo
-          imgStyle={{ objectFit: 'contain' }}
-          name="Talus logo"
           data={footerData}
         />
       </LogoLink>
