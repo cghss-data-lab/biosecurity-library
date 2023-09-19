@@ -28,20 +28,19 @@ const AboutMain = styled.section`
 `
 const ImageBar = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  gap: 50px;
-  margin-top: 30px;
-  @media (max-width: 500px) {
-    flex-wrap: wrap;
-    padding: 0px 30px;
-    justify-content: center;
-  }
+  gap: 40px;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  max-width: 100%;
 `
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 100%;
 `
 const ButtonLink = styled(CMS.Download)`
   display: block;
@@ -75,7 +74,7 @@ const ButtonLink = styled(CMS.Download)`
 const About = (): JSX.Element => {
   const data = useAboutPageData()
 
-  const imgScale = 0.75
+  const imgScale = 1
 
   return (
     <FigmaProvider>
@@ -101,7 +100,16 @@ const About = (): JSX.Element => {
 
         <ImageBar>
           <ImageContainer
-            style={{ height: 90 * imgScale, width: 513 * imgScale }}
+            style={{ height: 70 * imgScale, width: 272 * imgScale }}
+          >
+            <CMS.Image
+              imgStyle={{ objectFit: 'contain' }}
+              name="WOAH logo"
+              data={data}
+            />
+          </ImageContainer>
+          <ImageContainer
+            style={{ height: 50 * imgScale, width: 415 * imgScale }}
           >
             <CMS.Image
               imgStyle={{ objectFit: 'contain' }}
@@ -110,20 +118,11 @@ const About = (): JSX.Element => {
             />
           </ImageContainer>
           <ImageContainer
-            style={{ height: 90 * imgScale, width: 523 * imgScale }}
+            style={{ height: 50 * imgScale, width: 460 * imgScale }}
           >
             <CMS.Image
               imgStyle={{ objectFit: 'contain' }}
               name="Georgetown logo"
-              data={data}
-            />
-          </ImageContainer>
-          <ImageContainer
-            style={{ height: 90 * imgScale, width: 168 * imgScale }}
-          >
-            <CMS.Image
-              imgStyle={{ objectFit: 'contain' }}
-              name="Talus logo"
               data={data}
             />
           </ImageContainer>
