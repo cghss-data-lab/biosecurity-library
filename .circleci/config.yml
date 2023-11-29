@@ -51,12 +51,12 @@ orbs:
 
 jobs:
   deploy:
-    working_directory: ~/repo
-
     docker:
-      - image: cimg/node:lts
+      - image: cimg/node:20.10
 
     resource_class: xlarge
+
+    working_directory: ~/repo
 
     parameters:
       bucket:
