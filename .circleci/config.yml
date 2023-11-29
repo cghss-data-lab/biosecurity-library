@@ -51,12 +51,12 @@ orbs:
 
 jobs:
   deploy:
-    working_directory: ~/repo
-
     docker:
       - image: cimg/node:lts
 
     resource_class: xlarge
+
+    working_directory: ~/repo
 
     parameters:
       bucket:
@@ -67,6 +67,16 @@ jobs:
     steps:
       - checkout
       - aws-cli/install
+
+      - run:
+          name: Check container ubuntu version
+          command: lsb_release -a
+
+      - run:
+          name: Install binary dependencies for `node-canvas`
+          command: |
+            sudo apt-get update
+            sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
       - run:
           name: Adding bit.dev to NPM Registry
@@ -89,8 +99,17 @@ jobs:
             bit config set user.token ${BIT_TOKEN};
 
       - run:
+          name: Bit import to get latest
+          command: |
+            bit import
+
+      - run:
           name: Yarn Install
           command: yarn install --network-timeout 1000000
+
+      - run:
+          name: Gatsby clean
+          command: yarn run gatsby clean
 
       - run:
           name: Gatsby build

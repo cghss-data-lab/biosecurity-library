@@ -39,7 +39,7 @@ export type ResourceSetProps = {
   }
   nameField?: keyof ResourceSetProps['data']['Resources_in_set'][0]['data']
 }
-interface PageContext {
+export interface PageContext {
   data: {
     resources: {
       nodes: PageContextData[]
