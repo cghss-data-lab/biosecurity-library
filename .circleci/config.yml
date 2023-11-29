@@ -103,6 +103,10 @@ jobs:
           command: yarn install --network-timeout 1000000
 
       - run:
+          name: Gatsby clean
+          command: yarn run gatsby clean
+
+      - run:
           name: Gatsby build
           command: yarn build;
 
