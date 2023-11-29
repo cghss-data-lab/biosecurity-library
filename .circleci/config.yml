@@ -51,9 +51,6 @@ orbs:
 
 jobs:
   deploy:
-    machine:
-      - image: current
-
     working_directory: ~/repo
 
     docker:
