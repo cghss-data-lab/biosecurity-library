@@ -3,9 +3,9 @@
 /**
  * The Bitmap file is an auto generated file used by Bit to track all your Bit components. It maps the component to a folder in your file system.
  * This file should be committed to VCS(version control).
- * Components are listed using their component ID (https://harmony-docs.bit.dev/aspects/component/#component-id).
+ * Components are listed using their component ID (https://bit.dev/docs/components/component-id).
  * If you want to delete components you can use the "bit remove <component-id>" command.
- * See the docs (https://harmony-docs.bit.dev/building-with-bit/removing-components) for more information, or use "bit remove --help".
+ * See the docs (https://bit.dev/docs/components/removing-components) for more information, or use "bit remove --help".
  */
 
 {
@@ -63,6 +63,18 @@
         "mainFile": "index.ts",
         "rootDir": "src/airtable-cms/CMSTypes"
     },
+    "charts/network": {
+        "scope": "talus-analytics.viz",
+        "version": "0.0.13",
+        "mainFile": "index.ts",
+        "rootDir": "viz/charts/network"
+    },
+    "charts/network-tools": {
+        "scope": "talus-analytics.viz",
+        "version": "0.0.2",
+        "mainFile": "index.ts",
+        "rootDir": "viz/charts/network-tools"
+    },
     "hooks/use-dark-preference": {
         "scope": "talus-analytics.library",
         "version": "0.0.3",
@@ -93,5 +105,5 @@
         "mainFile": "index.tsx",
         "rootDir": "src/components/ui/Typeahead"
     },
-    "$schema-version": "14.9.0"
+    "$schema-version": "15.0.0"
 }
