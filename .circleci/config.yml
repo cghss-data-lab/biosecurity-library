@@ -99,6 +99,11 @@ jobs:
             bit config set user.token ${BIT_TOKEN};
 
       - run:
+          name: Bit import to get latest
+          command: |
+            bit import
+
+      - run:
           name: Yarn Install
           command: yarn install --network-timeout 1000000
 
