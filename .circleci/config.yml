@@ -52,7 +52,7 @@ orbs:
 jobs:
   deploy:
     machine:
-      image: current
+      - image: current
 
     working_directory: ~/repo
 
