@@ -69,6 +69,17 @@ jobs:
       - aws-cli/install
 
       - run:
+          name: Install binary dependencies for `node-canvas`
+          command: |
+            sudo apt-get install \
+              build-essential \
+              libcairo2-dev \
+              libpango1.0-dev \
+              libjpeg-dev \
+              libgif-dev \
+              librsvg2-dev
+
+      - run:
           name: Adding bit.dev to NPM Registry
           command: |
             echo "always-auth=true" >> ~/.npmrc;
