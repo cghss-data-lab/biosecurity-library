@@ -5,6 +5,7 @@ import qs from 'qs'
 
 import { PageContext } from '../../../templates/Detail'
 import IconTag from 'components/ui/IconTag/IconTag'
+import { commaSeparatedList } from 'utilities/grammar'
 
 const HeaderContainer = styled.header`
   grid-area: header;
@@ -56,7 +57,13 @@ const Header: React.FC<PageContext> = ({ data }) => {
         {data.Resource_name}
       </h2>
       <ShortName>[{data.Short_name.trim()}]</ShortName>
-      <Author>{data.Authoring_organization[0].data.value}</Author>
+      <Author>
+        {commaSeparatedList(
+          data.Authoring_organization.map(org => org.data.value).sort((a, b) =>
+            a.localeCompare(b)
+          )
+        )}
+      </Author>
       <p>{data.Short_description}</p>
       <TagHolder>
         {data.Key_resource === 'Yes' && (
