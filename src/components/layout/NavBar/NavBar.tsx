@@ -90,13 +90,15 @@ const MobileSearchContainer = styled.div`
 
 const NavBar: React.FC = () => {
   const { resourceSearchData } = useHomePageData()
-  const resources = resourceSearchData.nodes.map(r => ({
-    key: r.data.Short_name,
-    label: r.data.Resource_name,
-    Description: r.data.Short_description,
-    Resource_Name: r.data.Resource_name,
-    Resource_Type: r.data.Resource_type,
-  }))
+  const resources = resourceSearchData.nodes
+    .map(r => ({
+      key: r.data.Short_name,
+      label: r.data.Resource_name,
+      Description: r.data.Short_description,
+      Resource_Name: r.data.Resource_name,
+      Resource_Type: r.data.Resource_type,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label))
 
   const [focusInSearch, setFocusInSearch] = useState(false)
   const theme: any = useTheme()
