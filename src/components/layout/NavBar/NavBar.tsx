@@ -97,14 +97,22 @@ const Banner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @media (max-width: 500px) {
     padding-right: 25px;
+  }
+
+  > span {
+    width: 100%;
+    text-align: center;
   }
 `
 
 const BannerLink = styled.a`
   ${({ theme }) => theme.medParagraph}
   font-size: 16px !important;
+  font-weight: 600 !important;
+  color: ${({ theme }) => theme.colorBlack} !important;
 `
 
 const BannerContainer = styled.div`
@@ -243,11 +251,13 @@ const NavBar: React.FC = () => {
       <BannerContainer style={{ display: showBanner ? 'flex' : 'none' }}>
         <Banner>
           <span>
-            <strong>ANNOUNCEMENT:</strong> Do you have a resource to suggest for
-            inclusion on Biosecurity Central? Send us an email at{' '}
-            <BannerLink href="mailto:biosecuritycentral@georgetown.edu">
-              biosecuritycentral@georgetown.edu.
-            </BannerLink>
+            To suggest a resource for inclusion on Biosecurity Central email our
+            team at{' '}
+            <strong>
+              <BannerLink href="mailto:biosecuritycentral@georgetown.edu">
+                biosecuritycentral@georgetown.edu.
+              </BannerLink>
+            </strong>
           </span>
           <CloseBannerButton
             aria-label="Close"
