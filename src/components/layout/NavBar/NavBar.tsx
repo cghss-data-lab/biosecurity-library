@@ -97,8 +97,14 @@ const Banner = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   @media (max-width: 500px) {
     padding-right: 25px;
+  }
+
+  > span {
+    width: 100%;
+    text-align: center;
   }
 `
 
