@@ -5,7 +5,7 @@ import qs from 'qs'
 
 import { PageContext } from '../../../templates/Detail'
 import IconTag from 'components/ui/IconTag/IconTag'
-import { commaSeparatedList } from 'utilities/grammar'
+import { commaSeparatedElements, commaSeparatedList } from 'utilities/grammar'
 
 const HeaderContainer = styled.header`
   grid-area: header;
@@ -27,10 +27,13 @@ const IconContainer = styled.div`
   flex-wrap: wrap;
 `
 const Author = styled.div`
-  font-size: 26px;
-  line-height: 32px;
   margin-bottom: 20px;
   color: ${({ theme }) => theme.colorVeryDarkGray};
+  font-family: 'Open Sans';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px; /* 155.556% */
 `
 
 const ShortName = styled.h6`
@@ -58,10 +61,20 @@ const Header: React.FC<PageContext> = ({ data }) => {
       </h2>
       <ShortName>[{data.Short_name.trim()}]</ShortName>
       <Author>
-        {commaSeparatedList(
-          data.Authoring_organization.map(org => org.data.value).sort((a, b) =>
-            a.localeCompare(b)
-          )
+        {commaSeparatedElements(
+          data.Authoring_organization.map(org => org.data.value)
+            .sort((a, b) => a.localeCompare(b))
+            .map(org => (
+              <Link
+                to={`/explore/?${qs.stringify({
+                  filters: { Authoring_organization: [org] },
+                })}`}
+              >
+                {console.log('organization')}
+                {console.log({ org })}
+                {org}
+              </Link>
+            ))
         )}
       </Author>
       <p>{data.Short_description}</p>
