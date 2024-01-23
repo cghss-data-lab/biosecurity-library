@@ -59,7 +59,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
       <Author>{data.Authoring_organization[0].data.value}</Author>
       <p>{data.Short_description}</p>
       <TagHolder>
-        {data.Seminal_resource === 'Yes' && (
+        {data.Key_resource === 'Yes' && (
           <IconTag dark name={'Key resource'} style={{ marginRight: '0em' }} />
         )}
         <Link

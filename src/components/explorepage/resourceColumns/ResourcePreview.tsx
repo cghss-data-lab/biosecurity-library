@@ -87,7 +87,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         </ThumbnailContainer>
       )}
       <Title to={urls.getDetailURL(data)}>
-        {data.Seminal_resource === 'Yes' && (
+        {data.Key_resource === 'Yes' && (
           <CMS.Icon
             name="Key resource"
             color={theme.colorGolden}

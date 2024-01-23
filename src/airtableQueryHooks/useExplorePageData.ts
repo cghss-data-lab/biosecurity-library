@@ -8,7 +8,7 @@ export interface Resource {
     Short_name: string
     Resource_name: string
     Resource_type: string
-    Seminal_resource: string
+    Key_resource: string
     Resource_language: string[]
     Access_limitations: string[]
     Access_method: string
@@ -80,7 +80,7 @@ const useExplorePageData = () => {
               Short_name
               Resource_name
               Resource_type
-              Seminal_resource
+              Key_resource
               Target_user_role
               Short_description
               Key_topic_area

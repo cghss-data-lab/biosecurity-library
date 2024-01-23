@@ -69,7 +69,7 @@ export interface PageContextData {
     Resource_name: string
     Short_name: string
     Resource_type: string
-    Seminal_resource: string
+    Key_resource: string
     Target_user_role: string[]
     Potential_user_role: string[]
     User_type: string[]
@@ -174,7 +174,7 @@ export const query = graphql`
           Short_description
           Long_description
           Key_topic_area
-          Seminal_resource
+          Key_resource
           Target_user_role
           Potential_user_role
           User_type
