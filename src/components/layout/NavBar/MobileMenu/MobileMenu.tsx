@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import HamburgerButton from '../HamburgerButton/HamburgerButton'
 
 const MenuContainer = styled.div`
-  @media (min-width: 500px) {
+  @media (min-width: 599px) {
     display: none;
   }
 `
