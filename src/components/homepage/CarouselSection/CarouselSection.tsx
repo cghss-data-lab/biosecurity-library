@@ -15,6 +15,7 @@ import Main from 'components/layout/Main'
 import Carousel from '@talus-analytics/library.ui.carousel'
 import IconTag from 'components/ui/IconTag/IconTag'
 import { Link } from 'gatsby'
+import { commaSeparatedList } from 'utilities/grammar'
 
 const H2 = styled.h2`
   text-align: center;
@@ -201,7 +202,13 @@ const CarouselSection = (): JSX.Element => {
                   <h3 style={{ margin: 0 }}>{resource.Resource_name}</h3>
                 </Title>
                 {/* <ShortName>[{resource.Short_name.trim()}]</ShortName> */}
-                <Author>{resource.Authoring_organization[0].data.Name}</Author>
+                <Author>
+                  {commaSeparatedList(
+                    resource.Authoring_organization.map(
+                      org => org.data.Name
+                    ).sort((a, b) => a.localeCompare(b))
+                  )}
+                </Author>
                 <Description>
                   {truncateDescription(
                     resource.Short_description,
