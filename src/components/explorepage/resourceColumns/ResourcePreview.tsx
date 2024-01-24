@@ -11,6 +11,7 @@ import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
 import * as urls from '../../../utilities/urls'
+import { commaSeparatedList } from 'utilities/grammar'
 
 const ResourceContainer = styled.section<{ expanded: boolean }>`
   background: ${({ theme }) => theme.colorVeryLightGray};
@@ -87,7 +88,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         </ThumbnailContainer>
       )}
       <Title to={urls.getDetailURL(data)}>
-        {data.Seminal_resource === 'Yes' && (
+        {data.Key_resource === 'Yes' && (
           <CMS.Icon
             name="Key resource"
             color={theme.colorGolden}
@@ -115,7 +116,13 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         )}
         {data.Short_name}
       </Title>
-      <Author>{data.Authoring_organization[0].data.value}</Author>
+      <Author>
+        {commaSeparatedList(
+          data.Authoring_organization.map(org => org.data.value).sort((a, b) =>
+            a.localeCompare(b)
+          )
+        )}
+      </Author>
       <IconContainer>
         {data.Key_topic_area.sort().map(name => (
           <Tippy content={name} key={name}>

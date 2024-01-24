@@ -30,7 +30,7 @@ const useCaroselData = (): CaroselResourceData => {
         caroselResources: allAirtable(
           filter: {
             table: { eq: "Resource Library" }
-            data: { Seminal_resource: { eq: "Yes" } }
+            data: { Key_resource: { eq: "Yes" } }
           }
         ) {
           nodes {

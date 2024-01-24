@@ -81,14 +81,14 @@ const ExplorePage = (): JSX.Element => {
   resources.forEach(group => {
     group.nodes.sort((a, b) => {
       // if a is a seminal resource
-      if (a.data.Seminal_resource === 'Yes')
-        if (b.data.Seminal_resource === 'Yes')
+      if (a.data.Key_resource === 'Yes')
+        if (b.data.Key_resource === 'Yes')
           // if b is also seminal, alphabetize
           return a.data.Short_name.localeCompare(b.data.Short_name)
         // if b is not seminal, put a before b
         else return -1
       // if a is not seminal but b is, b goes first
-      if (b.data.Seminal_resource === 'Yes') return 1
+      if (b.data.Key_resource === 'Yes') return 1
       // if neither is seminal, alphabetize
       return a.data.Short_name.localeCompare(b.data.Short_name)
     })
