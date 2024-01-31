@@ -49,7 +49,6 @@ export const createPages: GatsbyNode['createPages'] = async ({
           data {
             Resource_set_name
             Unique_ID
-            Description
             Resources_in_set {
               data {
                 Resource_name
