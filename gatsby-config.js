@@ -46,7 +46,7 @@ module.exports = {
             ],
             mapping: {
               Thumbnail_INTERNAL: `fileNode`,
-              Files_INTERNAL: `fileNode`,
+              Primary_file: `fileNode`,
               Other_language_files_INTERNAL: `fileNode`,
             },
           },

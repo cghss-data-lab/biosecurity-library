@@ -98,7 +98,7 @@ export interface PageContextData {
           }
         }[]
       | null
-    Files_INTERNAL: {
+    Primary_file: {
       localFiles: {
         publicURL: string
         name: string
@@ -200,7 +200,7 @@ export const query = graphql`
               Record_ID_INTERNAL
             }
           }
-          Files_INTERNAL {
+          Primary_file {
             localFiles {
               publicURL
               name

@@ -30,7 +30,7 @@ interface ThumbnailProps {
     Other_language_URLs: string
     URL_for_resource: string
     Resource_language?: string[]
-    Files_INTERNAL?: {
+    Primary_file?: {
       localFiles: {
         publicURL: string
         name: string

@@ -43,7 +43,7 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Last_update_date: 'Test',
   Update_frequency: 'Test',
   // Topic_area_icons: 'Test',
-  Files_INTERNAL: {
+  Primary_file: {
     localFiles: [{ publicURL: 'Test', name: 'Test' }],
   },
   Thumbnail_INTERNAL: {
