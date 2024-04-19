@@ -104,7 +104,7 @@ export interface PageContextData {
         name: string
       }[]
     }
-    Other_language_files_INTERNAL: {
+    Other_language_files: {
       localFiles: {
         publicURL: string
         name: string
@@ -206,7 +206,7 @@ export const query = graphql`
               name
             }
           }
-          Other_language_files_INTERNAL {
+          Other_language_files {
             localFiles {
               publicURL
               name

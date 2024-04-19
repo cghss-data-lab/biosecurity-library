@@ -36,7 +36,7 @@ interface ThumbnailProps {
         name: string
       }[]
     }
-    Other_language_files_INTERNAL?: {
+    Other_language_files?: {
       localFiles: {
         publicURL: string
         name: string
