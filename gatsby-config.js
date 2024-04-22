@@ -44,6 +44,7 @@ module.exports = {
               `Resources_cited`,
               `Authoring_organization`,
               `Key_topic_area`,
+              `Target_user_role`,
             ],
             mapping: {
               Thumbnail: `fileNode`,

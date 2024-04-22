@@ -74,7 +74,11 @@ export interface PageContextData {
     Short_name: string
     Resource_type: string
     Key_resource: string
-    Target_user_role: string[]
+    Target_user_role: {
+      data: {
+        Name: string
+      }
+    }[]
     User_type: string[]
     URL_for_resource: string
     Access_method: string
@@ -182,7 +186,11 @@ export const query = graphql`
             }
           }
           Key_resource
-          Target_user_role
+          Target_user_role {
+            data {
+              Name
+            }
+          }
           User_type
           URL_for_resource
           Access_method

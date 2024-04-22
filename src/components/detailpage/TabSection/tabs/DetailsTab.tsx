@@ -23,7 +23,9 @@ const DetailsTab = ({ data }: PageContextData): JSX.Element => {
       </h5>
       <p>
         {commaSeparatedList(
-          data.Target_user_role.sort((a, b) => a.localeCompare(b))
+          data.Target_user_role.sort((a, b) =>
+            a.data.Name.localeCompare(b.data.Name)
+          ).map(({ data: { Name } }) => Name)
         )}
       </p>
       {data.User_type && (

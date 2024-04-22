@@ -19,7 +19,11 @@ export interface Resource {
       }
     }[]
     Short_description: string
-    Target_user_role: string[]
+    Target_user_role: {
+      data: {
+        value: string
+      }
+    }[]
     User_type: string[]
     Authoring_organization: {
       data: {
@@ -85,7 +89,11 @@ const useExplorePageData = () => {
               Resource_name
               Resource_type
               Key_resource
-              Target_user_role
+              Target_user_role {
+                data {
+                  value: Name
+                }
+              }
               Short_description
               Key_topic_area {
                 data {

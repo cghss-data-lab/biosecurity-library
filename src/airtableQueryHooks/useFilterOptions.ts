@@ -18,7 +18,7 @@ const useFilterOptions = () => {
       Target_user_role: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        distinct(field: data___Target_user_role)
+        distinct(field: data___Target_user_role___data___Name)
       }
       User_type: allAirtable(filter: { table: { eq: "Resource Library" } }) {
         distinct(field: data___User_type)
