@@ -72,7 +72,7 @@ export const toggleFilter: FilterFunction = (filter, setExploreState) => {
       return {
         ...prev,
         filters: {
-          [filterKey]: [filterVal],
+          [filterKey]: filterVal,
         },
       }
 
