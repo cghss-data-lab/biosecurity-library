@@ -84,13 +84,13 @@ interface DownloadOrAccessDropdownProps {
     Other_language_URLs: string
     URL_for_resource: string
     Resource_language?: string[]
-    Files_INTERNAL?: {
+    Primary_file?: {
       localFiles: {
         publicURL: string
         name: string
       }[]
     }
-    Other_language_files_INTERNAL?: {
+    Other_language_files?: {
       localFiles: {
         publicURL: string
         name: string
@@ -107,10 +107,10 @@ const DownloadOrAccessDropdown = ({
   showBothButtons,
 }: DownloadOrAccessDropdownProps) => {
   const languageFiles: { [key: string]: string } = {}
-  if (data.Files_INTERNAL?.localFiles[0].publicURL)
-    languageFiles['English'] = data.Files_INTERNAL?.localFiles[0].publicURL
+  if (data.Primary_file?.localFiles[0].publicURL)
+    languageFiles['English'] = data.Primary_file?.localFiles[0].publicURL
 
-  data.Other_language_files_INTERNAL?.localFiles.forEach(file => {
+  data.Other_language_files?.localFiles.forEach(file => {
     const lang = file.name.split('_').slice(-1)[0].replace('.', '')
     languageFiles[lang] = file.publicURL
   })

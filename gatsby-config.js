@@ -21,7 +21,7 @@ module.exports = {
         tables: [
           {
             baseId: `app708Ctx0rz1c1n7`,
-            tableName: `Lookup: Authoring orgs.`,
+            tableName: `LOOKUP: Authoring organization`,
             tableView: `CMS view`,
           },
           {
@@ -41,13 +41,15 @@ module.exports = {
             tableView: `CMS view`,
             tableLinks: [
               `Resource_sets`,
-              `Auto_other_resources_cited`,
+              `Resources_cited`,
               `Authoring_organization`,
+              `Key_topic_area`,
+              `Target_user_role`,
             ],
             mapping: {
-              Thumbnail_INTERNAL: `fileNode`,
-              Files_INTERNAL: `fileNode`,
-              Other_language_files_INTERNAL: `fileNode`,
+              Thumbnail: `fileNode`,
+              Primary_file: `fileNode`,
+              Other_language_files: `fileNode`,
             },
           },
           {

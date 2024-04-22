@@ -30,7 +30,7 @@ const TabSection: React.FC<PageContext> = ({ data }) => {
     ...(data.Resource_sets !== null && data.Resource_sets.length > 0
       ? [{ id: 'related', label: 'Related resources' }]
       : []),
-    ...(data.Files_INTERNAL
+    ...(data.Primary_file
       ? [{ id: 'document', label: 'Document preview' }]
       : []),
     // { id: 'users', label: 'Users' },

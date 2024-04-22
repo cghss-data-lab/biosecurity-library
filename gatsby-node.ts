@@ -29,7 +29,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
             Record_ID_INTERNAL
             Resource_type
             Resource_name
-            Auto_other_resources_cited {
+            Resources_cited {
               data {
                 Record_ID_INTERNAL
               }
@@ -68,7 +68,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   const fullResourceMapData: HyperlinkedGraphData = getFullResourceMapData(
     result.data.resources.nodes,
-    ['Auto_other_resources_cited'],
+    ['Resources_cited'],
     'Short_name',
     'Record_ID_INTERNAL',
     'Resource_type'

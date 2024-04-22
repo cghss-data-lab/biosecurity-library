@@ -97,8 +97,6 @@ export const Network2D: FC<Network2DProps> = ({
 
   const networkRef = useRef<any>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  console.log('hoveredNode')
-  console.log(hoveredNode)
 
   // This function updates the state to re-render components
   const resizeHandler = useCallback(() => {

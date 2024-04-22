@@ -180,9 +180,9 @@ const CarouselSection = (): JSX.Element => {
             <Card key={resource.Resource_name}>
               <KeyResourceFlag name="Key resource" color={theme.colorGolden} />
               <div>
-                {resource.Thumbnail_INTERNAL && (
+                {resource.Thumbnail && (
                   <GatsbyImage
-                    image={getImage(resource.Thumbnail_INTERNAL.localFiles[0])!}
+                    image={getImage(resource.Thumbnail.localFiles[0])!}
                     alt={resource.Short_name + 'thumbnail image'}
                     style={{
                       width: 200,
@@ -239,7 +239,7 @@ const CarouselSection = (): JSX.Element => {
                   )}
                 </KeyTopicArea>
                 <KeyTopicArea>
-                  {resource.Key_topic_area.map(topic => (
+                  {resource.Key_topic_area.map(({ data: { Name: topic } }) => (
                     <Link
                       key={topic}
                       to={`explore?${qs.stringify({

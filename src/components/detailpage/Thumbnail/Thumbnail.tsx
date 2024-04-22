@@ -23,20 +23,20 @@ const ThumbnailShadow = styled(GatsbyImage)`
 
 interface ThumbnailProps {
   data: {
-    Thumbnail_INTERNAL: {
+    Thumbnail: {
       localFiles: ImageDataLike[]
     }
     Short_name: string
     Other_language_URLs: string
     URL_for_resource: string
     Resource_language?: string[]
-    Files_INTERNAL?: {
+    Primary_file?: {
       localFiles: {
         publicURL: string
         name: string
       }[]
     }
-    Other_language_files_INTERNAL?: {
+    Other_language_files?: {
       localFiles: {
         publicURL: string
         name: string
@@ -46,7 +46,7 @@ interface ThumbnailProps {
 }
 
 const Thumbnail = ({ data }: ThumbnailProps): JSX.Element => {
-  const thumbnail = getImage(data.Thumbnail_INTERNAL?.localFiles[0])
+  const thumbnail = getImage(data.Thumbnail?.localFiles[0])
 
   if (thumbnail) {
     return (

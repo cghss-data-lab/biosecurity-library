@@ -10,7 +10,7 @@ export interface ResourceSearchData {
         Short_description: string
         Resource_type: string
       }
-    }
+    },
   ]
 }
 
@@ -50,7 +50,7 @@ const useHomePageData = () => {
       homePageResources: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        group(field: data___Key_topic_area) {
+        group(field: data___Key_topic_area___data___Name) {
           fieldValue
           totalCount
         }

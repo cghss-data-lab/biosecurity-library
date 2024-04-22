@@ -32,7 +32,6 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Resource_type: 'Test',
   Authoring_organization: [{ data: { Name: 'Test' } }],
   Target_user_role: ['Test'],
-  Potential_user_role: ['Test'],
   URL_for_resource: 'Test',
   Access_method: 'Test',
   Access_limitations: 'Test',
@@ -43,13 +42,13 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Last_update_date: 'Test',
   Update_frequency: 'Test',
   // Topic_area_icons: 'Test',
-  Files_INTERNAL: {
+  Primary_file: {
     localFiles: [{ publicURL: 'Test', name: 'Test' }],
   },
-  Thumbnail_INTERNAL: {
+  Thumbnail: {
     localFiles: [],
   },
-  Auto_other_resources_cited: [{ data: { Record_ID_INTERNAL: 'recTest' } }],
+  Resources_cited: [{ data: { Record_ID_INTERNAL: 'recTest' } }],
 }
 
 /**
