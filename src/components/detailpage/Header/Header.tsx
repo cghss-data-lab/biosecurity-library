@@ -51,7 +51,7 @@ const TagHolder = styled.div`
   gap: 15px;
 `
 
-const Header: React.FC<PageContext> = ({ data }) => {
+const Header = ({ data }: PageContext['data']['resources']['nodes'][0]) => {
   const theme: any = useTheme()
 
   return (
