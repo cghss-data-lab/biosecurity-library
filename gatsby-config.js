@@ -41,7 +41,7 @@ module.exports = {
             tableView: `CMS view`,
             tableLinks: [
               `Resource_sets`,
-              `Auto_other_resources_cited`,
+              `Resources_cited`,
               `Authoring_organization`,
             ],
             mapping: {

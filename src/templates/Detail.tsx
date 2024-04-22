@@ -22,7 +22,7 @@ import MobileDetailLayout from 'components/detailpage/MobileDetailLayout/MobileD
 /**
  * Resource Airtable fields that link to other records
  */
-export type LinkField = 'Auto_other_resources_cited'
+export type LinkField = 'Resources_cited'
 export type ResourceSetProps = {
   data: {
     Resource_set_name: string
@@ -91,7 +91,7 @@ export interface PageContextData {
         value: string
       }
     }[]
-    Auto_other_resources_cited:
+    Resources_cited:
       | {
           data: {
             Record_ID_INTERNAL: string
@@ -195,7 +195,7 @@ export const query = graphql`
               value: Type
             }
           }
-          Auto_other_resources_cited {
+          Resources_cited {
             data {
               Record_ID_INTERNAL
             }

@@ -48,7 +48,7 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Thumbnail: {
     localFiles: [],
   },
-  Auto_other_resources_cited: [{ data: { Record_ID_INTERNAL: 'recTest' } }],
+  Resources_cited: [{ data: { Record_ID_INTERNAL: 'recTest' } }],
 }
 
 /**
