@@ -15,7 +15,7 @@ export interface Resource {
     Resource_format: string[]
     Key_topic_area: {
       data: {
-        Name: string
+        value: string
       }
     }[]
     Short_description: string
@@ -89,7 +89,7 @@ const useExplorePageData = () => {
               Short_description
               Key_topic_area {
                 data {
-                  Name
+                  value: Name
                 }
               }
               User_type
