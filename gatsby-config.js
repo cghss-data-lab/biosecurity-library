@@ -21,7 +21,7 @@ module.exports = {
         tables: [
           {
             baseId: `app708Ctx0rz1c1n7`,
-            tableName: `Lookup: Authoring orgs.`,
+            tableName: `LOOKUP: Authoring organization`,
             tableView: `CMS view`,
           },
           {
