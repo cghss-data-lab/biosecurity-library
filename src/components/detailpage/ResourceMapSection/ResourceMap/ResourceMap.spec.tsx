@@ -45,7 +45,7 @@ export const MOCK_RESOURCE_DATA: PageContext['data'] = {
   Primary_file: {
     localFiles: [{ publicURL: 'Test', name: 'Test' }],
   },
-  Thumbnail_INTERNAL: {
+  Thumbnail: {
     localFiles: [],
   },
   Auto_other_resources_cited: [{ data: { Record_ID_INTERNAL: 'recTest' } }],

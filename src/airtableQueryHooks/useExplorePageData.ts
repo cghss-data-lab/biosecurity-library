@@ -27,7 +27,7 @@ export interface Resource {
         value: string
       }
     }[]
-    Thumbnail_INTERNAL: {
+    Thumbnail: {
       localFiles: ImageDataLike[]
     }
   }
@@ -99,7 +99,7 @@ const useExplorePageData = () => {
                   value: Type
                 }
               }
-              Thumbnail_INTERNAL {
+              Thumbnail {
                 localFiles {
                   childImageSharp {
                     gatsbyImageData(width: 100, placeholder: BLURRED)

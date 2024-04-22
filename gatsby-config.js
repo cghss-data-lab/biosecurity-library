@@ -45,7 +45,7 @@ module.exports = {
               `Authoring_organization`,
             ],
             mapping: {
-              Thumbnail_INTERNAL: `fileNode`,
+              Thumbnail: `fileNode`,
               Primary_file: `fileNode`,
               Other_language_files: `fileNode`,
             },

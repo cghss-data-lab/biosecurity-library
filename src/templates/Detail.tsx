@@ -110,7 +110,7 @@ export interface PageContextData {
         name: string
       }[]
     }
-    Thumbnail_INTERNAL: {
+    Thumbnail: {
       localFiles: ImageDataLike[]
     }
     Resource_sets: ResourceSetProps[] | null
@@ -212,7 +212,7 @@ export const query = graphql`
               name
             }
           }
-          Thumbnail_INTERNAL {
+          Thumbnail {
             localFiles {
               childImageSharp {
                 gatsbyImageData(width: 200, placeholder: BLURRED)

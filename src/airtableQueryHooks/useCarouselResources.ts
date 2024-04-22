@@ -16,7 +16,7 @@ export interface CaroselResourceData {
         }
       }[]
       Key_topic_area: string[]
-      Thumbnail_INTERNAL: {
+      Thumbnail {
         localFiles: ImageDataLike[]
       }
     }
@@ -47,7 +47,7 @@ const useCaroselData = (): CaroselResourceData => {
                   Name
                 }
               }
-              Thumbnail_INTERNAL {
+              Thumbnail {
                 localFiles {
                   childImageSharp {
                     gatsbyImageData(width: 200, placeholder: BLURRED)
