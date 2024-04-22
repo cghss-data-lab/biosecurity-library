@@ -70,8 +70,6 @@ const Header: React.FC<PageContext> = ({ data }) => {
                   filters: { Authoring_organization: [org] },
                 })}`}
               >
-                {console.log('organization')}
-                {console.log({ org })}
                 {org}
               </Link>
             ))
