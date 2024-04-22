@@ -16,7 +16,7 @@ export interface CaroselResourceData {
         }
       }[]
       Key_topic_area: string[]
-      Thumbnail {
+      Thumbnail: {
         localFiles: ImageDataLike[]
       }
     }
