@@ -15,7 +15,11 @@ export interface CaroselResourceData {
           Name: string
         }
       }[]
-      Key_topic_area: string[]
+      Key_topic_area: {
+        data: {
+          Name: string
+        }
+      }[]
       Thumbnail: {
         localFiles: ImageDataLike[]
       }
@@ -39,7 +43,11 @@ const useCaroselData = (): CaroselResourceData => {
               Resource_name
               Resource_type
               Short_description
-              Key_topic_area
+              Key_topic_area {
+                data {
+                  Name
+                }
+              }
               Access_limitations
               Access_method
               Authoring_organization {

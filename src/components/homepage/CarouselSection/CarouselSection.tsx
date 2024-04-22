@@ -239,7 +239,7 @@ const CarouselSection = (): JSX.Element => {
                   )}
                 </KeyTopicArea>
                 <KeyTopicArea>
-                  {resource.Key_topic_area.map(topic => (
+                  {resource.Key_topic_area.map(({ data: { Name: topic } }) => (
                     <Link
                       key={topic}
                       to={`explore?${qs.stringify({

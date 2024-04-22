@@ -13,7 +13,7 @@ const useFilterOptions = () => {
       Key_topic_area: allAirtable(
         filter: { table: { eq: "Resource Library" } }
       ) {
-        distinct(field: data___Key_topic_area)
+        distinct(field: data___Key_topic_area___data___Name)
       }
       Target_user_role: allAirtable(
         filter: { table: { eq: "Resource Library" } }

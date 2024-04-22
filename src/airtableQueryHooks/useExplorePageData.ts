@@ -13,7 +13,11 @@ export interface Resource {
     Access_limitations: string[]
     Access_method: string
     Resource_format: string[]
-    Key_topic_area: string[]
+    Key_topic_area: {
+      data: {
+        Name: string
+      }
+    }[]
     Short_description: string
     Target_user_role: string[]
     User_type: string[]
@@ -83,7 +87,11 @@ const useExplorePageData = () => {
               Key_resource
               Target_user_role
               Short_description
-              Key_topic_area
+              Key_topic_area {
+                data {
+                  Name
+                }
+              }
               User_type
               Resource_language
               Access_limitations

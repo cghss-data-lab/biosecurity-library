@@ -107,7 +107,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
         )}
       </TagHolder>
       <IconContainer>
-        {data.Key_topic_area.map(topic => (
+        {data.Key_topic_area.map(({ data: { Name: topic } }) => (
           <Link
             key={topic}
             to={`/explore?${qs.stringify({

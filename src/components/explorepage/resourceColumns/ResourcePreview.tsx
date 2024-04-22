@@ -124,10 +124,10 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         )}
       </Author>
       <IconContainer>
-        {data.Key_topic_area.sort().map(name => (
-          <Tippy content={name} key={name}>
+        {data.Key_topic_area.sort().map(({ data: { Name } }) => (
+          <Tippy content={Name} key={Name}>
             <CMS.Icon
-              name={name}
+              name={Name}
               color={theme.colorDarkest}
               style={{ width: 30 }}
             />

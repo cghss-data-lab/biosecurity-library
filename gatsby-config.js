@@ -43,6 +43,7 @@ module.exports = {
               `Resource_sets`,
               `Resources_cited`,
               `Authoring_organization`,
+              `Key_topic_area`,
             ],
             mapping: {
               Thumbnail: `fileNode`,

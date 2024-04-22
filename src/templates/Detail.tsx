@@ -65,7 +65,11 @@ export interface PageContextData {
     Record_ID_INTERNAL: string
     Short_description: string
     Long_description: string
-    Key_topic_area: string[]
+    Key_topic_area: {
+      data: {
+        Name: string
+      }
+    }[]
     Resource_name: string
     Short_name: string
     Resource_type: string
@@ -172,7 +176,11 @@ export const query = graphql`
           Resource_name
           Short_description
           Long_description
-          Key_topic_area
+          Key_topic_area {
+            data {
+              Name
+            }
+          }
           Key_resource
           Target_user_role
           User_type
