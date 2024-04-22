@@ -13,7 +13,9 @@ const DetailsTab = ({ data }: PageContextData): JSX.Element => {
       <h5>KEY TOPIC {data.Key_topic_area.length === 1 ? 'AREA' : 'AREAS'}</h5>
       <p>
         {commaSeparatedList(
-          data.Key_topic_area.sort((a, b) => a.localeCompare(b))
+          data.Key_topic_area.sort((a, b) =>
+            a.data.Name.localeCompare(b.data.Name)
+          ).map(({ data: { Name } }) => Name)
         )}
       </p>
       <h5>
@@ -21,7 +23,9 @@ const DetailsTab = ({ data }: PageContextData): JSX.Element => {
       </h5>
       <p>
         {commaSeparatedList(
-          data.Target_user_role.sort((a, b) => a.localeCompare(b))
+          data.Target_user_role.sort((a, b) =>
+            a.data.Name.localeCompare(b.data.Name)
+          ).map(({ data: { Name } }) => Name)
         )}
       </p>
       {data.User_type && (

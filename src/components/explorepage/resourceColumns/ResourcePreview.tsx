@@ -74,7 +74,7 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
   expand,
 }) => {
   const theme: any = useTheme()
-  const thumbnail = getImage(data.Thumbnail_INTERNAL?.localFiles[0])
+  const thumbnail = getImage(data.Thumbnail?.localFiles[0])
   return (
     <ResourceContainer expanded={expand}>
       {expand && (
@@ -124,10 +124,10 @@ const ResourcePreview: React.FC<Resource & { expand: boolean }> = ({
         )}
       </Author>
       <IconContainer>
-        {data.Key_topic_area.sort().map(name => (
-          <Tippy content={name} key={name}>
+        {data.Key_topic_area.sort().map(({ data: { value } }) => (
+          <Tippy content={value} key={value}>
             <CMS.Icon
-              name={name}
+              name={value}
               color={theme.colorDarkest}
               style={{ width: 30 }}
             />

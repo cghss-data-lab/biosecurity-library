@@ -51,7 +51,7 @@ const TagHolder = styled.div`
   gap: 15px;
 `
 
-const Header: React.FC<PageContext> = ({ data }) => {
+const Header = ({ data }: PageContext['data']['resources']['nodes'][0]) => {
   const theme: any = useTheme()
 
   return (
@@ -70,8 +70,6 @@ const Header: React.FC<PageContext> = ({ data }) => {
                   filters: { Authoring_organization: [org] },
                 })}`}
               >
-                {console.log('organization')}
-                {console.log({ org })}
                 {org}
               </Link>
             ))
@@ -109,7 +107,7 @@ const Header: React.FC<PageContext> = ({ data }) => {
         )}
       </TagHolder>
       <IconContainer>
-        {data.Key_topic_area.map(topic => (
+        {data.Key_topic_area.map(({ data: { Name: topic } }) => (
           <Link
             key={topic}
             to={`/explore?${qs.stringify({

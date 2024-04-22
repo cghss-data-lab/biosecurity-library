@@ -20,7 +20,7 @@ export AIRTABLE_API_KEY=$(
 )
 
 if [ "$reset" == "1" ]; then 
-  bvm upgrade;
+  # bvm upgrade;
   yarn install;
   gatsby clean;
 fi

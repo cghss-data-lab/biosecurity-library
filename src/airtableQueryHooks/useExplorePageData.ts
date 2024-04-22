@@ -13,9 +13,17 @@ export interface Resource {
     Access_limitations: string[]
     Access_method: string
     Resource_format: string[]
-    Key_topic_area: string[]
+    Key_topic_area: {
+      data: {
+        value: string
+      }
+    }[]
     Short_description: string
-    Target_user_role: string[]
+    Target_user_role: {
+      data: {
+        value: string
+      }
+    }[]
     User_type: string[]
     Authoring_organization: {
       data: {
@@ -27,7 +35,7 @@ export interface Resource {
         value: string
       }
     }[]
-    Thumbnail_INTERNAL: {
+    Thumbnail: {
       localFiles: ImageDataLike[]
     }
   }
@@ -81,9 +89,17 @@ const useExplorePageData = () => {
               Resource_name
               Resource_type
               Key_resource
-              Target_user_role
+              Target_user_role {
+                data {
+                  value: Name
+                }
+              }
               Short_description
-              Key_topic_area
+              Key_topic_area {
+                data {
+                  value: Name
+                }
+              }
               User_type
               Resource_language
               Access_limitations
@@ -99,7 +115,7 @@ const useExplorePageData = () => {
                   value: Type
                 }
               }
-              Thumbnail_INTERNAL {
+              Thumbnail {
                 localFiles {
                   childImageSharp {
                     gatsbyImageData(width: 100, placeholder: BLURRED)

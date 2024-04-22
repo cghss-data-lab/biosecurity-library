@@ -8,7 +8,7 @@ const DocumentTab = ({ data }: PageContext): JSX.Element => {
     <TabContentContainer>
       <iframe
         title="document preview"
-        src={data.Files_INTERNAL.localFiles[0].publicURL}
+        src={data.Primary_file.localFiles[0].publicURL}
         style={{ height: '80vh', width: '100%' }}
       />
     </TabContentContainer>

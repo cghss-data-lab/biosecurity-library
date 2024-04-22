@@ -22,7 +22,7 @@ import MobileDetailLayout from 'components/detailpage/MobileDetailLayout/MobileD
 /**
  * Resource Airtable fields that link to other records
  */
-export type LinkField = 'Auto_other_resources_cited'
+export type LinkField = 'Resources_cited'
 export type ResourceSetProps = {
   data: {
     Resource_set_name: string
@@ -65,13 +65,20 @@ export interface PageContextData {
     Record_ID_INTERNAL: string
     Short_description: string
     Long_description: string
-    Key_topic_area: string[]
+    Key_topic_area: {
+      data: {
+        Name: string
+      }
+    }[]
     Resource_name: string
     Short_name: string
     Resource_type: string
     Key_resource: string
-    Target_user_role: string[]
-    Potential_user_role: string[]
+    Target_user_role: {
+      data: {
+        Name: string
+      }
+    }[]
     User_type: string[]
     URL_for_resource: string
     Access_method: string
@@ -92,26 +99,26 @@ export interface PageContextData {
         value: string
       }
     }[]
-    Auto_other_resources_cited:
+    Resources_cited:
       | {
           data: {
             Record_ID_INTERNAL: string
           }
         }[]
       | null
-    Files_INTERNAL: {
+    Primary_file: {
       localFiles: {
         publicURL: string
         name: string
       }[]
     }
-    Other_language_files_INTERNAL: {
+    Other_language_files: {
       localFiles: {
         publicURL: string
         name: string
       }[]
     }
-    Thumbnail_INTERNAL: {
+    Thumbnail: {
       localFiles: ImageDataLike[]
     }
     Resource_sets: ResourceSetProps[] | null
@@ -173,10 +180,17 @@ export const query = graphql`
           Resource_name
           Short_description
           Long_description
-          Key_topic_area
+          Key_topic_area {
+            data {
+              Name
+            }
+          }
           Key_resource
-          Target_user_role
-          Potential_user_role
+          Target_user_role {
+            data {
+              Name
+            }
+          }
           User_type
           URL_for_resource
           Access_method
@@ -197,24 +211,24 @@ export const query = graphql`
               value: Type
             }
           }
-          Auto_other_resources_cited {
+          Resources_cited {
             data {
               Record_ID_INTERNAL
             }
           }
-          Files_INTERNAL {
+          Primary_file {
             localFiles {
               publicURL
               name
             }
           }
-          Other_language_files_INTERNAL {
+          Other_language_files {
             localFiles {
               publicURL
               name
             }
           }
-          Thumbnail_INTERNAL {
+          Thumbnail {
             localFiles {
               childImageSharp {
                 gatsbyImageData(width: 200, placeholder: BLURRED)

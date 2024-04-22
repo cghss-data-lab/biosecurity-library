@@ -6,7 +6,7 @@ describe('getFullResourceMapData', () => {
   it('should always include one node for each resource', () => {
     const fullResourceMapData: AppGraphData = getFullResourceMapData(
       [{ data: MOCK_RESOURCE_DATA }],
-      ['Auto_other_resources_cited'],
+      ['Resources_cited'],
       'Resource_name',
       'Record_ID_INTERNAL'
     )
