@@ -1,5 +1,5 @@
 import React from 'react'
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import TabContentContainer from '../TabContentContainer'
 import { PageContext } from '../../../../templates/Detail'
 // import { commaSeparatedList } from '../../../../utilities/grammar'

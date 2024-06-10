@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { demoGraphData } from './internal/internal'
 import { NetworkMap, NetworkProps } from './core'
-import {
-  Project,
-  defaultSettings,
-  AppGraphData,
-} from '@talus-analytics/viz.charts.network-tools'
+import { Project, defaultSettings, AppGraphData } from '../network-tools'
 
 export function Network({
   initGraphData = demoGraphData,

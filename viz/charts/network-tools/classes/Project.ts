@@ -5,7 +5,7 @@ import {
   GraphNode,
   CsvDataSource,
   DataSource,
-} from '@talus-analytics/viz.charts.network-tools'
+} from '../../network-tools'
 
 type UpdateFunction = (a: AppGraphData, b?: { reheat?: boolean }) => void
 

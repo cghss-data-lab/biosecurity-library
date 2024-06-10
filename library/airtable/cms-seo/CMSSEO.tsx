@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
-import { getCMSText } from '@talus-analytics/library.airtable.cms-text'
-import { getCMSImage } from '@talus-analytics/library.airtable.cms-image'
+import { getCMSText } from '../../../src/airtable-cms/CMSText'
+import { getCMSImage } from '../../../src/airtable-cms/CMSImage'
 
 import { SiteMetadataContext } from './'
 

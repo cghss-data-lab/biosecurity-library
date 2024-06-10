@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from 'gatsby'
 import { ImageDataLike } from 'gatsby-plugin-image'
 
-import { AirtableCMSData } from '@talus-analytics/library.airtable-cms'
+import { AirtableCMSData } from 'AirtableCMS'
 
 export interface Resource {
   data: {

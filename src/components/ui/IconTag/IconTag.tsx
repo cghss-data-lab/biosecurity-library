@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 
 // prettier-ignore
 const Tag = styled.div<{ foregroundColor: string, backgroundColor: string, borderColor: string, name: string}>`

@@ -2,10 +2,10 @@
  * Simple legend defining the direction of curved edges in `<ResourceMap />`
  */
 import React, { useMemo } from 'react'
-import * as network from '@talus-analytics/viz.charts.network'
+import * as network from '../../../../../../viz/charts/network'
 import styled from 'styled-components'
-import { initNode } from '@talus-analytics/viz.charts.network'
-import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
+import { initNode } from '../../../../../../viz/charts/network'
+import { AppGraphData } from '../../../../../../viz/charts/network-tools'
 
 const Container = styled.div`
   position: relative;

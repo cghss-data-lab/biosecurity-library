@@ -5,7 +5,7 @@ import { PageContext } from '../../../../templates/Detail'
 import {
   AppGraphData,
   GraphNode,
-} from '@talus-analytics/viz.charts.network-tools'
+} from '../../../../../viz/charts/network-tools/types'
 import FigmaProvider from '../../../../figma/FigmaProvider'
 import ResourceMapSection from '../ResourceMapSection'
 

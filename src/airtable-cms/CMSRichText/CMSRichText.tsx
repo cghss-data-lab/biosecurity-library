@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
-import { getCMSText } from '@talus-analytics/library.airtable.cms-text'
+import { AirtableCMSData } from 'AirtableCMS'
+import { getCMSText } from 'airtable-cms/CMSText'
 import RenderCMSRichText from './RenderCMSRichText'
 
 export interface CMSRichTextProps {

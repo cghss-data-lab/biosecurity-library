@@ -1,13 +1,13 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { AirtableCMSData } from '@talus-analytics/library.airtable-cms'
+import { AirtableCMSData } from 'AirtableCMS'
 
 // This queries the Site metadata table in airtable,
 // and is consumed by the CMS.SiteMetadataProvider component
 // in Providers. This data is used to populate SEO tags
 // for each page rendered.
 const useSiteMetadataQuery = () => {
-  const { siteMetadata }: { siteMetadata: AirtableCMSData } =
-    useStaticQuery(graphql`
+  const { siteMetadata }: { siteMetadata: AirtableCMSData } = useStaticQuery(
+    graphql`
       query siteMetadataQuery {
         siteMetadata: allAirtable(filter: { table: { eq: "Site metadata" } }) {
           nodes {
@@ -25,7 +25,8 @@ const useSiteMetadataQuery = () => {
           }
         }
       }
-    `)
+    `
+  )
 
   return siteMetadata
 }

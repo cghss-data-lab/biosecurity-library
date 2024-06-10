@@ -12,21 +12,17 @@ import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import {
-  useAllCMSIcons,
-  replaceFill,
-} from '@talus-analytics/library.airtable.cms-icon'
-import * as network from '@talus-analytics/viz.charts.network'
+import { useAllCMSIcons, replaceFill } from 'airtable-cms/CMSIcon'
+
+import * as network from '../../../../../viz/charts/network'
 import {
   SettingsContext,
   defaultSettings,
-} from '@talus-analytics/viz.charts.network-tools'
-import {
   AppGraphData,
   getNodeIdsForLinks,
   GraphLink,
   GraphNode,
-} from '@talus-analytics/viz.charts.network-tools'
+} from '../../../../../viz/charts/network-tools'
 
 import { PageContext } from '../../../../templates/Detail'
 import WrappedLabel from './Legend/WrappedLabel'

@@ -1,6 +1,6 @@
 import { getImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
-import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
+import { AirtableCMSData } from 'AirtableCMS'
 
 interface CMSImage {
   sources: IGatsbyImageData

@@ -3,7 +3,6 @@ version: 2.1
 credentials: &credentials
   - AWS Credentials
   - Airtable Credentials
-  - Bit Credentials
 
 workflows:
   version: 2
@@ -78,30 +77,10 @@ jobs:
             sudo apt-get update
             sudo apt-get install build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
 
-      # - run:
-      #     name: Adding bit.dev to NPM Registry
-      #     command: |
-      #       echo "always-auth=true" >> ~/.npmrc;
-      #       echo "@talus-analytics:registry=https://node.bit.dev" >> ~/.npmrc;
-      #       echo "@teambit:registry=https://node.bit.dev" >> ~/.npmrc;
-      #       echo "//node.bit.dev/:_authToken={$BIT_TOKEN}" >> ~/.npmrc;
-
       - restore_cache:
           keys:
             - yarn-deps-{{ checksum "yarn.lock" }}
             - yarn-deps-
-
-      # - run:
-      #     name: Install bit
-      #     command: |
-      #       yarn global add @teambit/bvm;
-      #       $(yarn global bin)/bvm install;
-      #       bit config set user.token ${BIT_TOKEN};
-
-      # - run:
-      #     name: Bit import to get latest
-      #     command: |
-      #       bit import
 
       - run:
           name: Yarn Install
