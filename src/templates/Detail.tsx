@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { ImageDataLike } from 'gatsby-plugin-image'
-import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
+import { AppGraphData } from '../../viz/charts/network-tools'
 
 // layout components
 import Main from '../components/layout/Main'

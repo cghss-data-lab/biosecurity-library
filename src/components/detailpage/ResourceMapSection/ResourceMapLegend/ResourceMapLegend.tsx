@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { useTheme } from 'styled-components'
 
-import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
+import { AppGraphData } from '../../../../../viz/charts/network-tools'
 
 import { useAllCMSIcons } from 'airtable-cms/CMSIcon'
 

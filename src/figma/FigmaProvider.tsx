@@ -16,7 +16,9 @@ import getTrackingId from 'utilities/trackingId'
 // const figmaStyles = require('sass-extract-loader?{"plugins":["sass-extract-js"]}!./styles.scss')
 const figmaStyles = theme
 
-const FigmaProvider: React.FC = ({ children }) => {
+const FigmaProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const icons = useCMSIconsQuery()
 
   const siteMetadata = useSiteMetadataQuery()

@@ -1,4 +1,4 @@
-import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
+import { AppGraphData } from '../../../../../../viz/charts/network-tools'
 import { getResourceMapData, getFullResourceMapData } from './packageMethods'
 import { MOCK_GRAPH_DATA, MOCK_RESOURCE_DATA } from '../ResourceMap.spec'
 

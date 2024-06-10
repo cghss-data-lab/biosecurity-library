@@ -22,7 +22,7 @@ import {
   Project,
   SettingsContext,
   Settings,
-} from '@talus-analytics/viz.charts.network-tools'
+} from '../../../network-tools'
 import { sortObjectsBy } from '../../utils'
 import { defaultTheme } from '../../networkThemes'
 import { InteractionSettings } from '../../core'

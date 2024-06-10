@@ -1,4 +1,4 @@
-import CMS from 'AirtableCMS
+import CMS from 'AirtableCMS'
 import Footer from 'components/layout/Footer'
 import React from 'react'
 import styled from 'styled-components'
