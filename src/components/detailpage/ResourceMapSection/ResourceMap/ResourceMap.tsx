@@ -12,10 +12,8 @@ import styled, { useTheme } from 'styled-components'
 import { LinkObject } from 'react-force-graph-2d'
 import { renderToString } from 'react-dom/server'
 
-import {
-  useAllCMSIcons,
-  replaceFill,
-} from '@talus-analytics/library.airtable.cms-icon'
+import { useAllCMSIcons, replaceFill } from 'airtable-cms/CMSIcon'
+
 import * as network from '@talus-analytics/viz.charts.network'
 import {
   SettingsContext,

@@ -6,7 +6,7 @@ import { semanticStyles } from './semanticStyles.module.scss'
 import './fonts.css'
 import theme from './styles'
 
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import useCMSIconsQuery from 'airtableQueryHooks/useIconsQuery'
 import useSiteMetadataQuery from 'airtableQueryHooks/useSiteMetadataQuery'
 import getTrackingId from 'utilities/trackingId'

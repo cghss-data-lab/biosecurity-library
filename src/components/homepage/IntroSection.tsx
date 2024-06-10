@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import useHomePageData from '../../airtableQueryHooks/useHomePageData'
 
 const Section = styled.section`

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import CMSIcon from '@talus-analytics/library.airtable.cms-icon'
+import CMSIcon from 'airtable-cms/CMSIcon'
 
 const IconHolder = styled.foreignObject`
   overflow: visible;

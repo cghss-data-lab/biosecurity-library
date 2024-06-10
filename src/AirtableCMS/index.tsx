@@ -1,37 +1,30 @@
-import CMSText, {
-  getCMSText,
-  CMSTextProps,
-} from '@talus-analytics/library.airtable.cms-text'
+import CMSText, { getCMSText, CMSTextProps } from 'airtable-cms/CMSText'
 import CMSIcon, {
   useCMSIcon,
   CMSIconProps,
   CMSIconProvider,
   CMSIconProviderProps,
-} from '@talus-analytics/library.airtable.cms-icon'
-import CMSImage, {
-  getCMSImage,
-  CMSImageProps,
-} from '@talus-analytics/library.airtable.cms-image'
+} from 'airtable-cms/CMSIcon'
+import CMSImage, { getCMSImage, CMSImageProps } from 'airtable-cms/CMSImage'
 import CMSRichText, {
   RenderCMSRichText,
   parseCMSRichText,
-} from '@talus-analytics/library.airtable.cms-rich-text'
-import CMSPlotIcon, {
-  CMSPlotIconProps,
-} from '@talus-analytics/library.airtable.cms-plot-icon'
+} from 'airtable-cms/CMSRichText'
+import CMSPlotIcon, { CMSPlotIconProps } from 'airtable-cms/CMSPlotIcon'
 import CMSDownload, {
   CMSDownloadProps,
   getCMSDownloadInfo,
-} from '@talus-analytics/library.airtable.cms-download'
+} from 'airtable-cms/CMSDownload'
+
 import SEO, {
   SEOProps,
   SiteMetadataContext,
   SiteMetadataProvider,
   SiteMetadataProviderProps,
-} from '@talus-analytics/library.airtable.cms-seo'
+} from '../../library/airtable/cms-seo'
 
 // AirtableCMSData type declaration
-import type { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
+import type { AirtableCMSData } from 'airtable-cms/CMSTypes'
 
 export type {
   // query data type

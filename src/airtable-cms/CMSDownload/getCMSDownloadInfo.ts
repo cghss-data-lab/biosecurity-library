@@ -1,4 +1,4 @@
-import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
+import { AirtableCMSData } from 'AirtableCMS'
 
 interface DownloadInfo {
   text: string | undefined

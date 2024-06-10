@@ -2,7 +2,8 @@ import React, { FC } from 'react'
 import { useTheme } from 'styled-components'
 
 import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
-import { useAllCMSIcons } from '@talus-analytics/library.airtable.cms-icon'
+
+import { useAllCMSIcons } from 'airtable-cms/CMSIcon'
 
 import Legend from '../ResourceMap/Legend/Legend'
 import CurvedEdgeEntry from '../ResourceMap/Legend/CurvedEdgeEntry'

@@ -2,8 +2,8 @@ import React from 'react'
 import styled, { useTheme } from 'styled-components'
 import { navigate } from 'gatsby'
 
-import CMS from '@talus-analytics/library.airtable-cms'
-import Typeahead from '@talus-analytics/library.ui.typeahead'
+import CMS from 'AirtableCMS'
+import Typeahead from 'components/ui/Typeahead'
 
 import ButtonLink from '../ui/ButtonLink'
 

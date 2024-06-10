@@ -1,9 +1,9 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { AirtableCMSData } from '@talus-analytics/library.airtable-cms'
+import { AirtableCMSData } from 'AirtableCMS'
 
 const useCMSIconsQuery = () => {
-  const { iconsQuery }: { iconsQuery: AirtableCMSData } =
-    useStaticQuery(graphql`
+  const { iconsQuery }: { iconsQuery: AirtableCMSData } = useStaticQuery(
+    graphql`
       query iconsQuery {
         iconsQuery: allAirtable(filter: { table: { eq: "Icons" } }) {
           nodes {
@@ -21,7 +21,8 @@ const useCMSIconsQuery = () => {
           }
         }
       }
-    `)
+    `
+  )
 
   return iconsQuery
 }
