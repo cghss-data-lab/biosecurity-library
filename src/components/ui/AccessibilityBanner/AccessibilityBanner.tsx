@@ -1,4 +1,4 @@
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import React from 'react'
 import styled, { useTheme } from 'styled-components'
 

@@ -11,7 +11,7 @@ import {
 } from './DisplayComponents'
 
 import TypeaheadResult from './TypeaheadResult'
-import Expander from '@talus-analytics/library.ui.expander'
+import Expander from 'components/ui/Expander'
 
 export interface Item {
   key: string

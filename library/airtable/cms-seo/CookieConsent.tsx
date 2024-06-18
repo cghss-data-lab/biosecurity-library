@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import { getCMSText } from '@talus-analytics/library.airtable.cms-text'
+import { getCMSText } from '../../../src/airtable-cms/CMSText'
 import { SiteMetadataContext } from './'
 
 const CookieConsent = () => {

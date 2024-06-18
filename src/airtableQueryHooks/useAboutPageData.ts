@@ -1,5 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { AirtableCMSData } from '@talus-analytics/library.airtable-cms'
+import { AirtableCMSData } from 'AirtableCMS'
 
 const useAboutPageData = () => {
   const {

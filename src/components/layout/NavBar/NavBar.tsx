@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 import NavLink from './NavLink'
 
-import Typeahead from '@talus-analytics/library.ui.typeahead'
+import Typeahead from 'components/ui/Typeahead'
 import useHomePageData from 'airtableQueryHooks/useHomePageData'
 import { navigate } from 'gatsby'
 import { getDetailURL } from 'utilities/urls'

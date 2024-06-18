@@ -1,7 +1,7 @@
 import React from 'react'
 import { ExploreState } from '../../../pages/explore'
 
-import Typeahead from '@talus-analytics/library.ui.typeahead'
+import Typeahead from 'components/ui/Typeahead'
 
 import { FilterContainer, NameContainer } from './displayComponents'
 import ExpandDefinitionsButton from './ExpandDefinitionsButton'

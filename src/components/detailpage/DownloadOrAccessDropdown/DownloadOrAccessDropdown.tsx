@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Dropdown from '@talus-analytics/library.ui.dropdown'
+import Dropdown from 'components/ui/Dropdown'
 
 import LanguageList from './LanguageList'
 

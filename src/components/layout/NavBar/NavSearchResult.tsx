@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import { RenderItemProps } from '@talus-analytics/library.ui.typeahead'
+import { RenderItemProps } from 'components/ui/Typeahead'
 
 const TypeaheadResultContainer = styled.span<{ selected?: boolean }>`
   box-sizing: border-box;

@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
+import { AirtableCMSData } from 'AirtableCMS'
 
 export const IconsContext = createContext<null | AirtableCMSData>(null)
 
