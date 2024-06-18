@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react'
 import styled, { useTheme } from 'styled-components'
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import { IconFrame } from './IconFrame/IconFrame'
 import { Frameable } from './legendTypes'
 import WrappedLabel from './WrappedLabel'

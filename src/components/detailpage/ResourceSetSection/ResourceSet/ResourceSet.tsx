@@ -4,7 +4,7 @@ import styled, { useTheme } from 'styled-components'
 import { ResourceSetProps } from '../../../../templates/Detail'
 import * as object from '../../../../utilities/object'
 import * as urls from '../../../../utilities/urls'
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import Tippy from '@tippyjs/react'
 import { followCursor } from 'tippy.js'
 
@@ -63,7 +63,7 @@ export const ResourceSet: FC<ResourceSetProps> = ({ ...props }) => {
       {/* Resources in set */}
       <ResourceList>
         {props.data.Resources_in_set.sort(
-          object.sortByCustom<typeof props.data.Resources_in_set[0]>(
+          object.sortByCustom<(typeof props.data.Resources_in_set)[0]>(
             inst => inst.data[nameField]
           )
         ).map(d => (

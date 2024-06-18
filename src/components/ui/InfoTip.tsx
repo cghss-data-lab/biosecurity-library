@@ -1,7 +1,7 @@
 // TODO make into a bit component
 import React, { FC, ReactElement } from 'react'
 import Tippy from '@tippyjs/react'
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import { useTheme } from 'styled-components'
 // import 'tippy.js/dist/tippy.css' // optional
 

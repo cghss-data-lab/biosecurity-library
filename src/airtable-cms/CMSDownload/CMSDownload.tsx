@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
+import { AirtableCMSData } from 'AirtableCMS'
 import getCMSDownloadInfo from './getCMSDownloadInfo'
 
 export interface CMSDownloadProps extends React.ComponentPropsWithRef<'a'> {

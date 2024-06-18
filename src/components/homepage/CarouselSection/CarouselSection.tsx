@@ -2,7 +2,7 @@ import React from 'react'
 import qs from 'qs'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import styled, { useTheme } from 'styled-components'
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 
 // this import is risky... TODO find a better place for
 // this utility because it's not part of airtable-cms.
@@ -12,7 +12,7 @@ import useCaroselData from 'airtableQueryHooks/useCarouselResources'
 import useHomePageData from 'airtableQueryHooks/useHomePageData'
 import Main from 'components/layout/Main'
 
-import Carousel from '@talus-analytics/library.ui.carousel'
+import Carousel from 'components/ui/Carousel'
 import IconTag from 'components/ui/IconTag/IconTag'
 import { Link } from 'gatsby'
 import { commaSeparatedList } from 'utilities/grammar'

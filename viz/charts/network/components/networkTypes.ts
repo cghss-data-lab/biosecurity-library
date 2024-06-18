@@ -1,7 +1,4 @@
-import {
-  AppGraphData,
-  GraphNode,
-} from '@talus-analytics/viz.charts.network-tools'
+import { AppGraphData, GraphNode } from '../../network-tools'
 
 /**
  * Return initialized graph node with given label and unique ID

@@ -7,7 +7,7 @@ import 'tippy.js/dist/tippy.css'
 import useDefinitions from 'airtableQueryHooks/useDefinitions'
 import { ExploreState } from 'pages/explore'
 
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 import { cleanAirtableKey } from 'airtable-cms/utilities'
 
 import FilterSection from './FilterSection'
@@ -47,7 +47,8 @@ const DefinitionButton = styled.button<{ active: boolean | undefined }>`
   /* width: 200px; */
   min-height: 53px;
   text-align: left;
-  box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.15),
+  box-shadow:
+    1px 1px 3px 0px rgba(0, 0, 0, 0.15),
     inset 0 0 8px 0px rgba(255, 255, 255, 0.5);
 
   border: 1px solid rgba(0, 0, 0, 0.05);

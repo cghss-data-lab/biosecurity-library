@@ -3,7 +3,7 @@ import styled, { useTheme } from 'styled-components'
 
 import { DimObj } from './BarChart'
 
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 
 import Tippy from '@tippyjs/react'
 import 'tippy.js/themes/light.css'

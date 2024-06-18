@@ -6,7 +6,7 @@ import { InfoTip } from '../../ui/InfoTip'
 import ResourceMap from './ResourceMap/ResourceMap'
 import ResourceMapLegend from './ResourceMapLegend/ResourceMapLegend'
 
-import { AppGraphData } from '@talus-analytics/viz.charts.network-tools'
+import { AppGraphData } from '../../../../viz/charts/network-tools/types'
 
 interface ResourceMapSectionProps {
   data: PageContext['data']

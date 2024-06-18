@@ -4,7 +4,7 @@ import {
   NodeConfig,
   NodeShape,
   Themes,
-} from '@talus-analytics/viz.charts.network-tools'
+} from '../../network-tools'
 
 export interface Settings {
   theme: Themes

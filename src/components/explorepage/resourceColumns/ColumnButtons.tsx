@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import styled, { useTheme } from 'styled-components'
 
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 
 const ExpandButton = styled.button`
   grid-area: expand;

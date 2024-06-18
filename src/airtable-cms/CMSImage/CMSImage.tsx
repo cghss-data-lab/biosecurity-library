@@ -1,7 +1,7 @@
 import React from 'react'
 import { GatsbyImage, GatsbyImageProps } from 'gatsby-plugin-image'
 
-import { AirtableCMSData } from '@talus-analytics/library.airtable.cms-types'
+import { AirtableCMSData } from 'AirtableCMS'
 import getCMSImage from './getCMSImage'
 
 export interface CMSImageProps extends Omit<GatsbyImageProps, 'image' | 'alt'> {

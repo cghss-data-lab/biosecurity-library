@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import styled, { useTheme } from 'styled-components'
 
-import CMS from '@talus-analytics/library.airtable-cms'
+import CMS from 'AirtableCMS'
 
 import { Resource } from '../../../airtableQueryHooks/useExplorePageData'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
