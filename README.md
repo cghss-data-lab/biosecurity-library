@@ -23,7 +23,7 @@ Automated deployment schedule: all data are ingested to `Staging` weekly.
 
 1. Click the "CI/CD Status" badge above next to the site where you want to update data
 2. Click "Trigger Pipeline" button on the top right section of that page
-3. If you're looking for additional detail on how to update different aspects of the site, checkout the [Standard Operating Procedures document][https://docs.google.com/document/d/1oj0nvjc8rRkSr3b-UhJ3UfORNdUQtC_N3lN7tNEn5_c/edit]
+3. If you're looking for additional detail on how to update different aspects of the site, checkout the [Standard Operating Procedures document](https://docs.google.com/document/d/1oj0nvjc8rRkSr3b-UhJ3UfORNdUQtC_N3lN7tNEn5_c/edit)
 
 ## 👩‍💻 Local Development Quick start
 
