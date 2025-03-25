@@ -68,7 +68,6 @@
     "@types/styled-components": "^5.1.12",
     "babel-jest": "^27.2.5",
     "babel-preset-gatsby": "^1.14.0",
-    "canvas": "^2.8.0",
     "gatsby-plugin-root-import": "^2.0.8",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.2.5",

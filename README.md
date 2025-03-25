@@ -13,8 +13,8 @@
 | Branch  | CI/CD Status                                                                                                                                                                                                                         | Url                                                                       |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
 | Prod    | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/prod.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/prod)       | [biosecuritycentral.org](https://biosecuritycentral.org/)                 |
-| Staging | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/staging.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/staging) | [staging.biosecuritycentral.org](https://staging.biosecuritycentral.com/) |
-| Review  | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/review.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/review)   | [review.biosecuritycentral.org](https://review.biosecuritycentral.com/)   |
+| Staging | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/staging.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/staging) | [staging.biosecuritycentral.org](https://staging.biosecuritycentral.org/) |
+| Review  | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/review.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/review)   | [review.biosecuritycentral.org](https://review.biosecuritycentral.org/)   |
 | Dev     | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/dev.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/dev)         | [dev.biosecuritycentral.org](https://dev.biosecuritycentral.org/)         |
 
 Automated deployment schedule: all data are ingested to `Staging` weekly.
@@ -27,7 +27,8 @@ Automated deployment schedule: all data are ingested to `Staging` weekly.
 
 ## 👩‍💻 Local Development Quick start
 
-1. [Install](https://bit.dev/docs/getting-started/installing-bit/installing-bit) & [log in](https://bit.dev/reference/reference/cli-reference/#login) to Bit
+1. [Install](https://bit.dev/docs/getting-started/installing-bit/installing-bit)
+   & [log in](https://bit.dev/reference/reference/cli-reference/#login) to Bit
 
 2. Install dependencies
 
@@ -43,9 +44,10 @@ yarn start
 
 ## 🖥 Deployment Infrastructure
 
-All Biosecurity Central Infrastructure is managed using the CloudFormation template within
-the `/CloudFormation/` directory. All changes to hosting, domain names, alternate domain
-names, and access control must be made in the template and deployed using the update command.
+All Biosecurity Central Infrastructure is managed using the CloudFormation
+template within the `/CloudFormation/` directory. All changes to hosting, domain
+names, alternate domain names, and access control must be made in the template
+and deployed using the update command.
 
 Infrastructure updates must be made with care as they can cause site downtime.
 
