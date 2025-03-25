@@ -12,18 +12,18 @@
 
 | Branch  | CI/CD Status                                                                                                                                                                                                                         | Url                                                                       |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| Prod    | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/prod.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/prod)       | [biosecuritycentral.org](https://biosecuritycentral.org/)                 |
-| Staging | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/staging.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/staging) | [staging.biosecuritycentral.org](https://staging.biosecuritycentral.org/) |
-| Review  | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/review.svg?style=svg)](https://dl.circleci.org/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/review)   | [review.biosecuritycentral.org](https://review.biosecuritycentral.com/)   |
-| Dev     | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/talus-analytics-bus/biosecurity-library/tree/dev.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/talus-analytics-bus/biosecurity-library/tree/dev)         | [dev.biosecuritycentral.org](https://dev.biosecuritycentral.org/)         |
+| Prod    | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/prod.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/prod)       | [biosecuritycentral.org](https://biosecuritycentral.org/)                 |
+| Staging | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/staging.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/staging) | [staging.biosecuritycentral.org](https://staging.biosecuritycentral.org/) |
+| Review  | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/review.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/review)   | [review.biosecuritycentral.org](https://review.biosecuritycentral.org/)   |
+| Dev     | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/cghss-data-lab/biosecurity-library/tree/dev.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/cghss-data-lab/biosecurity-library/tree/dev)         | [dev.biosecuritycentral.org](https://dev.biosecuritycentral.org/)         |
 
 Automated deployment schedule: all data are ingested to `Staging` weekly.
 
 ## 📄 Ingest Latest Data from Airtable
 
-1. Click the "CI/CD Status" badge above next to the site where you want to
-   update data
-2. Click "Trigger Pipeline" button on the top right section of that page.
+1. Click the "CI/CD Status" badge above next to the site where you want to update data
+2. Click "Trigger Pipeline" button on the top right section of that page
+3. If you're looking for additional detail on how to update different aspects of the site, checkout the [Standard Operating Procedures document](https://docs.google.com/document/d/1oj0nvjc8rRkSr3b-UhJ3UfORNdUQtC_N3lN7tNEn5_c/edit)
 
 ## 👩‍💻 Local Development Quick start
 
